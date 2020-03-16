@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 14476,
+  "expoServerNgrokUrl": "https://gf-dyj.gnbiiie3.frontend-readalright.exp.direct",
+  "packagerNgrokUrl": "https://packager.gf-dyj.gnbiiie3.frontend-readalright.exp.direct",
+  "ngrokPid": 14534,
   "webpackServerPort": null
 }
