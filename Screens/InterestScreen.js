@@ -30,45 +30,33 @@ import { FlatGrid } from "react-native-super-grid";
 // }));
 
 const items = [
-  { name: "TURQUOISE", code: "#1abc9c", img: require("./../assets/img1.png") },
-  { name: "EMERALD", code: "#2ecc71", img: require("./../assets/img1.png") },
   {
-    name: "PETER RIVER",
-    code: "#3498db",
-    img: require("./../assets/img1.png")
+    name: "Entertainment",
+    img: require("./../assets/catagory/entertainment.png")
   },
-  { name: "AMETHYST", code: "#9b59b6", img: require("./../assets/img1.png") },
+  { name: "Sport", img: require("./../assets/catagory/sport.png") },
   {
-    name: "WET ASPHALT",
-    code: "#34495e",
-    img: require("./../assets/img1.png")
+    name: "News",
+
+    img: require("./../assets/catagory/news.png")
   },
-  { name: "GREEN SEA", code: "#16a085", img: require("./../assets/img1.png") },
-  { name: "NEPHRITIS", code: "#27ae60", img: require("./../assets/img1.png") },
+  { name: "Animal", img: require("./../assets/catagory/animal.png") },
   {
-    name: "BELIZE HOLE",
-    code: "#2980b9",
-    img: require("./../assets/img1.png")
+    name: "Food",
+
+    img: require("./../assets/catagory/food.png")
   },
-  { name: "WISTERIA", code: "#8e44ad", img: require("./../assets/img1.png") },
+  { name: "Tale", img: require("./../assets/catagory/tale.png") },
   {
-    name: "MIDNIGHT BLUE",
-    code: "#2c3e50",
-    img: require("./../assets/img1.png")
+    name: "Announce & Brochure",
+    img: require("./../assets/catagory/announce.png")
   },
-  { name: "SUN FLOWER", code: "#f1c40f", img: require("./../assets/img1.png") },
-  { name: "CARROT", code: "#e67e22", img: require("./../assets/img1.png") },
-  { name: "ALIZARIN", code: "#e74c3c", img: require("./../assets/img1.png") },
-  { name: "CLOUDS", code: "#ecf0f1", img: require("./../assets/img1.png") },
-  { name: "CONCRETE", code: "#95a5a6", img: require("./../assets/img1.png") },
-  { name: "ORANGE", code: "#f39c12", img: require("./../assets/img1.png") },
-  { name: "PUMPKIN", code: "#d35400", img: require("./../assets/img1.png") },
   {
-    name: "POMEGRANATE",
-    code: "#c0392b",
-    img: require("./../assets/img1.png")
+    name: "Home",
+
+    img: require("./../assets/catagory/home.png")
   },
-  { name: "SILVER", code: "#bdc3c7", img: require("./../assets/img1.png") }
+  { name: "Clothing", img: require("./../assets/catagory/clothing.png") }
 ];
 
 const Interest = () => {
