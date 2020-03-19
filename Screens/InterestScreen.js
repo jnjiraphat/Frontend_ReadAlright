@@ -73,17 +73,21 @@ const Interest = () => {
             containerStyle={styles.itemContainer}
             image={item.img}
             imageStyle={{
-              height: 75
-              // backgroundColor: "red"
-
+              height: "65%"
               // borderColor: "red",
               // borderTopLeftRadius: 5,
               // borderTopRightRadius: 5,
-              // overflow: "hidden"
             }}
             imageProps={{ resizeMode: "cover" }}
           >
-            <Text style={styles.itemTopic}>{item.name}</Text>
+            {/* <Image
+              source={item.img}
+              style={{ height: "100%" }}
+              resizeMode="cover"
+            /> */}
+            <View style={{ alignItems: "center" }}>
+              <Text style={styles.itemTopic}>{item.name}</Text>
+            </View>
           </Card>
         )}
       />
