@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ImageResizeMode from "react-native/Libraries/Image/ImageResizeMode";
 import {
   StyleSheet,
   View,
@@ -72,8 +73,8 @@ const Interest = () => {
           <Card
             containerStyle={styles.itemContainer}
             image={item.img}
+            resizeMode={ImageResizeMode.contain}
             imageStyle={{
-              width: 110,
               height: 60
               // borderColor: "red",
               // borderTopLeftRadius: 5,
@@ -127,7 +128,8 @@ const styles = StyleSheet.create({
   itemContainer: {
     borderRadius: 5,
     height: 110,
-    width: 110
+    width: 110,
+    overflow: "hidden"
   },
   topic: {
     fontSize: 20,
