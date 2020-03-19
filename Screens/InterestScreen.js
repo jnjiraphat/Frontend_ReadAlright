@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Grid } from "@ant-design/react-native";
 import {
   StyleSheet,
   View,
@@ -10,87 +9,105 @@ import {
   ScrollView,
   ImageBackground
 } from "react-native";
+import { Card } from "react-native-elements";
+import { Grid, Col, Row } from "react-native-easy-grid";
 import { FlatGrid } from "react-native-super-grid";
-
-// const datalist = [
-//   { image: require("./../assets/img1.png") },
-//   { image: require("./../assets/img2.png") },
-//   { image: require("./../assets/img1.png") },
-//   { image: require("./../assets/img2.png") },
-//   { image: require("./../assets/img1.png") },
-//   { image: require("./../assets/img2.png") },
-//   { image: require("./../assets/img1.png") },
-//   { image: require("./../assets/img2.png") },
-//   { image: require("./../assets/img2.png") }
-// ];
-
-// const data = Array.from(new Array(9)).map((_val, i) => ({
-//   image: require("./../assets/img1.png"),
-//   text: `name${i}`
-// }));
 
 const items = [
   {
-    name: "Entertainment",
-    img: require("./../assets/catagory/entertainment.png")
+    name: "Music",
+    img: require("./../assets/catagory/music.png")
   },
-  { name: "Sport", img: require("./../assets/catagory/sport.png") },
+  { name: "Movie", img: require("./../assets/catagory/movie.png") },
   {
     name: "News",
-
     img: require("./../assets/catagory/news.png")
   },
   { name: "Animal", img: require("./../assets/catagory/animal.png") },
   {
     name: "Food",
-
     img: require("./../assets/catagory/food.png")
   },
-  { name: "Tale", img: require("./../assets/catagory/tale.png") },
+  { name: "Story", img: require("./../assets/catagory/story.png") },
   {
-    name: "Announce & Brochure",
-    img: require("./../assets/catagory/announce.png")
+    name: "House",
+    img: require("./../assets/catagory/house.png")
   },
   {
-    name: "Home",
-
-    img: require("./../assets/catagory/home.png")
+    name: "Natural",
+    img: require("./../assets/catagory/natural.png")
   },
-  { name: "Clothing", img: require("./../assets/catagory/clothing.png") }
+  { name: "Sport", img: require("./../assets/catagory/sport.png") }
 ];
+
+const ImageCards = () => {
+  return <Image />;
+};
 
 const Interest = () => {
   // const [count, setcount] = useState(0);
 
   return (
     <ScrollView>
-      <View style={styles.container}>
-        {/* <View style={styles.container}>
+      <Grid>
+        <Row>
+          <View style={styles.container}>
+            <View style={styles.container}>
+              <Text style={styles.topic}>Interest</Text>
+              <Text style={styles.descript}>
+                Please select 3 that you interests
+              </Text>
+            </View>
+          </View>
+        </Row>
+        <Row>
+          <View style={styles.container}></View>
+        </Row>
+      </Grid>
+      <FlatGrid
+        itemDimension={110}
+        items={items}
+        style={styles.gridView}
+        renderItem={({ item, index }) => (
+          <Card
+            containerStyle={styles.itemContainer}
+            image={item.img}
+            imageStyle={{
+              width: 110,
+              height: 60
+              // borderColor: "red",
+              // borderTopLeftRadius: 5,
+              // borderTopRightRadius: 5,
+              // overflow: "hidden"
+            }}
+          >
+            <Text style={styles.itemTopic}>{item.name}</Text>
+          </Card>
+        )}
+      />
+      {/* <View style={styles.container}>
           <TouchableOpacity onPress={() => setcount(count + 1)}>
             <Image source={require("./../assets/icon.png")} />
           </TouchableOpacity>
           <Text>your clicks: {count}</Text>
           <Text>click</Text>
         </View> */}
-        <FlatGrid
-          itemDimension={130}
+      {/* <FlatGrid
+          itemDimension={110}
           items={items}
           style={styles.gridView}
-          // staticDimension={300}
-          // fixed
-          // spacing={20}
           renderItem={({ item, index }) => (
-            <ImageBackground
+            <CardViewWithImage
+              width={110}
+              borderRadius={5}
               source={item.img}
-              style={styles.itemContainer}
-              imageStyle={{ borderRadius: 5 }}
-            >
-              <Text style={styles.itemName}>{item.name}</Text>
-              <Text style={styles.itemCode}>{item.code}</Text>
-            </ImageBackground>
+              title={item.name}
+              imageWidth={"100%"}
+              imageHeight={100}
+              roundedImage={false}
+            />
           )}
-        />
-      </View>
+        /> */}
     </ScrollView>
   );
 };
@@ -108,19 +125,24 @@ const styles = StyleSheet.create({
     flex: 1
   },
   itemContainer: {
-    justifyContent: "flex-end",
     borderRadius: 5,
-    padding: 10,
-    height: 150
+    height: 110,
+    width: 110
   },
-  itemName: {
+  topic: {
+    fontSize: 20,
+    color: "#000",
+    marginTop: 50,
+    fontWeight: "bold"
+  },
+  descript: {
     fontSize: 16,
-    color: "#fff",
+    color: "#000",
     fontWeight: "600"
   },
-  itemCode: {
-    fontWeight: "600",
-    fontSize: 12,
-    color: "#fff"
+  itemTopic: {
+    fontSize: 14,
+    color: "#000",
+    fontWeight: "bold"
   }
 });
