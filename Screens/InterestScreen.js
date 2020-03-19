@@ -3,13 +3,11 @@ import {
   StyleSheet,
   View,
   Text,
-  Button,
-  Image,
   TouchableOpacity,
   ScrollView,
   ImageBackground
 } from "react-native";
-import { Card } from "react-native-elements";
+import { Card, Button } from "react-native-elements";
 import { Grid, Col, Row } from "react-native-easy-grid";
 import { FlatGrid } from "react-native-super-grid";
 
@@ -63,34 +61,38 @@ const Interest = () => {
         <Row>
           <View style={styles.container}></View>
         </Row>
-      </Grid>
-      <FlatGrid
-        itemDimension={110}
-        items={items}
-        style={styles.gridView}
-        renderItem={({ item, index }) => (
-          <Card
-            containerStyle={styles.itemContainer}
-            image={item.img}
-            imageStyle={{
-              height: "65%"
-              // borderColor: "red",
-              // borderTopLeftRadius: 5,
-              // borderTopRightRadius: 5,
-            }}
-            imageProps={{ resizeMode: "cover" }}
-          >
-            {/* <Image
+
+        <FlatGrid
+          itemDimension={110}
+          items={items}
+          style={styles.gridView}
+          renderItem={({ item, index }) => (
+            <Card
+              containerStyle={styles.itemContainer}
+              image={item.img}
+              imageStyle={{
+                height: "65%"
+                // borderColor: "red",
+                // borderTopLeftRadius: 5,
+                // borderTopRightRadius: 5,
+              }}
+              imageProps={{ resizeMode: "cover" }}
+            >
+              {/* <Image
               source={item.img}
               style={{ height: "100%" }}
               resizeMode="cover"
             /> */}
-            <View style={{ alignItems: "center" }}>
-              <Text style={styles.itemTopic}>{item.name}</Text>
-            </View>
-          </Card>
-        )}
-      />
+              <View style={{ alignItems: "center" }}>
+                <Text style={styles.itemTopic}>{item.name}</Text>
+              </View>
+            </Card>
+          )}
+        />
+        <Row style={styles.container}>
+          <Button title="Next" buttonStyle={styles.button} />
+        </Row>
+      </Grid>
       {/* <View style={styles.container}>
           <TouchableOpacity onPress={() => setcount(count + 1)}>
             <Image source={require("./../assets/icon.png")} />
@@ -151,5 +153,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#000",
     fontWeight: "bold"
+  },
+  button: {
+    width: 200,
+    marginTop: 20
   }
 });
