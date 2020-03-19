@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ImageResizeMode from "react-native/Libraries/Image/ImageResizeMode";
 import {
   StyleSheet,
   View,
@@ -56,7 +55,7 @@ const Interest = () => {
             <View style={styles.container}>
               <Text style={styles.topic}>Interest</Text>
               <Text style={styles.descript}>
-                Please select 3 that you interests
+                Please select 3 that you interest
               </Text>
             </View>
           </View>
@@ -73,14 +72,16 @@ const Interest = () => {
           <Card
             containerStyle={styles.itemContainer}
             image={item.img}
-            resizeMode={ImageResizeMode.contain}
             imageStyle={{
-              height: 60
+              height: 75
+              // backgroundColor: "red"
+
               // borderColor: "red",
               // borderTopLeftRadius: 5,
               // borderTopRightRadius: 5,
               // overflow: "hidden"
             }}
+            imageProps={{ resizeMode: "cover" }}
           >
             <Text style={styles.itemTopic}>{item.name}</Text>
           </Card>
