@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Interest from "./Screens/InterestScreen";
+import Interest from "./App/Screens/InterestScreen";
 
 export default function App() {
   return <Interest />;

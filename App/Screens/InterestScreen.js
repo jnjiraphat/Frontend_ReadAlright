@@ -11,10 +11,8 @@ import {
 import { Card, Button } from "react-native-elements";
 import { Grid, Col, Row } from "react-native-easy-grid";
 import { FlatGrid } from "react-native-super-grid";
-import ReadingApi from "../API/ReadingAPI"
-import { List, ListItem } from "react-native-elements"
-
-
+import ReadingApi from "../API/ReadingAPI";
+import { List, ListItem } from "react-native-elements";
 
 const ImageCards = () => {
   return <Image />;
@@ -29,17 +27,17 @@ const Interest = () => {
     // console.log("-----------------")
     // console.log(result)
   };
-  console.log(result)
+  console.log(result);
   useEffect(() => {
     read();
   }, []);
 
   // const [count, setcount] = useState(0);
   if (result) {
-    console.log("Eiei")
-    console.log(result)
-    console.log("Mookkkkkkkkk")
-    console.log(result.length)
+    console.log("Eiei");
+    console.log(result);
+    console.log("Mookkkkkkkkk");
+    console.log(result.length);
 
     const items = [
       {
@@ -76,7 +74,7 @@ const Interest = () => {
                 <Text style={styles.topic}>Interest</Text>
                 <Text style={styles.descript}>
                   Please select 3 that you interest
-              </Text>
+                </Text>
               </View>
             </View>
           </Row>
@@ -89,19 +87,15 @@ const Interest = () => {
                 data={result}
                 renderItem={({ item }) => (
                   <ListItem
-                  roundAvatar
-                  title={item.categoryName}
-                  subtitle={item.typeName}
-
-                />
-
-                )
-                }
+                    roundAvatar
+                    title={item.categoryName}
+                    subtitle={item.typeName}
+                  />
+                )}
                 keyExtractor={({ id }, index) => id}
               />
             </View>
           </Row>
-
 
           <FlatGrid
             itemDimension={110}
@@ -158,11 +152,10 @@ const Interest = () => {
           )}
         /> */}
       </ScrollView>
-    )
+    );
+  } else {
+    return <Text>Loading</Text>;
   }
-  else {
-    return <Text>Loading</Text>
-  };
 };
 
 export default Interest;
