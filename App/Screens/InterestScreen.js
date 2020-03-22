@@ -13,6 +13,7 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 import { FlatGrid } from "react-native-super-grid";
 import ReadingApi from "../API/ReadingAPI";
 import { List, ListItem } from "react-native-elements";
+import { Actions } from 'react-native-router-flux';
 
 const ImageCards = () => {
   return <Image />;
@@ -66,10 +67,19 @@ const Interest = () => {
       },
       { name: "Sport", img: require("./../assets/catagory/sport.png") }
     ];
+    const goToAbout = () => {
+      Actions.about()
+    }
     return (
       <ScrollView>
         <Grid>
           <Row>
+            <TouchableOpacity style={{ margin: 50 }} onPress={goToAbout}>
+              <Text>Click to go to about</Text>
+            </TouchableOpacity>
+          </Row>
+          <Row>
+
             <View style={styles.container}>
               <View style={styles.container}>
                 <Text style={styles.topic}>Interest</Text>
