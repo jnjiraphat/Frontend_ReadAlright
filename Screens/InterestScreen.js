@@ -13,6 +13,30 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 import { FlatGrid } from "react-native-super-grid";
 import ReadingApi from "../API/ReadingAPI"
 import { List, ListItem } from "react-native-elements"
+import A from "react-native-a";
+import App from "../App"
+
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Content"
+        onPress={() => navigation.navigate('Content')}
+      />
+    </View>
+  );
+}
+
+function DetailsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Details Screen</Text>
+    </View>
+  );
+}
+
+// const Stack = createStackNavigator();
 
 
 
@@ -89,11 +113,11 @@ const Interest = () => {
                 data={result}
                 renderItem={({ item }) => (
                   <ListItem
-                  roundAvatar
-                  title={item.categoryName}
-                  subtitle={item.typeName}
+                    roundAvatar
+                    title={item.categoryName}
+                    subtitle={item.typeName}
 
-                />
+                  />
 
                 )
                 }
@@ -101,6 +125,14 @@ const Interest = () => {
               />
             </View>
           </Row>
+          {/* <Row>
+            <NavigationContainer>
+              <Stack.Navigator initialRouteName="Home">
+                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="Details" component={DetailsScreen} />
+              </Stack.Navigator>
+            </NavigationContainer>
+          </Row> */}
 
 
           <FlatGrid
