@@ -32,7 +32,8 @@ const Interest = () => {
     read();
   }, []);
 
-  // const [count, setcount] = useState(0);
+  const [view, setview] = useState(0);
+
   if (result) {
     console.log("Eiei");
     console.log(result);
@@ -84,6 +85,7 @@ const Interest = () => {
           <Row>
             <View style={{ flex: 1, paddingTop: 20 }}>
               <FlatList
+                onPress={() => setview(view + 1)}
                 data={result}
                 renderItem={({ item }) => (
                   <ListItem
@@ -102,30 +104,33 @@ const Interest = () => {
             items={items}
             style={styles.gridView}
             renderItem={({ item, index }) => (
-              <Card
-                containerStyle={styles.itemContainer}
-                image={item.img}
-                imageStyle={{
-                  height: "65%"
-                  // borderColor: "red",
-                  // borderTopLeftRadius: 5,
-                  // borderTopRightRadius: 5,
-                }}
-                imageProps={{ resizeMode: "cover" }}
-              >
-                {/* <Image
+              <TouchableOpacity onPress={() => setview(view + 1)}>
+                <Card
+                  containerStyle={styles.itemContainer}
+                  image={item.img}
+                  imageStyle={{
+                    height: "65%"
+                    // borderColor: "red",
+                    // borderTopLeftRadius: 5,
+                    // borderTopRightRadius: 5,
+                  }}
+                  imageProps={{ resizeMode: "cover" }}
+                >
+                  {/* <Image
               source={item.img}
               style={{ height: "100%" }}
               resizeMode="cover"
             /> */}
-                <View style={{ alignItems: "center" }}>
-                  <Text style={styles.itemTopic}>{item.name}</Text>
-                </View>
-              </Card>
+                  <View style={{ alignItems: "center" }}>
+                    <Text style={styles.itemTopic}>{item.name}</Text>
+                  </View>
+                </Card>
+              </TouchableOpacity>
             )}
           />
           <Row style={styles.container}>
             <Button title="Next" buttonStyle={styles.button} />
+            <Text>Your clicks: {view}</Text>
           </Row>
         </Grid>
         {/* <View style={styles.container}>
@@ -194,6 +199,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 200,
-    marginTop: 20
+    marginTop: 20,
+    marginBottom: 20
   }
 });
