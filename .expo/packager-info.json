@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 31492,
+  "expoServerNgrokUrl": "https://um-4m2.anonymous.senior-project.exp.direct",
+  "packagerNgrokUrl": "https://packager.um-4m2.anonymous.senior-project.exp.direct",
+  "ngrokPid": 38996,
   "webpackServerPort": null
 }
