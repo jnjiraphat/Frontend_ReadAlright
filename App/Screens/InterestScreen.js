@@ -97,11 +97,11 @@ const Interest = () => {
               <FlatList
                 onPress={() => setview(view + 1)}
                 data={result}
-                renderItem={({ cat }) => (
+                renderItem={({ item }) => (
                   <ListItem
                     roundAvatar
-                    title={cat.categoryName}
-                    subtitle={cat.typeName}
+                    title={item.categoryName}
+                    subtitle={item.typeName}
                   />
                 )}
                 keyExtractor={({ id }, index) => id}
