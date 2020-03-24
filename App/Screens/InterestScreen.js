@@ -41,32 +41,32 @@ const Interest = () => {
     console.log("Mookkkkkkkkk");
     console.log(result.length);
 
-    const items = [
-      {
-        name: "Music",
-        img: require("./../assets/catagory/music.png")
-      },
-      { name: "Movie", img: require("./../assets/catagory/movie.png") },
-      {
-        name: "News",
-        img: require("./../assets/catagory/news.png")
-      },
-      { name: "Animal", img: require("./../assets/catagory/animal.png") },
-      {
-        name: "Food",
-        img: require("./../assets/catagory/food.png")
-      },
-      { name: "Story", img: require("./../assets/catagory/story.png") },
-      {
-        name: "House",
-        img: require("./../assets/catagory/house.png")
-      },
-      {
-        name: "Natural",
-        img: require("./../assets/catagory/natural.png")
-      },
-      { name: "Sport", img: require("./../assets/catagory/sport.png") }
-    ];
+    // const items = [
+    //   {
+    //     name: "Music",
+    //     img: require("./../assets/catagory/music.png")
+    //   },
+    //   { name: "Movie", img: require("./../assets/catagory/movie.png") },
+    //   {
+    //     name: "News",
+    //     img: require("./../assets/catagory/news.png")
+    //   },
+    //   { name: "Animal", img: require("./../assets/catagory/animal.png") },
+    //   {
+    //     name: "Food",
+    //     img: require("./../assets/catagory/food.png")
+    //   },
+    //   { name: "Story", img: require("./../assets/catagory/story.png") },
+    //   {
+    //     name: "House",
+    //     img: require("./../assets/catagory/house.png")
+    //   },
+    //   {
+    //     name: "Natural",
+    //     img: require("./../assets/catagory/natural.png")
+    //   },
+    //   { name: "Sport", img: require("./../assets/catagory/sport.png") }
+    // ];
     const goToAbout = () => {
       Actions.about();
     };
@@ -92,7 +92,7 @@ const Interest = () => {
           <Row>
             <View style={styles.container}></View>
           </Row>
-          <Row>
+          {/* <Row>
             <View style={{ flex: 1, paddingTop: 20 }}>
               <FlatList
                 onPress={() => setview(view + 1)}
@@ -107,11 +107,11 @@ const Interest = () => {
                 keyExtractor={({ id }, index) => id}
               />
             </View>
-          </Row>
+          </Row> */}
 
           <FlatGrid
             itemDimension={110}
-            items={items}
+            items={result} 
             style={styles.gridView}
             renderItem={({ item, index }) => (
               <TouchableOpacity onPress={() => setview(view + 1)}>
@@ -119,20 +119,12 @@ const Interest = () => {
                   containerStyle={styles.itemContainer}
                   image={item.img}
                   imageStyle={{
-                    height: "65%"
-                    // borderColor: "red",
-                    // borderTopLeftRadius: 5,
-                    // borderTopRightRadius: 5,
+                    height: "65%"                    
                   }}
                   imageProps={{ resizeMode: "cover" }}
                 >
-                  {/* <Image
-              source={item.img}
-              style={{ height: "100%" }}
-              resizeMode="cover"
-            /> */}
                   <View style={{ alignItems: "center" }}>
-                    <Text style={styles.itemTopic}>{item.name}</Text>
+                    <Text style={styles.itemTopic}>{item.categoryName}</Text>
                   </View>
                 </Card>
               </TouchableOpacity>
