@@ -30,15 +30,30 @@ const Interest = () => {
   }, []);
 
   //Fetch(POST) numOfViews
-  const [catagory_id, setcatagory_id] = useState("");
-  const [numOfView, setnumOfView] = useState(0);
+  const initialState = {
+    views_id: 1,
+    numOfView: 1,
+    category_id: "",
+    user_id: 1,
+    reading_id: null,
+    vocabBox_id: null
+  };
+  const [state, setstate] = useState(initialState);
+  const updateViews = state => {
+    setstate({
+      views_id: 1,
+      numOfView: 1,
+      category_id: item.catagory_id,
+      user_id: 1,
+      reading_id: null,
+      vocabBox_id: null
+    });
+  };
   const views = e => {
     e.preventDefault();
     fetch(`http://10.0.2.2:3000/views`, {
       method: "POST",
-      body: JSON.stringify({ catagory_id, numOfView })
-        .then(() => setIsSent(true))
-        .catch(() => alert("There was an error, please try again"))
+      body: JSON.stringify(state)
     });
   };
 
@@ -81,8 +96,7 @@ const Interest = () => {
             renderItem={({ item }) => (
               <TouchableOpacity
                 onPress={e => {
-                  setnumOfView(1);
-                  setcatagory_id(item.catagory_id);
+                  updateViews;
                 }}
               >
                 <Card containerStyle={styles.itemContainer}>
@@ -92,7 +106,7 @@ const Interest = () => {
                 </Card>
               </TouchableOpacity>
             )}
-            keyExtractor={item => item.catagory_id}
+            keyExtractor={(item,index) => item.catagory_id}
           />
           <Row style={styles.container}>
             <Button title="Next" buttonStyle={styles.button} onPress={views} />
