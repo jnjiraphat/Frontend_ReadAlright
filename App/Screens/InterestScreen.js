@@ -11,36 +11,42 @@ import {
 import { Card, Button } from "react-native-elements";
 import { Grid, Col, Row } from "react-native-easy-grid";
 import { FlatGrid } from "react-native-super-grid";
-import ReadingApi from "../API/ReadingAPI";
 import { List, ListItem } from "react-native-elements";
 import { Actions } from "react-native-router-flux";
 
-const ImageCards = () => {
-  return <Image />;
-};
+//API
+import ReadingApi from "../API/ReadingAPI";
+// import ViewsApi from "../API/ViewsAPI";
 
 const Interest = () => {
+  //Fetch(GET) Catagory Name
   const [result, setResult] = useState([]);
   const read = async () => {
     const data = await ReadingApi();
     setResult(data);
-    // console.log(data);
-    // console.log("-----------------")
-    // console.log(result)
   };
-  console.log(result);
   useEffect(() => {
     read();
   }, []);
 
-  const [view, setview] = useState(0);
+  //Fetch(POST) numOfViews
+  const [catagory_id, setcatagory_id] = useState("");
+  const [numOfView, setnumOfView] = useState(0);
+  const views = e => {
+    e.preventDefault();
+    fetch(`http://10.0.2.2:3000/views`, {
+      method: "POST",
+      body: JSON.stringify({ catagory_id, numOfView })
+        .then(() => setIsSent(true))
+        .catch(() => alert("There was an error, please try again"))
+    });
+  };
 
   if (result) {
-    console.log("Eiei");
     console.log(result);
-    console.log("Mookkkkkkkkk");
     console.log(result.length);
 
+    //Navigator
     const goToAbout = () => {
       Actions.about();
     };
@@ -67,12 +73,18 @@ const Interest = () => {
             <View style={styles.container}></View>
           </Row>
 
+          {/* Render CatagoryName */}
           <FlatGrid
             itemDimension={110}
             items={result}
             style={styles.gridView}
-            renderItem={({ item, index }) => (
-              <TouchableOpacity onPress={() => setview(view + 1)}>
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                onPress={e => {
+                  setnumOfView(1);
+                  setcatagory_id(item.catagory_id);
+                }}
+              >
                 <Card containerStyle={styles.itemContainer}>
                   <View style={{ alignItems: "center" }}>
                     <Text style={styles.itemTopic}>{item.categoryName}</Text>
@@ -80,35 +92,12 @@ const Interest = () => {
                 </Card>
               </TouchableOpacity>
             )}
+            keyExtractor={item => item.catagory_id}
           />
           <Row style={styles.container}>
-            <Button title="Next" buttonStyle={styles.button} />
-            <Text>Your clicks: {view}</Text>
+            <Button title="Next" buttonStyle={styles.button} onPress={views} />
           </Row>
         </Grid>
-        {/* <View style={styles.container}>
-          <TouchableOpacity onPress={() => setcount(count + 1)}>
-            <Image source={require("./../assets/icon.png")} />
-          </TouchableOpacity>
-          <Text>your clicks: {count}</Text>
-          <Text>click</Text>
-        </View> */}
-        {/* <FlatGrid
-          itemDimension={110}
-          items={items}
-          style={styles.gridView}
-          renderItem={({ item, index }) => (
-            <CardViewWithImage
-              width={110}
-              borderRadius={5}
-              source={item.img}
-              title={item.name}
-              imageWidth={"100%"}
-              imageHeight={100}
-              roundedImage={false}
-            />
-          )}
-        /> */}
       </ScrollView>
     );
   } else {
