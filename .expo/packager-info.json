@@ -1,10 +1,10 @@
 {
-  "packagerPort": 19003,
-  "packagerPid": 58233,
+  "packagerPort": 19001,
+  "packagerPid": 6192,
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://2d-s3r.gnbiiie3.frontend-readalright.exp.direct",
-  "packagerNgrokUrl": "https://packager.2d-s3r.gnbiiie3.frontend-readalright.exp.direct",
-  "ngrokPid": 58367,
+  "expoServerNgrokUrl": "https://iq-knv.anonymous.senior-project.exp.direct",
+  "packagerNgrokUrl": "https://packager.iq-knv.anonymous.senior-project.exp.direct",
+  "ngrokPid": 376,
   "webpackServerPort": null
 }

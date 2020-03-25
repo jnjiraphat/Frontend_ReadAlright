@@ -18,7 +18,7 @@ import axios from "axios";
 //API
 import ReadingApi from "../API/ReadingAPI";
 // import ViewsApi from "../API/ViewsAPI";
-
+const arrayId = []
 const Interest = () => {
   //Fetch(GET) Catagory Name
   const [result, setResult] = useState([]);
@@ -32,7 +32,14 @@ const Interest = () => {
 
   //Fetch(POST) numOfViews
   //  item.categoryName const [categoryId, setCategoryId] = useState(1);
+
+
   const [categoryId, setCategoryId] = useState(0);
+
+  const cateId = () => {
+    arrayId.push(categoryId)
+    console.log("push success!!!" + categoryId)
+  }
   const interest = {
     numOfView: 1,
     category_id: categoryId,
@@ -40,7 +47,6 @@ const Interest = () => {
     reading_id: 1,
     vocabBox_id: 1
   };
-
   const views = e => {
     axios
       .post("http://10.0.2.2:3000/views", {
@@ -52,18 +58,28 @@ const Interest = () => {
       })
       .then(
         response => {
-          console.log("eiei");
-          console.log(response.data);
+
+          arrayId.push(categoryId)
+
+          console.log("array length = " + arrayId.length)
+          for (let index = 0; index < arrayId.length; index++) {
+            const element = arrayId[index];
+            console.log("index = " + [index] + "value = " + element)
+
+          }
+          // console.log("eiei");
+          // console.log(response.data);
         },
         error => {
           console.log(error);
         }
       );
   };
-  const setViews = e => {
-    setCategoryId();
-    views();
-  };
+  // const setViews = e => {
+  //   setCategoryId();
+  //   views();
+  // };
+  console.log(categoryId)
 
   if (result) {
     // console.log(result);
@@ -71,7 +87,7 @@ const Interest = () => {
 
     //Navigator
     const goToAbout = () => {
-      Actions.about();
+      Actions.about({ text: arrayId })
     };
 
     return (
@@ -106,6 +122,7 @@ const Interest = () => {
               <TouchableOpacity
                 onPressIn={() => setCategoryId(item.category_id)}
                 onPress={views}
+
               >
                 <Card containerStyle={styles.itemContainer}>
                   <View style={{ alignItems: "center" }}>
@@ -116,7 +133,7 @@ const Interest = () => {
             )}
           />
           <Row style={styles.container}>
-            <Button title="Next" buttonStyle={styles.button} />
+            <Button title="Next" buttonStyle={styles.button} onPress={goToAbout} ></Button>
           </Row>
         </Grid>
       </ScrollView>
