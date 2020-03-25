@@ -31,18 +31,19 @@ const Interest = () => {
   }, []);
 
   //Fetch(POST) numOfViews
-  const [categoryId, setCategoryId] = useState(1);
+//  item.categoryName const [categoryId, setCategoryId] = useState(1);
   const views = e => {
     axios
       .post("http://10.0.2.2:3000/views", {
         numOfView: 1,
-        category_id: categoryId,
+        category_id: 1,
         user_id: 1,
         reading_id: 1,
         vocabBox_id: 1
       })
       .then(
         response => {
+          console.log("eiei")
           console.log(response.data);
         },
         error => {
@@ -52,8 +53,8 @@ const Interest = () => {
   };
 
   if (result) {
-    console.log(result);
-    console.log(result.length);
+    // console.log(result);
+    // console.log(result.length);
 
     //Navigator
     const goToAbout = () => {
@@ -89,10 +90,9 @@ const Interest = () => {
             style={styles.gridView}
             renderItem={({ item }) => (
               <TouchableOpacity
-                onPress={e => {
-                  views;
-                  setCategoryId(item.catagory_id);
-                }}
+                onPress={
+                  views
+                }
               >
                 <Card containerStyle={styles.itemContainer}>
                   <View style={{ alignItems: "center" }}>
