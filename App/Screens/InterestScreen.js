@@ -13,6 +13,7 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 import { FlatGrid } from "react-native-super-grid";
 import { List, ListItem } from "react-native-elements";
 import { Actions } from "react-native-router-flux";
+import axios from 'axios';
 
 //API
 import ReadingApi from "../API/ReadingAPI";
@@ -30,32 +31,46 @@ const Interest = () => {
   }, []);
 
   //Fetch(POST) numOfViews
-  const initialState = {
-    views_id: 1,
-    numOfView: 1,
-    category_id: "",
-    user_id: 1,
-    reading_id: null,
-    vocabBox_id: null
-  };
-  const [state, setstate] = useState(initialState);
-  const updateViews = state => {
-    setstate({
-      views_id: 1,
-      numOfView: 1,
-      category_id: item.catagory_id,
-      user_id: 1,
-      reading_id: null,
-      vocabBox_id: null
-    });
-  };
+  // const initialState = {
+  //   numOfView: 1,
+  //   category_id: 1,
+  //   user_id: 1,
+  //   reading_id: 1,
+  //   vocabBox_id: 1
+  // };
+
+  // const [state, setstate] = useState(initialState);
+
+  // const updateViews = state => {
+  //   setstate({
+  //     numOfView: 1,
+  //     category_id: 1,
+  //     user_id: 1,
+  //     reading_id: 1,
+  //     vocabBox_id: 1
+  //   });
+  // };
   const views = e => {
-    e.preventDefault();
-    fetch(`http://10.0.2.2:3000/views`, {
-      method: "POST",
-      body: JSON.stringify(state)
-    });
-  };
+    axios.post('http://10.0.2.2:3000/views', {
+      numOfView: 1,
+      category_id: 1,
+      user_id: 1,
+      reading_id: 1,
+      vocabBox_id: 1,
+    })
+      .then((response) => {
+        console.log(response.data);
+      }, (error) => {
+        console.log(error);
+
+      });
+  }
+  //   e.preventDefault();
+  //   fetch(`http://10.0.2.2:3000/views`, {
+  //     method: "POST",
+  //     body: JSON.stringify(state)
+  //   });
+  // };
 
   if (result) {
     console.log(result);
@@ -96,7 +111,7 @@ const Interest = () => {
             renderItem={({ item }) => (
               <TouchableOpacity
                 onPress={e => {
-                  updateViews;
+                  views;
                 }}
               >
                 <Card containerStyle={styles.itemContainer}>
@@ -106,7 +121,7 @@ const Interest = () => {
                 </Card>
               </TouchableOpacity>
             )}
-            keyExtractor={(item,index) => item.catagory_id}
+            keyExtractor={(item, index) => item.catagory_id}
           />
           <Row style={styles.container}>
             <Button title="Next" buttonStyle={styles.button} onPress={views} />
@@ -117,6 +132,7 @@ const Interest = () => {
   } else {
     return <Text>Loading</Text>;
   }
+
 };
 
 export default Interest;
