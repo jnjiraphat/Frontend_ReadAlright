@@ -13,6 +13,7 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 import { FlatGrid } from "react-native-super-grid";
 import { List, ListItem } from "react-native-elements";
 import { Actions } from "react-native-router-flux";
+import axios from "axios";
 
 //API
 import ReadingApi from "../API/ReadingAPI";
@@ -30,35 +31,24 @@ const Interest = () => {
   }, []);
 
   //Fetch(POST) numOfViews
-  const initialState = {
-    views_id: 1,
-    numOfView: 1,
-    category_id: "",
-    user_id: 1,
-    reading_id: null,
-    vocabBox_id: null
-  };
-  const [state, setstate] = useState(initialState);
-  const updateViews = state => {
-    setstate({
-      views_id: 1,
-      numOfView: 1,
-      category_id: item.catagory_id,
-      user_id: 1,
-      reading_id: null,
-      vocabBox_id: null
-    });
-  };
-  const sendViews = e => {
-    e.preventDefault();
-    fetch(
-      `http://10.0.2.2:3000/views`,
-      {
-        method: "POST",
-        body: JSON.stringify(state)
-      },
-      []
-    );
+  const [categoryId, setCategoryId] = useState(1);
+  const views = e => {
+    axios
+      .post("http://10.0.2.2:3000/views", {
+        numOfView: 1,
+        category_id: categoryId,
+        user_id: 1,
+        reading_id: 1,
+        vocabBox_id: 1
+      })
+      .then(
+        response => {
+          console.log(response.data);
+        },
+        error => {
+          console.log(error);
+        }
+      );
   };
 
   if (result) {
@@ -100,7 +90,8 @@ const Interest = () => {
             renderItem={({ item }) => (
               <TouchableOpacity
                 onPress={e => {
-                  updateViews;
+                  views;
+                  setCategoryId(item.catagory_id);
                 }}
               >
                 <Card containerStyle={styles.itemContainer}>
@@ -113,11 +104,7 @@ const Interest = () => {
             keyExtractor={(item, index) => item.catagory_id}
           />
           <Row style={styles.container}>
-            <Button
-              title="Next"
-              buttonStyle={styles.button}
-              onPress={sendViews}
-            />
+            <Button title="Next" buttonStyle={styles.button} onPress={views} />
           </Row>
         </Grid>
       </ScrollView>
