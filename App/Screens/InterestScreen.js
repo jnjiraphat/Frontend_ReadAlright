@@ -31,25 +31,38 @@ const Interest = () => {
   }, []);
 
   //Fetch(POST) numOfViews
-//  item.categoryName const [categoryId, setCategoryId] = useState(1);
+  //  item.categoryName const [categoryId, setCategoryId] = useState(1);
+  const [categoryId, setCategoryId] = useState(0);
+  const interest = {
+    numOfView: 1,
+    category_id: categoryId,
+    user_id: 1,
+    reading_id: 1,
+    vocabBox_id: 1
+  };
+
   const views = e => {
     axios
       .post("http://10.0.2.2:3000/views", {
         numOfView: 1,
-        category_id: 1,
+        category_id: categoryId,
         user_id: 1,
         reading_id: 1,
         vocabBox_id: 1
       })
       .then(
         response => {
-          console.log("eiei")
+          console.log("eiei");
           console.log(response.data);
         },
         error => {
           console.log(error);
         }
       );
+  };
+  const setViews = e => {
+    setCategoryId();
+    views();
   };
 
   if (result) {
@@ -84,15 +97,15 @@ const Interest = () => {
           </Row>
 
           {/* Render CatagoryName */}
+
           <FlatGrid
             itemDimension={110}
             items={result}
             style={styles.gridView}
             renderItem={({ item }) => (
               <TouchableOpacity
-                onPress={
-                  views
-                }
+                onPressIn={() => setCategoryId(item.category_id)}
+                onPress={views}
               >
                 <Card containerStyle={styles.itemContainer}>
                   <View style={{ alignItems: "center" }}>
@@ -101,10 +114,9 @@ const Interest = () => {
                 </Card>
               </TouchableOpacity>
             )}
-            keyExtractor={(item, index) => item.catagory_id}
           />
           <Row style={styles.container}>
-            <Button title="Next" buttonStyle={styles.button} onPress={views} />
+            <Button title="Next" buttonStyle={styles.button} />
           </Row>
         </Grid>
       </ScrollView>
