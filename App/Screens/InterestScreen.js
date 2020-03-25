@@ -49,12 +49,16 @@ const Interest = () => {
       vocabBox_id: null
     });
   };
-  const views = e => {
+  const sendViews = e => {
     e.preventDefault();
-    fetch(`http://10.0.2.2:3000/views`, {
-      method: "POST",
-      body: JSON.stringify(state)
-    });
+    fetch(
+      `http://10.0.2.2:3000/views`,
+      {
+        method: "POST",
+        body: JSON.stringify(state)
+      },
+      []
+    );
   };
 
   if (result) {
@@ -106,10 +110,14 @@ const Interest = () => {
                 </Card>
               </TouchableOpacity>
             )}
-            keyExtractor={(item,index) => item.catagory_id}
+            keyExtractor={(item, index) => item.catagory_id}
           />
           <Row style={styles.container}>
-            <Button title="Next" buttonStyle={styles.button} onPress={views} />
+            <Button
+              title="Next"
+              buttonStyle={styles.button}
+              onPress={sendViews}
+            />
           </Row>
         </Grid>
       </ScrollView>
