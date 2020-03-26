@@ -60,10 +60,6 @@ const Interest = () => {
         }
       );
   };
-  const setViews = e => {
-    setCategoryId();
-    views();
-  };
 
   if (result) {
     // console.log(result);
