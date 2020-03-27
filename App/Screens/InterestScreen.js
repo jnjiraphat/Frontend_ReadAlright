@@ -106,7 +106,6 @@ const Interest = () => {
           </Row>
 
           {/* Render CatagoryName */}
-
           <FlatGrid
             itemDimension={110}
             items={result}
@@ -122,6 +121,7 @@ const Interest = () => {
                   </View>
                 </Card>
               </TouchableOpacity>
+
             )}
           />
           <Row style={styles.container}>
