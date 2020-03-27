@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   StyleSheet,
   View,
@@ -31,20 +31,10 @@ const Interest = () => {
   }, []);
 
   //Fetch(POST) numOfViews
-  //  item.categoryName const [categoryId, setCategoryId] = useState(1);
-
   const [categoryId, setCategoryId] = useState(0);
-
   const cateId = () => {
     arrayId.push(categoryId);
     console.log("push success!!!" + categoryId);
-  };
-  const interest = {
-    numOfView: 1,
-    category_id: categoryId,
-    user_id: 1,
-    reading_id: 1,
-    vocabBox_id: 1
   };
   const views = e => {
     axios
@@ -73,6 +63,20 @@ const Interest = () => {
       );
   };
   console.log(categoryId);
+
+  //Selected category
+  const [selected, setSelected] = useState(new Map());
+  const onSelect = useCallback(
+    categoryId => {
+      const newSelected = new Map(selected);
+      newSelected.set(categoryId, !selected.get(categoryId));
+      setSelected(newSelected);
+    },
+    [selected]
+  );
+  const onCollect = () => {
+    onSelect(categoryId);
+  };
 
   if (result) {
     // console.log(result);
@@ -114,15 +118,25 @@ const Interest = () => {
             renderItem={({ item }) => (
               <TouchableOpacity
                 onPressIn={() => setCategoryId(item.category_id)}
-                onPress={views}
+                onPress={onCollect}
+                selected={!!selected.get(item.id)}
+                onSelect={onSelect}
               >
-                <Card containerStyle={styles.itemContainer}>
+                <Card
+                  containerStyle={[
+                    styles.itemContainer,
+                    {
+                      backgroundColor: selected ? "#6e3b6e" : "#ffffff"
+                    }
+                  ]}
+                >
                   <View style={{ alignItems: "center" }}>
                     <Text style={styles.itemTopic}>{item.categoryName}</Text>
                   </View>
                 </Card>
               </TouchableOpacity>
             )}
+            extraData={selected}
           />
           <Row style={styles.container}>
             <Button
@@ -155,7 +169,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     height: 110,
     width: 110,
-    overflow: "hidden"
+    overflow: "hidden",
+    backgroundColor: "#f9c2ff"
   },
   topic: {
     fontSize: 20,
