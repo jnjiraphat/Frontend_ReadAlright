@@ -83,17 +83,17 @@ const Interest = () => {
     // console.log(result.length);
 
     //Navigator
-    const goToAbout = () => {
-      Actions.about({ text: arrayId });
+    const goToMaybeYouLike = () => {
+      Actions.MaybeYouLike({ text: arrayId });
     };
 
     return (
       <ScrollView>
         <Grid>
           <Row>
-            <TouchableOpacity style={{ margin: 50 }} onPress={goToAbout}>
+            {/* <TouchableOpacity style={{ margin: 50 }} onPress={goToAbout}>
               <Text>Click to go to about</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </Row>
           <Row>
             <View style={styles.container}>
@@ -142,7 +142,7 @@ const Interest = () => {
             <Button
               title="Next"
               buttonStyle={styles.button}
-              onPress={goToAbout}
+              onPress={goToMaybeYouLike}
             ></Button>
           </Row>
         </Grid>

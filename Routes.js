@@ -1,8 +1,9 @@
 import React from "react";
 import { Router, Scene } from "react-native-router-flux";
 import Article from "./App/Screens/Article.js";
-import About from "./App/Screens/About.js";
+import MaybeYouLike from "./App/Screens/MaybeYouLike";
 import InterestScreen from "./App/Screens/InterestScreen.js";
+// import Article from "./App/Screens/Article"
 
 const Routes = () => (
   <Router>
@@ -13,7 +14,8 @@ const Routes = () => (
         title="Home"
         initial={true}
       />
-      <Scene key="about" component={About} title="About" />
+      <Scene key="MaybeYouLike" component={MaybeYouLike} title="MaybeYouLike" />
+      <Scene key="Article" component={Article} title="Article" />
     </Scene>
   </Router>
 );
