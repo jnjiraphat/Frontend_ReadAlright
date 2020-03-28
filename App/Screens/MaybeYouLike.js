@@ -18,7 +18,7 @@ import { FlatGrid } from "react-native-super-grid";
 
 const arrayReading = []
 
-const arrayId = [];
+// const arrayId = [];
 
 const About = (props) => {
    const [cate, setCate] = useState([]);
@@ -32,13 +32,14 @@ const About = (props) => {
    useEffect(() => {
       read();
    }, []);
-   
+
    // const [check, setCheck] = useState(false);
    const [categoryId, setCategoryId] = useState(0);
-   const cateId = () => {
-      arrayId.push(categoryId);
-      console.log("push success!!!" + categoryId);
-    };
+
+   // const cateId = () => {
+   //    arrayId.push(categoryId);
+   //    console.log("push success!!!" + categoryId);
+   // };
 
    // console.log("about page" + props.text[0])
    // console.log("about page" + props.text[1])
@@ -47,8 +48,8 @@ const About = (props) => {
    const [result, setResult] = useState([]);
 
    const goToArticle = () => {
-      Actions.Article({ text: arrayId });
-    };
+      Actions.Article({ text: categoryId });
+   };
 
    const getReadaingByCateId = async () => {
 
@@ -76,7 +77,6 @@ const About = (props) => {
 
 
 
-
    if (result) {
       // const goToHome = () => {
       //    Actions.home()
@@ -99,7 +99,7 @@ const About = (props) => {
                      })
                   }
                </View> */}
-               <FlatGrid
+               {/* <FlatGrid
                   itemDimension={110}
                   items={result}
                   style={styles.gridView}
@@ -111,7 +111,7 @@ const About = (props) => {
                         </View>
                      </Card>
                   )}
-               />
+               /> */}
                <FlatGrid
                   itemDimension={110}
                   items={cate}
@@ -120,9 +120,12 @@ const About = (props) => {
                      <TouchableOpacity
                         onPressIn={() => setCategoryId(item.category_id)}
                         onPress={goToArticle}
+
                      >
-                        <Card>
+                        <Card >
                            <View style={{ alignItems: "center" }}>
+                              <Text style={styles.itemTopic}>{item.category_id}</Text>
+
                               <Text style={styles.itemTopic}>{item.categoryName}</Text>
                            </View>
                         </Card>
