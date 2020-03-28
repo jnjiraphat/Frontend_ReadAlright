@@ -80,21 +80,13 @@ const Interest = () => {
     onSelect(categoryId);
   };
 
-  const data = [
-    { id: 1, label: "Money" },
-    { id: 2, label: "Credit card" },
-    { id: 3, label: "Debit card" },
-    { id: 4, label: "Online payment" },
-    { id: 5, label: "Bitcoin" }
-  ];
-
   if (result) {
     // console.log(result);
     // console.log(result.length);
 
     //Navigator
-    const goToAbout = () => {
-      Actions.about({ text: arrayId });
+    const goToMaybeYouLike = () => {
+      Actions.MaybeYouLike({ text: arrayId });
     };
 
     return (

@@ -10,19 +10,47 @@ import {
    ImageBackground,
    FlatList
 } from "react-native";
+import ReadingApi from "../API/ReadingAPI";
 import { Card, Button } from "react-native-elements";
 import { Grid, Col, Row } from "react-native-easy-grid";
 import { FlatGrid } from "react-native-super-grid";
+
+
 const arrayReading = []
 
-const About = (props) => {
-   const [check, setCheck] = useState(false);
+// const arrayId = [];
 
-   console.log("about page" + props.text[0])
-   console.log("about page" + props.text[1])
-   console.log("about page length" + props.text.length)
+const About = (props) => {
+   const [cate, setCate] = useState([]);
+   const read = async () => {
+      const data = await ReadingApi();
+      setCate(data);
+   };
+   console.log("This is category")
+   console.log(cate)
+
+   useEffect(() => {
+      read();
+   }, []);
+
+   // const [check, setCheck] = useState(false);
+   const [categoryId, setCategoryId] = useState(0);
+
+   // const cateId = () => {
+   //    arrayId.push(categoryId);
+   //    console.log("push success!!!" + categoryId);
+   // };
+
+   // console.log("about page" + props.text[0])
+   // console.log("about page" + props.text[1])
+   // console.log("about page length" + props.text.length)
 
    const [result, setResult] = useState([]);
+
+   const goToArticle = () => {
+      Actions.Article({ text: categoryId });
+   };
+
    const getReadaingByCateId = async () => {
 
       for (let index = 0; index < props.text.length; index++) {
@@ -49,20 +77,19 @@ const About = (props) => {
 
 
 
-
    if (result) {
-      const goToHome = () => {
-         Actions.home()
-      }
+      // const goToHome = () => {
+      //    Actions.home()
+      // }
 
       return (
          <ScrollView>
             <Grid>
-               <Row>
+               {/* <Row>
                   <TouchableOpacity style={{ margin: 50 }} onPress={goToHome}>
                      <Text>Click to go to about</Text>
                   </TouchableOpacity>
-               </Row>
+               </Row> */}
                {/* <View>
                   {
                      result.map((result, index) => {
@@ -72,7 +99,7 @@ const About = (props) => {
                      })
                   }
                </View> */}
-               <FlatGrid
+               {/* <FlatGrid
                   itemDimension={110}
                   items={result}
                   style={styles.gridView}
@@ -83,6 +110,26 @@ const About = (props) => {
                            <Text style={styles.itemTopic}>{item.title}</Text>
                         </View>
                      </Card>
+                  )}
+               /> */}
+               <FlatGrid
+                  itemDimension={110}
+                  items={cate}
+                  style={styles.gridView}
+                  renderItem={({ item }) => (
+                     <TouchableOpacity
+                        onPressIn={() => setCategoryId(item.category_id)}
+                        onPress={goToArticle}
+
+                     >
+                        <Card >
+                           <View style={{ alignItems: "center" }}>
+                              <Text style={styles.itemTopic}>{item.category_id}</Text>
+
+                              <Text style={styles.itemTopic}>{item.categoryName}</Text>
+                           </View>
+                        </Card>
+                     </TouchableOpacity>
                   )}
                />
             </Grid>
