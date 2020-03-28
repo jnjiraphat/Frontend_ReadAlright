@@ -44,7 +44,7 @@
 //   }
 // });
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   SafeAreaView,
   TouchableOpacity,
@@ -71,10 +71,10 @@ const DATA = [
   }
 ];
 
-function Item({ category_id, title, selected, onSelect }) {
+function Item({ category_id, title, selected, onSelect, setCategoryId }) {
   return (
     <TouchableOpacity
-      // onPressIn={()=> setCategoryId(category_id)}
+      // onPressIn={() => setCategoryId(category_id)}
       onPress={() => onSelect(category_id)}
       style={[
         styles.item,
@@ -88,7 +88,7 @@ function Item({ category_id, title, selected, onSelect }) {
 
 export default function App() {
   const [selected, setSelected] = React.useState(new Map());
-  // const [categoryId, setCategoryId] = useState(0)
+  const [categoryId, setCategoryId] = useState(0);
 
   const onSelect = React.useCallback(
     category_id => {
@@ -111,7 +111,6 @@ export default function App() {
             title={item.title}
             selected={!!selected.get(item.category_id)}
             onSelect={onSelect}
-            // setCategoryId={}
           />
         )}
         keyExtractor={item => item.category_id}
