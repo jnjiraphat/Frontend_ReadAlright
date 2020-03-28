@@ -15,22 +15,16 @@ import {
 } from "react-native";
 import axios from 'axios'
 
-const Article = (props) => {
-   const [readingId, setReadingId] = useState(0);
-
-
-   const goToContentScreen = () => {
-      Actions.ContentScreen({ text: readingId });
-   };
+const Content = (props) => {
    const [cate, setCate] = useState([]);
-
+  
    const fetch = async () => {
       console.log("runningggggggggggggggggggggggggggggg")
       await axios
-         .get("http://10.0.2.2:3000/reading/categorys/" + props.text)
+         .get("http://10.0.2.2:3000/reading/readingId/" + props.text)
          .then(
             response => {
-               console.log("eiei");
+               console.log("eieiContent");
                console.log(response.data.reading);
                setCate(response.data.reading)
             },
@@ -48,7 +42,7 @@ const Article = (props) => {
    useEffect(() => {
       read();
    }, []);
-   console.log("This is id")
+   console.log("This is reading id")
    console.log(props.text)
 
 
@@ -57,27 +51,26 @@ const Article = (props) => {
    // }
    return (
       <ScrollView>
-         <Grid>
-            <FlatGrid
-               items={cate}
-               renderItem={({ item }) => (
-                  <ListItem onPressIn={() => setReadingId(item.reading_id)}
-                     onPress={goToContentScreen}
-                     key={item.category_id}
-                     title={item.title}
-                     leftIcon={{ name: item.icon }}
-                     bottomDivider
-                     chevron
-                  />
+      <Grid>
+      <FlatGrid
+      items={cate}
+      renderItem={({ item }) => (
+         <ListItem
+         key={item.category_id}
+         title={item.content}
+         leftIcon={{ name: item.icon }}
+         bottomDivider
+         chevron
+       />
 
-               )}
-            />
-         </Grid>
-      </ScrollView>
+      )}
+   />
+</Grid>
+</ScrollView>
 
    )
 }
-export default Article
+export default Content
 
 const styles = StyleSheet.create({
    container: {
