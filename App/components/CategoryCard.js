@@ -52,36 +52,83 @@ import {
   StyleSheet,
   Text,
   Button,
-  Alert
+  Alert,
+  Image
 } from "react-native";
+import { Card } from "@ant-design/react-native";
+import GradientButton from "react-native-gradient-buttons";
 import Constants from "expo-constants";
 
 const DATA = [
   {
     category_id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item"
+    title: "First Item",
+    img: require("./../assets/catagory/Animal.jpg")
   },
   {
     category_id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item"
+    title: "Second Item",
+    img: require("./../assets/catagory/Food.jpg")
   },
   {
     category_id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Third Item"
+    title: "Third Item",
+    img: require("./../assets/catagory/News.jpg")
+  },
+  {
+    category_id: "bd7acbea-c1b1-46c2-aed5-3ad53abb23ba",
+    title: "First Item",
+    img: require("./../assets/catagory/Animal.jpg")
+  },
+  {
+    category_id: "3ac68afc-c605-48d3-a4f8-fbd91aa97s63",
+    title: "Second Item",
+    img: require("./../assets/catagory/Food.jpg")
+  },
+  {
+    category_id: "58694a0f-3da1-471f-bd96-145571e29d722",
+    title: "Third Item",
+    img: require("./../assets/catagory/News.jpg")
+  },
+  {
+    category_id: "bd7acbea-c1b1-46c2-aed5-3ad53ayb28ba",
+    title: "First Item",
+    img: require("./../assets/catagory/Animal.jpg")
+  },
+  {
+    category_id: "3ac68afc-c605-48d3-a4f8-fbd91aac7f63",
+    title: "Second Item",
+    img: require("./../assets/catagory/Food.jpg")
   }
 ];
 
-function Item({ category_id, title, selected, onSelect, setCategoryId }) {
+function Item({ category_id, title, selected, onSelect, img }) {
   return (
     <TouchableOpacity
-      // onPressIn={() => setCategoryId(category_id)}
       onPress={() => onSelect(category_id)}
       style={[
         styles.item,
-        { backgroundColor: selected ? "#6e3b6e" : "#f9c2ff" }
+        {
+          borderColor: selected ? "#7EF192" : "transparent"
+        }
       ]}
     >
-      <Text style={styles.title}>{title}</Text>
+      <Card style={styles.card}>
+        <Card.Body style={styles.cardImg}>
+          <Image
+            source={img}
+            style={{
+              width: 90,
+              height: 90,
+              borderTopRightRadius: 3,
+              borderTopLeftRadius: 3
+            }}
+          />
+        </Card.Body>
+        <Card.Body style={styles.cardTitle}>
+          <Text style={styles.title}>{title}</Text>
+        </Card.Body>
+      </Card>
     </TouchableOpacity>
   );
 }
@@ -104,11 +151,14 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
+        numColumns={3}
         data={DATA}
         renderItem={({ item }) => (
           <Item
+            // topic={item.title}
             category_id={item.category_id}
             title={item.title}
+            img={item.img}
             selected={!!selected.get(item.category_id)}
             onSelect={onSelect}
           />
@@ -116,11 +166,19 @@ export default function App() {
         keyExtractor={item => item.category_id}
         extraData={selected}
       />
-      <Button
-        title="Next"
-        onPress={() => {
-          Alert.alert();
-        }}
+      <GradientButton
+        style={{ marginTop: 30 }}
+        text="Next"
+        textStyle={{ fontSize: 20, color: "#000000" }}
+        gradientDirection="vertical"
+        gradientBegin="#7EF192"
+        gradientEnd="#2DC897"
+        height={39}
+        width={245}
+        radius={30}
+        impact
+        impactStyle="Light"
+        onPressAction={() => alert("You pressed me!")}
       />
     </SafeAreaView>
   );
@@ -129,15 +187,39 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Constants.statusBarHeight
+    marginTop: Constants.statusBarHeight,
+    alignItems: "center"
   },
   item: {
-    backgroundColor: "#f9c2ff",
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16
+    borderStyle: "solid",
+    borderWidth: 2,
+    borderColor: "transparent",
+    borderRadius: 5,
+    marginHorizontal: 8,
+    marginVertical: 10
   },
   title: {
-    fontSize: 32
+    fontSize: 10,
+    paddingLeft: 5
+  },
+  cardImg: {
+    width: 90,
+    height: 90,
+    resizeMode: "contain",
+    paddingTop: 0
+  },
+  cardTitle: {
+    height: 20,
+    width: 90
+  },
+  card: {
+    shadowOffset: {
+      width: 0,
+      height: 4
+    },
+    shadowRadius: 4,
+    shadowColor: "#000000",
+    shadowOpacity: 0.25,
+    elevation: 4
   }
 });

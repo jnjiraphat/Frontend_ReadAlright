@@ -5,6 +5,16 @@
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Screens/InterestScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/App/Screens/InterestScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/assets/catagory/animal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/assets/catagory/food.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/assets/catagory/house.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/assets/catagory/movie.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/assets/catagory/music.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/assets/catagory/natural.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/assets/catagory/news.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/assets/catagory/sport.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/assets/catagory/story.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/components/CategoryCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/App/components/CategoryCard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
@@ -39,6 +49,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -51,7 +62,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
