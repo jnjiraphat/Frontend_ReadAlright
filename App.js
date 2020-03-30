@@ -1,17 +1,15 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, AppRegistry } from "react-native";
 import Interest from "./App/Screens/InterestScreen";
-import Routes from './Routes.js'
+import Routes from "./Routes.js";
 
 class App extends Component {
   render() {
-    return (
-      <Routes />
-    )
+    return <Routes />;
   }
 }
-export default App
-AppRegistry.registerComponent('App', () => App)
+export default App;
+AppRegistry.registerComponent("App", () => App);
 // export default function App() {
 //   return <Interest />;
 // }

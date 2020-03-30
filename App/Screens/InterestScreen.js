@@ -8,11 +8,12 @@ import {
   Button,
   Alert,
   Image,
-  ScrollView
+  ScrollView,
+  View
 } from "react-native";
 import { Card } from "@ant-design/react-native";
 import GradientButton from "react-native-gradient-buttons";
-// import LinearGradient from "expo-linear-gradient";
+// import LinearGradient from "expo";
 import Constants from "expo-constants";
 
 import { Actions } from "react-native-router-flux";
@@ -80,7 +81,7 @@ function Item({ category_id, title, selected, onSelect, img }) {
 }
 
 const arrayId = [];
-export default function App() {
+export default function() {
   //Fetch(GET) Catagory Name
   const [result, setResult] = useState([]);
   const read = async () => {
