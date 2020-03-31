@@ -79,7 +79,6 @@ function Item({ category_id, title, selected, onSelect, img }) {
   );
 }
 
-const arrayId = [];
 export default function() {
   //Fetch(GET) Catagory Name
   const [result, setResult] = useState([]);
@@ -91,6 +90,7 @@ export default function() {
     read();
   }, []);
 
+  const arrayId = [];
   //Fetch(POST) numOfViews
   const cateId = () => {
     arrayId.push(categoryId);
@@ -122,11 +122,11 @@ export default function() {
         }
       );
   };
-  console.log(categoryId);
+  // console.log(categoryId);
 
   //Selected category
   const [selected, setSelected] = React.useState(new Map());
-  const [categoryId, setCategoryId] = useState(0);
+  const getKey = selected.keys();
 
   const onSelect = React.useCallback(
     category_id => {
@@ -134,9 +134,17 @@ export default function() {
       newSelected.set(category_id, !selected.get(category_id));
 
       setSelected(newSelected);
+      if (newSelected.get(category_id) == true) {
+        arrayId.push(newSelected.get(category_id));
+      } else if (newSelected.get(category_id) == false) {
+        arrayId.pop();
+      } else {
+        console.log("error");
+      }
     },
     [selected],
-    console.log(selected)
+    console.log(selected),
+    console.log(arrayId)
   );
 
   if (result) {
@@ -161,7 +169,7 @@ export default function() {
               category_id={item.category_id}
               title={item.categoryName}
               // img={data.img}'
-              
+
               selected={!!selected.get(item.category_id)}
               onSelect={onSelect}
             />
