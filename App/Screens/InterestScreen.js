@@ -185,7 +185,7 @@ export default function () {
           );
       }
 
-      Actions.MaybeYouLike();
+      Actions.MaybeYouLike({text:arrayIdCate});
     };
 
     return (

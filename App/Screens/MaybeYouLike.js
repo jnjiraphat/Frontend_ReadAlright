@@ -33,6 +33,8 @@ const About = (props) => {
 
    useEffect(() => {
       read();
+      getReadaingByCateId();
+
    }, []);
 
    // const [check, setCheck] = useState(false);
@@ -73,9 +75,6 @@ const About = (props) => {
       // setCheck(true)
    }
 
-   useEffect(() => {
-      getReadaingByCateId();
-   }, []);
 
 
 
@@ -116,7 +115,7 @@ const About = (props) => {
                      })
                   }
                </View> */}
-               {/* <FlatGrid
+               <FlatGrid
                   itemDimension={110}
                   items={result}
                   style={styles.gridView}
@@ -128,7 +127,7 @@ const About = (props) => {
                         </View>
                      </Card>
                   )}
-               /> */}
+               />
                <FlatGrid
                   itemDimension={110}
                   items={cate}
