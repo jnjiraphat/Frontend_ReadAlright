@@ -81,7 +81,9 @@ function Item({ category_id, title, selected, onSelect, img }) {
 }
 
 const arrayId = [];
-export default function() {
+const arrayIdCate = [];
+
+export default function () {
   //Fetch(GET) Catagory Name
   const [result, setResult] = useState([]);
   const read = async () => {
@@ -141,12 +143,49 @@ export default function() {
   );
 
   if (result) {
+    function logMapElements(value, key, map) {
+      console.log(`m[${key}] = ${value}`);
+    }
+    // var mapIter = props.text.keys();
+    // console.log(mapIter.next().value);
+    // console.log(mapIter.next().value);
+    // console.log(props.text.size)
+
+    selected.forEach(logMapElements);
     // console.log(result);
     // console.log(result.length);
 
     //Navigator
     const goToMaybeYouLike = () => {
-      Actions.MaybeYouLike({ text: arrayId });
+      function logMapElements(value, key, map) {
+        console.log(`m[${key}] = ${value}`);
+        if (value == true) {
+          arrayIdCate.push(key)
+        }
+        console.log("length = " + arrayIdCate.length)
+      }
+      selected.forEach(logMapElements);
+      for (let index = 0; index < arrayIdCate.length; index++) {
+        axios
+          .post("http://10.0.2.2:3000/views", {
+            numOfView: 1,
+            category_id: arrayIdCate[index],
+            user_id: 1,
+            reading_id: 1,
+            vocabBox_id: 1
+          })
+          .then(
+            response => {
+              console.log("upload success!!!")
+
+            },
+            error => {
+              console.log(error);
+            }
+          );
+      }
+
+      Actions.MaybeYouLike();
     };
 
     return (
@@ -173,7 +212,7 @@ export default function() {
               category_id={item.category_id}
               title={item.categoryName}
               // img={data.img}'
-              
+
               selected={!!selected.get(item.category_id)}
               onSelect={onSelect}
             />
@@ -193,7 +232,7 @@ export default function() {
           radius={30}
           impact
           impactStyle="Light"
-          // onPressAction={goToMaybeYouLike()}
+          onPressAction={goToMaybeYouLike}
         />
       </SafeAreaView>
     );
