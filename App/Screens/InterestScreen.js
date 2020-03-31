@@ -160,7 +160,8 @@ export default function() {
               // topic={item.title}
               category_id={item.category_id}
               title={item.categoryName}
-              // img={data.img}
+              // img={data.img}'
+              
               selected={!!selected.get(item.category_id)}
               onSelect={onSelect}
             />
@@ -180,7 +181,7 @@ export default function() {
           radius={30}
           impact
           impactStyle="Light"
-          onPressAction={goToMaybeYouLike()}
+          // onPressAction={goToMaybeYouLike()}
         />
       </SafeAreaView>
     );

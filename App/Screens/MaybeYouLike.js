@@ -21,6 +21,8 @@ const arrayReading = []
 // const arrayId = [];
 
 const About = (props) => {
+   console.log("This is props")
+   console.log(props.text[0])
    const [cate, setCate] = useState([]);
    const read = async () => {
       const data = await ReadingApi();
@@ -68,7 +70,7 @@ const About = (props) => {
       }
       console.log("array length" + arrayReading.length)
       setResult(arrayReading)
-      setCheck(true)
+      // setCheck(true)
    }
 
    useEffect(() => {
