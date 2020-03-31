@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, AppRegistry } from "react-native";
+import { StyleSheet, Text, AppRegistry } from "react-native";
 import Interest from "./App/Screens/InterestScreen";
 import Routes from "./Routes.js";
 

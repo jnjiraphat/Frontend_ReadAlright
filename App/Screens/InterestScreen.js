@@ -13,7 +13,6 @@ import {
 } from "react-native";
 import { Card } from "@ant-design/react-native";
 import GradientButton from "react-native-gradient-buttons";
-// import LinearGradient from "expo";
 import Constants from "expo-constants";
 
 import { Actions } from "react-native-router-flux";
@@ -151,17 +150,6 @@ export default function() {
 
     return (
       <SafeAreaView style={styles.container}>
-        {/* <View style={{ backgroundColor: "orange", flex: 1 }} />
-        <LinearGradient
-          colors={["rgba(0,0,0,0.8)", "transparent"]}
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            top: 0,
-            height: 300
-          }}
-        /> */}
         <Text style={styles.header}>Interest</Text>
         <Text style={styles.subHeader}>Please select 3 that you interests</Text>
         <FlatList
