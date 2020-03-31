@@ -22,7 +22,7 @@ const arrayReading = []
 
 const About = (props) => {
    console.log("This is props")
-   console.log(props.text[0])
+   console.log(props.text)
    const [cate, setCate] = useState([]);
    const read = async () => {
       const data = await ReadingApi();
@@ -33,6 +33,8 @@ const About = (props) => {
 
    useEffect(() => {
       read();
+      getReadaingByCateId();
+
    }, []);
 
    // const [check, setCheck] = useState(false);
@@ -73,13 +75,25 @@ const About = (props) => {
       // setCheck(true)
    }
 
-   useEffect(() => {
-      getReadaingByCateId();
-   }, []);
 
 
 
    if (result) {
+      // function logMapElements(value, key, map) {
+      //    console.log(`m[${key}] = ${value}`);
+      // }
+      // var mapIter = props.text.keys();
+      // console.log(mapIter.next().value);
+      // console.log(mapIter.next().value);
+      // console.log(props.text.size)
+
+      // props.text.forEach(logMapElements);
+
+      // var mapIter = props.text.values();
+      // console.log(mapIter.next().value);
+      // console.log(mapIter.next().value);
+      // console.log(props.text.size)
+
       // const goToHome = () => {
       //    Actions.home()
       // }
@@ -101,7 +115,7 @@ const About = (props) => {
                      })
                   }
                </View> */}
-               {/* <FlatGrid
+               <FlatGrid
                   itemDimension={110}
                   items={result}
                   style={styles.gridView}
@@ -113,7 +127,7 @@ const About = (props) => {
                         </View>
                      </Card>
                   )}
-               /> */}
+               />
                <FlatGrid
                   itemDimension={110}
                   items={cate}

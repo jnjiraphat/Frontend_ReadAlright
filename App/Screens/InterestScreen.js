@@ -79,6 +79,9 @@ function Item({ category_id, title, selected, onSelect, img }) {
   );
 }
 
+const arrayId = [];
+const arrayIdCate = [];
+
 export default function() {
   //Fetch(GET) Catagory Name
   const [result, setResult] = useState([]);
@@ -90,38 +93,37 @@ export default function() {
     read();
   }, []);
 
-  const arrayId = [];
   //Fetch(POST) numOfViews
-  const cateId = () => {
-    arrayId.push(categoryId);
-    console.log("push success!!!" + categoryId);
-  };
-  const views = e => {
-    axios
-      .post("http://10.0.2.2:3000/views", {
-        numOfView: 1,
-        category_id: categoryId,
-        user_id: 1,
-        reading_id: 1,
-        vocabBox_id: 1
-      })
-      .then(
-        response => {
-          arrayId.push(categoryId);
+  // const cateId = () => {
+  //   arrayId.push(categoryId);
+  //   console.log("push success!!!" + categoryId);
+  // };
+  // const views = e => {
+  //   axios
+  //     .post("http://10.0.2.2:3000/views", {
+  //       numOfView: 1,
+  //       category_id: categoryId,
+  //       user_id: 1,
+  //       reading_id: 1,
+  //       vocabBox_id: 1
+  //     })
+  //     .then(
+  //       response => {
+  //         arrayId.push(categoryId);
 
-          console.log("array length = " + arrayId.length);
-          for (let index = 0; index < arrayId.length; index++) {
-            const element = arrayId[index];
-            console.log("index = " + [index] + "value = " + element);
-          }
-          // console.log("eiei");
-          // console.log(response.data);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-  };
+  //         console.log("array length = " + arrayId.length);
+  //         for (let index = 0; index < arrayId.length; index++) {
+  //           const element = arrayId[index];
+  //           console.log("index = " + [index] + "value = " + element);
+  //         }
+  //         // console.log("eiei");
+  //         // console.log(response.data);
+  //       },
+  //       error => {
+  //         console.log(error);
+  //       }
+  //     );
+  // };
   // console.log(categoryId);
 
   //Selected category
@@ -134,26 +136,62 @@ export default function() {
       newSelected.set(category_id, !selected.get(category_id));
 
       setSelected(newSelected);
-      if (newSelected.get(category_id) == true) {
-        arrayId.push(newSelected.get(category_id));
-      } else if (newSelected.get(category_id) == false) {
-        arrayId.pop();
-      } else {
-        console.log("error");
-      }
+      // if (newSelected.get(category_id) == true) {
+      //   arrayId.push(newSelected.get(category_id));
+      // } else if (newSelected.get(category_id) == false) {
+      //   arrayId.pop();
+      // } else {
+      //   console.log("error");
+      // }
     },
     [selected],
-    console.log(selected),
-    console.log(arrayId)
+    console.log(selected)
+    // console.log(arrayId)
   );
 
   if (result) {
+    function logMapElements(value, key, map) {
+      console.log(`m[${key}] = ${value}`);
+    }
+    // var mapIter = props.text.keys();
+    // console.log(mapIter.next().value);
+    // console.log(mapIter.next().value);
+    // console.log(props.text.size)
+
+    selected.forEach(logMapElements);
     // console.log(result);
     // console.log(result.length);
 
     //Navigator
     const goToMaybeYouLike = () => {
-      Actions.MaybeYouLike({ text: arrayId });
+      function logMapElements(value, key, map) {
+        console.log(`m[${key}] = ${value}`);
+        if (value == true) {
+          arrayIdCate.push(key);
+        }
+        console.log("length = " + arrayIdCate.length);
+      }
+      selected.forEach(logMapElements);
+      for (let index = 0; index < arrayIdCate.length; index++) {
+        axios
+          .post("http://10.0.2.2:3000/views", {
+            numOfView: 1,
+            category_id: arrayIdCate[index],
+            user_id: 1,
+            reading_id: 1,
+            vocabBox_id: 1
+          })
+          .then(
+            response => {
+              console.log("upload success!!!");
+            },
+            error => {
+              console.log(error);
+            }
+          );
+      }
+
+      Actions.MaybeYouLike({ text: arrayIdCate });
     };
 
     return (
@@ -189,7 +227,7 @@ export default function() {
           radius={30}
           impact
           impactStyle="Light"
-          // onPressAction={goToMaybeYouLike()}
+          onPressAction={goToMaybeYouLike}
         />
       </SafeAreaView>
     );
