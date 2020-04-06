@@ -15,6 +15,7 @@ import { Card, Button } from "react-native-elements";
 import { Grid, Col, Row } from "react-native-easy-grid";
 import { FlatGrid } from "react-native-super-grid";
 import LevelLabel from "../components/LevelLabel";
+import Header from "../components/Header"
 
 const arrayReading = [];
 
@@ -94,6 +95,7 @@ const About = (props) => {
 
     return (
       <ScrollView>
+        <Header></Header>
         <Grid>
           {/* <Row>
                   <TouchableOpacity style={{ margin: 50 }} onPress={goToHome}>
@@ -109,7 +111,7 @@ const About = (props) => {
                      })
                   }
                </View> */}
-          <LevelLabel />
+          {/* <LevelLabel /> */}
           <FlatGrid
             itemDimension={110}
             items={result}
@@ -178,7 +180,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   gridView: {
-    marginTop: 20,
+    marginTop: 200,
     flex: 1,
   },
   itemContainer: {
