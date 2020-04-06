@@ -9,10 +9,13 @@ const LevelLabel = (props) => {
       <LinearGradient
         colors={["#86B8F3", "#2DC897"]}
         style={{
+          position : "absolute",
           alignItems: "center",
+          top: -90,
           borderRadius: 5,
           height: 26,
           width: 51,
+          left: 167,
           shadowOffset: {
             width: 0,
             height: 4,
