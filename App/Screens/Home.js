@@ -24,53 +24,59 @@ export default class BasicTabsExample extends React.Component {
           renderTabBar={(tabProps) => (
             <View
               style={{
-                marginTop: 50,
-                paddingHorizontal: 0,
-                flexDirection: "row",
                 alignItems: "center",
-                borderWidth: 4,
-                borderColor: "#000",
-                width: 237,
-                height: 32,
+                marginTop: 50,
               }}
             >
-              {tabProps.tabs.map((tab, i) => (
-                // change the style to fit your needs
-                <TouchableOpacity
-                  activeOpacity={0.9}
-                  key={tab.key || i}
-                  style={{
-                    // width: "10%",
-                    padding: 6,
-                  }}
-                  onPress={() => {
-                    const { goToTab, onTabClick } = tabProps;
-                    // tslint:disable-next-line:no-unused-expression
-                    onTabClick && onTabClick(tabs[i], i);
-                    // tslint:disable-next-line:no-unused-expression
-                    goToTab && goToTab(i);
-                  }}
-                >
-                  <Text
+              <View
+                style={{
+                  paddingHorizontal: 0,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderWidth: 4,
+                  borderColor: "#000",
+                  width: 237,
+                  height: 32,
+                }}
+              >
+                {tabProps.tabs.map((tab, i) => (
+                  // change the style to fit your needs
+                  <TouchableOpacity
+                    activeOpacity={0.9}
+                    key={tab.key || i}
                     style={{
-                      color: tabProps.activeTab === i ? "green" : undefined,
+                      // width: "10%",
+                      padding: 6,
+                      width: "50%",
+                      alignItems: "center",
+                    }}
+                    onPress={() => {
+                      const { goToTab, onTabClick } = tabProps;
+                      // tslint:disable-next-line:no-unused-expression
+                      onTabClick && onTabClick(tabs[i], i);
+                      // tslint:disable-next-line:no-unused-expression
+                      goToTab && goToTab(i);
                     }}
                   >
-                    {tab.title}
-                  </Text>
-                </TouchableOpacity>
-              ))}
+                    <Text
+                      style={{
+                        color: tabProps.activeTab === i ? "green" : undefined,
+                      }}
+                    >
+                      {tab.title}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
             </View>
           )}
         >
           <View style={styles.content}>
-            <Text>Content of First Tab</Text>
+            <Text>Content of Reading</Text>
           </View>
           <View style={styles.content}>
-            <Text>Content of Second Tab</Text>
-          </View>
-          <View style={styles.content}>
-            <Text>Content of Third Tab</Text>
+            <Text>Content of Vocabulary</Text>
           </View>
         </Tabs>
       </View>
