@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   TouchableOpacity,
@@ -11,27 +11,26 @@ import { LinearGradient } from "expo-linear-gradient";
 import { ListItem } from "react-native-elements";
 import { Avatar } from "react-native-elements";
 import LevelLabel from "../components/LevelLabel";
+import LevelLabel2 from "../components/LevelLabel2";
 
 import { Ionicons } from "@expo/vector-icons";
 
 const Header = (props) => {
-  
-  const {
-    onPressAction,
-    colorsStart,
-    colorsEnd,
-    padding,
-    radius,
-    height,
-    width,
-    fontSize,
-    fontWeight,
-    fontcolor,
-    text,
-  } = props;
-  const check = false;
-  return (
-    <View style={{ flex: 1, justifyContent: "center" }}>
+  const onPress = () => {
+    if (check == true) {
+      setCheck(false);
+      console.log(check);
+    } else if (check == false) {
+      setCheck(true);
+      console.log(check);
+    }
+  };
+  const [check, setCheck] = useState(true);
+
+  return check == true ? (
+    <View
+      style={{ flex: 1, justifyContent: "center", flexDirection: "column" }}
+    >
       <LinearGradient
         colors={["#FFB382", "#F07590"]}
         style={{
@@ -45,92 +44,95 @@ const Header = (props) => {
           borderBottomRightRadius: 30,
         }}
       />
-      <Avatar
-        rounded
-        source={{
-          uri: "https://randomuser.me/api/portraits/men/41.jpg",
-        }}
-        size="large"
-        containerStyle={{
-          marginLeft: 25,
+      <View
+        style={{
+          flexDirection: "row",
+          flex: 1,
           marginTop: 25,
-          width: 124.2,
-          height: 114.43,
+          marginLeft: 15,
+          marginRight: 15,
+        }}
+      >
+        <Avatar
+          rounded
+          source={{
+            uri: "https://randomuser.me/api/portraits/men/41.jpg",
+          }}
+          size={130}
+          containerStyle={{
+            // width: 124.2,
+            // height: 114.43,
+            marginRight: 15,
+          }}
+        />
+        <LevelLabel></LevelLabel>
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          marginTop: 30,
+        }}
+      >
+        <TouchableHighlight onPress={onPress}>
+          <Ionicons name="ios-arrow-up" size={32} color="black"></Ionicons>
+        </TouchableHighlight>
+      </View>
+    </View>
+  ) : (
+    <View
+      style={{ flex: 1, justifyContent: "center", flexDirection: "column" }}
+    >
+      <LinearGradient
+        colors={["#FFB382", "#F07590"]}
+        style={{
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 0,
+          height: 150,
+          width: Dimensions.get("window").width,
+          borderBottomLeftRadius: 30,
+          borderBottomRightRadius: 30,
         }}
       />
-      <LevelLabel></LevelLabel>
-      <Text
+      <View
         style={{
-          position: "absolute",
-          left: 233,
-          right: 0,
-          top: 48,
-          height: 23,
-          fontSize: 16,
+          flexDirection: "row",
+          flex: 1,
+          marginTop: 25,
+          marginLeft: 15,
+          marginRight: 15,
         }}
       >
-        Thanatcha
-      </Text>
-      <Text
+        <Avatar
+          rounded
+          source={{
+            uri: "https://randomuser.me/api/portraits/men/41.jpg",
+          }}
+          size={80}
+          containerStyle={{
+            // width: 124.2,
+            // height: 114.43,
+            marginRight: 15,
+          }}
+        />
+        <LevelLabel2></LevelLabel2>
+      </View>
+      <View
         style={{
-          position: "absolute",
-          left: 167,
-          right: 0,
-          top: 85,
-          height: 23,
-          fontSize: 14,
+          flexDirection: "row",
+          justifyContent: "center",
         }}
       >
-        You should practice adverb more
-      </Text>
-      <TouchableHighlight
-        // onPress={this.onBooking}
-        style={styles.btnClickContain}
-        // underlayColor="#042417"
-      >
-        <View style={styles.btnContainer}>
-          {/* <ion-icon name="chevron-down-outline"></ion-icon> */}
-          <Ionicons name="ios-arrow-down" size={32} color="black" />
-          {/* <ion-icon name="arrow-down"></ion-icon> */}
-          {/* <Icon type='down' size='lg' color="red"/> */}
-        </View>
-      </TouchableHighlight>
-      
+        <TouchableHighlight onPress={onPress}>
+          <Ionicons name="ios-arrow-down" size={32} color="black"></Ionicons>
+        </TouchableHighlight>
+      </View>
     </View>
   );
 };
 
 export default Header;
 
-var styles = StyleSheet.create({
-  btnClickContain: {
-    // flex: 1,
-    // flexDirection: 'row',
-    // justifyContent: 'center',
-    // alignItems: 'stretch',
-    // alignSelf: 'stretch',
-    // backgroundColor: '#009D6E',
-    // borderRadius: 5,
-    // padding: 5,
-    // marginTop: 5,
-    // marginBottom: 5,
-  },
-  btnContainer: {
-    // flex: 1,
-    // flexDirection: 'row',
-    // justifyContent: 'center',
-    // alignItems: 'stretch',
-    // alignSelf: 'stretch',
-    // borderRadius: 10,
-  },
-  btnIcon: {
-    // height: 25,
-    // width: 25,
-  },
-  btnText: {
-    // fontSize: 18,
-    // color: '#FAFAFA',
-    // marginLeft: 10,
-    // marginTop: 2,
-  },
-});
+

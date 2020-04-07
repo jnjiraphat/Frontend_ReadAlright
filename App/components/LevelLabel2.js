@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-const LevelLabel = (props) => {
+const LevelLabel2 = (props) => {
   const [name, showName] = useState("Thanatcha");
   const { level } = props;
   const [sugggestion, hideSuggestion] = useState(
@@ -50,13 +50,11 @@ const LevelLabel = (props) => {
           {name}
         </Text>
       </View>
-      <Text>{sugggestion} </Text>
-      <Text>{sugggestion} </Text>
-      <Text>{sugggestion} </Text>
+
 
 
     </View>
   );
 };
 
-export default LevelLabel;
+export default LevelLabel2;
