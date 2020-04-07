@@ -12,10 +12,10 @@ import {
   Dimensions,
 } from "react-native";
 import { Card } from "@ant-design/react-native";
-import Constants from "expo-constants";
 import { LinearGradient } from "expo-linear-gradient";
 import { Actions } from "react-native-router-flux";
 import ButtonClick from "./../components/ButtonClick";
+import Constants from "expo-constants";
 
 //API
 import ReadingApi from "../API/ReadingAPI";
