@@ -13,6 +13,7 @@ import { ListItem } from "react-native-elements";
 import { Avatar } from "react-native-elements";
 import LevelLabel from "../components/LevelLabel";
 import LevelLabel2 from "../components/LevelLabel2";
+// import Constants from "expo-constants";
 
 import { Ionicons } from "@expo/vector-icons";
 
@@ -30,7 +31,11 @@ const Header = (props) => {
 
   return check == true ? (
     <View
-      style={{ flex: 1, justifyContent: "center", flexDirection: "column" }}
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        flexDirection: "column",
+      }}
     >
       <LinearGradient
         colors={["#FFB382", "#F07590"]}
@@ -49,7 +54,7 @@ const Header = (props) => {
         style={{
           flexDirection: "row",
           flex: 1,
-          marginTop: 25,
+          marginTop: "5%",
           marginLeft: 15,
           marginRight: 15,
         }}
@@ -135,5 +140,3 @@ const Header = (props) => {
 };
 
 export default Header;
-
-
