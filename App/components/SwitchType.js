@@ -9,7 +9,7 @@ import {
 import { Tabs } from "@ant-design/react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-export default class BasicTabsExample extends React.Component {
+export default class SwitchType extends React.Component {
   render() {
     const tabs = [{ title: "Reading" }, { title: "Vocabulary" }];
     return (
@@ -104,8 +104,6 @@ export default class BasicTabsExample extends React.Component {
     );
   }
 }
-export const title = "Tabs";
-export const description = "Tabs example";
 
 const styles = StyleSheet.create({
   content: {
