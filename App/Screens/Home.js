@@ -12,10 +12,11 @@ import {
 } from "react-native";
 import ReadingApi from "../API/ReadingAPI";
 import { Card, Button } from "react-native-elements";
-import { Grid, Col, Row } from "react-native-easy-grid";
 import { FlatGrid } from "react-native-super-grid";
+import Constants from "expo-constants";
 import LevelLabel from "../components/LevelLabel";
 import Header from "../components/Header";
+import SwitchType from "../components/SwitchType";
 
 const arrayReading = [];
 
@@ -94,15 +95,16 @@ const About = (props) => {
     // }
 
     return (
-      <ScrollView>
-        <Header></Header>
-        <Grid>
-          {/* <Row>
+      <View style={styles.container}>
+        <Header />
+
+        <SwitchType />
+        {/* <Row>
                   <TouchableOpacity style={{ margin: 50 }} onPress={goToHome}>
                      <Text>Click to go to about</Text>
                   </TouchableOpacity>
                </Row> */}
-          {/* <View>
+        {/* <View>
                   {
                      result.map((result, index) => {
                         return <Text key={index}>
@@ -111,23 +113,22 @@ const About = (props) => {
                      })
                   }
                </View> */}
-          {/* <LevelLabel /> */}
-          <FlatGrid
-            itemDimension={110}
-            items={result}
-            style={styles.gridView}
-            renderItem={({ item }) => (
-              <Card containerStyle={styles.itemContainer}>
-                <View style={{ alignItems: "center" }}>
-                  <Text style={styles.itemTopic}>{item.category_id}</Text>
+        {/* <LevelLabel /> */}
+        <FlatGrid
+          itemDimension={110}
+          items={result}
+          style={styles.gridView}
+          renderItem={({ item }) => (
+            <Card containerStyle={styles.itemContainer}>
+              <View style={{ alignItems: "center" }}>
+                <Text style={styles.itemTopic}>{item.category_id}</Text>
 
-                  <Text style={styles.itemTopic}>{item.categoryName}</Text>
-                </View>
-              </Card>
-            )}
-          />
-        </Grid>
-      </ScrollView>
+                <Text style={styles.itemTopic}>{item.categoryName}</Text>
+              </View>
+            </Card>
+          )}
+        />
+      </View>
     );
   } else {
     return <Text>Loading</Text>;
@@ -138,8 +139,7 @@ export default About;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    marginTop: Constants.statusBarHeight,
   },
   gridView: {
     marginTop: 200,

@@ -116,7 +116,7 @@ export default function () {
     selected.forEach(logMapElements);
 
     //Navigator
-    const goToMaybeYouLike = () => {
+    const goToHome = () => {
       function logMapElements(value, key, map) {
         console.log(`m[${key}] = ${value}`);
         if (value == true) {
@@ -144,7 +144,7 @@ export default function () {
           );
       }
 
-      Actions.MaybeYouLike({ text: arrayIdCate });
+      Actions.Home({ text: arrayIdCate });
     };
 
     return (
@@ -193,7 +193,7 @@ export default function () {
           width={245}
           radius={30}
           padding={0}
-          onPressAction={goToMaybeYouLike}
+          onPressAction={goToHome}
           // shadowRadius={30}
           colorsStart="#7EF192"
           colorsEnd="#2DC897"

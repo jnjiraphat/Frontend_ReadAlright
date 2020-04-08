@@ -26,7 +26,7 @@ export default class SwitchType extends React.Component {
             <View
               style={{
                 alignItems: "center",
-                marginTop: 50,
+                // marginTop: 50,
               }}
             >
               <LinearGradient

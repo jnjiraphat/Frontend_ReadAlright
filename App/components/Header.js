@@ -12,7 +12,7 @@ import { ListItem } from "react-native-elements";
 import { Avatar } from "react-native-elements";
 import LevelLabel from "../components/LevelLabel";
 import LevelLabel2 from "../components/LevelLabel2";
-import Constants from "expo-constants";
+// import Constants from "expo-constants";
 
 import { Ionicons } from "@expo/vector-icons";
 
@@ -34,7 +34,6 @@ const Header = (props) => {
         flex: 1,
         justifyContent: "center",
         flexDirection: "column",
-        marginTop: Constants.statusBarHeight,
       }}
     >
       <LinearGradient
