@@ -6,6 +6,7 @@ import {
   Dimensions,
   StyleSheet,
   TouchableHighlight,
+  
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ListItem } from "react-native-elements";
@@ -74,9 +75,9 @@ const Header = (props) => {
           marginTop: 30,
         }}
       >
-        <TouchableHighlight onPress={onPress}>
+        <TouchableOpacity onPress={onPress}>
           <Ionicons name="ios-arrow-up" size={32} color="black"></Ionicons>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
     </View>
   ) : (

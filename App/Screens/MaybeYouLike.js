@@ -14,7 +14,6 @@ import ReadingApi from "../API/ReadingAPI";
 import { Card, Button } from "react-native-elements";
 import { Grid, Col, Row } from "react-native-easy-grid";
 import { FlatGrid } from "react-native-super-grid";
-import LevelLabel from "../components/LevelLabel";
 import Header from "../components/Header";
 
 const arrayReading = [];
@@ -45,14 +44,13 @@ const About = (props) => {
   //    console.log("push success!!!" + categoryId);
   // };
 
-  // console.log("about page" + props.text[0])
-  // console.log("about page" + props.text[1])
-  // console.log("about page length" + props.text.length)
 
   const [result, setResult] = useState([]);
 
-  const goToArticle = () => {
+  const goToArticle = (categoryId) => {
+    console.log("==========")
     Actions.Article({ text: categoryId });
+    console.log(categoryId)
   };
 
   const getReadaingByCateId = async () => {
@@ -112,20 +110,39 @@ const About = (props) => {
                   }
                </View> */}
           {/* <LevelLabel /> */}
+         
           <FlatGrid
             itemDimension={110}
             items={result}
             style={styles.gridView}
             renderItem={({ item }) => (
+              <TouchableOpacity>
               <Card containerStyle={styles.itemContainer}>
                 <View style={{ alignItems: "center" }}>
-                  <Text style={styles.itemTopic}>{item.category_id}</Text>
+                  <Text style={styles.itemTopic}>{item.title}</Text>
+                </View>
+              </Card>
+              </TouchableOpacity>
+            )}
+          />
+          
+          <FlatGrid 
+            itemDimension={110}
+            items={cate}
+            style={styles.gridView}
+            renderItem={({ item }) => (
+              <TouchableOpacity onPress={() => goToArticle(item.category_id)}>
+              <Card containerStyle={styles.itemContainer} >
+                <View style={{ alignItems: "center" }}>
+                  {/* <Text style={styles.itemTopic}>{item.category_id}</Text> */}
 
                   <Text style={styles.itemTopic}>{item.categoryName}</Text>
                 </View>
               </Card>
+              </TouchableOpacity>
             )}
           />
+          
         </Grid>
       </ScrollView>
     );
