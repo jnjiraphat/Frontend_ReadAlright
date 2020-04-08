@@ -52,7 +52,7 @@ const About = (props) => {
 
   const [result, setResult] = useState([]);
 
-  const goToArticle = () => {
+  const goToArticle = (categoryId) => {
     Actions.Article({ text: categoryId });
   };
 
@@ -115,19 +115,36 @@ const About = (props) => {
                </View> */}
         {/* <LevelLabel /> */}
         <FlatGrid
-          itemDimension={110}
-          items={result}
-          style={styles.gridView}
-          renderItem={({ item }) => (
-            <Card containerStyle={styles.itemContainer}>
-              <View style={{ alignItems: "center" }}>
-                <Text style={styles.itemTopic}>{item.category_id}</Text>
+            itemDimension={110}
+            items={result}
+            style={styles.gridView}
+            renderItem={({ item }) => (
+              <TouchableOpacity>
+              <Card containerStyle={styles.itemContainer}>
+                <View style={{ alignItems: "center" }}>
+                  <Text style={styles.itemTopic}>{item.title}</Text>
+                </View>
+              </Card>
+              </TouchableOpacity>
+            )}
+          />
+          
+          <FlatGrid 
+            itemDimension={110}
+            items={cate}
+            style={styles.gridView}
+            renderItem={({ item }) => (
+              <TouchableOpacity onPress={() => goToArticle(item.category_id)}>
+              <Card containerStyle={styles.itemContainer} >
+                <View style={{ alignItems: "center" }}>
+                  {/* <Text style={styles.itemTopic}>{item.category_id}</Text> */}
 
-                <Text style={styles.itemTopic}>{item.categoryName}</Text>
-              </View>
-            </Card>
-          )}
-        />
+                  <Text style={styles.itemTopic}>{item.categoryName}</Text>
+                </View>
+              </Card>
+              </TouchableOpacity>
+            )}
+          />
       </View>
     );
   } else {

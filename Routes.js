@@ -24,7 +24,7 @@ const Routes = () => (
         // initial={true}
         hideNavBar={true}
       />
-      <Scene key="MaybeYouLike" component={MaybeYouLike} title="MaybeYouLike" />
+      <Scene key="Home" component={Home} title="Home" />
       <Scene key="Article" component={Article} title="Article" />
       <Scene
         key="ContentScreen"
