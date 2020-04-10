@@ -37,14 +37,7 @@ const newReading = (props) => {
   if (resultNew) {
     return (
       <View style={styles.container}>
-
-        {/* <SwitchType /> */}
-        {/* <Row>
-                  <TouchableOpacity style={{ margin: 50 }} onPress={goToHome}>
-                     <Text>Click to go to about</Text>
-                  </TouchableOpacity>
-               </Row> */}
-        
+ 
         <FlatGrid
           itemDimension={110}
           items={resultNew}
