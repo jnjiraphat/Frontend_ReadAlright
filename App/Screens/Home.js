@@ -45,7 +45,7 @@ const About = (props) => {
 
   const [result, setResult] = useState([]);
 
-  const pls = [
+  const rd = [
     { title: "Reading", img: require("./../assets/catagory/Animal.jpg") },
     { title: "Vocabulary", img: require("./../assets/catagory/Animal.jpg") },
     { title: "Reading", img: require("./../assets/catagory/Animal.jpg") },
@@ -53,6 +53,30 @@ const About = (props) => {
     { title: "Reading", img: require("./../assets/catagory/Animal.jpg") },
     { title: "Vocabulary", img: require("./../assets/catagory/Animal.jpg") },
   ];
+
+  const vb = [
+    { title: "Reading", img: require("./../assets/catagory/News.jpg") },
+    { title: "Vocabulary", img: require("./../assets/catagory/News.jpg") },
+    { title: "Reading", img: require("./../assets/catagory/News.jpg") },
+    { title: "Vocabulary", img: require("./../assets/catagory/News.jpg") },
+    { title: "Reading", img: require("./../assets/catagory/News.jpg") },
+    { title: "Vocabulary", img: require("./../assets/catagory/News.jpg") },
+  ];
+
+  function ContentDefault() {
+    return (
+      <View style={{ flex: 1 }}>
+        <View style={{ height: 200 }}>
+          <Text>New!</Text>
+          <CarouselCard result={rd} />
+        </View>
+        <View style={{ height: 200 }}>
+          <Text>Maybe you like</Text>
+          <CarouselCard result={rd} />
+        </View>
+      </View>
+    );
+  }
 
   function ContentChange() {
     return (
@@ -72,20 +96,16 @@ const About = (props) => {
           )}
         /> */}
 
-        <CarouselCard
-          result={pls}
-          imgHeight={110}
-          width={130}
-          titleHeight={20}
-        />
-      </View>
-    );
-  }
-
-  function ContentDefault() {
-    return (
-      <View>
-        <Text>TR</Text>
+        <View style={{ flex: 1 }}>
+          <View style={{ height: 200 }}>
+            <Text>New!</Text>
+            <CarouselCard result={vb} />
+          </View>
+          <View style={{ height: 200 }}>
+            <Text>Maybe you like</Text>
+            <CarouselCard result={vb} />
+          </View>
+        </View>
       </View>
     );
   }
