@@ -34,7 +34,7 @@ const AreaProfile = (props) => {
           {name}
         </Text>
       </View>
-      <View style={{ display: display }}>
+      <View style={{ display: display, marginTop: "3%" }}>
         <Text>{sugggestion} </Text>
         <Text>{sugggestion} </Text>
         <Text>{sugggestion} </Text>
