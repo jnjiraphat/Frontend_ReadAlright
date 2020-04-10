@@ -70,9 +70,9 @@ const About = (props) => {
   if (result) {
     return (
       <View style={styles.container}>
-        <Header />
-
-        <SwitchType tabs={tabSwitch} />
+        <Header tabs={tabSwitch} />
+        {/* 
+        <SwitchType tabs={tabSwitch} /> */}
         {/* <Row>
                   <TouchableOpacity style={{ margin: 50 }} onPress={goToHome}>
                      <Text>Click to go to about</Text>

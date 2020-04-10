@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
+  Dimensions,
 } from "react-native";
 import { Tabs } from "@ant-design/react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -92,12 +93,35 @@ const SwitchType = (props) => {
           </View>
         )}
       >
-        <View style={styles.content}>
-          <Text>Content of Reading</Text>
-        </View>
-        <View style={styles.content}>
-          <Text>Content of Vocabulary</Text>
-        </View>
+        <ScrollView>
+          <View style={styles.content}>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+            <Text>Content of Reading</Text>
+          </View>
+        </ScrollView>
+        <ScrollView>
+          <View style={styles.content}>
+            <Text>Content of Vocabulary</Text>
+          </View>
+        </ScrollView>
       </Tabs>
     </View>
   );
@@ -107,9 +131,9 @@ export default SwitchType;
 const styles = StyleSheet.create({
   content: {
     alignItems: "center",
-    justifyContent: "center",
-    height: 150,
-    backgroundColor: "#fff",
+    // justifyContent: "center",
+    height: Dimensions.get("window").height,
+    // backgroundColor: "#000",
     marginTop: "5%",
   },
   LayoutGradient: {
