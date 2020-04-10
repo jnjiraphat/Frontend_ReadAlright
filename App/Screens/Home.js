@@ -16,7 +16,9 @@ import { FlatGrid } from "react-native-super-grid";
 import Constants from "expo-constants";
 import LevelLabel from "../components/LevelLabel";
 import Header from "../components/Header";
+
 import SwitchType from "../components/SwitchType";
+import NewReading from "../components/NewReading";
 
 const arrayReading = [];
 
@@ -41,15 +43,6 @@ const About = (props) => {
   // const [check, setCheck] = useState(false);
   const [categoryId, setCategoryId] = useState(0);
 
-  // const cateId = () => {
-  //    arrayId.push(categoryId);
-  //    console.log("push success!!!" + categoryId);
-  // };
-
-  // console.log("about page" + props.text[0])
-  // console.log("about page" + props.text[1])
-  // console.log("about page length" + props.text.length)
-
   const [result, setResult] = useState([]);
 
   const goToArticle = (categoryId) => {
@@ -57,14 +50,14 @@ const About = (props) => {
   };
 
   const getReadaingByCateId = async () => {
-    for (let index = 0; index < props.text.length; index++) {
+    for (let index = 0; index < 3; index++) {
       console.log("cateId = " + props.text[index]);
 
       const data = await axios
         .get("http://10.0.2.2:3000/reading/categorys/" + props.text[index])
         .then((response) => {
           console.log("round = " + [index]);
-          for (let j = 0; j < response.data.reading.length; j++) {
+          for (let j = 0; j < 3; j++) {
             arrayReading.push(response.data.reading[j]);
           }
         });
@@ -75,76 +68,50 @@ const About = (props) => {
   };
 
   if (result) {
-    // function logMapElements(value, key, map) {
-    //    console.log(`m[${key}] = ${value}`);
-    // }
-    // var mapIter = props.text.keys();
-    // console.log(mapIter.next().value);
-    // console.log(mapIter.next().value);
-    // console.log(props.text.size)
-
-    // props.text.forEach(logMapElements);
-
-    // var mapIter = props.text.values();
-    // console.log(mapIter.next().value);
-    // console.log(mapIter.next().value);
-    // console.log(props.text.size)
-
-    // const goToHome = () => {
-    //    Actions.home()
-    // }
-
+  
     return (
       <View style={styles.container}>
         <Header />
 
-        <SwitchType />
+        {/* <SwitchType /> */}
         {/* <Row>
                   <TouchableOpacity style={{ margin: 50 }} onPress={goToHome}>
                      <Text>Click to go to about</Text>
                   </TouchableOpacity>
                </Row> */}
-        {/* <View>
-                  {
-                     result.map((result, index) => {
-                        return <Text key={index}>
-                           {result.title}
-                        </Text>
-                     })
-                  }
-               </View> */}
-        {/* <LevelLabel /> */}
+               <NewReading></NewReading>
+
         <FlatGrid
-            itemDimension={110}
-            items={result}
-            style={styles.gridView}
-            renderItem={({ item }) => (
-              <TouchableOpacity>
+          itemDimension={110}
+          items={result}
+          style={styles.gridView}
+          renderItem={({ item }) => (
+            <TouchableOpacity>
               <Card containerStyle={styles.itemContainer}>
                 <View style={{ alignItems: "center" }}>
                   <Text style={styles.itemTopic}>{item.title}</Text>
                 </View>
               </Card>
-              </TouchableOpacity>
-            )}
-          />
-          
-          <FlatGrid 
-            itemDimension={110}
-            items={cate}
-            style={styles.gridView}
-            renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => goToArticle(item.category_id)}>
-              <Card containerStyle={styles.itemContainer} >
+            </TouchableOpacity>
+          )}
+        />
+
+        <FlatGrid
+          itemDimension={110}
+          items={cate}
+          style={styles.gridView}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => goToArticle(item.category_id)}>
+              <Card containerStyle={styles.itemContainer}>
                 <View style={{ alignItems: "center" }}>
                   {/* <Text style={styles.itemTopic}>{item.category_id}</Text> */}
 
                   <Text style={styles.itemTopic}>{item.categoryName}</Text>
                 </View>
               </Card>
-              </TouchableOpacity>
-            )}
-          />
+            </TouchableOpacity>
+          )}
+        />
       </View>
     );
   } else {
@@ -159,7 +126,7 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight,
   },
   gridView: {
-    marginTop: 200,
+    // marginTop: 200,
     flex: 1,
   },
   itemContainer: {
