@@ -11,7 +11,7 @@ import { Tabs } from "@ant-design/react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 const SwitchType = (props) => {
-  const { tabs, ContentDefault, ContentChange } = props;
+  const { tabs, ContentDefault, ContentChange, SwitchDisplay } = props;
   return (
     <View style={{ flex: 1 }}>
       <Tabs
@@ -26,6 +26,7 @@ const SwitchType = (props) => {
           <View
             style={{
               alignItems: "center",
+              display: SwitchDisplay,
               // marginTop: 50,
             }}
           >

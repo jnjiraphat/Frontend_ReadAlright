@@ -32,9 +32,7 @@ const Header = (props) => {
   return check == true ? (
     <View
       style={{
-        // flex: Dimensions.get("window").height,
         justifyContent: "center",
-        // backgroundColor: "red",
         height: Dimensions.get("window").height,
       }}
     >
@@ -52,7 +50,6 @@ const Header = (props) => {
         <LinearGradient
           colors={["#F07590", "#FFB382"]}
           style={{
-            // position: "absolutes",
             left: 0,
             right: 0,
             top: 0,
@@ -69,7 +66,6 @@ const Header = (props) => {
               marginTop: "5%",
               marginLeft: 15,
               marginRight: 15,
-              // backgroundColor: "green",
             }}
           >
             <Avatar
@@ -79,8 +75,6 @@ const Header = (props) => {
               }}
               size={Dimensions.get("window").width / 3.5}
               containerStyle={{
-                // width: 124.2,
-                // height: 114.43,
                 marginRight: 15,
               }}
             />
@@ -90,8 +84,6 @@ const Header = (props) => {
             style={{
               flexDirection: "row",
               justifyContent: "center",
-              // backgroundColor: "blue",
-              // marginTop: "1%",
             }}
           >
             <TouchableOpacity onPress={onPress}>
@@ -115,7 +107,10 @@ const Header = (props) => {
     </View>
   ) : (
     <View
-      style={{ flex: 1, justifyContent: "center", flexDirection: "column" }}
+      style={{
+        height: Dimensions.get("window").height,
+        // backgroundColor: "red",
+      }}
     >
       <LinearGradient
         colors={["#F07590", "#FFB382"]}
@@ -164,8 +159,13 @@ const Header = (props) => {
           </TouchableHighlight>
         </View>
       </LinearGradient>
-      <View style={{ flex: 0 }}>
-        <SwitchType tabs={tabs} />
+      <View style={{ flex: 1, top: "18%" }}>
+        <SwitchType
+          tabs={tabs}
+          ContentDefault={ContentDefault}
+          ContentChange={ContentChange}
+          SwitchDisplay="none"
+        />
       </View>
     </View>
   );

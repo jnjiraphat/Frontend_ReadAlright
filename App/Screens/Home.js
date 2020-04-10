@@ -46,7 +46,7 @@ const About = (props) => {
   function ContentChange() {
     return (
       <View>
-        <Text>TT</Text>
+        <Text>TV</Text>
         <FlatGrid
           itemDimension={110}
           items={result}
@@ -68,7 +68,7 @@ const About = (props) => {
   function ContentDefault() {
     return (
       <View>
-        <Text>TT</Text>
+        <Text>TR</Text>
       </View>
     );
   }
