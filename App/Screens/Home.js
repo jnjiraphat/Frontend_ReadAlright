@@ -11,10 +11,8 @@ import {
   FlatList,
 } from "react-native";
 import ReadingApi from "../API/ReadingAPI";
-import { Card, Button } from "react-native-elements";
 import { FlatGrid } from "react-native-super-grid";
 import Constants from "expo-constants";
-import LevelLabel from "../components/LevelLabel";
 import Header from "../components/Header";
 
 import SwitchType from "../components/SwitchType";
@@ -67,21 +65,22 @@ const About = (props) => {
     // setCheck(true)
   };
 
+  const tabSwitch = [{ title: "Reading" }, { title: "Vocabulary" }];
+
   if (result) {
-  
     return (
       <View style={styles.container}>
         <Header />
 
-        {/* <SwitchType /> */}
+        <SwitchType tabs={tabSwitch} />
         {/* <Row>
                   <TouchableOpacity style={{ margin: 50 }} onPress={goToHome}>
                      <Text>Click to go to about</Text>
                   </TouchableOpacity>
                </Row> */}
-               <NewReading></NewReading>
+        {/* <NewReading></NewReading> */}
 
-        <FlatGrid
+        {/* <FlatGrid
           itemDimension={110}
           items={result}
           style={styles.gridView}
@@ -94,23 +93,23 @@ const About = (props) => {
               </Card>
             </TouchableOpacity>
           )}
-        />
+        /> */}
 
         <FlatGrid
-          itemDimension={110}
-          items={cate}
-          style={styles.gridView}
-          renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => goToArticle(item.category_id)}>
-              <Card containerStyle={styles.itemContainer}>
-                <View style={{ alignItems: "center" }}>
-                  {/* <Text style={styles.itemTopic}>{item.category_id}</Text> */}
+        // itemDimension={110}
+        // items={cate}
+        // style={styles.gridView}
+        // renderItem={({ item }) => (
+        // <TouchableOpacity onPress={() => goToArticle(item.category_id)}>
+        //   <Card containerStyle={styles.itemContainer}>
+        //     <View style={{ alignItems: "center" }}>
+        //       {/* <Text style={styles.itemTopic}>{item.category_id}</Text> */}
 
-                  <Text style={styles.itemTopic}>{item.categoryName}</Text>
-                </View>
-              </Card>
-            </TouchableOpacity>
-          )}
+        //       <Text style={styles.itemTopic}>{item.categoryName}</Text>
+        //     </View>
+        //   </Card>
+        // </TouchableOpacity>
+        // )}
         />
       </View>
     );
