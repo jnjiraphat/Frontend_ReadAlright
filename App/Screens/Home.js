@@ -43,6 +43,36 @@ const About = (props) => {
 
   const [result, setResult] = useState([]);
 
+  function ContentChange() {
+    return (
+      <View>
+        <Text>TT</Text>
+        <FlatGrid
+          itemDimension={110}
+          items={result}
+          style={styles.gridView}
+          renderItem={({ item }) => (
+            <TouchableOpacity>
+              <Card containerStyle={styles.itemContainer}>
+                <View style={{ alignItems: "center" }}>
+                  <Text style={styles.itemTopic}>{item.title}</Text>
+                </View>
+              </Card>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+    );
+  }
+
+  function ContentDefault() {
+    return (
+      <View>
+        <Text>TT</Text>
+      </View>
+    );
+  }
+
   const goToArticle = (categoryId) => {
     Actions.Article({ text: categoryId });
   };
@@ -66,11 +96,14 @@ const About = (props) => {
   };
 
   const tabSwitch = [{ title: "Reading" }, { title: "Vocabulary" }];
-
   if (result) {
     return (
       <View style={styles.container}>
-        <Header tabs={tabSwitch} />
+        <Header
+          tabs={tabSwitch}
+          ContentDefault={ContentDefault()}
+          ContentChange={ContentChange()}
+        />
         {/* 
         <SwitchType tabs={tabSwitch} /> */}
         {/* <Row>
