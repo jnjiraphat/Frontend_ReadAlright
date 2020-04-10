@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-const LevelLabel = (props) => {
+const AreaProfile = (props) => {
   const [name, showName] = useState("Thanatcha");
-  const { level } = props;
+  const { level, display } = props;
   const [sugggestion, hideSuggestion] = useState(
     "You should practice adverb more"
   );
@@ -37,7 +37,7 @@ const LevelLabel = (props) => {
               color: "#000000",
             }}
           >
-            
+            {level}
           </Text>
         </LinearGradient>
         <Text
@@ -50,13 +50,13 @@ const LevelLabel = (props) => {
           {name}
         </Text>
       </View>
-      <Text>{sugggestion} </Text>
-      <Text>{sugggestion} </Text>
-      <Text>{sugggestion} </Text>
-
-
+      <View style={{ display: display }}>
+        <Text>{sugggestion} </Text>
+        <Text>{sugggestion} </Text>
+        <Text>{sugggestion} </Text>
+      </View>
     </View>
   );
 };
 
-export default LevelLabel;
+export default AreaProfile;
