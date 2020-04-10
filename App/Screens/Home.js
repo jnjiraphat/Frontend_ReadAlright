@@ -19,6 +19,7 @@ import Header from "../components/Header";
 
 import SwitchType from "../components/SwitchType";
 import NewReading from "../components/NewReading";
+import BottomNavigation from "../components/BottomNavigation"
 
 const arrayReading = [];
 
@@ -50,7 +51,7 @@ const About = (props) => {
   };
 
   const getReadaingByCateId = async () => {
-    for (let index = 0; index < 3; index++) {
+    for (let index = 0; index < props.text.length; index++) {
       console.log("cateId = " + props.text[index]);
 
       const data = await axios
@@ -112,6 +113,7 @@ const About = (props) => {
             </TouchableOpacity>
           )}
         />
+        <BottomNavigation></BottomNavigation>
       </View>
     );
   } else {
