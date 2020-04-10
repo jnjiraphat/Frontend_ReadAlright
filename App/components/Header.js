@@ -6,14 +6,11 @@ import {
   Dimensions,
   StyleSheet,
   TouchableHighlight,
-  
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ListItem } from "react-native-elements";
 import { Avatar } from "react-native-elements";
-import LevelLabel from "../components/LevelLabel";
-import LevelLabel2 from "../components/LevelLabel2";
-// import Constants from "expo-constants";
+import AreaProfile from "../components/AreaProfile";
 
 import { Ionicons } from "@expo/vector-icons";
 
@@ -38,103 +35,105 @@ const Header = (props) => {
       }}
     >
       <LinearGradient
-        colors={["#FFB382", "#F07590"]}
+        colors={["#F07590", "#FFB382"]}
         style={{
           position: "absolute",
           left: 0,
           right: 0,
           top: 0,
-          height: 250,
+          height: Dimensions.get("window").height / 4,
           width: Dimensions.get("window").width,
           borderBottomLeftRadius: 30,
           borderBottomRightRadius: 30,
         }}
-      />
-      <View
-        style={{
-          flexDirection: "row",
-          flex: 1,
-          marginTop: "5%",
-          marginLeft: 15,
-          marginRight: 15,
-        }}
       >
-        <Avatar
-          rounded
-          source={{
-            uri: "https://randomuser.me/api/portraits/men/41.jpg",
-          }}
-          size={130}
-          containerStyle={{
-            // width: 124.2,
-            // height: 114.43,
+        <View
+          style={{
+            flexDirection: "row",
+            flex: 1,
+            marginTop: "5%",
+            marginLeft: 15,
             marginRight: 15,
           }}
-        />
-        <LevelLabel></LevelLabel>
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          marginTop: 30,
-        }}
-      >
-        <TouchableOpacity onPress={onPress}>
-          <Ionicons name="ios-arrow-up" size={32} color="black"></Ionicons>
-        </TouchableOpacity>
-      </View>
+        >
+          <Avatar
+            rounded
+            source={{
+              uri: "https://randomuser.me/api/portraits/men/41.jpg",
+            }}
+            size={Dimensions.get("window").width / 3.5}
+            containerStyle={{
+              // width: 124.2,
+              // height: 114.43,
+              marginRight: 15,
+            }}
+          />
+          <AreaProfile level="A1" />
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            marginTop: 30,
+          }}
+        >
+          <TouchableOpacity onPress={onPress}>
+            <Ionicons name="ios-arrow-up" size={32} color="black"></Ionicons>
+          </TouchableOpacity>
+        </View>
+      </LinearGradient>
     </View>
   ) : (
     <View
       style={{ flex: 1, justifyContent: "center", flexDirection: "column" }}
     >
       <LinearGradient
-        colors={["#FFB382", "#F07590"]}
+        colors={["#F07590", "#FFB382"]}
         style={{
           position: "absolute",
           left: 0,
           right: 0,
           top: 0,
-          height: 150,
+          height: Dimensions.get("window").height / 6,
           width: Dimensions.get("window").width,
           borderBottomLeftRadius: 30,
           borderBottomRightRadius: 30,
         }}
-      />
-      <View
-        style={{
-          flexDirection: "row",
-          flex: 1,
-          marginTop: 25,
-          marginLeft: 15,
-          marginRight: 15,
-        }}
       >
-        <Avatar
-          rounded
-          source={{
-            uri: "https://randomuser.me/api/portraits/men/41.jpg",
-          }}
-          size={80}
-          containerStyle={{
-            // width: 124.2,
-            // height: 114.43,
+        <View
+          style={{
+            flexDirection: "row",
+            flex: 1,
+            marginTop: "2%",
+            marginLeft: 15,
             marginRight: 15,
           }}
-        />
-        <LevelLabel2></LevelLabel2>
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-        }}
-      >
-        <TouchableHighlight onPress={onPress}>
-          <Ionicons name="ios-arrow-down" size={32} color="black"></Ionicons>
-        </TouchableHighlight>
-      </View>
+        >
+          <Avatar
+            rounded
+            source={{
+              uri: "https://randomuser.me/api/portraits/men/41.jpg",
+            }}
+            size={Dimensions.get("window").width / 4}
+            containerStyle={{
+              // width: 124.2,
+              // height: 114.43,
+              marginRight: 15,
+            }}
+          />
+          <AreaProfile level="A1" display="none" />
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+        >
+          <TouchableHighlight onPress={onPress}>
+            <Ionicons name="ios-arrow-down" size={32} color="black"></Ionicons>
+          </TouchableHighlight>
+        </View>
+      </LinearGradient>
     </View>
   );
 };
