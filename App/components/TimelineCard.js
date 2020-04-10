@@ -2,41 +2,43 @@ import React from "react";
 import { TouchableOpacity, StyleSheet, Text, Image } from "react-native";
 import { Card } from "@ant-design/react-native";
 
-const CategoryCard = (props) => {
-  const { img, title, imgHeight, width, titleHeight } = props;
-  <TouchableOpacity style={[styles.item]}>
-    <Card style={styles.card}>
-      <Card.Body
-        style={{
-          height: height,
-          width: width,
-          resizeMode: "contain",
-          paddingTop: 0,
-        }}
-      >
-        <Image
-          source={img}
+const TimelineCard = (props) => {
+  const { title, img, imgHeight, width, titleHeight, height } = props;
+  return (
+    <TouchableOpacity style={[styles.item]}>
+      <Card style={styles.card}>
+        <Card.Body
           style={{
             height: imgHeight,
             width: width,
-            borderTopRightRadius: 3,
-            borderTopLeftRadius: 3,
+            resizeMode: "contain",
+            paddingTop: 0,
           }}
-        />
-      </Card.Body>
-      <Card.Body
-        style={{
-          height: titleHeight,
-          width: width,
-        }}
-      >
-        <Text style={styles.title}>{title}</Text>
-      </Card.Body>
-    </Card>
-  </TouchableOpacity>;
+        >
+          <Image
+            source={img}
+            style={{
+              height: imgHeight,
+              width: width,
+              borderTopRightRadius: 3,
+              borderTopLeftRadius: 3,
+            }}
+          />
+        </Card.Body>
+        <Card.Body
+          style={{
+            height: titleHeight,
+            width: width,
+          }}
+        >
+          <Text style={styles.title}>{title}</Text>
+        </Card.Body>
+      </Card>
+    </TouchableOpacity>
+  );
 };
 
-export default CategoryCard;
+export default TimelineCard;
 
 const styles = StyleSheet.create({
   item: {

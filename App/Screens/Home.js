@@ -2,7 +2,6 @@ import { TouchableOpacity, Text } from "react-native";
 import { Actions } from "react-native-router-flux";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { ListItem } from "react-native-elements";
 import {
   StyleSheet,
   View,
@@ -11,13 +10,15 @@ import {
   FlatList,
 } from "react-native";
 import ReadingApi from "../API/ReadingAPI";
-import { FlatGrid } from "react-native-super-grid";
 import Constants from "expo-constants";
 import Header from "../components/Header";
+// import FlatGrid from "react-native-super-grid";
+import { Card, Button } from "react-native-elements";
 
-import SwitchType from "../components/SwitchType";
 import NewReading from "../components/NewReading";
-import BottomNavigation from "../components/BottomNavigation"
+import TimelineCard from "../components/TimelineCard";
+// import BottomNavigation from "../components/BottomNavigation"
+import CarouselCard from "../components/CarouselCard";
 
 const arrayReading = [];
 
@@ -44,11 +45,19 @@ const About = (props) => {
 
   const [result, setResult] = useState([]);
 
+  const pls = [
+    { title: "Reading", img: require("./../assets/catagory/Animal.jpg") },
+    { title: "Vocabulary", img: require("./../assets/catagory/Animal.jpg") },
+    { title: "Reading", img: require("./../assets/catagory/Animal.jpg") },
+    { title: "Vocabulary", img: require("./../assets/catagory/Animal.jpg") },
+    { title: "Reading", img: require("./../assets/catagory/Animal.jpg") },
+    { title: "Vocabulary", img: require("./../assets/catagory/Animal.jpg") },
+  ];
+
   function ContentChange() {
     return (
       <View>
-        <Text>TV</Text>
-        <FlatGrid
+        {/* <FlatGrid
           itemDimension={110}
           items={result}
           style={styles.gridView}
@@ -61,6 +70,13 @@ const About = (props) => {
               </Card>
             </TouchableOpacity>
           )}
+        /> */}
+
+        <CarouselCard
+          result={pls}
+          imgHeight={110}
+          width={130}
+          titleHeight={20}
         />
       </View>
     );
@@ -129,23 +145,7 @@ const About = (props) => {
           )}
         /> */}
 
-        <FlatGrid
-        // itemDimension={110}
-        // items={cate}
-        // style={styles.gridView}
-        // renderItem={({ item }) => (
-        // <TouchableOpacity onPress={() => goToArticle(item.category_id)}>
-        //   <Card containerStyle={styles.itemContainer}>
-        //     <View style={{ alignItems: "center" }}>
-        //       {/* <Text style={styles.itemTopic}>{item.category_id}</Text> */}
-
-        //       <Text style={styles.itemTopic}>{item.categoryName}</Text>
-        //     </View>
-        //   </Card>
-        // </TouchableOpacity>
-        // )}
-        />
-        <BottomNavigation></BottomNavigation>
+        {/* <BottomNavigation></BottomNavigation> */}
       </View>
     );
   } else {
