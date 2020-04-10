@@ -16,7 +16,7 @@ import SwitchType from "../components/SwitchType";
 import { Ionicons } from "@expo/vector-icons";
 
 const Header = (props) => {
-  const { tabs } = props;
+  const { tabs, ContentDefault, ContentChange } = props;
 
   const onPress = () => {
     if (check == true) {
@@ -106,7 +106,11 @@ const Header = (props) => {
           bottom: "5%",
         }}
       >
-        <SwitchType tabs={tabs} />
+        <SwitchType
+          tabs={tabs}
+          ContentDefault={ContentDefault}
+          ContentChange={ContentChange}
+        />
       </View>
     </View>
   ) : (

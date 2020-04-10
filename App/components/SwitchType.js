@@ -11,7 +11,7 @@ import { Tabs } from "@ant-design/react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 const SwitchType = (props) => {
-  const { tabs } = props;
+  const { tabs, ContentDefault, ContentChange } = props;
   return (
     <View style={{ flex: 1 }}>
       <Tabs
@@ -94,33 +94,10 @@ const SwitchType = (props) => {
         )}
       >
         <ScrollView>
-          <View style={styles.content}>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-            <Text>Content of Reading</Text>
-          </View>
+          <View style={styles.content}>{ContentDefault}</View>
         </ScrollView>
         <ScrollView>
-          <View style={styles.content}>
-            <Text>Content of Vocabulary</Text>
-          </View>
+          <View style={styles.content}>{ContentChange}</View>
         </ScrollView>
       </Tabs>
     </View>
