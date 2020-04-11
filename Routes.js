@@ -12,18 +12,53 @@ import Mylist from "./App/Screens/Mylist";
 import { Text } from "react-native";
 // import Article from "./App/Screens/Article"
 import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 const TabIcon = ({ focused, title }) => {
-  var color = focused ? "black" : "grey";
+  // var color = focused ? "black" : "grey";
 
   // return <Text style={{ color: selected ? "red" : "yellow" }}>{title}</Text>;
   if (title == "Home") {
-    return <Ionicons name="md-home" size={32} color={color}></Ionicons>;
+    if (focused) {
+      return (
+        <MaterialCommunityIcons
+          name="home-variant"
+          size={32}
+        ></MaterialCommunityIcons>
+      );
+    } else {
+      return (
+        <MaterialCommunityIcons
+          name="home-outline"
+          size={32}
+        ></MaterialCommunityIcons>
+      );
+    }
   }
   if (title == "Trick") {
-    return <Ionicons name="md-bulb" size={32} color={color}></Ionicons>;
+    if (focused) {
+      return (
+        <MaterialCommunityIcons
+          name="lightbulb-on"
+          size={32}
+        ></MaterialCommunityIcons>
+      );
+    } else {
+      return (
+        <MaterialCommunityIcons
+          name="lightbulb-on-outline"
+          size={32}
+        ></MaterialCommunityIcons>
+      );
+    }
   }
   if (title == "Mylist") {
-    return <Ionicons name="md-bookmark" size={32} color={color}></Ionicons>;
+    if (focused) {
+      return <FontAwesome name="bookmark" size={32}></FontAwesome>;
+    } else {
+      return <FontAwesome name="bookmark-o" size={32}></FontAwesome>;
+    }
   }
   // return <Text>{selected}</Text>
 };
