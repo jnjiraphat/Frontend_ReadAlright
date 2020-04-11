@@ -24,7 +24,7 @@ const arrayReading = [];
 
 // const arrayId = [];
 
-const About = (props) => {
+const home = (props) => {
   console.log("This is props");
   console.log(props.text);
   const [cate, setCate] = useState([]);
@@ -172,7 +172,7 @@ const About = (props) => {
     return <Text>Loading</Text>;
   }
 };
-export default About;
+export default home;
 
 const styles = StyleSheet.create({
   container: {
