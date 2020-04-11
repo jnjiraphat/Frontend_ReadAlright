@@ -14,6 +14,13 @@ import { Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  ImageBackground,
+  FlatList,
+} from "react-native";
 
 const TabIcon = ({ focused, title }) => {
   // var color = focused ? "black" : "grey";
@@ -24,14 +31,14 @@ const TabIcon = ({ focused, title }) => {
       return (
         <MaterialCommunityIcons
           name="home-variant"
-          size={32}
+          size={28}
         ></MaterialCommunityIcons>
       );
     } else {
       return (
         <MaterialCommunityIcons
           name="home-outline"
-          size={32}
+          size={28}
         ></MaterialCommunityIcons>
       );
     }
@@ -41,23 +48,23 @@ const TabIcon = ({ focused, title }) => {
       return (
         <MaterialCommunityIcons
           name="lightbulb-on"
-          size={32}
+          size={28}
         ></MaterialCommunityIcons>
       );
     } else {
       return (
         <MaterialCommunityIcons
           name="lightbulb-on-outline"
-          size={32}
+          size={28}
         ></MaterialCommunityIcons>
       );
     }
   }
   if (title == "Mylist") {
     if (focused) {
-      return <FontAwesome name="bookmark" size={32}></FontAwesome>;
+      return <FontAwesome name="bookmark" size={28} ></FontAwesome>;
     } else {
-      return <FontAwesome name="bookmark-o" size={32}></FontAwesome>;
+      return <FontAwesome name="bookmark-o" size={28}></FontAwesome>;
     }
   }
   // return <Text>{selected}</Text>
@@ -79,7 +86,7 @@ const Routes = () => {
         <Scene
           key="tabbar"
           tabs
-          tabBarStyle={{ backgroundColor: "#FFFFFF" }}
+          tabBarStyle={{ backgroundColor: "white" ,height : 61}}
           wrap={false}
           showLabel={false}
         >
@@ -114,45 +121,6 @@ const Routes = () => {
 };
 export default Routes;
 
-// <Scene key="root">
-// {/* <Scene
-//   key="Home"
-//   component={Home}
-//   title="Home"
-//   initial={true}
-//   hideNavBar={true}
-// /> */}
-// <Scene
-//   key="Interest"
-//   component={InterestScreen}
-//   title="Interest"
-//   // initial={true}
-//   hideNavBar={true}
-// />
-
-// <Scene key="Article" component={Article} title="Article" />
-// <Scene key="Mylist" component={Mylist} title="Mylist" />
-
-// <Scene
-// key= "tabbar"
-// tabs
-// tabBarStyle={{ backgroundColor: "#FFFFFF" }}>
-//   <Scene key="osu" title="OSU" icon={TabIcon}>
-//     <Scene
-//     key="Home"
-//     component={Home}
-//     title="Home"
-//     />
-//     <Scene
-//     key="Tricks"
-//     component={Tricks}
-//     title="Tricks"
-//     />
-//     <Scene
-//     key="ContentScreen"
-//     component={ContentScreen}
-//     title="ContentScreen"
-//     />
-//   </Scene>
-// </Scene>
-// </Scene>
+const styles = StyleSheet.create({
+ 
+});
