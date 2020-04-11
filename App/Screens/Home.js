@@ -68,11 +68,11 @@ const home = (props) => {
       <View style={{ flex: 1 }}>
         <View style={{ height: 200 }}>
           <Text>New!</Text>
-          <CarouselCard result={rd} />
+          <CarouselCard result={result} />
         </View>
         <View style={{ height: 200 }}>
           <Text>Maybe you like</Text>
-          <CarouselCard result={rd} />
+          <CarouselCard result={result} />
         </View>
       </View>
     );
