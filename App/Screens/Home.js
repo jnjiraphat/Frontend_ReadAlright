@@ -37,14 +37,16 @@ const home = (props) => {
   useEffect(() => {
     read();
     getReadaingByCateId();
+<<<<<<< HEAD
     getNewReading();
+=======
+>>>>>>> parent of 8a1c55c... [UPDATE] Show new article and Maybe you like finish
   }, []);
 
   // const [check, setCheck] = useState(false);
   const [categoryId, setCategoryId] = useState(0);
-  const [resultNew, setResultNew] = useState([]);
 
-  const [results, setResult] = useState([]);
+  const [result, setResult] = useState([]);
 
   const rd = [
     { title: "Reading", img: require("./../assets/catagory/Animal.jpg") },
@@ -69,11 +71,11 @@ const home = (props) => {
       <View style={styles.ContentSwitch}>
         <View style={styles.ContentCarousel}>
           <Text>New!</Text>
-          <CarouselCard result={resultNew} />
+          <CarouselCard result={result} />
         </View>
         <View style={styles.ContentCarousel}>
           <Text>Maybe you like</Text>
-          <CarouselCard result={results} />
+          <CarouselCard result={result} />
         </View>
         <View>
           <Text>Category</Text>
@@ -140,20 +142,9 @@ const home = (props) => {
     setResult(arrayReading);
     // setCheck(true)
   };
-  const getNewReading = async () => {
-    const data = await axios
-      .get("http://10.0.2.2:3000/newReading")
-      .then((response) => {
-        console.log("Newreadingggggggggggggggggggggggggggggggggg");
-        console.log(response.data.length);
-        console.log("Newreadingggggggggggggggggggggggggggggggggg");
-
-        setResultNew(response.data);
-      });
-  };
 
   const tabSwitch = [{ title: "Reading" }, { title: "Vocabulary" }];
-  if (results) {
+  if (result) {
     return (
       <View style={styles.container}>
         <Header
