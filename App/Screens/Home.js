@@ -14,7 +14,8 @@ import Constants from "expo-constants";
 import Header from "../components/Header";
 // import FlatGrid from "react-native-super-grid";
 import NewReading from "../components/NewReading";
-// import BottomNavigation from "../components/BottomNavigation"
+import TimelineCard from "../components/TimelineCard";
+
 import CarouselCard from "../components/CarouselCard";
 import CategoryCard from "../components/CategoryCard";
 
@@ -37,7 +38,6 @@ const home = (props) => {
     read();
     getReadaingByCateId();
     getNewReading();
-
   }, []);
 
   // const [check, setCheck] = useState(false);
@@ -184,8 +184,6 @@ const home = (props) => {
             </TouchableOpacity>
           )}
         /> */}
-
-        {/* <BottomNavigation></BottomNavigation> */}
       </View>
     );
   } else {
