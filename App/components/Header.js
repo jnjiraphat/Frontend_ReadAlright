@@ -154,9 +154,9 @@ const Header = (props) => {
             justifyContent: "center",
           }}
         >
-          <TouchableHighlight onPress={onPress}>
+          <TouchableOpacity onPress={onPress}>
             <Ionicons name="ios-arrow-down" size={32} color="black"></Ionicons>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
       </LinearGradient>
       <View style={{ flex: 1, top: "18%" }}>

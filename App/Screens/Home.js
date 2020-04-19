@@ -22,7 +22,7 @@ const arrayReading = [];
 
 // const arrayId = [];
 
-const About = (props) => {
+const home = (props) => {
   console.log("This is props");
   console.log(props.text);
   const [cate, setCate] = useState([]);
@@ -36,12 +36,15 @@ const About = (props) => {
   useEffect(() => {
     read();
     getReadaingByCateId();
+    getNewReading();
+
   }, []);
 
   // const [check, setCheck] = useState(false);
   const [categoryId, setCategoryId] = useState(0);
+  const [resultNew, setResultNew] = useState([]);
 
-  const [result, setResult] = useState([]);
+  const [results, setResult] = useState([]);
 
   const rd = [
     { title: "Reading", img: require("./../assets/catagory/Animal.jpg") },
@@ -66,11 +69,11 @@ const About = (props) => {
       <View style={styles.ContentSwitch}>
         <View style={styles.ContentCarousel}>
           <Text>New!</Text>
-          <CarouselCard result={rd} />
+          <CarouselCard result={resultNew} />
         </View>
         <View style={styles.ContentCarousel}>
           <Text>Maybe you like</Text>
-          <CarouselCard result={rd} />
+          <CarouselCard result={results} />
         </View>
         <View>
           <Text>Category</Text>
@@ -137,9 +140,20 @@ const About = (props) => {
     setResult(arrayReading);
     // setCheck(true)
   };
+  const getNewReading = async () => {
+    const data = await axios
+      .get("http://10.0.2.2:3000/newReading")
+      .then((response) => {
+        console.log("Newreadingggggggggggggggggggggggggggggggggg");
+        console.log(response.data.length);
+        console.log("Newreadingggggggggggggggggggggggggggggggggg");
+
+        setResultNew(response.data);
+      });
+  };
 
   const tabSwitch = [{ title: "Reading" }, { title: "Vocabulary" }];
-  if (result) {
+  if (results) {
     return (
       <View style={styles.container}>
         <Header
@@ -178,7 +192,7 @@ const About = (props) => {
     return <Text>Loading</Text>;
   }
 };
-export default About;
+export default home;
 
 const styles = StyleSheet.create({
   container: {
