@@ -1,4 +1,3 @@
-import { ListItem } from "react-native-elements";
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity, Text } from "react-native";
 import { Actions } from "react-native-router-flux";
@@ -54,15 +53,16 @@ const Article = (props) => {
       <FlatGrid
         items={cate}
         renderItem={({ item }) => (
-          <ListItem
-            onPressIn={() => setReadingId(item.reading_id)}
-            onPress={goToContentScreen}
-            key={item.category_id}
-            title={item.title}
-            leftIcon={{ name: item.icon }}
-            bottomDivider
-            chevron
-          />
+          // <ListItem
+          //   onPressIn={() => setReadingId(item.reading_id)}
+          //   onPress={goToContentScreen}
+          //   key={item.category_id}
+          //   title={item.title}
+          //   leftIcon={{ name: item.icon }}
+          //   bottomDivider
+          //   chevron
+          // />
+          <View></View>
         )}
       />
     </ScrollView>

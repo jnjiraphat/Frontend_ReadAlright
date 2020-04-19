@@ -1,9 +1,7 @@
-import { ListItem } from "react-native-elements";
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity, Text } from "react-native";
 import { Actions } from "react-native-router-flux";
 import ReadingApi from "../API/ReadingAPI";
-import { Card, Button } from "react-native-elements";
 import { FlatGrid } from "react-native-super-grid";
 import {
   StyleSheet,
@@ -50,13 +48,14 @@ const Content = (props) => {
       <FlatGrid
         items={cate}
         renderItem={({ item }) => (
-          <ListItem
-            key={item.category_id}
-            title={item.content}
-            leftIcon={{ name: item.icon }}
-            bottomDivider
-            chevron
-          />
+          // <ListItem
+          //   key={item.category_id}
+          //   title={item.content}
+          //   leftIcon={{ name: item.icon }}
+          //   bottomDivider
+          //   chevron
+          // />
+          <View></View>
         )}
       />
     </ScrollView>

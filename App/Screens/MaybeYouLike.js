@@ -2,7 +2,6 @@ import { TouchableOpacity, Text } from "react-native";
 import { Actions } from "react-native-router-flux";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { ListItem } from "react-native-elements";
 import {
   StyleSheet,
   View,

@@ -2,7 +2,6 @@ import { TouchableOpacity, Text } from "react-native";
 import { Actions } from "react-native-router-flux";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { ListItem } from "react-native-elements";
 import {
   StyleSheet,
   View,
@@ -11,10 +10,9 @@ import {
   FlatList,
 } from "react-native";
 import ReadingApi from "../API/ReadingAPI";
-import { Card, Button } from "react-native-elements";
+import { Card } from "@ant-design/react-native";
 import { FlatGrid } from "react-native-super-grid";
 import Constants from "expo-constants";
-
 
 const newReading = (props) => {
   const [resultNew, setResultNew] = useState([]);
@@ -37,7 +35,6 @@ const newReading = (props) => {
   if (resultNew) {
     return (
       <View style={styles.container}>
- 
         <FlatGrid
           itemDimension={110}
           items={resultNew}
