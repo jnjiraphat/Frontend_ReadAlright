@@ -37,10 +37,7 @@ const home = (props) => {
   useEffect(() => {
     read();
     getReadaingByCateId();
-<<<<<<< HEAD
     getNewReading();
-=======
->>>>>>> parent of 8a1c55c... [UPDATE] Show new article and Maybe you like finish
   }, []);
 
   // const [check, setCheck] = useState(false);
