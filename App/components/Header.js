@@ -8,8 +8,7 @@ import {
   TouchableHighlight,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { ListItem } from "react-native-elements";
-import { Avatar } from "react-native-elements";
+import Avatar from "../components/Avatar";
 import AreaProfile from "../components/AreaProfile";
 import SwitchType from "../components/SwitchType";
 
@@ -34,18 +33,17 @@ const Header = (props) => {
       style={{
         justifyContent: "center",
         height: Dimensions.get("window").height,
+        backgroundColor: "transparent",
       }}
     >
       <View
-        style={
-          {
-            // flex: 1,
-            // justifyContent: "center",
-            // flexDirection: "column",
-            // backgroundColor: "blue",
-            // height: Dimensions.get("window").height / 4,
-          }
-        }
+        style={{
+          // flex: 1,
+          // justifyContent: "center",
+          // flexDirection: "column",
+          backgroundColor: "transparent",
+          // height: Dimensions.get("window").height / 4,
+        }}
       >
         <LinearGradient
           colors={["#F07590", "#FFB382"]}
@@ -69,10 +67,7 @@ const Header = (props) => {
             }}
           >
             <Avatar
-              rounded
-              source={{
-                uri: "https://randomuser.me/api/portraits/men/41.jpg",
-              }}
+              source={require("./../assets/demo-profile.png")}
               size={Dimensions.get("window").width / 3.5}
               containerStyle={{
                 marginRight: 15,
@@ -96,6 +91,7 @@ const Header = (props) => {
         style={{
           flex: 1,
           bottom: "5%",
+          backgroundColor: "transparent",
         }}
       >
         <SwitchType
@@ -135,14 +131,9 @@ const Header = (props) => {
           }}
         >
           <Avatar
-            rounded
-            source={{
-              uri: "https://randomuser.me/api/portraits/men/41.jpg",
-            }}
+            source={require("./../assets/demo-profile.png")}
             size={Dimensions.get("window").width / 4}
             containerStyle={{
-              // width: 124.2,
-              // height: 114.43,
               marginRight: 15,
             }}
           />

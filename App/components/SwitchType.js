@@ -26,8 +26,11 @@ const SwitchType = (props) => {
           <View
             style={{
               alignItems: "center",
+              // justifyContent: "center",
               display: SwitchDisplay,
-              // marginTop: 50,
+              // left: 50, //ลองtestกับ device อื่นๆว่ามันกลางจริงมั้ย
+              // position: "absolute",
+              // zIndex: 1,
             }}
           >
             <LinearGradient
@@ -94,7 +97,11 @@ const SwitchType = (props) => {
           </View>
         )}
       >
-        <ScrollView>
+        <ScrollView
+          style={{
+            backgroundColor: "transparent",
+          }}
+        >
           <View style={styles.content}>{ContentDefault}</View>
         </ScrollView>
         <ScrollView>
@@ -108,9 +115,9 @@ export default SwitchType;
 
 const styles = StyleSheet.create({
   content: {
-    alignItems: "center",
+    // alignItems: "center",
     // justifyContent: "center",
-    height: Dimensions.get("window").height,
+    // height: Dimensions.get("window").height,
     // backgroundColor: "#000",
     marginTop: "5%",
   },

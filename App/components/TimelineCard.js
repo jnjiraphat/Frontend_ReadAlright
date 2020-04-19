@@ -3,7 +3,7 @@ import { TouchableOpacity, StyleSheet, Text, Image } from "react-native";
 import { Card } from "@ant-design/react-native";
 
 const TimelineCard = (props) => {
-  const { title, img, imgHeight, width, titleHeight, height } = props;
+  const { title, img, imgHeight, width, titleHeight } = props;
   return (
     <TouchableOpacity style={[styles.item]}>
       <Card style={styles.card}>
@@ -60,5 +60,6 @@ const styles = StyleSheet.create({
     shadowColor: "#000000",
     shadowOpacity: 0.3,
     elevation: 8,
+    marginBottom: "-10%", //ค้างอยู่ที่ต้องจัดให้ marginbottom ของ cat ขยับขึ้น กับจัดให้ scrollView ของ switch ธรรมชาติกว่านี้
   },
 });

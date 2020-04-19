@@ -62,7 +62,7 @@ const TabIcon = ({ focused, title }) => {
   }
   if (title == "Mylist") {
     if (focused) {
-      return <FontAwesome name="bookmark" size={28} ></FontAwesome>;
+      return <FontAwesome name="bookmark" size={28}></FontAwesome>;
     } else {
       return <FontAwesome name="bookmark-o" size={28}></FontAwesome>;
     }
@@ -86,7 +86,7 @@ const Routes = () => {
         <Scene
           key="tabbar"
           tabs
-          tabBarStyle={{ backgroundColor: "white" ,height : 61}}
+          tabBarStyle={{ backgroundColor: "white", height: 61 }}
           wrap={false}
           showLabel={false}
         >
@@ -121,6 +121,4 @@ const Routes = () => {
 };
 export default Routes;
 
-const styles = StyleSheet.create({
- 
-});
+const styles = StyleSheet.create({});

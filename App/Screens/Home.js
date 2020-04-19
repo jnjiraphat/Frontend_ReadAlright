@@ -13,12 +13,11 @@ import ReadingApi from "../API/ReadingAPI";
 import Constants from "expo-constants";
 import Header from "../components/Header";
 // import FlatGrid from "react-native-super-grid";
-import { Card, Button } from "react-native-elements";
-
 import NewReading from "../components/NewReading";
 import TimelineCard from "../components/TimelineCard";
-// import BottomNavigation from "../components/BottomNavigation"
+
 import CarouselCard from "../components/CarouselCard";
+import CategoryCard from "../components/CategoryCard";
 
 const arrayReading = [];
 
@@ -39,14 +38,12 @@ const home = (props) => {
     read();
     getReadaingByCateId();
     getNewReading();
-
   }, []);
 
   // const [check, setCheck] = useState(false);
   const [categoryId, setCategoryId] = useState(0);
-  const [resultNew, setResultNew] = useState([]);
 
-  const [results, setResult] = useState([]);
+  const [result, setResult] = useState([]);
 
   const rd = [
     { title: "Reading", img: require("./../assets/catagory/Animal.jpg") },
@@ -68,14 +65,18 @@ const home = (props) => {
 
   function ContentDefault() {
     return (
-      <View style={{ flex: 1 }}>
-        <View style={{ height: 200 }}>
+      <View style={styles.ContentSwitch}>
+        <View style={styles.ContentCarousel}>
           <Text>New!</Text>
-          <CarouselCard result={resultNew} />
+          <CarouselCard result={result} />
         </View>
-        <View style={{ height: 200 }}>
+        <View style={styles.ContentCarousel}>
           <Text>Maybe you like</Text>
-          <CarouselCard result={results} />
+          <CarouselCard result={result} />
+        </View>
+        <View>
+          <Text>Category</Text>
+          <CategoryCard result={rd} />
         </View>
       </View>
     );
@@ -99,14 +100,18 @@ const home = (props) => {
           )}
         /> */}
 
-        <View style={{ flex: 1 }}>
-          <View style={{ height: 200 }}>
+        <View style={styles.ContentSwitch}>
+          <View style={styles.ContentCarousel}>
             <Text>New!</Text>
             <CarouselCard result={vb} />
           </View>
-          <View style={{ height: 200 }}>
+          <View style={styles.ContentCarousel}>
             <Text>Maybe you like</Text>
             <CarouselCard result={vb} />
+          </View>
+          <View>
+            <Text>Category</Text>
+            <CategoryCard result={vb} />
           </View>
         </View>
       </View>
@@ -134,20 +139,9 @@ const home = (props) => {
     setResult(arrayReading);
     // setCheck(true)
   };
-  const getNewReading = async () => {
-    const data = await axios
-      .get("http://10.0.2.2:3000/newReading")
-      .then((response) => {
-        console.log("Newreadingggggggggggggggggggggggggggggggggg");
-        console.log(response.data.length);
-        console.log("Newreadingggggggggggggggggggggggggggggggggg");
-
-        setResultNew(response.data);
-      });
-  };
 
   const tabSwitch = [{ title: "Reading" }, { title: "Vocabulary" }];
-  if (results) {
+  if (result) {
     return (
       <View style={styles.container}>
         <Header
@@ -178,8 +172,6 @@ const home = (props) => {
             </TouchableOpacity>
           )}
         /> */}
-
-        {/* <BottomNavigation></BottomNavigation> */}
       </View>
     );
   } else {
@@ -223,5 +215,12 @@ const styles = StyleSheet.create({
     width: 200,
     marginTop: 20,
     marginBottom: 20,
+  },
+  ContentSwitch: {
+    flex: 1,
+    marginLeft: "2%",
+  },
+  ContentCarousel: {
+    height: 200,
   },
 });
