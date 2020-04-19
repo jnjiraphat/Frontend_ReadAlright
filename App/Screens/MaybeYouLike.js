@@ -11,8 +11,6 @@ import {
   FlatList,
 } from "react-native";
 import ReadingApi from "../API/ReadingAPI";
-import { Card, Button } from "react-native-elements";
-import { Grid, Col, Row } from "react-native-easy-grid";
 import { FlatGrid } from "react-native-super-grid";
 import Header from "../components/Header";
 
@@ -44,13 +42,12 @@ const About = (props) => {
   //    console.log("push success!!!" + categoryId);
   // };
 
-
   const [result, setResult] = useState([]);
 
   const goToArticle = (categoryId) => {
-    console.log("==========")
+    console.log("==========");
     Actions.Article({ text: categoryId });
-    console.log(categoryId)
+    console.log(categoryId);
   };
 
   const getReadaingByCateId = async () => {
@@ -94,13 +91,12 @@ const About = (props) => {
     return (
       <ScrollView>
         <Header></Header>
-        <Grid>
-          {/* <Row>
+        {/* <Row>
                   <TouchableOpacity style={{ margin: 50 }} onPress={goToHome}>
                      <Text>Click to go to about</Text>
                   </TouchableOpacity>
                </Row> */}
-          {/* <View>
+        {/* <View>
                   {
                      result.map((result, index) => {
                         return <Text key={index}>
@@ -109,41 +105,55 @@ const About = (props) => {
                      })
                   }
                </View> */}
-          {/* <LevelLabel /> */}
-         
-          <FlatGrid
-            itemDimension={110}
-            items={result}
-            style={styles.gridView}
-            renderItem={({ item }) => (
-              <TouchableOpacity>
-              <Card containerStyle={styles.itemContainer}>
-                <View style={{ alignItems: "center" }}>
-                  <Text style={styles.itemTopic}>{item.title}</Text>
-                </View>
-              </Card>
-              </TouchableOpacity>
-            )}
-          />
-          
-          <FlatGrid 
-            itemDimension={110}
-            items={cate}
-            style={styles.gridView}
-            renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => goToArticle(item.category_id)}>
-              <Card containerStyle={styles.itemContainer} >
-                <View style={{ alignItems: "center" }}>
-                  {/* <Text style={styles.itemTopic}>{item.category_id}</Text> */}
+        {/* <LevelLabel /> */}
 
-                  <Text style={styles.itemTopic}>{item.categoryName}</Text>
-                </View>
-              </Card>
-              </TouchableOpacity>
-            )}
-          />
-          
-        </Grid>
+        <FlatGrid
+          itemDimension={110}
+          items={result}
+          style={styles.gridView}
+          renderItem={({ item }) => (
+            <TouchableOpacity>
+              {/* <Card containerStyle={styles.itemContainer}>
+                  <View style={{ alignItems: "center" }}>
+                    <Text style={styles.itemTopic}>{item.title}</Text>
+                  </View>
+                </Card> */}
+            </TouchableOpacity>
+          )}
+        />
+
+        <FlatGrid
+          itemDimension={110}
+          items={cate}
+          style={styles.gridView}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => goToArticle(item.category_id)}>
+              {/* <Card containerStyle={styles.itemContainer}> */}
+              {/* <View style={{ alignItems: "center" }}> */}
+              {/* <Text style={styles.itemTopic}>{item.category_id}</Text> */}
+
+              {/* <Text style={styles.itemTopic}>{item.categoryName}</Text> */}
+              {/* </View> */}
+              {/* </Card> */}
+            </TouchableOpacity>
+          )}
+        />
+        <FlatGrid
+        // itemDimension={110}
+        // items={cate}
+        // style={styles.gridView}
+        // renderItem={({ item }) => (
+        // <TouchableOpacity onPress={() => goToArticle(item.category_id)}>
+        //   <Card containerStyle={styles.itemContainer}>
+        //     <View style={{ alignItems: "center" }}>
+        //       {/* <Text style={styles.itemTopic}>{item.category_id}</Text> */}
+
+        //       <Text style={styles.itemTopic}>{item.categoryName}</Text>
+        //     </View>
+        //   </Card>
+        // </TouchableOpacity>
+        // )}
+        />
       </ScrollView>
     );
   } else {

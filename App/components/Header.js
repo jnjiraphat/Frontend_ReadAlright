@@ -34,18 +34,17 @@ const Header = (props) => {
       style={{
         justifyContent: "center",
         height: Dimensions.get("window").height,
+        backgroundColor: "transparent",
       }}
     >
       <View
-        style={
-          {
-            // flex: 1,
-            // justifyContent: "center",
-            // flexDirection: "column",
-            // backgroundColor: "blue",
-            // height: Dimensions.get("window").height / 4,
-          }
-        }
+        style={{
+          // flex: 1,
+          // justifyContent: "center",
+          // flexDirection: "column",
+          backgroundColor: "transparent",
+          // height: Dimensions.get("window").height / 4,
+        }}
       >
         <LinearGradient
           colors={["#F07590", "#FFB382"]}
@@ -96,6 +95,7 @@ const Header = (props) => {
         style={{
           flex: 1,
           bottom: "5%",
+          backgroundColor: "transparent",
         }}
       >
         <SwitchType

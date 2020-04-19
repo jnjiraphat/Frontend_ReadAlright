@@ -1,7 +1,6 @@
 import React from "react";
 import { Router, Scene } from "react-native-router-flux";
 import Article from "./App/Screens/Article.js";
-import MaybeYouLike from "./App/Screens/MaybeYouLike";
 import InterestScreen from "./App/Screens/InterestScreen.js";
 import ContentScreen from "./App/Screens/ContentScreen";
 import Home from "./App/Screens/Home";
@@ -10,13 +9,13 @@ import Home from "./App/Screens/Home";
 const Routes = () => (
   <Router>
     <Scene key="root">
-      {/* <Scene
+      <Scene
         key="Home"
         component={Home}
         title="Home"
         initial={true}
         hideNavBar={true}
-      /> */}
+      />
       <Scene
         key="Interest"
         component={InterestScreen}
@@ -24,7 +23,7 @@ const Routes = () => (
         // initial={true}
         hideNavBar={true}
       />
-      <Scene key="Home" component={Home} title="Home" />
+      <Scene key="Home" component={Home} title="Home" hideNavBar={true} />
       <Scene key="Article" component={Article} title="Article" />
       <Scene
         key="ContentScreen"
