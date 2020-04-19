@@ -17,7 +17,7 @@ import { Card, Button } from "react-native-elements";
 
 import NewReading from "../components/NewReading";
 import TimelineCard from "../components/TimelineCard";
-// import BottomNavigation from "../components/BottomNavigation"
+
 import CarouselCard from "../components/CarouselCard";
 
 const arrayReading = [];
@@ -179,7 +179,6 @@ const home = (props) => {
           )}
         /> */}
 
-        {/* <BottomNavigation></BottomNavigation> */}
       </View>
     );
   } else {
