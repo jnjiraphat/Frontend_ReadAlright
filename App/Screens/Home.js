@@ -37,7 +37,6 @@ const home = (props) => {
   useEffect(() => {
     read();
     getReadaingByCateId();
-    getNewReading();
   }, []);
 
   // const [check, setCheck] = useState(false);
