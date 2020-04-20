@@ -10,7 +10,7 @@ const CategoryCard = (props) => {
       data={result}
       contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
       renderItem={({ item }) => (
-        <View style={{ height: 200 }}>
+        <View>
           <TimelineCard
             img={item.img}
             title={item.title}
@@ -20,7 +20,7 @@ const CategoryCard = (props) => {
           />
         </View>
       )}
-      keyExtractor={(item) => item.category_id}
+      // keyExtractor={(item) => item.category_id}
     />
   );
 };

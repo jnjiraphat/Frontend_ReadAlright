@@ -8,11 +8,12 @@ import {
   ScrollView,
   ImageBackground,
   FlatList,
+  Image,
 } from "react-native";
 import ReadingApi from "../API/ReadingAPI";
+import { Card } from "@ant-design/react-native";
 import Constants from "expo-constants";
 import Header from "../components/Header";
-// import FlatGrid from "react-native-super-grid";
 import NewReading from "../components/NewReading";
 import TimelineCard from "../components/TimelineCard";
 
@@ -65,15 +66,15 @@ const home = (props) => {
   function ContentDefault() {
     return (
       <View style={styles.ContentSwitch}>
-        <View style={styles.ContentCarousel}>
-          <Text>New!</Text>
-          <CarouselCard result={result} />
+        <View>
+          <Text>News!</Text>
+          <CarouselCard result={rd} />
         </View>
         <View style={styles.ContentCarousel}>
           <Text>Maybe you like</Text>
-          <CarouselCard result={result} />
+          <CarouselCard result={rd} />
         </View>
-        <View>
+        <View style={styles.ContentCategory}>
           <Text>Category</Text>
           <CategoryCard result={rd} />
         </View>
@@ -84,21 +85,6 @@ const home = (props) => {
   function ContentChange() {
     return (
       <View>
-        {/* <FlatGrid
-          itemDimension={110}
-          items={result}
-          style={styles.gridView}
-          renderItem={({ item }) => (
-            <TouchableOpacity>
-              <Card containerStyle={styles.itemContainer}>
-                <View style={{ alignItems: "center" }}>
-                  <Text style={styles.itemTopic}>{item.title}</Text>
-                </View>
-              </Card>
-            </TouchableOpacity>
-          )}
-        /> */}
-
         <View style={styles.ContentSwitch}>
           <View style={styles.ContentCarousel}>
             <Text>New!</Text>
@@ -108,7 +94,7 @@ const home = (props) => {
             <Text>Maybe you like</Text>
             <CarouselCard result={vb} />
           </View>
-          <View>
+          <View style={styles.ContentCategory}>
             <Text>Category</Text>
             <CategoryCard result={vb} />
           </View>
@@ -148,7 +134,7 @@ const home = (props) => {
           ContentDefault={ContentDefault()}
           ContentChange={ContentChange()}
         />
-        {/* 
+        {/*
         <SwitchType tabs={tabSwitch} /> */}
         {/* <Row>
                   <TouchableOpacity style={{ margin: 50 }} onPress={goToHome}>
@@ -221,5 +207,8 @@ const styles = StyleSheet.create({
   },
   ContentCarousel: {
     height: 200,
+  },
+  ContentCategory: {
+    justifyContent: "center",
   },
 });

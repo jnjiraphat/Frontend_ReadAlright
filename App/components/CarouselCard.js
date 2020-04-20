@@ -6,10 +6,11 @@ const CarouselCard = (props) => {
   const { result } = props;
   return (
     <FlatList
-      horizontal={true}
+      horizontal
       showsHorizontalScrollIndicator={false}
       data={result}
-      refreshing={true}
+      // initialNumToRender={5}
+      // contentContainerStyle={{ flexGrow: 1, flexDirection: "row" }}
       renderItem={({ item }) => (
         <View style={{ height: 200 }}>
           <TimelineCard
@@ -21,7 +22,7 @@ const CarouselCard = (props) => {
           />
         </View>
       )}
-      keyExtractor={(item) => item.category_id}
+      // keyExtractor={(item) => item.category_id}
     />
   );
 };
