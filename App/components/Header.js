@@ -69,23 +69,10 @@ const Header = (props) => {
               marginRight: 15,
             }}
           >
-            {/* <Text>Where are you now? pls tell me why</Text> */}
-            {/* <TouchableOpacity style={{ marginRight: 15 }}>
-              <Image
-                source={require("./../assets/img1.png")}
-                style={{
-                  width: Dimensions.get("window").width / 3.5,
-                  height: Dimensions.get("window").height / 3.5,
-                }}
-              />
-            </TouchableOpacity> */}
             <Avatar
-              source={require("./../assets/img1.png")}
+              source={require("./../assets/demo-profile.png")}
               width={130}
               height={130}
-              containerStyle={{
-                marginRight: 15,
-              }}
             />
             <AreaProfile level="A1" />
           </View>
@@ -145,12 +132,9 @@ const Header = (props) => {
           }}
         >
           <Avatar
-            source={require("./../assets/img1.png")}
+            source={require("./../assets/demo-profile.png")}
             width={100}
             height={100}
-            containerStyle={{
-              marginRight: 15,
-            }}
           />
           <AreaProfile level="A1" display="none" />
         </View>
