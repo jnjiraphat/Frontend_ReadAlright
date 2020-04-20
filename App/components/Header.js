@@ -6,6 +6,7 @@ import {
   Dimensions,
   StyleSheet,
   TouchableHighlight,
+  Image,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Avatar from "../components/Avatar";
@@ -33,17 +34,19 @@ const Header = (props) => {
       style={{
         justifyContent: "center",
         height: Dimensions.get("window").height,
-        backgroundColor: "transparent",
+        // backgroundColor: "transparent",
       }}
     >
       <View
-        style={{
-          // flex: 1,
-          // justifyContent: "center",
-          // flexDirection: "column",
-          backgroundColor: "transparent",
-          // height: Dimensions.get("window").height / 4,
-        }}
+        style={
+          {
+            // flex: 1,
+            // justifyContent: "center",
+            // flexDirection: "column",
+            // backgroundColor: "transparent",
+            // height: Dimensions.get("window").height / 4,
+          }
+        }
       >
         <LinearGradient
           colors={["#F07590", "#FFB382"]}
@@ -66,9 +69,20 @@ const Header = (props) => {
               marginRight: 15,
             }}
           >
+            {/* <Text>Where are you now? pls tell me why</Text> */}
+            {/* <TouchableOpacity style={{ marginRight: 15 }}>
+              <Image
+                source={require("./../assets/img1.png")}
+                style={{
+                  width: Dimensions.get("window").width / 3.5,
+                  height: Dimensions.get("window").height / 3.5,
+                }}
+              />
+            </TouchableOpacity> */}
             <Avatar
-              source={require("./../assets/demo-profile.png")}
-              size={Dimensions.get("window").width / 3.5}
+              source={require("./../assets/img1.png")}
+              width={130}
+              height={130}
               containerStyle={{
                 marginRight: 15,
               }}
@@ -82,7 +96,7 @@ const Header = (props) => {
             }}
           >
             <TouchableOpacity onPress={onPress}>
-              <Ionicons name="ios-arrow-up" size={32} color="black"></Ionicons>
+              <Ionicons name="ios-arrow-up" size={30} color="black"></Ionicons>
             </TouchableOpacity>
           </View>
         </LinearGradient>
@@ -90,7 +104,7 @@ const Header = (props) => {
       <View
         style={{
           flex: 1,
-          bottom: "5%",
+          bottom: "4%",
           backgroundColor: "transparent",
         }}
       >
@@ -131,8 +145,9 @@ const Header = (props) => {
           }}
         >
           <Avatar
-            source={require("./../assets/demo-profile.png")}
-            size={Dimensions.get("window").width / 4}
+            source={require("./../assets/img1.png")}
+            width={100}
+            height={100}
             containerStyle={{
               marginRight: 15,
             }}

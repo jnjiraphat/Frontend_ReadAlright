@@ -1,11 +1,18 @@
 import React from "react";
-import { Image, TouchableOpacity } from "react-native";
+import { Image, TouchableOpacity, Dimensions } from "react-native";
 
 const Avatar = (props) => {
-  const { size, source, containerStyle } = props;
+  const { width, source, containerStyle, height } = props;
   return (
     <TouchableOpacity style={containerStyle}>
-      <Image source={source} width={size} />
+      <Image
+        source={source}
+        style={{
+          width: width,
+          height: height,
+          borderRadius: width / 2,
+        }}
+      />
     </TouchableOpacity>
   );
 };
