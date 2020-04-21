@@ -17,13 +17,14 @@ const CarouselCard = (props) => {
       horizontal
       showsHorizontalScrollIndicator={false}
       data={result}
+      
       // initialNumToRender={5}
       // contentContainerStyle={{ flexGrow: 1, flexDirection: "row" }}
       renderItem={({ item }) => (
         <TouchableOpacity onPress={() => goToContentScreen(item.reading_id)}>
         <View style={{ height: 200 }}>
           <TimelineCard
-            img={item.img}
+            img={item.image}
             title={item.title}
             imgHeight={92}
             width={180}

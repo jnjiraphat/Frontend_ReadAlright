@@ -134,7 +134,7 @@ const home = (props) => {
         .get("http://10.0.2.2:3000/reading/categorys/" + props.text[index])
         .then((response) => {
           console.log("round = " + [index]);
-          for (let j = 0; j < 3; j++) {
+          for (let j = 0; j < response.data.reading.length; j++) {
             arrayReading.push(response.data.reading[j]);
           }
         });
