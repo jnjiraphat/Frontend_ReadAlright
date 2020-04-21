@@ -15,9 +15,19 @@ const ButtonClick = (props) => {
     fontWeight,
     fontcolor,
     text,
+    marginBottom,
+    marginTop,
   } = props;
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View
+      style={{
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        marginBottom: marginBottom,
+        marginTop: marginTop,
+      }}
+    >
       <TouchableOpacity
         onPress={onPressAction}
         style={{

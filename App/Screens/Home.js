@@ -9,6 +9,7 @@ import {
   ImageBackground,
   FlatList,
   Image,
+  Dimensions,
 } from "react-native";
 import ReadingApi from "../API/ReadingAPI";
 import { Card } from "@ant-design/react-native";
@@ -19,6 +20,7 @@ import TimelineCard from "../components/TimelineCard";
 
 import CarouselCard from "../components/CarouselCard";
 import CategoryCard from "../components/CategoryCard";
+import ButtonClick from "../components/ButtonClick";
 
 const arrayReading = [];
 
@@ -120,6 +122,22 @@ const home = (props) => {
             <Text style={{ marginLeft: "2%" }}>Category</Text>
             <CategoryCard result={vb} />
           </View>
+          <ButtonClick
+            text="Challenge"
+            fontSize={24}
+            fontWeight="bold"
+            fontcolor="#000000"
+            height={39}
+            width={245}
+            radius={30}
+            padding={0}
+            marginTop={Dimensions.get("window").height / 16}
+            marginBottom={Dimensions.get("window").height / 7}
+            // onPressAction={goToHome}
+            // shadowRadius={30}
+            colorsStart="#7EF192"
+            colorsEnd="#2DC897"
+          />
         </View>
       </View>
     );
@@ -228,5 +246,6 @@ const styles = StyleSheet.create({
   },
   ContentCategory: {
     justifyContent: "center",
+    // marginBottom: 100,
   },
 });
