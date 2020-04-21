@@ -115,7 +115,24 @@ const Routes = () => {
             hideNavBar={true}
             showLabel={false}
           />
+          
         </Scene>
+        <Scene
+          key="Article"
+          component={Article}
+          title="Article"
+          hideNavBar
+          hideTabBar
+          showLabel={false}
+        />
+         <Scene
+          key="ContentScreen"
+          component={ContentScreen}
+          title="ContentScreen"
+          hideNavBar
+          hideTabBar
+          showLabel={false}
+        />
       </Scene>
     </Router>
   );

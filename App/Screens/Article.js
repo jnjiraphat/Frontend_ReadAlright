@@ -11,13 +11,20 @@ import {
   FlatList,
 } from "react-native";
 import axios from "axios";
+import TimelineCard from "../components/TimelineCard";
+import CountViews from "../API/CountViewsAPI"
 
 const Article = (props) => {
   const [readingId, setReadingId] = useState(0);
 
-  const goToContentScreen = () => {
-    Actions.ContentScreen({ text: readingId });
-  };
+  function goToContentScreen(category_id,user_id,reading_id,vocabBox_id ) {
+    const views =  CountViews(category_id,user_id,reading_id,vocabBox_id)
+    console.log(readingId);
+    Actions.ContentScreen({ text: reading_id });
+
+    console.log("hello");
+  }
+  
   const [cate, setCate] = useState([]);
 
   const fetch = async () => {
@@ -49,23 +56,33 @@ const Article = (props) => {
   //    Actions.about()
   // }
   return (
-    <ScrollView>
-      <FlatGrid
-        items={cate}
-        renderItem={({ item }) => (
-          // <ListItem
-          //   onPressIn={() => setReadingId(item.reading_id)}
-          //   onPress={goToContentScreen}
-          //   key={item.category_id}
-          //   title={item.title}
-          //   leftIcon={{ name: item.icon }}
-          //   bottomDivider
-          //   chevron
-          // />
-          <View></View>
-        )}
-      />
-    </ScrollView>
+    <FlatList
+      numColumns={2}
+      contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+      data={cate}
+      renderItem={({ item }) => (
+        <View>
+          <TouchableOpacity onPress={() => goToContentScreen(item.category_id,1,item.reading_id,1)} >
+            <TimelineCard
+              img={item.image}
+              title={item.title}
+              imgHeight={102}
+              width={162.75}
+              titleHeight={40}
+            />
+          </TouchableOpacity>
+        </View>
+        // <ListItem
+        //   onPressIn={() => setReadingId(item.reading_id)}
+        //   onPress={goToContentScreen}
+        //   key={item.category_id}
+        //   title={item.title}
+        //   leftIcon={{ name: item.icon }}
+        //   bottomDivider
+        //   chevron
+        // />
+      )}
+    />
   );
 };
 export default Article;

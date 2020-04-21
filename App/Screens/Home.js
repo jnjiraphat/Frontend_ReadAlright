@@ -35,10 +35,33 @@ const home = (props) => {
   console.log("This is category");
   console.log(cate);
 
+  const [resultNew, setResultNew] = useState([]);
+  const getNewReading = async () => {
+    const data = await axios
+      .get("http://10.0.2.2:3000/newReading")
+      .then((response) => {
+        console.log("Newreadingggggggggggggggggggggggggggggggggg");
+        console.log(response.data.length);
+        console.log(response.data);
+        console.log("Newreadingggggggggggggggggggggggggggggggggg");
+
+        setResultNew(response.data);
+      });
+  };
+
   useEffect(() => {
     read();
     getReadaingByCateId();
+    getNewReading();
+
   }, []);
+
+  function goToContentScreen(readingId) {
+    console.log(readingId);
+    Actions.ContentScreen({ text: readingId });
+
+    console.log("hello");
+  }
 
   // const [check, setCheck] = useState(false);
   const [categoryId, setCategoryId] = useState(0);
@@ -68,15 +91,15 @@ const home = (props) => {
       <View style={styles.ContentSwitch}>
         <View>
           <Text>News!</Text>
-          <CarouselCard result={rd} />
+          <CarouselCard  result={resultNew} />
         </View>
         <View style={styles.ContentCarousel}>
           <Text>Maybe you like</Text>
-          <CarouselCard result={rd} />
+          <CarouselCard result={result} />
         </View>
         <View style={styles.ContentCategory}>
           <Text>Category</Text>
-          <CategoryCard result={rd} />
+          <CategoryCard result={cate} />
         </View>
       </View>
     );
@@ -103,10 +126,6 @@ const home = (props) => {
     );
   }
 
-  const goToArticle = (categoryId) => {
-    Actions.Article({ text: categoryId });
-  };
-
   const getReadaingByCateId = async () => {
     for (let index = 0; index < props.text.length; index++) {
       console.log("cateId = " + props.text[index]);
@@ -115,7 +134,7 @@ const home = (props) => {
         .get("http://10.0.2.2:3000/reading/categorys/" + props.text[index])
         .then((response) => {
           console.log("round = " + [index]);
-          for (let j = 0; j < 3; j++) {
+          for (let j = 0; j < response.data.reading.length; j++) {
             arrayReading.push(response.data.reading[j]);
           }
         });
