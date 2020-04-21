@@ -16,6 +16,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Actions } from "react-native-router-flux";
 import ButtonClick from "./../components/ButtonClick";
 import Constants from "expo-constants";
+import CountView from "../API/CountViewsAPI"
 
 //API
 import ReadingApi from "../API/ReadingAPI";
@@ -133,6 +134,7 @@ export default function () {
             user_id: 1,
             reading_id: 1,
             vocabBox_id: 1,
+            is_Active: "1"
           })
           .then(
             (response) => {

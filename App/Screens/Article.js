@@ -12,13 +12,15 @@ import {
 } from "react-native";
 import axios from "axios";
 import TimelineCard from "../components/TimelineCard";
+import CountViews from "../API/CountViewsAPI"
 
 const Article = (props) => {
   const [readingId, setReadingId] = useState(0);
 
-  function goToContentScreen(readingId) {
+  function goToContentScreen(category_id,user_id,reading_id,vocabBox_id ) {
+    const views =  CountViews(category_id,user_id,reading_id,vocabBox_id)
     console.log(readingId);
-    Actions.ContentScreen({ text: readingId });
+    Actions.ContentScreen({ text: reading_id });
 
     console.log("hello");
   }
@@ -60,7 +62,7 @@ const Article = (props) => {
       data={cate}
       renderItem={({ item }) => (
         <View>
-          <TouchableOpacity onPress={() => goToContentScreen(item.reading_id)}>
+          <TouchableOpacity onPress={() => goToContentScreen(item.category_id,1,item.reading_id,1)} >
             <TimelineCard
               img={item.image}
               title={item.title}
