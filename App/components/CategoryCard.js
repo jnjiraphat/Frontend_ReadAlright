@@ -16,7 +16,7 @@ const CategoryCard = (props) => {
     <FlatList
       numColumns={2}
       data={result}
-      contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+      contentContainerStyle={{ flexGrow: 1, alignItems: "center" }}
       renderItem={({ item }) => (
         <TouchableOpacity onPress={() => goToArticle(item.category_id)}>
           <View>
@@ -30,7 +30,7 @@ const CategoryCard = (props) => {
           </View>
         </TouchableOpacity>
       )}
-      
+
       // keyExtractor={(item) => item.category_id}
     />
   );

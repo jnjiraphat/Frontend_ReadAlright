@@ -53,7 +53,6 @@ const home = (props) => {
     read();
     getReadaingByCateId();
     getNewReading();
-
   }, []);
 
   function goToContentScreen(readingId) {
@@ -91,14 +90,14 @@ const home = (props) => {
       <View style={styles.ContentSwitch}>
         <View>
           <Text>News!</Text>
-          <CarouselCard  result={resultNew} />
+          <CarouselCard result={resultNew} />
         </View>
         <View style={styles.ContentCarousel}>
           <Text>Maybe you like</Text>
           <CarouselCard result={result} />
         </View>
         <View style={styles.ContentCategory}>
-          <Text>Category</Text>
+          <Text style={{ marginLeft: "2%" }}>Category</Text>
           <CategoryCard result={cate} />
         </View>
       </View>
@@ -118,7 +117,7 @@ const home = (props) => {
             <CarouselCard result={vb} />
           </View>
           <View style={styles.ContentCategory}>
-            <Text>Category</Text>
+            <Text style={{ marginLeft: "2%" }}>Category</Text>
             <CategoryCard result={vb} />
           </View>
         </View>
@@ -222,10 +221,10 @@ const styles = StyleSheet.create({
   },
   ContentSwitch: {
     flex: 1,
-    marginLeft: "2%",
   },
   ContentCarousel: {
     height: 200,
+    marginLeft: "2%",
   },
   ContentCategory: {
     justifyContent: "center",

@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   item: {
     borderColor: "transparent",
     borderRadius: 5,
-    marginHorizontal: 10,
+    marginHorizontal: 5,
     marginVertical: 10,
   },
   title: {
