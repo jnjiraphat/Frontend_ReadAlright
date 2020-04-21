@@ -11,6 +11,8 @@ import {
   FlatList,
 } from "react-native";
 import axios from "axios";
+import TimelineCard from "../components/TimelineCard";
+
 
 const Content = (props) => {
   const [cate, setCate] = useState([]);
@@ -45,19 +47,44 @@ const Content = (props) => {
   // }
   return (
     <ScrollView>
-      <FlatGrid
+          <FlatList
+      numColumns={2}
+      contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+      data={cate}
+      renderItem={({ item }) => (
+        <View>
+            <TimelineCard
+              img={item.image}
+              title={item.content}
+              imgHeight={102}
+              width={162.75}
+              titleHeight={40}
+            />
+        </View>
+        // <ListItem
+        //   onPressIn={() => setReadingId(item.reading_id)}
+        //   onPress={goToContentScreen}
+        //   key={item.category_id}
+        //   title={item.title}
+        //   leftIcon={{ name: item.icon }}
+        //   bottomDivider
+        //   chevron
+        // />
+      )}
+    />
+      {/* <FlatGrid
         items={cate}
         renderItem={({ item }) => (
-          // <ListItem
-          //   key={item.category_id}
-          //   title={item.content}
-          //   leftIcon={{ name: item.icon }}
-          //   bottomDivider
-          //   chevron
-          // />
-          <View></View>
+          <ListItem
+            key={item.category_id}
+            title={item.content}
+            leftIcon={{ name: item.icon }}
+            bottomDivider
+            chevron
+          />
+          
         )}
-      />
+      /> */}
     </ScrollView>
   );
 };

@@ -72,11 +72,11 @@ const home = (props) => {
         </View>
         <View style={styles.ContentCarousel}>
           <Text>Maybe you like</Text>
-          <CarouselCard result={rd} />
+          <CarouselCard result={result} />
         </View>
         <View style={styles.ContentCategory}>
           <Text>Category</Text>
-          <CategoryCard result={rd} />
+          <CategoryCard result={cate} />
         </View>
       </View>
     );

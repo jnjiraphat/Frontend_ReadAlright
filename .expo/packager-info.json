@@ -1,10 +1,10 @@
 {
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://e3-7e3.gnbiiie3.frontend-readalright.exp.direct",
-  "packagerNgrokUrl": "https://packager.e3-7e3.gnbiiie3.frontend-readalright.exp.direct",
-  "ngrokPid": 99684,
-  "packagerPort": 19003,
-  "packagerPid": 99567,
+  "expoServerNgrokUrl": "https://e3-7e3.anonymous.senior-project.exp.direct",
+  "packagerNgrokUrl": "https://packager.e3-7e3.anonymous.senior-project.exp.direct",
+  "ngrokPid": 22756,
+  "packagerPort": 19001,
+  "packagerPid": 5560,
   "webpackServerPort": null,
   "devToolsPort": 19002
 }

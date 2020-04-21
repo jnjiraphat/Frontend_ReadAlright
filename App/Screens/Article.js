@@ -11,13 +11,23 @@ import {
   FlatList,
 } from "react-native";
 import axios from "axios";
+import TimelineCard from "../components/TimelineCard";
 
 const Article = (props) => {
   const [readingId, setReadingId] = useState(0);
 
-  const goToContentScreen = () => {
+  function goToContentScreen(readingId) {
+    console.log(readingId);
     Actions.ContentScreen({ text: readingId });
-  };
+
+    console.log("hello");
+  }
+  function show() {
+    console.log("eiei");
+    // Actions.Article({ text: readingId });
+
+    console.log("hello");
+  }
   const [cate, setCate] = useState([]);
 
   const fetch = async () => {
@@ -49,23 +59,33 @@ const Article = (props) => {
   //    Actions.about()
   // }
   return (
-    <ScrollView>
-      <FlatGrid
-        items={cate}
-        renderItem={({ item }) => (
-          // <ListItem
-          //   onPressIn={() => setReadingId(item.reading_id)}
-          //   onPress={goToContentScreen}
-          //   key={item.category_id}
-          //   title={item.title}
-          //   leftIcon={{ name: item.icon }}
-          //   bottomDivider
-          //   chevron
-          // />
-          <View></View>
-        )}
-      />
-    </ScrollView>
+    <FlatList
+      numColumns={2}
+      contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+      data={cate}
+      renderItem={({ item }) => (
+        <View>
+          <TouchableOpacity onPress={() => goToContentScreen(item.reading_id)}>
+            <TimelineCard
+              img={item.image}
+              title={item.title}
+              imgHeight={102}
+              width={162.75}
+              titleHeight={40}
+            />
+          </TouchableOpacity>
+        </View>
+        // <ListItem
+        //   onPressIn={() => setReadingId(item.reading_id)}
+        //   onPress={goToContentScreen}
+        //   key={item.category_id}
+        //   title={item.title}
+        //   leftIcon={{ name: item.icon }}
+        //   bottomDivider
+        //   chevron
+        // />
+      )}
+    />
   );
 };
 export default Article;
