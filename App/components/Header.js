@@ -54,7 +54,7 @@ const Header = (props) => {
             left: 0,
             right: 0,
             top: 0,
-            height: Dimensions.get("window").height / 3.3,
+            height: Dimensions.get("window").height / 3.8,
             width: Dimensions.get("window").width,
             borderBottomLeftRadius: 30,
             borderBottomRightRadius: 30,
@@ -71,8 +71,8 @@ const Header = (props) => {
           >
             <Avatar
               source={require("./../assets/demo-profile.png")}
-              width={130}
-              height={130}
+              width={Dimensions.get("window").width / 3.5}
+              height={Dimensions.get("window").height / 7}
             />
             <AreaProfile level="A1" />
           </View>
@@ -116,7 +116,7 @@ const Header = (props) => {
           left: 0,
           right: 0,
           top: 0,
-          height: Dimensions.get("window").height / 6,
+          height: Dimensions.get("window").height / 8,
           width: Dimensions.get("window").width,
           borderBottomLeftRadius: 30,
           borderBottomRightRadius: 30,
@@ -133,8 +133,8 @@ const Header = (props) => {
         >
           <Avatar
             source={require("./../assets/demo-profile.png")}
-            width={100}
-            height={100}
+            width={Dimensions.get("window").width / 5.5}
+            height={Dimensions.get("window").height / 10}
           />
           <AreaProfile level="A1" display="none" />
         </View>

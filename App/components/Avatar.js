@@ -8,6 +8,8 @@ const Avatar = (props) => {
       style={{
         borderRadius: width / 2,
         marginRight: 15,
+        width: width,
+        height: height,
         backgroundColor: "#fff",
       }}
     >
@@ -16,6 +18,7 @@ const Avatar = (props) => {
         style={{
           width: width,
           height: height,
+          resizeMode: "contain",
         }}
       />
     </TouchableOpacity>
