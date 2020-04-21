@@ -1,8 +1,16 @@
 import React from "react";
 import { FlatList, View } from "react-native";
 import TimelineCard from "../components/TimelineCard";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { Actions } from "react-native-router-flux";
 
 const CarouselCard = (props) => {
+  function goToContentScreen(readingId) {
+    console.log(readingId);
+    Actions.ContentScreen({ text: readingId });
+
+    console.log("hello");
+  }
   const { result } = props;
   return (
     <FlatList
@@ -12,6 +20,7 @@ const CarouselCard = (props) => {
       // initialNumToRender={5}
       // contentContainerStyle={{ flexGrow: 1, flexDirection: "row" }}
       renderItem={({ item }) => (
+        <TouchableOpacity onPress={() => goToContentScreen(item.reading_id)}>
         <View style={{ height: 200 }}>
           <TimelineCard
             img={item.img}
@@ -21,6 +30,7 @@ const CarouselCard = (props) => {
             titleHeight={40}
           />
         </View>
+        </TouchableOpacity>
       )}
       // keyExtractor={(item) => item.category_id}
     />

@@ -22,12 +22,7 @@ const Article = (props) => {
 
     console.log("hello");
   }
-  function show() {
-    console.log("eiei");
-    // Actions.Article({ text: readingId });
-
-    console.log("hello");
-  }
+  
   const [cate, setCate] = useState([]);
 
   const fetch = async () => {
