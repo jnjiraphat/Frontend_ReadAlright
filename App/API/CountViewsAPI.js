@@ -1,6 +1,9 @@
 import axios from "axios";
 
 const countView = (category_id,user_id,reading_id,vocabBox_id) => {
+  console.log("readingId in method")
+
+  console.log(reading_id)
     axios
     .post("http://10.0.2.2:3000/views", {
       numOfView: 1,

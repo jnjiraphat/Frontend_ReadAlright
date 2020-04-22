@@ -144,20 +144,23 @@ const home = (props) => {
   }
 
   const getReadaingByCateId = async () => {
-    for (let index = 0; index < props.text.length; index++) {
-      console.log("cateId = " + props.text[index]);
+    const data = await axios
+      .get("http://10.0.2.2:3000/reading/user/1")
+      .then((response) => {
+        console.log("------------mookkakeiei-------------");
 
-      const data = await axios
-        .get("http://10.0.2.2:3000/reading/categorys/" + props.text[index])
-        .then((response) => {
-          console.log("round = " + [index]);
-          for (let j = 0; j < response.data.reading.length; j++) {
-            arrayReading.push(response.data.reading[j]);
-          }
-        });
-    }
-    console.log("array length" + arrayReading.length);
-    setResult(arrayReading);
+        console.log(response.data.reading);
+        console.log("-------------------------");
+
+        // console.log("round = " + [index]);
+        // for (let j = 0; j < response.data.reading.length; j++) {
+        //   arrayReading.push(response.data.reading[j]);
+        // }
+        setResult(response.data.reading);
+
+      });
+
+    // console.log("array length" + arrayReading.length);
     // setCheck(true)
   };
 
@@ -170,7 +173,7 @@ const home = (props) => {
           ContentDefault={ContentDefault()}
           ContentChange={ContentChange()}
         />
-        {/*
+        {/*เดะ
         <SwitchType tabs={tabSwitch} /> */}
         {/* <Row>
                   <TouchableOpacity style={{ margin: 50 }} onPress={goToHome}>
