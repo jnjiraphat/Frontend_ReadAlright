@@ -17,6 +17,7 @@ import Constants from "expo-constants";
 import Header from "../components/Header";
 import NewReading from "../components/NewReading";
 import TimelineCard from "../components/TimelineCard";
+import VocabBoxApi from "../API/VocabBoxAPI";
 
 import CarouselCard from "../components/CarouselCard";
 import CategoryCard from "../components/CategoryCard";
@@ -37,6 +38,14 @@ const home = (props) => {
   console.log("This is category");
   console.log(cate);
 
+  const [cateVocabBox, setCateVocabBox] = useState([]);
+  const vocab = async () => {
+    const word = await VocabBoxApi();
+    setCateVocabBox(word)
+  };
+  console.log("This is vocabBox");
+  console.log(cateVocabBox);
+
   const [resultNew, setResultNew] = useState([]);
   const getNewReading = async () => {
     const data = await axios
@@ -55,6 +64,7 @@ const home = (props) => {
     read();
     getReadaingByCateId();
     getNewReading();
+    vocab();
   }, []);
 
   function goToContentScreen(readingId) {
@@ -120,7 +130,7 @@ const home = (props) => {
           </View>
           <View style={styles.ContentCategory}>
             <Text style={{ marginLeft: "2%" }}>Category</Text>
-            <CategoryCard result={vb} />
+            <CategoryCard result={cateVocabBox} />
           </View>
           <ButtonClick
             text="Challenge"
@@ -148,10 +158,8 @@ const home = (props) => {
       .get("http://10.0.2.2:3000/reading/user/1")
       .then((response) => {
         console.log("------------mookkakeiei-------------");
-
         console.log(response.data.reading);
         console.log("-------------------------");
-
         // console.log("round = " + [index]);
         // for (let j = 0; j < response.data.reading.length; j++) {
         //   arrayReading.push(response.data.reading[j]);
