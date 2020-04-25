@@ -17,11 +17,14 @@ import Constants from "expo-constants";
 import Header from "../components/Header";
 import NewReading from "../components/NewReading";
 import TimelineCard from "../components/TimelineCard";
-import VocabBoxApi from "../API/VocabBoxAPI";
+import VocabCateApi from "../API/VocabCateAPI";
 
 import CarouselCard from "../components/CarouselCard";
 import CategoryCard from "../components/CategoryCard";
 import ButtonClick from "../components/ButtonClick";
+import NewVocab from "../API/NewVocabAPI";
+import CarouselCardVocab from "../components/CarouselCardVocab";
+import CategoryCardVocab from "../components/CategoryCardVocab";
 
 const arrayReading = [];
 
@@ -40,11 +43,23 @@ const home = (props) => {
 
   const [cateVocabBox, setCateVocabBox] = useState([]);
   const vocab = async () => {
-    const word = await VocabBoxApi();
+    const word = await VocabCateApi();
     setCateVocabBox(word)
   };
   console.log("This is vocabBox");
   console.log(cateVocabBox);
+
+  const [newVocab, setNewVocab] = useState([]);
+  const newvocab = async () => {
+    const newword = await NewVocab();
+    console.log("--------------vocab-----------------")
+    console.log(newword)
+    console.log("--------------vocab-----------------")
+
+    setNewVocab(newword)
+  };
+  console.log("This is newVocab");
+  console.log(newVocab);
 
   const [resultNew, setResultNew] = useState([]);
   const getNewReading = async () => {
@@ -65,6 +80,7 @@ const home = (props) => {
     getReadaingByCateId();
     getNewReading();
     vocab();
+    newvocab();
   }, []);
 
   function goToContentScreen(readingId) {
@@ -122,7 +138,7 @@ const home = (props) => {
         <View style={styles.ContentSwitch}>
           <View style={styles.ContentCarousel}>
             <Text>New!</Text>
-            <CarouselCard result={vb} />
+            <CarouselCardVocab result={newVocab} />
           </View>
           <View style={styles.ContentCarousel}>
             <Text>Maybe you like</Text>
@@ -130,7 +146,7 @@ const home = (props) => {
           </View>
           <View style={styles.ContentCategory}>
             <Text style={{ marginLeft: "2%" }}>Category</Text>
-            <CategoryCard result={cateVocabBox} />
+            <CategoryCardVocab result={cateVocabBox} />
           </View>
           <ButtonClick
             text="Challenge"
@@ -157,7 +173,7 @@ const home = (props) => {
     const data = await axios
       .get("http://10.0.2.2:3000/reading/user/1")
       .then((response) => {
-        console.log("------------mookkakeiei-------------");
+        // console.log("------------mookkakeiei-------------");
         console.log(response.data.reading);
         console.log("-------------------------");
         // console.log("round = " + [index]);
