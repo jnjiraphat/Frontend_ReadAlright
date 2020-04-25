@@ -19,7 +19,8 @@ const Article = (props) => {
 
   function goToContentScreen(category_id,user_id,reading_id,vocabBox_id ) {
     const views =  CountViews(category_id,user_id,reading_id,vocabBox_id)
-    console.log(readingId);
+    console.log("readingIdddddddddddddddddddddd++++++++++++++")
+    console.log(reading_id);
     Actions.ContentScreen({ text: reading_id });
 
     console.log("hello");
@@ -30,7 +31,7 @@ const Article = (props) => {
   const fetch = async () => {
     console.log("runningggggggggggggggggggggggggggggg");
     await axios
-      .get("http://10.0.2.2:3000/reading/categorys/" + props.text)
+      .get("http://10.0.2.2:3000/reading/interest/" + props.text)
       .then(
         (response) => {
           console.log("eiei");
