@@ -5,10 +5,10 @@ import Article from "./App/Screens/Article.js";
 import InterestScreen from "./App/Screens/InterestScreen.js";
 import ContentScreen from "./App/Screens/ContentScreen";
 import MyHome from "./App/Screens/Home.js";
-// import { Router,Scene} from "react-native-router-flux";
 // import Home from "../App/Screens/Home";
 import Tricks from "./App/Screens/Tricks";
 import Mylist from "./App/Screens/Mylist";
+import PreTest from "./App/Screens/PreTestScreen";
 // import Article from "./App/Screens/Article"
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
@@ -76,14 +76,24 @@ const Routes = () => {
     <Router>
       <Scene key="root" hideNavBar showLabel={false}>
         <Scene
-          key="Interest"
-          component={InterestScreen}
-          title="Interest"
+          key="PreTest"
+          component={PreTest}
+          title="PreTest"
           hideNavBar
           hideTabBar
           initial
           showLabel={false}
         />
+        <Scene
+          key="Interest"
+          component={InterestScreen}
+          title="Interest"
+          hideNavBar
+          hideTabBar
+          // initial
+          showLabel={false}
+        />
+
         <Scene
           key="tabbar"
           tabs
@@ -115,7 +125,6 @@ const Routes = () => {
             hideNavBar={true}
             showLabel={false}
           />
-          
         </Scene>
         <Scene
           key="Article"
@@ -125,7 +134,7 @@ const Routes = () => {
           hideTabBar
           showLabel={false}
         />
-         <Scene
+        <Scene
           key="ContentScreen"
           component={ContentScreen}
           title="ContentScreen"
