@@ -23,7 +23,7 @@ const ButtonClick = (props) => {
       style={{
         flex: 1,
         alignItems: "center",
-        justifyContent: "center",
+        // justifyContent: "center",
         marginBottom: marginBottom,
         marginTop: marginTop,
       }}
@@ -51,6 +51,7 @@ const ButtonClick = (props) => {
           style={{
             padding: padding,
             alignItems: "center",
+            justifyContent: "center",
             borderRadius: radius,
             height: height,
             width: width,
