@@ -1,16 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 
-const WhiteCard = (props) => {
-  const { ContentDefault } = props;
-  return <View style={styles.container}>{ContentDefault}</View>;
-};
+// const WhiteCardStyle = (props) => {
+//   const { ContentDefault } = props;
+//   return <View style={styles.container}>{ContentDefault}</View>;
+// };
 
-export default WhiteCard;
+// export default WhiteCardStyle;
 
-const styles = StyleSheet.create({
+const whiteCardStyle = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     width: Dimensions.get("window").width / 1.15,
     justifyContent: "center",
     borderRadius: 5,
@@ -29,3 +29,5 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
 });
+
+export default { whiteCardStyle };
