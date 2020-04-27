@@ -15,6 +15,7 @@
     "@react-navigation/compat": "^5.1.8",
     "@react-navigation/native": "^5.0.0",
     "@react-navigation/stack": "^5.2.3",
+    "@use-expo/font": "^2.0.0",
     "antd-mobile": "^2.3.1",
     "antd-mobile-rn": "^2.3.3",
     "axios": "^0.19.2",
