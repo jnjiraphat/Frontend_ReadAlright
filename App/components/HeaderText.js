@@ -31,5 +31,6 @@ const styles = StyleSheet.create({
   headerText: {
     // fontFamily: "PTSansCaption-Bold",
     fontSize: 24,
+    fontWeight: "bold",
   },
 });
