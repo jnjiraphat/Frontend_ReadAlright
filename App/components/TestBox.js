@@ -19,6 +19,7 @@ const TestBox = (props) => {
   var data = quizs.map(function (item) {
     return {
       title: item.question,
+      key:item.question_id,
       data: [{}],
     };
   });
