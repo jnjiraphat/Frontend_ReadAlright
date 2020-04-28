@@ -12,18 +12,30 @@ import {
 import ButtonClick from "../components/ButtonClick";
 
 const TestBox = (props) => {
-  const { sections } = props;
+  const array = [];
+  const { quizs } = props;
+  console.log(quizs);
+  console.log(quizs.length);
+  var data = quizs.map(function (item) {
+    return {
+      title: item.question,
+      data: [{}],
+    };
+  });
+  console.log(data);
+
   const renderSection = ({ item }) => {
     return (
       <View style={styles.whiteCardChoice}>
-        <View style={{ width: Dimensions.get("window").width / 1.35 }}>
+        {/* <View style={{ width: Dimensions.get("window").width / 1.35 }}>
           <FlatList
+           title={item.question}
             data={item.list}
             numColumns={2}
             renderItem={renderListItem}
             keyExtractor={keyExtractor}
           />
-        </View>
+        </View> */}
       </View>
     );
   };
@@ -37,7 +49,7 @@ const TestBox = (props) => {
             marginLeft: "10%",
           }}
         >
-          <Text style={styles.textQuestion}>{section.question}</Text>
+          <Text style={styles.textQuestion}>{section.title}</Text>
         </View>
       </View>
     );
@@ -70,7 +82,7 @@ const TestBox = (props) => {
   // render()
   return (
     <SectionList
-      sections={sections}
+      sections={data}
       contentContainerStyle={{ alignItems: "center", marginVertical: "7%" }}
       renderSectionHeader={renderSectionHeader}
       renderItem={renderSection}

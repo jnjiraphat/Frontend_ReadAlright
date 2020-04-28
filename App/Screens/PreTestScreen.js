@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   ScrollView,
@@ -16,8 +16,21 @@ import ButtonClick from "../components/ButtonClick";
 // import whiteCardStyle from "../components/WhiteCardStyle";
 // import { useFonts } from "@use-expo/font";
 import TestBox from "../components/TestBox";
+import Test from "../API/TestAPI";
 
 const PreTest = () => {
+  const [quizs, setQuiz] = useState([]);
+  const Quiz = async () => {
+    const data = await Test();
+    setQuiz(data.quiz);
+  };
+  console.log("This is Quiz");
+  console.log(quizs);
+
+  useEffect(() => {
+    Quiz();
+  }, []);
+
   const sections = [
     {
       question: "Question1",
@@ -83,73 +96,82 @@ const PreTest = () => {
   //   return console.log("Font not load");
   // } else {
 
-  const renderSectionListItem = ({ item }) => {
+  // const renderSectionListItem = ({ item }) => {
+  //   return (
+  //     <FlatList
+  //       data={item}
+  //       numColumns={2}
+  //       contentContainerStyle={{ flexDirection: "row" }}
+  //       renderItem={({ item }) => (
+  //         <ButtonClick
+  //           // onPressAction={}
+  //           colorsStart="#E9B0FF"
+  //           colorsEnd="#8A63E5"
+  //           // padding=
+  //           radius={10}
+  //           height={39}
+  //           width={112}
+  //           fontSize={14}
+  //           // fontWeight="normal"
+  //           fontcolor="#000"
+  //           text={item}
+  //           marginBottom={10}
+  //           marginTop={10}
+  //         />
+  //       )}
+  //     />
+  //   );
+  // };
+  if (quizs.length>0) {
+    console.log(quizs.length)
     return (
-      <FlatList
-        data={item}
-        numColumns={2}
-        contentContainerStyle={{ flexDirection: "row" }}
-        renderItem={({ item }) => (
-          <ButtonClick
-            // onPressAction={}
-            colorsStart="#E9B0FF"
-            colorsEnd="#8A63E5"
-            // padding=
-            radius={10}
-            height={39}
-            width={112}
-            fontSize={14}
-            fontWeight="normal"
-            fontcolor="#000"
-            text={item}
-            marginBottom={10}
-            marginTop={10}
-          />
-        )}
-      />
-    );
-  };
-
-  return (
-    <LinearGradient
-      colors={["#FFB382", "#F07590"]}
-      style={{
-        position: "absolute",
-        left: 0,
-        right: 0,
-        top: 0,
-        height: Dimensions.get("window").height,
-        width: Dimensions.get("window").width,
-      }}
-    >
-      <ScrollView style={styles.container}>
-        <View style={{ alignItems: "center" }}>
-          <View style={styles.textLayout}>
-            <HeaderText text="Pre-Test" />
-            <Text style={styles.subHeader}>
-              Fill the gaps with the correct word from the box.
-            </Text>
+      <LinearGradient
+        colors={["#FFB382", "#F07590"]}
+        style={{
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 0,
+          height: Dimensions.get("window").height,
+          width: Dimensions.get("window").width,
+        }}
+      >
+        <ScrollView style={styles.container}>
+          <View style={{ alignItems: "center" }}>
+            <View style={styles.textLayout}>
+              <HeaderText text="Pre-Test" />
+              <Text style={styles.subHeader}>
+                Fill the gaps with the correct word from the box.
+              </Text>
+            </View>
+            <TestBox quizs={quizs}/>
+            <ButtonClick
+              text="Submit"
+              fontSize={24}
+              fontWeight="Bold"
+              fontcolor="#000000"
+              height={39}
+              width={245}
+              radius={30}
+              padding={0}
+              marginBottom="10%"
+              // onPressAction={goToHome}
+              // shadowRadius={30}
+              colorsStart="#7EF192"
+              colorsEnd="#2DC897"
+            />
           </View>
-          <TestBox sections={sections} />
-          <ButtonClick
-            text="Submit"
-            fontSize={24}
-            fontWeight="Bold"
-            fontcolor="#000000"
-            height={39}
-            width={245}
-            radius={30}
-            padding={0}
-            marginBottom="10%"
-            // onPressAction={goToHome}
-            // shadowRadius={30}
-            colorsStart="#7EF192"
-            colorsEnd="#2DC897"
-          />
-        </View>
-      </ScrollView>
-    </LinearGradient>
-  );
+        </ScrollView>
+      </LinearGradient>
+    );
+  } else {
+    return (
+      <View>
+        <Text>Loading</Text>
+      </View>
+    );
+  }
+
   // }
 };
 export default PreTest;
