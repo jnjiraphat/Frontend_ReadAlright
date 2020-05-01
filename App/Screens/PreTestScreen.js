@@ -1,16 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  ScrollView,
-  FlatList,
-  Dimensions,
-  Text,
-  StyleSheet,
-  SectionList,
-  SafeAreaView,
-  Modal,
-  TouchableOpacity,
-} from "react-native";
+import { View, ScrollView, Dimensions, Text, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Constants from "expo-constants";
 import HeaderText from "../components/HeaderText";
@@ -19,6 +8,7 @@ import ButtonClick from "../components/ButtonClick";
 // import { useFonts } from "@use-expo/font";
 import TestBox from "../components/TestBox";
 import Test from "../API/TestAPI";
+import ModalSubmit from "../components/ModalSubmit";
 
 const PreTest = () => {
   const [quizs, setQuiz] = useState([]);
@@ -151,68 +141,12 @@ const PreTest = () => {
             </Text>
           </View>
           <TestBox quizs={quizs} />
-          <ButtonClick
-            text="Submit"
-            fontSize={24}
-            fontWeight="bold"
-            fontcolor="#000000"
-            height={39}
-            width={245}
-            radius={30}
-            padding={0}
-            marginBottom="10%"
-            onPressAction={() => {
-              setModalVisible(true);
-            }}
-            // shadowRadius={30}
-            colorsStart="#7EF192"
-            colorsEnd="#2DC897"
-          />
         </View>
-        <View style={styles.centeredView}>
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-              Alert.alert("Modal has been closed.");
-            }}
-          >
-            <View style={styles.centeredView}>
-              <LinearGradient
-                colors={["#7EB2F0", "#8A63E5"]}
-                style={styles.modalView}
-              >
-                <Text style={styles.header}>
-                  Your Level of our suggestion is
-                </Text>
-                {/* circleLayout */}
-                <LinearGradient
-                  colors={["#FFD387", "#FCDE58"]}
-                  style={styles.circleLayout}
-                >
-                  <Text style={styles.modalText}>A1</Text>
-                </LinearGradient>
-                {/* circleLayout */}
-
-                {/* next Step */}
-                <TouchableOpacity
-                  onPress={() => {
-                    setModalVisible(!modalVisible);
-                  }}
-                >
-                  <LinearGradient
-                    colors={["#FFD387", "#FCDE58"]}
-                    style={styles.openButton}
-                  >
-                    <Text style={styles.textStyle}>Next Step</Text>
-                  </LinearGradient>
-                </TouchableOpacity>
-                {/* next Step */}
-              </LinearGradient>
-            </View>
-          </Modal>
-        </View>
+        <ModalSubmit
+          modalHeader="Your Level of our suggestion is"
+          modalText="A1"
+          modalButton="Finish"
+        />
       </ScrollView>
     </LinearGradient>
   );
@@ -232,11 +166,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: Constants.statusBarHeight,
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center",
   },
   subHeader: {
     marginTop: "5%",
