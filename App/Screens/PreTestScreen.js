@@ -9,7 +9,7 @@ import {
   SectionList,
   SafeAreaView,
   Modal,
-  TouchableHighlight,
+  TouchableOpacity,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Constants from "expo-constants";
@@ -151,7 +151,6 @@ const PreTest = () => {
             </Text>
           </View>
           <TestBox quizs={quizs} />
-
           <ButtonClick
             text="Submit"
             fontSize={24}
@@ -180,18 +179,37 @@ const PreTest = () => {
             }}
           >
             <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.modalText}>Hello World!</Text>
+              <LinearGradient
+                colors={["#7EB2F0", "#8A63E5"]}
+                style={styles.modalView}
+              >
+                <Text style={styles.header}>
+                  Your Level of our suggestion is
+                </Text>
+                {/* circleLayout */}
+                <LinearGradient
+                  colors={["#FFD387", "#FCDE58"]}
+                  style={styles.circleLayout}
+                >
+                  <Text style={styles.modalText}>A1</Text>
+                </LinearGradient>
+                {/* circleLayout */}
 
-                <TouchableHighlight
-                  style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+                {/* next Step */}
+                <TouchableOpacity
                   onPress={() => {
                     setModalVisible(!modalVisible);
                   }}
                 >
-                  <Text style={styles.textStyle}>Hide Modal</Text>
-                </TouchableHighlight>
-              </View>
+                  <LinearGradient
+                    colors={["#FFD387", "#FCDE58"]}
+                    style={styles.openButton}
+                  >
+                    <Text style={styles.textStyle}>Next Step</Text>
+                  </LinearGradient>
+                </TouchableOpacity>
+                {/* next Step */}
+              </LinearGradient>
             </View>
           </Modal>
         </View>
@@ -215,10 +233,11 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: Constants.statusBarHeight,
   },
-  // header: {
-  //   fontSize: 24,
-  //   fontWeight: "bold",
-  // },
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
   subHeader: {
     marginTop: "5%",
     fontSize: 16,
@@ -260,13 +279,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
+    // marginTop: 22,
   },
   modalView: {
+    width: Dimensions.get("window").width / 1.35,
+    // height: Dimensions.get("window").height / 2.3,
     margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
+    // backgroundColor: "white",
+    borderRadius: 5,
+    padding: 25,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -278,18 +299,26 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   openButton: {
-    backgroundColor: "#F194FF",
+    // backgroundColor: "#F194FF",
     borderRadius: 20,
     padding: 10,
     elevation: 2,
   },
   textStyle: {
-    color: "white",
+    color: "black",
     fontWeight: "bold",
     textAlign: "center",
   },
   modalText: {
-    marginBottom: 15,
-    textAlign: "center",
+    fontSize: 90,
+  },
+  circleLayout: {
+    borderRadius: 170 / 2,
+    width: 170,
+    height: 170,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: "5%",
   },
 });
