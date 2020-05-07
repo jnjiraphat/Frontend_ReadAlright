@@ -44,7 +44,7 @@ const home = (props) => {
   const [cateVocabBox, setCateVocabBox] = useState([]);
   const vocab = async () => {
     const word = await VocabCateApi();
-    setCateVocabBox(word)
+    setCateVocabBox(word);
   };
   console.log("This is vocabBox");
   console.log(cateVocabBox);
@@ -52,11 +52,11 @@ const home = (props) => {
   const [newVocab, setNewVocab] = useState([]);
   const newvocab = async () => {
     const newword = await NewVocab();
-    console.log("--------------vocab-----------------")
-    console.log(newword)
-    console.log("--------------vocab-----------------")
+    console.log("--------------vocab-----------------");
+    console.log(newword);
+    console.log("--------------vocab-----------------");
 
-    setNewVocab(newword)
+    setNewVocab(newword);
   };
   console.log("This is newVocab");
   console.log(newVocab);
@@ -116,7 +116,7 @@ const home = (props) => {
   function ContentDefault() {
     return (
       <View style={styles.ContentSwitch}>
-        <View>
+        <View style={styles.ContentCarousel}>
           <Text>News!</Text>
           <CarouselCard result={resultNew} />
         </View>
@@ -128,6 +128,22 @@ const home = (props) => {
           <Text style={{ marginLeft: "2%" }}>Category</Text>
           <CategoryCard result={cate} />
         </View>
+        <ButtonClick
+          text="Challenge"
+          fontSize={24}
+          fontWeight="bold"
+          fontcolor="#000000"
+          height={39}
+          width={245}
+          radius={30}
+          padding={0}
+          marginTop={Dimensions.get("window").height / 16}
+          marginBottom={Dimensions.get("window").height / 7}
+          // onPressAction={goToHome}
+          // shadowRadius={30}
+          colorsStart="#7EF192"
+          colorsEnd="#2DC897"
+        />
       </View>
     );
   }
@@ -181,7 +197,6 @@ const home = (props) => {
         //   arrayReading.push(response.data.reading[j]);
         // }
         setResult(response.data.reading);
-
       });
 
     // console.log("array length" + arrayReading.length);
