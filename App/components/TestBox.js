@@ -1,4 +1,6 @@
 import React from "react";
+import { useState, useEffect } from "react";
+
 import {
   Text,
   TouchableOpacity,
@@ -10,33 +12,65 @@ import {
   SafeAreaView,
 } from "react-native";
 import ButtonClick from "../components/ButtonClick";
+import ChoiceAPI from "../API/ChoiceAPI";
+import axios from "axios";
 
 const TestBox = (props) => {
-  const array = [];
-  const { quizs } = props;
-  console.log(quizs);
-  console.log(quizs.length);
-  var data = quizs.map(function (item) {
-    return {
-      title: item.question,
-      key:item.question_id,
-      data: [{}],
-    };
-  });
-  console.log(data);
+  // const [answer, setAnswer] = useState([]);
 
+  // const array = [];
+  const { section } = props;
+  // console.log(quizs);
+  // console.log(quizs.length);
+
+  // var data = quizs.map(function (item) {
+  //   return {
+  //     title: item.question,
+  //     data: [{}],
+  //   };
+  // });
+  // console.log(data);
+  // const loopId = async () => {
+  //   for (let index = 0; index < quizs.length; index++) {
+  //     array.push(quizs[index].question_id);
+  //   }
+  //   console.log(" quiz length = " + array.length);
+
+  // };
+
+  // const Answer = async () => {
+  //   for (let index = 1; index <= 6; index++) {
+  //     axios.get("http://10.0.2.2:3000/answers/quizs/" + index).then(
+  //       (response) => {
+  //         console.log("------------------------------------" + index);
+  //         console.log(response.data.answer);
+  //         console.log("------------------------------------");
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       }
+  //     );
+  //   }
+
+  //   // setAnswer();
+  // };
+
+  useEffect(() => {
+    // Answer();
+    // loopId();
+  }, []);
   const renderSection = ({ item }) => {
     return (
       <View style={styles.whiteCardChoice}>
-        {/* <View style={{ width: Dimensions.get("window").width / 1.35 }}>
+        <View style={{ width: Dimensions.get("window").width / 1.35 }}>
           <FlatList
-           title={item.question}
+            title={item.question}
             data={item.list}
             numColumns={2}
             renderItem={renderListItem}
-            keyExtractor={keyExtractor}
+            // keyExtractor={keyExtractor}
           />
-        </View> */}
+        </View>
       </View>
     );
   };
@@ -76,14 +110,14 @@ const TestBox = (props) => {
     );
   };
 
-  const keyExtractor = (item) => {
-    return item.choice;
-  };
+  // const keyExtractor = (item) => {
+  //   return item.choice;
+  // };
 
   // render()
   return (
     <SectionList
-      sections={data}
+      sections={section}
       contentContainerStyle={{ alignItems: "center", marginVertical: "7%" }}
       renderSectionHeader={renderSectionHeader}
       renderItem={renderSection}
