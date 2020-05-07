@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { TouchableOpacity, Text } from "react-native";
 import { Actions } from "react-native-router-flux";
 import ReadingApi from "../API/ReadingAPI";
 import { FlatGrid } from "react-native-super-grid";
@@ -9,9 +8,14 @@ import {
   ScrollView,
   ImageBackground,
   FlatList,
+  Dimensions,
+  Text,
+  Image,
 } from "react-native";
+import ButtonClick from "../components/ButtonClick";
+
+import Constants from "expo-constants";
 import axios from "axios";
-import TimelineCard from "../components/TimelineCard";
 
 const Content = (props) => {
   const [cate, setCate] = useState([]);
@@ -32,6 +36,14 @@ const Content = (props) => {
       );
   };
 
+  const testData = [
+    {
+      content: "YOOOO",
+      topic: "Name's Topic",
+      img: require("./../assets/catagory/Animal.jpg"),
+    },
+  ];
+
   const read = async () => {
     const data = await fetch();
   };
@@ -47,43 +59,34 @@ const Content = (props) => {
   return (
     <ScrollView>
       <FlatList
-        numColumns={2}
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-        data={cate}
+        data={testData}
         renderItem={({ item }) => (
-          <View>
-            <TimelineCard
-              img={item.image}
-              title={item.content}
-              imgHeight={102}
-              width={162.75}
-              titleHeight={40}
+          <View style={styles.container}>
+            <Image source={item.img} style={styles.headerImg} />
+            <Text style={styles.topic}>{item.topic}</Text>
+            <View style={styles.whiteCard}>
+              <Text>{item.content}</Text>
+            </View>
+            <ButtonClick
+              text="Challenge"
+              fontSize={24}
+              fontWeight="bold"
+              fontcolor="#000000"
+              height={39}
+              width={245}
+              radius={30}
+              padding={0}
+              marginTop={20}
+              marginBottom={40}
+              // onPressAction={goToHome}
+              // shadowRadius={30}
+              colorsStart="#2DC897"
+              colorsEnd="#7EF192"
             />
           </View>
-          // <ListItem
-          //   onPressIn={() => setReadingId(item.reading_id)}
-          //   onPress={goToContentScreen}
-          //   key={item.category_id}
-          //   title={item.title}
-          //   leftIcon={{ name: item.icon }}
-          //   bottomDivider
-          //   chevron
-          // />
         )}
       />
-      {/* <FlatGrid
-        items={cate}
-        renderItem={({ item }) => (
-          <ListItem
-            key={item.category_id}
-            title={item.content}
-            leftIcon={{ name: item.icon }}
-            bottomDivider
-            chevron
-          />
-          
-        )}
-      /> */}
     </ScrollView>
   );
 };
@@ -94,21 +97,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  gridView: {
-    marginTop: 20,
-    flex: 1,
-  },
-  itemContainer: {
-    borderRadius: 5,
-    height: 110,
-    width: 110,
-    overflow: "hidden",
+    marginTop: Constants.statusBarHeight,
   },
   topic: {
     fontSize: 20,
     color: "#000",
-    marginTop: 50,
+    marginVertical: 20,
     fontWeight: "bold",
   },
   descript: {
@@ -121,9 +115,29 @@ const styles = StyleSheet.create({
     color: "#000",
     fontWeight: "bold",
   },
-  button: {
-    width: 200,
-    marginTop: 20,
-    marginBottom: 20,
+
+  headerImg: {
+    height: Dimensions.get("window").height / 3.5,
+  },
+
+  //whiteCard
+  whiteCard: {
+    // flex: 1,
+    width: Dimensions.get("window").width / 1.15,
+    // justifyContent: "center",
+    borderBottomRightRadius: 5,
+    borderBottomLeftRadius: 5,
+    backgroundColor: "#ffffff",
+    alignItems: "center",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowRadius: 4.65,
+    shadowColor: "#000000",
+    shadowOpacity: 0.3,
+    elevation: 8,
+    marginBottom: "10%",
+    paddingVertical: 20,
   },
 });
