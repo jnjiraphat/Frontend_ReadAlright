@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, ScrollView, Dimensions, Text, StyleSheet } from "react-native";
+import {
+  View,
+  ScrollView,
+  Dimensions,
+  Text,
+  StyleSheet,
+  FlatList,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Constants from "expo-constants";
 import HeaderText from "../components/HeaderText";
@@ -165,34 +172,9 @@ const PreTest = () => {
         },
       ],
     },
-    {
-      question: "Question2",
-      key: "2",
-      data: [
-        {
-          key: "2",
-          list: [
-            {
-              choice: "Apple",
-              color: "Green",
-            },
-            {
-              choice: "Banana",
-              color: "Yellow",
-            },
-            {
-              choice: "Strawberry",
-              color: "Red",
-            },
-            {
-              choice: "Blueberry",
-              color: "Blue",
-            },
-          ],
-        },
-      ],
-    },
   ];
+
+  const quizQuestion = [];
 
   // let [fontsLoaded] = useFonts({
   //   // "PTSansCaption-Regular": require("../assets/font/PTSansCaption-Regular.ttf"),
@@ -255,7 +237,47 @@ const PreTest = () => {
                 Fill the gaps with the correct word from the box.
               </Text>
             </View>
-            <TestBox section={quizs} />
+            {/* <TestBox section={quizs} /> */}
+            {/* <FlatList
+              data={}
+              extraData={}
+              numColumns={2}
+              contentContainerStyle={{ flexDirection: "row" }}
+              renderItem={({ item, index }) => (
+                <View>
+
+                <View style={styles.whiteCardQuestion}>
+        <View
+          style={{
+            width: Dimensions.get("window").width / 1.35,
+            marginLeft: "10%",
+          }}
+        >
+          <Text style={styles.textQuestion}>{item.title}</Text>
+        </View>
+      </View>
+      <View style={styles.whiteCardChoice}>
+      <View style={{ width: Dimensions.get("window").width / 1.35 }}>
+      <ButtonClick
+        // onPressAction={}
+        colorsStart="#E9B0FF"
+        colorsEnd="#8A63E5"
+        // padding=
+        radius={10}
+        height={39}
+        width={112}
+        fontSize={14}
+        fontWeight="normal"
+        fontcolor="#000"
+        text={item.choice}
+        marginBottom={10}
+        marginTop={10}
+      />
+      </View>
+    </View>
+    </View>
+              )}
+            /> */}
           </View>
           <ModalSubmit
             modalHeader="Your Level of our suggestion is"
@@ -372,5 +394,50 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginVertical: "5%",
+  },
+
+  //quiz
+  whiteCardChoice: {
+    // flex: 1,
+    width: Dimensions.get("window").width / 1.15,
+    // justifyContent: "center",
+    borderBottomRightRadius: 5,
+    borderBottomLeftRadius: 5,
+    backgroundColor: "#ffffff",
+    alignItems: "center",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowRadius: 4.65,
+    shadowColor: "#000000",
+    shadowOpacity: 0.3,
+    elevation: 8,
+    marginBottom: "10%",
+    paddingVertical: 20,
+  },
+  whiteCardQuestion: {
+    // flex: 1,
+    width: Dimensions.get("window").width / 1.15,
+    justifyContent: "center",
+    borderTopRightRadius: 5,
+    borderTopLeftRadius: 5,
+    backgroundColor: "#ffffff",
+    // alignItems: "center",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowRadius: 4.65,
+    shadowColor: "#000000",
+    shadowOpacity: 0.3,
+    elevation: 8,
+    // marginBottom: 10,
+    // marginVertical: 20,
+    paddingVertical: 20,
+  },
+  textQuestion: {
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });

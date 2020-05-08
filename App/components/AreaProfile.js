@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import ButtonNoClick from "../components/ButtonNoClick";
 
 const AreaProfile = (props) => {
@@ -19,28 +19,34 @@ const AreaProfile = (props) => {
           height={26}
           width={51}
           fontSize={12}
-          fontWeight="bold"
           fontcolor="#000"
           text={level}
         />
         <Text
           style={{
             fontSize: 16,
-            fontWeight: "bold",
             color: "#000000",
             marginLeft: "3%",
+            fontFamily: "PT-Bold",
           }}
         >
           {name}
         </Text>
       </View>
       <View style={{ display: display, marginTop: "3%" }}>
-        <Text>{sugggestion} </Text>
-        <Text>{sugggestion} </Text>
-        <Text>{sugggestion} </Text>
+        <Text style={styles.textSug}>{sugggestion} </Text>
+        <Text style={styles.textSug}>{sugggestion} </Text>
+        <Text style={styles.textSug}>{sugggestion} </Text>
       </View>
     </View>
   );
 };
 
 export default AreaProfile;
+
+const styles = StyleSheet.create({
+  textSug: {
+    fontFamily: "PT-Reg",
+    fontSize: 12,
+  },
+});

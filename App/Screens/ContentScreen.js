@@ -66,12 +66,12 @@ const Content = (props) => {
             <Image source={item.img} style={styles.headerImg} />
             <Text style={styles.topic}>{item.topic}</Text>
             <View style={styles.whiteCard}>
-              <Text>{item.content}</Text>
+              <Text style={styles.content}>{item.content}</Text>
             </View>
             <ButtonClick
               text="Challenge"
               fontSize={24}
-              fontWeight="bold"
+              fontFamily="PT-Bold"
               fontcolor="#000000"
               height={39}
               width={245}
@@ -103,17 +103,17 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#000",
     marginVertical: 20,
-    fontWeight: "bold",
+    fontFamily: "PT-Bold",
   },
-  descript: {
+  content: {
     fontSize: 16,
     color: "#000",
-    fontWeight: "600",
+    fontFamily: "PT-Reg",
   },
   itemTopic: {
     fontSize: 14,
     color: "#000",
-    fontWeight: "bold",
+    fontFamily: "PT-Bold",
   },
 
   headerImg: {

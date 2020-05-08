@@ -76,7 +76,7 @@ const TabIcon = ({ focused, title }) => {
 const Routes = () => {
   //font
   let [fontsLoaded] = useFonts({
-    "PT-Regular": require("./App/assets/fonts/PTSansCaption-Regular.ttf"),
+    "PT-Reg": require("./App/assets/fonts/PTSansCaption-Regular.ttf"),
     "PT-Bold": require("./App/assets/fonts/PTSansCaption-Bold.ttf"),
   });
 

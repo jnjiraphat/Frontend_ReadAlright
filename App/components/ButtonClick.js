@@ -12,11 +12,11 @@ const ButtonClick = (props) => {
     height,
     width,
     fontSize,
-    fontWeight,
     fontcolor,
     text,
     marginBottom,
     marginTop,
+    fontFamily,
   } = props;
 
   return (
@@ -61,9 +61,8 @@ const ButtonClick = (props) => {
           <Text
             style={{
               fontSize: fontSize,
-              fontWeight: fontWeight,
               color: fontcolor,
-              fontFamily: "PT-Bold",
+              fontFamily: fontFamily,
             }}
           >
             {text}

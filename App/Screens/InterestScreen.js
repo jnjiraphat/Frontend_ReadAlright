@@ -189,7 +189,7 @@ export default function () {
         <ButtonClick
           text="Next"
           fontSize={24}
-          fontWeight="Bold"
+          fontFamily="PT-Bold"
           fontcolor="#000000"
           height={39}
           width={245}
@@ -259,6 +259,6 @@ const styles = StyleSheet.create({
   },
   subHeader: {
     fontSize: 16,
-    fontFamily: "PT-Regular",
+    fontFamily: "PT-Reg",
   },
 });

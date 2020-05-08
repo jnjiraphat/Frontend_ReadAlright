@@ -11,7 +11,6 @@ const ButtonClick = (props) => {
     height,
     width,
     fontSize,
-    fontWeight,
     fontcolor,
     text,
     buttonStyle,
@@ -40,8 +39,8 @@ const ButtonClick = (props) => {
         <Text
           style={{
             fontSize: fontSize,
-            fontWeight: fontWeight,
             color: fontcolor,
+            fontFamily: "PT-Bold",
           }}
         >
           {text}

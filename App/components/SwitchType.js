@@ -81,7 +81,7 @@ const SwitchType = (props) => {
                   >
                     <Text
                       style={{
-                        fontWeight: "bold",
+                        fontFamily: "PT-Bold",
                         color:
                           tabProps.activeTab === i
                             ? "#000"

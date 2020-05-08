@@ -18,8 +18,8 @@ const ModalSubmit = (props) => {
       <ButtonClick
         text="Submit"
         fontSize={24}
-        fontWeight="bold"
         fontcolor="#000000"
+        fontFamily="PT-Bold"
         height={39}
         width={245}
         radius={30}
@@ -61,7 +61,6 @@ const ModalSubmit = (props) => {
               <ButtonClick
                 text={modalButton}
                 fontSize={16}
-                fontWeight="bold"
                 fontcolor="#000000"
                 height={39}
                 width={120}
@@ -117,13 +116,9 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
   },
-  textStyle: {
-    color: "black",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
   modalText: {
     fontSize: 90,
+    fontFamily: "PT-Bold",
   },
   circleLayout: {
     borderRadius: 170 / 2,
@@ -136,7 +131,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 24,
-    fontWeight: "bold",
     textAlign: "center",
+    fontFamily: "PT-Bold",
   },
 });

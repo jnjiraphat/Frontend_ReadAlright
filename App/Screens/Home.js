@@ -117,21 +117,21 @@ const home = (props) => {
     return (
       <View style={styles.ContentSwitch}>
         <View style={styles.ContentCarousel}>
-          <Text>News!</Text>
+          <Text style={styles.topic}>News!</Text>
           <CarouselCard result={resultNew} />
         </View>
         <View style={styles.ContentCarousel}>
-          <Text>Maybe you like</Text>
+          <Text style={styles.topic}>Maybe you like</Text>
           <CarouselCard result={result} />
         </View>
         <View style={styles.ContentCategory}>
-          <Text style={{ marginLeft: "2%" }}>Category</Text>
+          <Text style={[styles.topic, { marginLeft: "5%" }]}>Category</Text>
           <CategoryCard result={cate} />
         </View>
         <ButtonClick
           text="Challenge"
           fontSize={24}
-          fontWeight="bold"
+          fontFamily="PT-Bold"
           fontcolor="#000000"
           height={39}
           width={245}
@@ -153,21 +153,21 @@ const home = (props) => {
       <View>
         <View style={styles.ContentSwitch}>
           <View style={styles.ContentCarousel}>
-            <Text>New!</Text>
+            <Text style={styles.topic}>New!</Text>
             <CarouselCardVocab result={newVocab} />
           </View>
           <View style={styles.ContentCarousel}>
-            <Text>Maybe you like</Text>
+            <Text style={styles.topic}>Maybe you like</Text>
             <CarouselCard result={vb} />
           </View>
           <View style={styles.ContentCategory}>
-            <Text style={{ marginLeft: "2%" }}>Category</Text>
+            <Text style={[styles.topic, { marginLeft: "5%" }]}>Category</Text>
             <CategoryCardVocab result={cateVocabBox} />
           </View>
           <ButtonClick
             text="Challenge"
             fontSize={24}
-            fontWeight="bold"
+            fontFamily="PT-Bold"
             fontcolor="#000000"
             height={39}
             width={245}
@@ -259,32 +259,21 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   topic: {
-    fontSize: 20,
+    fontSize: 18,
     color: "#000",
-    marginTop: 50,
-    fontWeight: "bold",
-  },
-  descript: {
-    fontSize: 16,
-    color: "#000",
-    fontWeight: "600",
+    fontFamily: "PT-Bold",
   },
   itemTopic: {
     fontSize: 14,
     color: "#000",
     fontWeight: "bold",
   },
-  button: {
-    width: 200,
-    marginTop: 20,
-    marginBottom: 20,
-  },
   ContentSwitch: {
     flex: 1,
   },
   ContentCarousel: {
     height: 200,
-    marginLeft: "2%",
+    marginLeft: "5%",
   },
   ContentCategory: {
     justifyContent: "center",

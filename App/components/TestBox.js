@@ -101,8 +101,8 @@ const TestBox = (props) => {
         height={39}
         width={112}
         fontSize={14}
-        fontWeight="normal"
         fontcolor="#000"
+        fontFamily="PT-Reg"
         text={item.choice}
         marginBottom={10}
         marginTop={10}
@@ -168,6 +168,6 @@ const styles = StyleSheet.create({
   },
   textQuestion: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontFamily: "PT-Bold",
   },
 });

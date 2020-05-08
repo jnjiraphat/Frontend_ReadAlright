@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 10,
     paddingLeft: 5,
+    fontFamily: "PT-Bold",
   },
   card: {
     shadowOffset: {
