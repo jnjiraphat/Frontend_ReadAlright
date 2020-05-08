@@ -18,6 +18,7 @@ const ButtonClick = (props) => {
     marginBottom,
     marginTop,
   } = props;
+
   return (
     <View
       style={{
@@ -62,6 +63,7 @@ const ButtonClick = (props) => {
               fontSize: fontSize,
               fontWeight: fontWeight,
               color: fontcolor,
+              fontFamily: "PT-Bold",
             }}
           >
             {text}

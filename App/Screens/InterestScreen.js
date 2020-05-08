@@ -165,7 +165,7 @@ export default function () {
         <View style={styles.textLayout}>
           <Text style={styles.header}>Interest</Text>
           <Text style={styles.subHeader}>
-            Please select the categories that you interested
+            Choose 3 categories that you interested.
           </Text>
         </View>
         <FlatList
@@ -219,6 +219,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "flex-end",
+    alignContent: "center",
   },
   item: {
     borderStyle: "solid",
@@ -254,9 +255,10 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontFamily: "PT-Bold",
   },
   subHeader: {
     fontSize: 16,
+    fontFamily: "PT-Regular",
   },
 });
