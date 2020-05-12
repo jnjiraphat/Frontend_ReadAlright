@@ -10,6 +10,8 @@ import MyHome from "./App/Screens/Home.js";
 import Tricks from "./App/Screens/Tricks";
 import Mylist from "./App/Screens/Mylist";
 import PreTest from "./App/Screens/PreTestScreen";
+import uploadImage from "./App/Screens/uploadImage";
+
 // import Article from "./App/Screens/Article"
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
