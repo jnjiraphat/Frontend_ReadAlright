@@ -21,7 +21,7 @@ const CategoryCardVocab = (props) => {
         <TouchableOpacity onPress={() => goToArticle(item.category_id)}>
           <View>
             <TimelineCard
-            //   img={item.image}
+              img={item.image}
               title={item.categoryName}
               imgHeight={102}
               width={162.75}

@@ -63,7 +63,9 @@ function Item({ category_id, title, selected, onSelect, img }) {
       <Card style={styles.card}>
         <Card.Body style={styles.cardImg}>
           <Image
-            source={img}
+            source={{
+              uri: img,
+            }}
             style={{
               width: 90,
               height: 90,
@@ -178,7 +180,7 @@ export default function () {
               category_id={item.category_id}
               title={item.categoryName}
               // img={data.img}'
-
+              img={item.image}
               selected={!!selected.get(item.category_id)}
               onSelect={onSelect}
             />

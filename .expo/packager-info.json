@@ -1,10 +1,10 @@
 {
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://r2-tjx.anonymous.senior-project.exp.direct",
-  "packagerNgrokUrl": "https://packager.r2-tjx.anonymous.senior-project.exp.direct",
-  "ngrokPid": 4968,
+  "expoServerNgrokUrl": "https://re-ike.anonymous.senior-project.exp.direct",
+  "packagerNgrokUrl": "https://packager.re-ike.anonymous.senior-project.exp.direct",
+  "ngrokPid": 37096,
   "packagerPort": 19001,
-  "packagerPid": 36888,
+  "packagerPid": 29040,
   "webpackServerPort": null,
   "devToolsPort": 19002
 }
