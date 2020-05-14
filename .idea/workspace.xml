@@ -3,20 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9d8a78ad-2ea6-4273-a019-1df057265923" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.expo/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Screens/InterestScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/App/Screens/InterestScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/assets/catagory/animal.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/assets/catagory/food.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/assets/catagory/house.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/assets/catagory/movie.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/assets/catagory/music.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/assets/catagory/natural.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/assets/catagory/news.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/assets/catagory/sport.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/assets/catagory/story.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/components/CategoryCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/App/components/CategoryCard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,15 +29,17 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="y" value="22" />
     <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="height" value="811" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -61,7 +52,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -95,7 +85,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="22" width="1440" height="811" extended-state="1" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.32980973" />
