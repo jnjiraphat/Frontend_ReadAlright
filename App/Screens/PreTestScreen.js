@@ -146,12 +146,15 @@ const PreTest = () => {
 
   const sections = [
     {
-      question: "Question1",
       key: "1",
+      quiz: [
+        {
+          question: "Question1",
+        },
+      ],
       data: [
         {
-          key: "1",
-          list: [
+          choice: [
             {
               choice: "Carrot",
               color: "Orange",
@@ -172,6 +175,58 @@ const PreTest = () => {
         },
       ],
     },
+    // {
+    //   key: "2",
+    //   quiz: [
+    //     {
+    //       question: "Question2",
+    //     },
+    //   ],
+    //   data: [
+    //     {
+    //       choice: "Carrot",
+    //       color: "Orange",
+    //     },
+    //     {
+    //       choice: "Cabbage",
+    //       color: "Purple",
+    //     },
+    //     {
+    //       choice: "Strawberry",
+    //       color: "Red",
+    //     },
+    //     {
+    //       choice: "Blueberry",
+    //       color: "Blue",
+    //     },
+    //   ],
+    // },
+    // {
+    //   key: "2",
+    //   quiz: [
+    //     {
+    //       question: "Question2",
+    //     },
+    //   ],
+    //   data: [
+    //     {
+    //       choice: "Carrot",
+    //       color: "Orange",
+    //     },
+    //     {
+    //       choice: "Cabbage",
+    //       color: "Purple",
+    //     },
+    //     {
+    //       choice: "Strawberry",
+    //       color: "Red",
+    //     },
+    //     {
+    //       choice: "Blueberry",
+    //       color: "Blue",
+    //     },
+    //   ],
+    // },
   ];
 
   const quizQuestion = [];
@@ -237,7 +292,7 @@ const PreTest = () => {
                 Fill the gaps with the correct word from the box.
               </Text>
             </View>
-            {/* <TestBox section={quizs} /> */}
+            <TestBox section={sections} />
             {/* <FlatList
               data={}
               extraData={}

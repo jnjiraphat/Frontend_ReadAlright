@@ -67,7 +67,7 @@ function Item({ category_id, title, selected, onSelect, img }) {
               uri: img,
             }}
             style={{
-              width: 90,
+              width: 110,
               height: 90,
               borderTopRightRadius: 3,
               borderTopLeftRadius: 3,
@@ -232,8 +232,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   title: {
-    fontSize: 10,
+    fontSize: 14,
     paddingLeft: 5,
+    fontFamily: "PT-Reg",
   },
   cardImg: {
     width: 110,
@@ -244,6 +245,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     height: 20,
     width: 110,
+    alignContent: "center"
   },
   card: {
     shadowOffset: {
@@ -262,5 +264,6 @@ const styles = StyleSheet.create({
   subHeader: {
     fontSize: 16,
     fontFamily: "PT-Reg",
+    
   },
 });

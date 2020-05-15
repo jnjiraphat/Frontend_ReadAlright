@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { useState, useEffect } from "react";
 
 import {
@@ -59,16 +59,33 @@ const TestBox = (props) => {
     // Answer();
     // loopId();
   }, []);
+
   const renderSection = ({ item }) => {
     return (
       <View style={styles.whiteCardChoice}>
         <View style={{ width: Dimensions.get("window").width / 1.35 }}>
           <FlatList
-            title={item.question}
-            data={item.list}
+            // title={item.question}
+            data={item.choice}
             numColumns={2}
-            renderItem={renderListItem}
-            // keyExtractor={keyExtractor}
+            renderItem={({ item }) => (
+              <ButtonClick
+                // onPressAction={}
+                colorsStart="#E9B0FF"
+                colorsEnd="#8A63E5"
+                // padding=
+                radius={10}
+                height={39}
+                width={112}
+                fontSize={14}
+                fontcolor="#000"
+                fontFamily="PT-Reg"
+                text={item.choice}
+                marginBottom={10}
+                marginTop={10}
+              />
+            )}
+            keyExtractor={(item, index) => item + index}
           />
         </View>
       </View>
@@ -84,7 +101,14 @@ const TestBox = (props) => {
             marginLeft: "10%",
           }}
         >
-          <Text style={styles.textQuestion}>{section.title}</Text>
+          <FlatList
+            // title={item.question}
+            data={section.quiz}
+            renderItem={({ item }) => (
+              <Text style={styles.textQuestion}>{item.question}</Text>
+            )}
+            // keyExtractor={keyExtractor}
+          />
         </View>
       </View>
     );
@@ -118,8 +142,10 @@ const TestBox = (props) => {
   return (
     <SectionList
       sections={section}
+      keyExtractor={(item, index) => item + index}
       contentContainerStyle={{ alignItems: "center", marginVertical: "7%" }}
       renderSectionHeader={renderSectionHeader}
+      // renderSectionHeader={renderSection}
       renderItem={renderSection}
     />
   );
