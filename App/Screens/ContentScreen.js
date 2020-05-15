@@ -60,10 +60,10 @@ const Content = (props) => {
     <ScrollView>
       <FlatList
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-        data={testData}
+        data={cate}
         renderItem={({ item }) => (
           <View style={styles.container}>
-            <Image source={item.img} style={styles.headerImg} />
+            <Image source={{ uri: item.image }} style={styles.headerImg} />
             <Text style={styles.topic}>{item.topic}</Text>
             <View style={styles.whiteCard}>
               <Text style={styles.content}>{item.content}</Text>
@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
 
   headerImg: {
     height: Dimensions.get("window").height / 3.5,
+    width: Dimensions.get("window").width 
   },
 
   //whiteCard
