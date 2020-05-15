@@ -1,10 +1,10 @@
 {
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://re-ike.anonymous.senior-project.exp.direct",
-  "packagerNgrokUrl": "https://packager.re-ike.anonymous.senior-project.exp.direct",
-  "ngrokPid": 37096,
-  "packagerPort": 19001,
-  "packagerPid": 29040,
+  "expoServerNgrokUrl": "https://pi-sir.gnbiiie3.frontend-readalright.exp.direct",
+  "packagerNgrokUrl": "https://packager.pi-sir.gnbiiie3.frontend-readalright.exp.direct",
+  "ngrokPid": 36981,
+  "packagerPort": 19003,
+  "packagerPid": 36894,
   "webpackServerPort": null,
   "devToolsPort": 19002
 }

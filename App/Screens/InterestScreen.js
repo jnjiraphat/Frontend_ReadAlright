@@ -22,32 +22,25 @@ import CountView from "../API/CountViewsAPI";
 import ReadingApi from "../API/ReadingAPI";
 import axios from "axios";
 
-const DATA = [
-  {
-    img: require("./../assets/catagory/Animal.jpg"),
-  },
-  {
-    img: require("./../assets/catagory/Food.jpg"),
-  },
-  {
-    img: require("./../assets/catagory/News.jpg"),
-  },
-  {
-    img: require("./../assets/catagory/Animal.jpg"),
-  },
-  {
-    img: require("./../assets/catagory/Food.jpg"),
-  },
-  {
-    img: require("./../assets/catagory/News.jpg"),
-  },
-  {
-    img: require("./../assets/catagory/Animal.jpg"),
-  },
-  {
-    img: require("./../assets/catagory/Food.jpg"),
-  },
-];
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Content"
+        onPress={() => navigation.navigate('Content')}
+      />
+    </View>
+  );
+}
+
+
+// const Stack = createStackNavigator();
+
+
+const ImageCards = () => {
+  return <Image />;
+};
 
 function Item({ category_id, title, selected, onSelect, img }) {
   return (
@@ -67,7 +60,7 @@ function Item({ category_id, title, selected, onSelect, img }) {
               uri: img,
             }}
             style={{
-              width: 90,
+              width: 110,
               height: 90,
               borderTopRightRadius: 3,
               borderTopLeftRadius: 3,
@@ -232,8 +225,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   title: {
-    fontSize: 10,
+    fontSize: 14,
     paddingLeft: 5,
+    fontFamily: "PT-Reg",
   },
   cardImg: {
     width: 110,
@@ -244,6 +238,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     height: 20,
     width: 110,
+    alignContent: "center"
   },
   card: {
     shadowOffset: {
@@ -262,5 +257,6 @@ const styles = StyleSheet.create({
   subHeader: {
     fontSize: 16,
     fontFamily: "PT-Reg",
+    
   },
 });
