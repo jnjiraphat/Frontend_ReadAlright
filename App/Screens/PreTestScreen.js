@@ -20,122 +20,28 @@ import ChoiceAPI from "../API/ChoiceAPI";
 import axios from "axios";
 
 const PreTest = () => {
-  const [answer, setAnswer] = useState([]);
   const [quizs, setQuiz] = useState([]);
   const dataArrayQuiz = [];
-  const dataArrayAnswer = [];
-  const temp = [];
-  const tempAnswer = [
-    {
-      question: "Question1",
-      key: "1",
-      data: [
-        {
-          key: "1",
-          list: [
-            {
-              choice: "Carrot",
-              color: "Orange",
-            },
-            {
-              choice: "Cabbage",
-              color: "Purple",
-            },
-            {
-              choice: "Strawberry",
-              color: "Red",
-            },
-            {
-              choice: "Blueberry",
-              color: "Blue",
-            },
-          ],
-        },
-      ],
-    },
-  ];
-
-  const Answer = async () => {
-    for (let index = 1; index <= 6; index++) {
-      await axios.get("http://10.0.2.2:3000/choice/" + index).then(
-        (response) => {
-          temp.length = 0;
-          console.log("------------------answer------------------" + index);
-          console.log(response.data.choice.length);
-          for (let j = 0; j < response.data.choice.length; j++) {
-            temp.push(response.data.choice[j]);
-            console.log(j);
-          }
-          dataArrayAnswer.push(temp);
-          // for (let j = 0; index < response.data.choice.length; j++) {
-          //   temp.push(response.data.choice[j]);
-          // }
-          // dataArrayAnswer.push(temp);
-          // console.log("-----------------dataAnswer-------------------");
-
-          // console.log(dataArrayAnswer);
-          // console.log("------------------------------------");
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
-  };
 
   const Question = async () => {
     for (let index = 7; index <= 16; index++) {
       await axios.get("http://10.0.2.2:3000/quiz/" + index).then(
         (response) => {
           console.log("------------------question------------------" + index);
-          dataArrayQuiz.push(response.data.quiz[0].question);
-          console.log(dataArrayQuiz[index - 1]);
-
+          console.log(response.data);
+          dataArrayQuiz.push(response.data);
           console.log(dataArrayQuiz.length);
-
-          console.log("------------------------------------");
         },
         (error) => {
           console.log(error);
         }
       );
     }
+    setQuiz(dataArrayQuiz);
   };
-  // const Quiz = async () => {
-  //   const data = await Test();
-  //   setQuiz(data.quiz);
-  // };
 
-  const SetToArray = async () => {
-    var data = dataArrayQuiz.map(function (item) {
-      return {
-        title: item,
-        data: [{ list: [] }],
-      };
-    });
-
-    console.log("data = ");
-    console.log(data);
-    console.log("eiei");
-    setQuiz(data);
-
-    // for (let index = 0; index < dataArrayAnswer.length; index++) {
-    //   console.log(dataArrayAnswer[index]);
-    // }
-
-    // console.log("dataAnswerlength =" + dataArrayAnswer.length);
-    // for (let index = 0; index < dataArrayQuiz.length; index++) {
-    //   // tempAnswer[index].data[index].list = dataArrayAnswer[index].choice;
-    //   console.log("tempAnswer" + index);
-    // }
-
-    console.log("eiei");
-  };
   async function getQuizAndAnswer() {
-    await Answer();
     await Question();
-    await SetToArray();
-    // await Quiz();
   }
 
   useEffect(() => {
@@ -175,58 +81,6 @@ const PreTest = () => {
         },
       ],
     },
-    // {
-    //   key: "2",
-    //   quiz: [
-    //     {
-    //       question: "Question2",
-    //     },
-    //   ],
-    //   data: [
-    //     {
-    //       choice: "Carrot",
-    //       color: "Orange",
-    //     },
-    //     {
-    //       choice: "Cabbage",
-    //       color: "Purple",
-    //     },
-    //     {
-    //       choice: "Strawberry",
-    //       color: "Red",
-    //     },
-    //     {
-    //       choice: "Blueberry",
-    //       color: "Blue",
-    //     },
-    //   ],
-    // },
-    // {
-    //   key: "2",
-    //   quiz: [
-    //     {
-    //       question: "Question2",
-    //     },
-    //   ],
-    //   data: [
-    //     {
-    //       choice: "Carrot",
-    //       color: "Orange",
-    //     },
-    //     {
-    //       choice: "Cabbage",
-    //       color: "Purple",
-    //     },
-    //     {
-    //       choice: "Strawberry",
-    //       color: "Red",
-    //     },
-    //     {
-    //       choice: "Blueberry",
-    //       color: "Blue",
-    //     },
-    //   ],
-    // },
   ];
 
   const quizQuestion = [];
@@ -300,7 +154,6 @@ const PreTest = () => {
               contentContainerStyle={{ flexDirection: "row" }}
               renderItem={({ item, index }) => (
                 <View>
-
                 <View style={styles.whiteCardQuestion}>
         <View
           style={{

@@ -92,6 +92,7 @@ const Routes = () => {
             title="PreTest"
             hideNavBar
             hideTabBar
+            initial
             showLabel={false}
           />
           <Scene
@@ -100,7 +101,6 @@ const Routes = () => {
             title="Interest"
             hideNavBar
             hideTabBar
-            initial
             showLabel={false}
           />
 
