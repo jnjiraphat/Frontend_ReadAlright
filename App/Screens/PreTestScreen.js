@@ -84,7 +84,7 @@ const PreTest = () => {
   };
 
   const Question = async () => {
-    for (let index = 1; index <= 6; index++) {
+    for (let index = 7; index <= 16; index++) {
       await axios.get("http://10.0.2.2:3000/quiz/" + index).then(
         (response) => {
           console.log("------------------question------------------" + index);
@@ -292,7 +292,7 @@ const PreTest = () => {
                 Fill the gaps with the correct word from the box.
               </Text>
             </View>
-            <TestBox section={sections} />
+            <TestBox section={quizs} />
             {/* <FlatList
               data={}
               extraData={}

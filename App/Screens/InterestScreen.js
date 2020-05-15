@@ -22,32 +22,25 @@ import CountView from "../API/CountViewsAPI";
 import ReadingApi from "../API/ReadingAPI";
 import axios from "axios";
 
-const DATA = [
-  {
-    img: require("./../assets/catagory/Animal.jpg"),
-  },
-  {
-    img: require("./../assets/catagory/Food.jpg"),
-  },
-  {
-    img: require("./../assets/catagory/News.jpg"),
-  },
-  {
-    img: require("./../assets/catagory/Animal.jpg"),
-  },
-  {
-    img: require("./../assets/catagory/Food.jpg"),
-  },
-  {
-    img: require("./../assets/catagory/News.jpg"),
-  },
-  {
-    img: require("./../assets/catagory/Animal.jpg"),
-  },
-  {
-    img: require("./../assets/catagory/Food.jpg"),
-  },
-];
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Content"
+        onPress={() => navigation.navigate('Content')}
+      />
+    </View>
+  );
+}
+
+
+// const Stack = createStackNavigator();
+
+
+const ImageCards = () => {
+  return <Image />;
+};
 
 function Item({ category_id, title, selected, onSelect, img }) {
   return (
