@@ -5,8 +5,24 @@
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.expo/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-build/register-service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/web-build/register-service-worker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/ReadingAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/App/API/ReadingAPI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Screens/Content.js" beforeDir="false" afterPath="$PROJECT_DIR$/App/Screens/Content.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Screens/InterestScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/App/Screens/InterestScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/catagory/animal.png" beforeDir="false" afterPath="$PROJECT_DIR$/App/assets/catagory/animal.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/catagory/food.png" beforeDir="false" afterPath="$PROJECT_DIR$/App/assets/catagory/food.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/catagory/house.png" beforeDir="false" afterPath="$PROJECT_DIR$/App/assets/catagory/house.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/catagory/movie.png" beforeDir="false" afterPath="$PROJECT_DIR$/App/assets/catagory/movie.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/catagory/music.png" beforeDir="false" afterPath="$PROJECT_DIR$/App/assets/catagory/music.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/catagory/natural.png" beforeDir="false" afterPath="$PROJECT_DIR$/App/assets/catagory/natural.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/catagory/news.png" beforeDir="false" afterPath="$PROJECT_DIR$/App/assets/catagory/news.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/catagory/sport.png" beforeDir="false" afterPath="$PROJECT_DIR$/App/assets/catagory/sport.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/catagory/story.png" beforeDir="false" afterPath="$PROJECT_DIR$/App/assets/catagory/story.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/App/assets/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img1.png" beforeDir="false" afterPath="$PROJECT_DIR$/App/assets/img1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img2.png" beforeDir="false" afterPath="$PROJECT_DIR$/App/assets/img2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/App/assets/splash.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ImageCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/App/components/ImageCard.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
