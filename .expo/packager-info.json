@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "packagerPort": 19001,
   "packagerPid": 13404,
   "devToolsPort": 19002,
@@ -6,4 +7,14 @@
   "expoServerNgrokUrl": "https://z3-pnq.anonymous.frontend-readalright.exp.direct",
   "packagerNgrokUrl": "https://packager.z3-pnq.anonymous.frontend-readalright.exp.direct",
   "ngrokPid": 18416
+=======
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://re-ike.anonymous.senior-project.exp.direct",
+  "packagerNgrokUrl": "https://packager.re-ike.anonymous.senior-project.exp.direct",
+  "ngrokPid": 37096,
+  "packagerPort": 19001,
+  "packagerPid": 29040,
+  "webpackServerPort": null,
+  "devToolsPort": 19002
+>>>>>>> 4d7b749c669b6f700156e128dfbe07227130803b
 }

@@ -3,6 +3,10 @@
   "lanType": "ip",
   "dev": true,
   "minify": false,
+<<<<<<< HEAD
   "urlRandomness": "z3-pnq",
+=======
+  "urlRandomness": "re-ike",
+>>>>>>> 4d7b749c669b6f700156e128dfbe07227130803b
   "https": false
 }

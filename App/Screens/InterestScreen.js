@@ -1,19 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
-  StyleSheet,
-  View,
-  Text,
+  SafeAreaView,
   TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  Text,
+  Alert,
+  Image,
   ScrollView,
-  ImageBackground,
-  FlatList
+  View,
+  Dimensions,
 } from "react-native";
-import { Card, Button } from "react-native-elements";
-import { Grid, Col, Row } from "react-native-easy-grid";
-import { FlatGrid } from "react-native-super-grid";
-import ReadingApi from "../API/ReadingAPI";
-import { List, ListItem } from "react-native-elements";
+import { Card } from "@ant-design/react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { Actions } from "react-native-router-flux";
+import ButtonClick from "./../components/ButtonClick";
+import Constants from "expo-constants";
+import CountView from "../API/CountViewsAPI";
 
+//API
+import ReadingApi from "../API/ReadingAPI";
+import axios from "axios";
+
+<<<<<<< HEAD
 
 function HomeScreen({ navigation }) {
   return (
@@ -34,29 +43,108 @@ function HomeScreen({ navigation }) {
 const ImageCards = () => {
   return <Image />;
 };
+=======
+const DATA = [
+  {
+    img: require("./../assets/catagory/Animal.jpg"),
+  },
+  {
+    img: require("./../assets/catagory/Food.jpg"),
+  },
+  {
+    img: require("./../assets/catagory/News.jpg"),
+  },
+  {
+    img: require("./../assets/catagory/Animal.jpg"),
+  },
+  {
+    img: require("./../assets/catagory/Food.jpg"),
+  },
+  {
+    img: require("./../assets/catagory/News.jpg"),
+  },
+  {
+    img: require("./../assets/catagory/Animal.jpg"),
+  },
+  {
+    img: require("./../assets/catagory/Food.jpg"),
+  },
+];
+>>>>>>> 4d7b749c669b6f700156e128dfbe07227130803b
 
-const Interest = () => {
+function Item({ category_id, title, selected, onSelect, img }) {
+  return (
+    <TouchableOpacity
+      onPress={() => onSelect(category_id)}
+      style={[
+        styles.item,
+        {
+          borderColor: selected ? "#7EF192" : "transparent",
+        },
+      ]}
+    >
+      <Card style={styles.card}>
+        <Card.Body style={styles.cardImg}>
+          <Image
+            source={{
+              uri: img,
+            }}
+            style={{
+              width: 90,
+              height: 90,
+              borderTopRightRadius: 3,
+              borderTopLeftRadius: 3,
+            }}
+          />
+        </Card.Body>
+        <Card.Body style={styles.cardTitle}>
+          <Text style={styles.title}>{title}</Text>
+        </Card.Body>
+      </Card>
+    </TouchableOpacity>
+  );
+}
+
+const arrayId = [];
+const arrayIdCate = [];
+
+export default function () {
+  //Fetch(GET) Catagory Name
   const [result, setResult] = useState([]);
   const read = async () => {
     const data = await ReadingApi();
     setResult(data);
-    // console.log(data);
-    // console.log("-----------------")
-    // console.log(result)
   };
-  console.log(result);
   useEffect(() => {
     read();
   }, []);
+<<<<<<< HEAD
 dsfsdfdsf
   const [view, setview] = useState(0);
+=======
+
+  //Selected category
+  const [selected, setSelected] = React.useState(new Map());
+  const getKey = selected.keys();
+
+  const onSelect = React.useCallback(
+    (category_id) => {
+      const newSelected = new Map(selected);
+      newSelected.set(category_id, !selected.get(category_id));
+
+      setSelected(newSelected);
+    },
+    [selected],
+    console.log(selected)
+  );
+>>>>>>> 4d7b749c669b6f700156e128dfbe07227130803b
 
   if (result) {
-    console.log("Eiei");
-    console.log(result);
-    console.log("Mookkkkkkkkk");
-    console.log(result.length);
+    function logMapElements(value, key, map) {
+      console.log(`m[${key}] = ${value}`);
+    }
 
+<<<<<<< HEAD
     const items = [
       {
         name: "Music",
@@ -125,108 +213,153 @@ dsfsdfdsf
               </Stack.Navigator>
             </NavigationContainer>
           </Row> */}
+=======
+    selected.forEach(logMapElements);
+>>>>>>> 4d7b749c669b6f700156e128dfbe07227130803b
 
-          <FlatGrid
-            itemDimension={110}
-            items={items}
-            style={styles.gridView}
-            renderItem={({ item, index }) => (
-              <TouchableOpacity onPress={() => setview(view + 1)}>
-                <Card
-                  containerStyle={styles.itemContainer}
-                  image={item.img}
-                  imageStyle={{
-                    height: "65%"
-                    // borderColor: "red",
-                    // borderTopLeftRadius: 5,
-                    // borderTopRightRadius: 5,
-                  }}
-                  imageProps={{ resizeMode: "cover" }}
-                >
-                  {/* <Image
-              source={item.img}
-              style={{ height: "100%" }}
-              resizeMode="cover"
-            /> */}
-                  <View style={{ alignItems: "center" }}>
-                    <Text style={styles.itemTopic}>{item.name}</Text>
-                  </View>
-                </Card>
-              </TouchableOpacity>
-            )}
-          />
-          <Row style={styles.container}>
-            <Button title="Next" buttonStyle={styles.button} />
-            <Text>Your clicks: {view}</Text>
-          </Row>
-        </Grid>
-        {/* <View style={styles.container}>
-          <TouchableOpacity onPress={() => setcount(count + 1)}>
-            <Image source={require("./../assets/icon.png")} />
-          </TouchableOpacity>
-          <Text>your clicks: {count}</Text>
-          <Text>click</Text>
-        </View> */}
-        {/* <FlatGrid
-          itemDimension={110}
-          items={items}
-          style={styles.gridView}
-          renderItem={({ item, index }) => (
-            <CardViewWithImage
-              width={110}
-              borderRadius={5}
-              source={item.img}
-              title={item.name}
-              imageWidth={"100%"}
-              imageHeight={100}
-              roundedImage={false}
+    //Navigator
+    const goToHome = () => {
+      function logMapElements(value, key, map) {
+        console.log(`m[${key}] = ${value}`);
+        if (value == true) {
+          arrayIdCate.push(key);
+        }
+        console.log("length = " + arrayIdCate.length);
+      }
+      selected.forEach(logMapElements);
+      for (let index = 0; index < arrayIdCate.length; index++) {
+        axios
+          .post("http://10.0.2.2:3000/views", {
+            numOfView: 1,
+            category_id: arrayIdCate[index],
+            user_id: 1,
+            reading_id: 1,
+            vocabBox_id: 1,
+            is_Active: "1",
+          })
+          .then(
+            (response) => {
+              console.log("upload success!!!");
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+      }
+
+      Actions.Home({ text: arrayIdCate });
+    };
+
+    return (
+      <SafeAreaView style={styles.container}>
+        <LinearGradient
+          colors={["#FFB382", "#F07590"]}
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 0,
+            height: Dimensions.get("window").height,
+            width: Dimensions.get("window").width,
+          }}
+        />
+        <View style={styles.textLayout}>
+          <Text style={styles.header}>Interest</Text>
+          <Text style={styles.subHeader}>
+            Choose 3 categories that you interested.
+          </Text>
+        </View>
+        <FlatList
+          numColumns={3}
+          data={result}
+          contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+          renderItem={({ item }) => (
+            <Item
+              // topic={item.title}
+              category_id={item.category_id}
+              title={item.categoryName}
+              // img={data.img}'
+              img={item.image}
+              selected={!!selected.get(item.category_id)}
+              onSelect={onSelect}
             />
           )}
-        /> */}
-      </ScrollView>
+          keyExtractor={(item) => item.category_id}
+          extraData={selected}
+        />
+        <ButtonClick
+          text="Next"
+          fontSize={24}
+          fontFamily="PT-Bold"
+          fontcolor="#000000"
+          height={39}
+          width={245}
+          radius={30}
+          padding={0}
+          marginBottom="10%"
+          onPressAction={goToHome}
+          // shadowRadius={30}
+          colorsStart="#7EF192"
+          colorsEnd="#2DC897"
+        />
+      </SafeAreaView>
     );
   } else {
     return <Text>Loading</Text>;
   }
-};
-
-export default Interest;
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // flexDirection: "column",
+    marginTop: Constants.statusBarHeight,
+  },
+  textLayout: {
+    flex: 1,
+    flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "flex-end",
+    alignContent: "center",
   },
-  gridView: {
-    marginTop: 20,
-    flex: 1
-  },
-  itemContainer: {
+  item: {
+    borderStyle: "solid",
+    borderWidth: 2,
+    borderColor: "transparent",
     borderRadius: 5,
-    height: 110,
+    marginHorizontal: 10,
+    marginVertical: 10,
+  },
+  title: {
+    fontSize: 10,
+    paddingLeft: 5,
+  },
+  cardImg: {
     width: 110,
-    overflow: "hidden"
+    height: 90,
+    resizeMode: "contain",
+    paddingTop: 0,
   },
-  topic: {
-    fontSize: 20,
-    color: "#000",
-    marginTop: 50,
-    fontWeight: "bold"
+  cardTitle: {
+    height: 20,
+    width: 110,
   },
-  descript: {
+  card: {
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowRadius: 4.65,
+    shadowColor: "#000000",
+    shadowOpacity: 0.3,
+    elevation: 8,
+  },
+  header: {
+    fontSize: 24,
+    fontFamily: "PT-Bold",
+  },
+  subHeader: {
     fontSize: 16,
-    color: "#000",
-    fontWeight: "600"
+    fontFamily: "PT-Reg",
   },
-  itemTopic: {
-    fontSize: 14,
-    color: "#000",
-    fontWeight: "bold"
-  },
-  button: {
-    width: 200,
-    marginTop: 20,
-    marginBottom: 20
-  }
 });
