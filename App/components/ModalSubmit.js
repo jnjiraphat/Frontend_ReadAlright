@@ -62,6 +62,7 @@ const ModalSubmit = (props) => {
                 text={modalButton}
                 fontSize={16}
                 fontcolor="#000000"
+                fontFamily="PT-Bold"
                 height={39}
                 width={120}
                 radius={30}
