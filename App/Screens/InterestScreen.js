@@ -24,19 +24,17 @@ import axios from "axios";
 
 function HomeScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Home Screen</Text>
       <Button
         title="Go to Content"
-        onPress={() => navigation.navigate('Content')}
+        onPress={() => navigation.navigate("Content")}
       />
     </View>
   );
 }
 
-
 // const Stack = createStackNavigator();
-
 
 const ImageCards = () => {
   return <Image />;
@@ -227,7 +225,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 14,
     paddingLeft: 5,
-    fontFamily: "PT-Reg",
+    fontFamily: "PT-Bold",
   },
   cardImg: {
     width: 110,
@@ -238,7 +236,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     height: 20,
     width: 110,
-    alignContent: "center"
+    alignContent: "center",
   },
   card: {
     shadowOffset: {
@@ -257,6 +255,5 @@ const styles = StyleSheet.create({
   subHeader: {
     fontSize: 16,
     fontFamily: "PT-Reg",
-    
   },
 });
