@@ -9,7 +9,7 @@ const Avatar = (props) => {
         borderRadius: width / 2,
         marginRight: 15,
         width: width,
-        height: height,
+        height: width,
         backgroundColor: "#fff",
       }}
     >
