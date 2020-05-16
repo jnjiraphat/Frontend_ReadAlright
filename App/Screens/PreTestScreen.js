@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Constants from "expo-constants";
-import HeaderText from "../components/HeaderText";
 import ButtonClick from "../components/ButtonClick";
 // import whiteCardStyle from "../components/WhiteCardStyle";
 // import { useFonts } from "@use-expo/font";
@@ -63,19 +62,27 @@ const PreTest = () => {
           choice: [
             {
               choice: "Carrot",
-              color: "Orange",
+              choice_id: 1,
+              isRightChoice: 1,
+              question_id: 1,
             },
             {
               choice: "Cabbage",
-              color: "Purple",
+              choice_id: 2,
+              isRightChoice: 0,
+              question_id: 1,
             },
             {
               choice: "Strawberry",
-              color: "Red",
+              choice_id: 3,
+              isRightChoice: 0,
+              question_id: 1,
             },
             {
               choice: "Blueberry",
-              color: "Blue",
+              choice_id: 4,
+              isRightChoice: 0,
+              question_id: 1,
             },
           ],
         },
@@ -141,12 +148,12 @@ const PreTest = () => {
         <ScrollView style={styles.container}>
           <View style={{ alignItems: "center" }}>
             <View style={styles.textLayout}>
-              <HeaderText text="Pre-Test" />
+              <Text style={styles.header}>Pre-Test</Text>
               <Text style={styles.subHeader}>
                 Fill the gaps with the correct word from the box.
               </Text>
             </View>
-            <TestBox section={quizs} />
+            <TestBox section={sections} />
             {/* <FlatList
               data={}
               extraData={}
@@ -223,7 +230,12 @@ const styles = StyleSheet.create({
   subHeader: {
     marginTop: "5%",
     fontSize: 16,
+    fontFamily: "PT-Reg",
     // fontFamily: "PTSansCaption-Bold",
+  },
+  header: {
+    fontSize: 24,
+    fontFamily: "PT-Bold",
   },
   textLayout: {
     flex: 1,

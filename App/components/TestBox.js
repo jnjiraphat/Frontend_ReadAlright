@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useCallback } from "react";
 import { useState, useEffect } from "react";
 
 import {
@@ -10,14 +10,14 @@ import {
   StyleSheet,
   Dimensions,
   SafeAreaView,
+  Image,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import ButtonClick from "../components/ButtonClick";
 import ChoiceAPI from "../API/ChoiceAPI";
 import axios from "axios";
 
 const TestBox = (props) => {
-  // const [answer, setAnswer] = useState([]);
-
   // const array = [];
   const { section } = props;
   // console.log(quizs);
@@ -55,12 +55,141 @@ const TestBox = (props) => {
   //   // setAnswer();
   // };
 
+  function Item({
+    choice_id,
+    choice,
+    selected,
+    onSelect,
+    isRightChoice,
+    question_id,
+  }) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          // justifyContent: "center",
+          marginBottom: 10,
+          marginTop: 10,
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => onSelect({ choice_id, isRightChoice, question_id })}
+          style={{
+            alignItems: "center",
+            borderRadius: 10,
+            borderStyle: "solid",
+            borderWidth: 5,
+            borderColor: "transparent",
+            borderColor: selected ? "#FFD387" : "transparent",
+            height: 39,
+            width: 112,
+            shadowOffset: {
+              width: 0,
+              height: 4,
+            },
+            shadowRadius: 4.65,
+            shadowColor: "#000000",
+            shadowOpacity: 0.3,
+            elevation: 8,
+          }}
+        >
+          <LinearGradient
+            colors={["#E9B0FF", "#8A63E5"]}
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: 10,
+              height: 39,
+              width: 112,
+            }}
+          >
+            <Text
+              style={[
+                {
+                  fontSize: 14,
+                  color: "#000000",
+                  fontFamily: "PT-Reg",
+                },
+                { color: selected ? "#ffffff" : "#000000" },
+              ]}
+            >
+              {choice}
+            </Text>
+          </LinearGradient>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  // const [selected, setSelected] = React.useState(null);
+  // const onSelect = (choice_id) => {
+  //   setSelected(choice_id);
+  //   console.log(selected);
+  // };
+
+  // const onSelect = React.useCallback(
+  //   (choice_id) => {
+  //     const newSelected = new Map(selected);
+
+  //     newSelected.set(choice_id, !selected.get(choice_id));
+
+  //     setSelected(choice_id);
+  //   },
+  //   console.log(selected)
+  // );
+  const [score, setScore] = React.useState(new Map());
+  const [selected, setSelected] = React.useState(0);
+  // const [currentQuiz, setCurrent] = React.useState(0);
+  // const [prevQuiz, setPrev] = React.useState(0);
+  const onSelect = ({ choice_id, isRightChoice, question_id }) => {
+    setSelected(choice_id);
+    // setCurrent(question_id);
+    putScore(isRightChoice);
+  };
+
+  // const putScore = React.useCallback(
+  //   (isRightChoice) => {
+  //     const newScore = new Map(score);
+  //     newScore.set(isRightChoice, !score.get(isRightChoice));
+
+  //     setScore(newScore);
+  //   },
+  //   [setScore],
+  //   console.log(setScore)
+  // );
+  // const putScore = (isRightChoice) => {
+  //   let array = [1, 2, 3, 4, 5];
+  //   // Getting sum of numbers.
+  //   let sum = array.reduce(function (a, b) {
+  //     return a + b;
+  //   }, 0);
+  //   console.log(sum);
+
+  // if (currentQuiz !== prevQuiz){
+  //   if (isRightChoice === 1) {
+  //     setScore(score + 1);
+  //   } else if (isRightChoice === 0) {
+  //     setScore(score + 0);
+  //   }
+  // } else if(currentQuiz === prevQuiz){
+  //   if (isRightChoice === 1) {
+  //     setScore(score + 0);
+  //   } else if (isRightChoice === 0) {
+  //     setScore(score - 1);
+  //   }
+  // }
+  // };
+
   useEffect(() => {
-    // Answer();
-    // loopId();
-  }, []);
+    console.log(selected);
+    // console.log(score);
+  });
 
   const renderSection = ({ item }) => {
+    // if (item.choice_id == selected) {
+
+    // }
     return (
       <View style={styles.whiteCardChoice}>
         <View style={{ width: Dimensions.get("window").width / 1.35 }}>
@@ -69,23 +198,17 @@ const TestBox = (props) => {
             data={item.choice}
             numColumns={2}
             renderItem={({ item }) => (
-              <ButtonClick
-                // onPressAction={}
-                colorsStart="#E9B0FF"
-                colorsEnd="#8A63E5"
-                // padding=
-                radius={10}
-                height={39}
-                width={112}
-                fontSize={14}
-                fontcolor="#000"
-                fontFamily="PT-Reg"
-                text={item.choice}
-                marginBottom={10}
-                marginTop={10}
+              <Item
+                choice={item.choice}
+                choice_id={item.choice_id}
+                question_id={item.question_id}
+                isRightChoice={item.isRightChoice}
+                onSelect={onSelect}
+                selected={selected === item.choice_id}
               />
             )}
-            keyExtractor={(item, index) => item + index}
+            keyExtractor={(item) => item.choice_id}
+            extraData={selected}
           />
         </View>
       </View>

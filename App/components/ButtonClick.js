@@ -17,6 +17,7 @@ const ButtonClick = (props) => {
     marginBottom,
     marginTop,
     fontFamily,
+    styleButton,
   } = props;
 
   return (
@@ -31,21 +32,24 @@ const ButtonClick = (props) => {
     >
       <TouchableOpacity
         onPress={onPressAction}
-        style={{
-          padding: padding,
-          alignItems: "center",
-          borderRadius: radius,
-          height: height,
-          width: width,
-          shadowOffset: {
-            width: 0,
-            height: 4,
+        style={[
+          styleButton,
+          {
+            padding: padding,
+            alignItems: "center",
+            borderRadius: radius,
+            height: height,
+            width: width,
+            shadowOffset: {
+              width: 0,
+              height: 4,
+            },
+            shadowRadius: 4.65,
+            shadowColor: "#000000",
+            shadowOpacity: 0.3,
+            elevation: 8,
           },
-          shadowRadius: 4.65,
-          shadowColor: "#000000",
-          shadowOpacity: 0.3,
-          elevation: 8,
-        }}
+        ]}
       >
         <LinearGradient
           colors={[colorsStart, colorsEnd]}
