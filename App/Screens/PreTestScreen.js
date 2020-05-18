@@ -153,8 +153,9 @@ const PreTest = () => {
                 Fill the gaps with the correct word from the box.
               </Text>
             </View>
-            <TestBox section={sections} />
-            {/* <FlatList
+          </View>
+          <TestBox section={quizs} />
+          {/* <FlatList
               data={}
               extraData={}
               numColumns={2}
@@ -193,12 +194,12 @@ const PreTest = () => {
     </View>
               )}
             /> */}
-          </View>
-          <ModalSubmit
+
+          {/* <ModalSubmit
             modalHeader="Your Level of our suggestion is"
             modalText="A1"
             modalButton="Finish"
-          />
+          /> */}
         </ScrollView>
       </LinearGradient>
     );
