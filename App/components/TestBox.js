@@ -1,5 +1,8 @@
 import React, { Component, useCallback } from "react";
 import { useState, useEffect } from "react";
+import ModalSubmit from "../components/ModalSubmit";
+import Dialog, { DialogContent } from "react-native-popup-dialog";
+import { Actions } from "react-native-router-flux";
 
 import {
   Text,
@@ -11,15 +14,88 @@ import {
   Dimensions,
   SafeAreaView,
   Image,
+  Modal,
+  Button,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import ButtonClick from "../components/ButtonClick";
 import ChoiceAPI from "../API/ChoiceAPI";
 import axios from "axios";
 
+const userAnswer = [];
 const TestBox = (props) => {
   // const array = [];
   const { section } = props;
+  const [check, setCheck] = useState([false]);
+  const [myScore, setMyScore] = useState(0);
+  const [visible, setVisible] = useState(false);
+
+  const Checking = () => {
+    // selected.forEach(logMapElements);
+    try {
+      var count = 0;
+
+      selected.forEach(logMapElements);
+
+      function logMapElements(value, key, map) {
+        console.log(`m[${key}] = ${value}`);
+        if (value == true) {
+          userAnswer.push(key);
+        }
+        console.log("length = " + userAnswer.length);
+      }
+      for (let index = 0; index < userAnswer.length; index++) {
+        console.log(userAnswer[index]);
+        // count += 1;
+        // console.log(count);
+        if (userAnswer[index] == "27") {
+          console.log("true");
+          count += 1;
+        } else if (userAnswer[index] == "30") {
+          console.log("true");
+          count += 1;
+        } else if (userAnswer[index] == "33") {
+          console.log("true");
+
+          count += 1;
+        } else if (userAnswer[index] == "38") {
+          console.log("true");
+
+          count += 1;
+        } else if (userAnswer[index] == "42") {
+          console.log("true");
+
+          count += 1;
+        } else if (userAnswer[index] == "45") {
+          console.log("true");
+
+          count += 1;
+        } else if (userAnswer[index] == "52") {
+          console.log("true");
+
+          count += 1;
+        } else if (userAnswer[index] == "54") {
+          console.log("true");
+
+          count += 1;
+        } else if (userAnswer[index] == "57") {
+          console.log("true");
+
+          count += 1;
+        } else if (userAnswer[index] == "64") {
+          console.log("true");
+
+          count += 1;
+        }
+      }
+    } catch (e) {
+    } finally {
+      setMyScore(count);
+      setVisible(true);
+    }
+
+    //Actions.Home({ text: arrayIdCate });
+  };
   // console.log(quizs);
   // console.log(quizs.length);
 
@@ -62,6 +138,7 @@ const TestBox = (props) => {
     onSelect,
     isRightChoice,
     question_id,
+    count = 0,
   }) {
     return (
       <View
@@ -74,7 +151,7 @@ const TestBox = (props) => {
         }}
       >
         <TouchableOpacity
-          onPress={() => onSelect({ choice_id, isRightChoice, question_id })}
+          onPress={() => onSelect(choice_id, isRightChoice, question_id, count)}
           style={{
             alignItems: "center",
             borderRadius: 10,
@@ -139,14 +216,38 @@ const TestBox = (props) => {
   //   console.log(selected)
   // );
   const [score, setScore] = React.useState(new Map());
-  const [selected, setSelected] = React.useState(0);
+  // const [selected, setSelected] = React.useState(0);
   // const [currentQuiz, setCurrent] = React.useState(0);
   // const [prevQuiz, setPrev] = React.useState(0);
-  const onSelect = ({ choice_id, isRightChoice, question_id }) => {
-    setSelected(choice_id);
-    // setCurrent(question_id);
-    putScore(isRightChoice);
-  };
+  const [selected, setSelected] = React.useState(new Map());
+
+  const onSelect = React.useCallback(
+    (choice_id) => {
+      const newSelected = new Map(selected);
+      newSelected.set(choice_id, !selected.get(choice_id));
+
+      setSelected(newSelected);
+    },
+    [selected],
+    console.log(selected)
+  );
+  // const onSelect = ({ choice_id, isRightChoice, question_id }) => {
+  //   const newSelected = new Map(selected);
+  //   newSelected.set(choice_id, !selected.get(choice_id));
+  //   setSelected(choice_id);
+
+  //   [selected], console.log(selected);
+  //   // if (userAnswer.indexOf(choice_id) == -1) {
+  //   //   userAnswer.push(choice_id);
+  //   // } else {
+  //   //   console.log("Dup");
+
+  //   //   userAnswer.splice(userAnswer.indexOf(choice_id), 1);
+  //   // }
+  //   // console.log(userAnswer);
+  //   // setCurrent(question_id);
+  //   // putScore(isRightChoice);
+  // };
 
   // const putScore = React.useCallback(
   //   (isRightChoice) => {
@@ -182,7 +283,7 @@ const TestBox = (props) => {
   // };
 
   useEffect(() => {
-    console.log(selected);
+    // console.log(selected);
     // console.log(score);
   });
 
@@ -204,7 +305,7 @@ const TestBox = (props) => {
                 question_id={item.question_id}
                 isRightChoice={item.isRightChoice}
                 onSelect={onSelect}
-                selected={selected === item.choice_id}
+                selected={!!selected.get(item.choice_id)}
               />
             )}
             keyExtractor={(item) => item.choice_id}
@@ -263,14 +364,48 @@ const TestBox = (props) => {
 
   // render()
   return (
-    <SectionList
-      sections={section}
-      keyExtractor={(item, index) => item + index}
-      contentContainerStyle={{ alignItems: "center", marginVertical: "7%" }}
-      renderSectionHeader={renderSectionHeader}
-      // renderSectionHeader={renderSection}
-      renderItem={renderSection}
-    />
+    <View>
+      <SectionList
+        sections={section}
+        keyExtractor={(item, index) => item + index}
+        contentContainerStyle={{ alignItems: "center", marginVertical: "7%" }}
+        renderSectionHeader={renderSectionHeader}
+        // renderSectionHeader={renderSection}
+        renderItem={renderSection}
+      />
+      <ButtonClick
+        text="Next"
+        fontSize={24}
+        fontFamily="PT-Bold"
+        fontcolor="#000000"
+        height={39}
+        width={245}
+        radius={30}
+        padding={0}
+        marginBottom="10%"
+        onPressAction={Checking}
+        // shadowRadius={30}
+        colorsStart="#7EF192"
+        colorsEnd="#2DC897"
+      />
+
+      <Dialog
+        visible={visible}
+        onTouchOutside={() => {
+          setVisible(false);
+          Actions.Interest();
+        }}
+      >
+        <DialogContent>
+          <Text>This is your score {myScore}</Text>
+        </DialogContent>
+      </Dialog>
+      {/* {myScore ? (
+        <Text>This is Your Score{myScore}</Text>
+      ) : (
+        <Text>Waiting</Text>
+      )} */}
+    </View>
   );
 };
 export default TestBox;
