@@ -1,10 +1,10 @@
 {
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://pi-sir.gnbiiie3.frontend-readalright.exp.direct",
-  "packagerNgrokUrl": "https://packager.pi-sir.gnbiiie3.frontend-readalright.exp.direct",
-  "ngrokPid": 36981,
-  "packagerPort": 19003,
-  "packagerPid": 36894,
+  "expoServerPort": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+  "packagerPort": null,
+  "packagerPid": null,
   "webpackServerPort": null,
   "devToolsPort": 19002
 }

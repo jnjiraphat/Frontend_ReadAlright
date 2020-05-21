@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
 
   headerImg: {
     height: Dimensions.get("window").height / 3.5,
-    width: Dimensions.get("window").width 
+    width: Dimensions.get("window").width,
   },
 
   //whiteCard
@@ -140,5 +140,6 @@ const styles = StyleSheet.create({
     elevation: 8,
     marginBottom: "10%",
     paddingVertical: 20,
+    paddingHorizontal: 10,
   },
 });

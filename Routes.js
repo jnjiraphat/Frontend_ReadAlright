@@ -92,7 +92,6 @@ const Routes = () => {
             title="PreTest"
             hideNavBar
             hideTabBar
-            initial
             showLabel={false}
           />
           <Scene
@@ -150,7 +149,6 @@ const Routes = () => {
             component={ContentScreen}
             title="ContentScreen"
             // hideNavBar
-            // initial
             hideTabBar
             showLabel={false}
           />
