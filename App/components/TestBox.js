@@ -29,6 +29,7 @@ const TestBox = (props) => {
   const [check, setCheck] = useState([false]);
   const [myScore, setMyScore] = useState(0);
   const [visible, setVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const Checking = () => {
     // selected.forEach(logMapElements);
@@ -91,7 +92,8 @@ const TestBox = (props) => {
     } catch (e) {
     } finally {
       setMyScore(count);
-      setVisible(true);
+      // setVisible(true);
+      setModalVisible(true);
     }
 
     //Actions.Home({ text: arrayIdCate });
@@ -388,8 +390,17 @@ const TestBox = (props) => {
         colorsStart="#7EF192"
         colorsEnd="#2DC897"
       />
-
-      <Dialog
+      <ModalSubmit
+        modalVisible={modalVisible}
+        modalText={myScore}
+        modalHeader="Your Score is"
+        modalButton="Next"
+        ModalAction={() => {
+          setModalVisible(false);
+          Actions.Interest();
+        }}
+      />
+      {/* <Dialog
         visible={visible}
         onTouchOutside={() => {
           setVisible(false);
@@ -399,7 +410,7 @@ const TestBox = (props) => {
         <DialogContent>
           <Text>This is your score {myScore}</Text>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
       {/* {myScore ? (
         <Text>This is Your Score{myScore}</Text>
       ) : (

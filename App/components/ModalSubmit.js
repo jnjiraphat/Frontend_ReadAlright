@@ -11,27 +11,33 @@ import { LinearGradient } from "expo-linear-gradient";
 import ButtonClick from "./ButtonClick";
 
 const ModalSubmit = (props) => {
-  const { modalText, modalHeader, modalButton } = props;
-  const [modalVisible, setModalVisible] = useState(false);
+  const {
+    modalText,
+    modalHeader,
+    modalButton,
+    ModalAction,
+    modalVisible,
+  } = props;
+  // const [modalVisible, setModalVisible] = useState(false);
   return (
     <View>
-      <ButtonClick
-        text="Submit"
-        fontSize={24}
-        fontcolor="#000000"
-        fontFamily="PT-Bold"
-        height={39}
-        width={245}
-        radius={30}
-        padding={0}
-        marginBottom="10%"
-        onPressAction={() => {
-          setModalVisible(true);
-        }}
-        // shadowRadius={30}
-        colorsStart="#7EF192"
-        colorsEnd="#2DC897"
-      />
+      {/* //   <ButtonClick
+    //     text="Submit"
+    //     fontSize={24}
+    //     fontcolor="#000000"
+    //     fontFamily="PT-Bold"
+    //     height={39}
+    //     width={245}
+    //     radius={30}
+    //     padding={0}
+    //     marginBottom="10%"
+    //     onPressAction={() => {
+    //       setModalVisible(true);
+    //     }}
+    //     // shadowRadius={30}
+    //     colorsStart="#7EF192"
+    //     colorsEnd="#2DC897"
+    //   /> */}
       <View style={styles.centeredView}>
         <Modal
           animationType="slide"
@@ -68,9 +74,7 @@ const ModalSubmit = (props) => {
                 radius={30}
                 padding={0}
                 marginBottom="20%"
-                onPressAction={() => {
-                  setModalVisible(!modalVisible);
-                }}
+                onPressAction={ModalAction}
                 // shadowRadius={30}
                 colorsStart="#FFD387"
                 colorsEnd="#FCDE58"
