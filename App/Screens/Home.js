@@ -20,6 +20,8 @@ import TimelineCard from "../components/TimelineCard";
 import VocabCateApi from "../API/VocabCateAPI";
 
 import CarouselCard from "../components/CarouselCard";
+import CarouselCard2 from "../components/CarouselCard2";
+
 import CategoryCard from "../components/CategoryCard";
 import ButtonClick from "../components/ButtonClick";
 import NewVocab from "../API/NewVocabAPI";
@@ -122,7 +124,7 @@ const home = (props) => {
         </View>
         <View style={styles.ContentCarousel}>
           <Text style={styles.topic}>Maybe you like</Text>
-          <CarouselCard result={result} />
+          <CarouselCard2 result={result} />
         </View>
         <View style={styles.ContentCategory}>
           <Text style={[styles.topic, { marginLeft: "5%" }]}>Category</Text>
@@ -191,7 +193,7 @@ const home = (props) => {
       .then((response) => {
         // console.log("------------mookkakeiei-------------");
         console.log(response.data.reading);
-        console.log("-------------------------");
+        console.log("-------------------------abcdef");
         // console.log("round = " + [index]);
         // for (let j = 0; j < response.data.reading.length; j++) {
         //   arrayReading.push(response.data.reading[j]);
