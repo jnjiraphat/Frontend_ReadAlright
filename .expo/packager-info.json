@@ -2,9 +2,9 @@
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://cf-x6v.anonymous.senior-project.exp.direct",
   "packagerNgrokUrl": "https://packager.cf-x6v.anonymous.senior-project.exp.direct",
-  "ngrokPid": 16008,
+  "ngrokPid": 3032,
   "packagerPort": 19001,
-  "packagerPid": 1620,
+  "packagerPid": 25280,
   "webpackServerPort": null,
   "devToolsPort": 19002
 }

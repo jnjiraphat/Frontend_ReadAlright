@@ -2,6 +2,7 @@ import React, { Component, useCallback } from "react";
 import { useState, useEffect } from "react";
 import ModalSubmit from "../components/ModalSubmit";
 import Dialog, { DialogContent } from "react-native-popup-dialog";
+import { Actions } from "react-native-router-flux";
 
 import {
   Text,
@@ -392,6 +393,7 @@ const TestBox = (props) => {
         visible={visible}
         onTouchOutside={() => {
           setVisible(false);
+          Actions.Interest();
         }}
       >
         <DialogContent>
