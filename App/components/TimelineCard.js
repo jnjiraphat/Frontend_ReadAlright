@@ -16,7 +16,7 @@ const TimelineCard = (props) => {
           }}
         >
           <Image
-            source={{uri:img}}
+            source={{ uri: img }}
             style={{
               height: imgHeight,
               width: width,
