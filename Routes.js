@@ -6,6 +6,7 @@ import Article from "./App/Screens/Article.js";
 import InterestScreen from "./App/Screens/InterestScreen.js";
 import ContentScreen from "./App/Screens/ContentScreen";
 import MyHome from "./App/Screens/Home.js";
+import Login from "./App/Screens/Login"
 // import Home from "../App/Screens/Home";
 import Tricks from "./App/Screens/Tricks";
 import Mylist from "./App/Screens/Mylist";
@@ -87,6 +88,14 @@ const Routes = () => {
       <Router>
         <Scene key="root" hideNavBar showLabel={false}>
           <Scene
+            key="Login"
+            component={Login}
+            title="Login"
+            hideNavBar
+            hideTabBar
+            showLabel={false}
+          />
+          <Scene
             key="PreTest"
             component={PreTest}
             title="PreTest"
@@ -102,7 +111,6 @@ const Routes = () => {
             hideTabBar
             showLabel={false}
           />
-
           <Scene
             key="tabbar"
             tabs

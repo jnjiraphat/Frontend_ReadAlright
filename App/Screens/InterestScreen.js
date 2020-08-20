@@ -193,6 +193,7 @@ export default function () {
           // shadowRadius={30}
           colorsStart="#7EF192"
           colorsEnd="#2DC897"
+          flex={1}
         />
       </SafeAreaView>
     );

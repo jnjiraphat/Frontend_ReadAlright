@@ -91,44 +91,6 @@ const PreTest = () => {
   ];
 
   const quizQuestion = [];
-
-  // let [fontsLoaded] = useFonts({
-  //   // "PTSansCaption-Regular": require("../assets/font/PTSansCaption-Regular.ttf"),
-  //   "PTSansCaption-Bold": require("../assets/font/PTSansCaption-Bold.ttf"),
-  // });
-  // if (!fontsLoaded) {
-  //   return console.log("Font not load");
-  // } else {
-
-  // const renderSectionListItem = ({ item }) => {
-  //   return (
-  //     <FlatList
-  //       data={item}
-  //       numColumns={2}
-  //       contentContainerStyle={{ flexDirection: "row" }}
-  //       renderItem={({ item }) => (
-  //         <ButtonClick
-  //           // onPressAction={}
-  //           colorsStart="#E9B0FF"
-  //           colorsEnd="#8A63E5"
-  //           // padding=
-  //           radius={10}
-  //           height={39}
-  //           width={112}
-  //           fontSize={14}
-  //           // fontWeight="normal"
-  //           fontcolor="#000"
-  //           text={item}
-  //           marginBottom={10}
-  //           marginTop={10}
-  //         />
-  //       )}
-  //     />
-  //   );
-  // };
-
-  // if (quizs.length>0) {
-  //   console.log(quizs.length)
   if (quizs) {
     console.log("This is quizs");
 
@@ -211,15 +173,6 @@ const PreTest = () => {
     );
   }
 
-  // } else {
-  //   return (
-  //     <View>
-  //       <Text>Loading</Text>
-  //     </View>
-  //   );
-  // }
-
-  // }
 };
 export default PreTest;
 

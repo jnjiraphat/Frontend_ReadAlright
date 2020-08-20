@@ -18,14 +18,14 @@ const ButtonClick = (props) => {
     marginTop,
     fontFamily,
     styleButton,
+    flex
   } = props;
 
   return (
     <View
       style={{
-        flex: 1,
+        flex: flex,
         alignItems: "center",
-        // justifyContent: "center",
         marginBottom: marginBottom,
         marginTop: marginTop,
       }}
