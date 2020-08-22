@@ -12,6 +12,7 @@ import Tricks from "./App/Screens/Tricks";
 import Mylist from "./App/Screens/Mylist";
 import PreTest from "./App/Screens/PreTestScreen";
 import uploadImage from "./App/Screens/uploadImage";
+import TestQuiz from "./App/Screens/TestQuiz";
 
 // import Article from "./App/Screens/Article"
 import { Ionicons } from "@expo/vector-icons";
@@ -87,6 +88,14 @@ const Routes = () => {
     return (
       <Router>
         <Scene key="root" hideNavBar showLabel={false}>
+          <Scene
+            key="TestQuiz"
+            component={TestQuiz}
+            title="TestQuiz"
+            hideNavBar
+            hideTabBar
+            showLabel={false}
+          />
           <Scene
             key="Login"
             component={Login}

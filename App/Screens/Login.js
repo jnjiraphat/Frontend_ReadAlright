@@ -12,11 +12,6 @@ const Login = () => {
         console.log(data)
     };
 
-    useEffect(() => {
-        register("username");
-        register("password");
-    }, [register])
-
     return (
         <SafeAreaView style={styles.container}>
             <Controller
@@ -57,6 +52,7 @@ const Login = () => {
 
             <View style={styles.forgotArea}>
                 <Text style={styles.forgot}>FORGOT PASSWORD?</Text>
+                <Text style={styles.forgot}>Register</Text>
             </View>
             <ButtonClick
                 text="LOGIN"
