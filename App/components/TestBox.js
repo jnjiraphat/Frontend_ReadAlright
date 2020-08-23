@@ -141,6 +141,7 @@ const TestBox = (props) => {
     isRightChoice,
     question_id,
     count = 0,
+    disabled
   }) {
     return (
       <View
@@ -158,7 +159,7 @@ const TestBox = (props) => {
             alignItems: "center",
             borderRadius: 10,
             borderStyle: "solid",
-            borderWidth: 5,
+             borderWidth: 5,
             borderColor: "transparent",
             borderColor: selected ? "#FFD387" : "transparent",
             height: 39,
@@ -308,6 +309,7 @@ const TestBox = (props) => {
                 isRightChoice={item.isRightChoice}
                 onSelect={onSelect}
                 selected={!!selected.get(item.choice_id)}
+                
               />
             )}
             keyExtractor={(item) => item.choice_id}
@@ -333,7 +335,7 @@ const TestBox = (props) => {
             renderItem={({ item }) => (
               <Text style={styles.textQuestion}>{item.question}</Text>
             )}
-            // keyExtractor={keyExtractor}
+          // keyExtractor={keyExtractor}
           />
         </View>
       </View>
