@@ -112,10 +112,27 @@ export default class TestQuiz extends React.Component {
                         console.log("index--" + this.state.result[index] + " is " + this.state.result[index].value.value)
                         if (this.state.result[index].value.isRightChoice == 1) {
                             count += 1
-                            console.log("index " + this.state.result[index] + " is " + this.state.result[index].isRightChoice)
+                            console.log("index " + this.state.result[index] + " is " + this.state.result[index].value.isRightChoice)
                         }else{
-                            
-                            console.log("index " + this.state.result[index] + " is " + this.state.result[index].isRightChoice + " is wrong") 
+                                axios
+                                  .post("http://10.0.2.2:3000/answers", {
+                                    "isRightChoice": this.state.result[index].value.isRightChoice,
+                                    "choice": this.state.result[index].value.choice,
+                                    "optionText": this.state.result[index].value.optionText,
+                                    "value": this.state.result[index].value.value,
+                                    "choice_id": this.state.result[index].value.choice_id,
+                                    "question_id":this.state.result[index].value.question_id
+                                  })
+                                  .then(
+                                    (response) => {
+                                      console.log("upload success!!!");
+                                    },
+                                    (error) => {
+                                      console.log(error);
+                                    }
+                                  );
+                              
+                            console.log("index " + this.state.result[index] + " is " + this.state.result[index].value.isRightChoice + " is wrong") 
                            
                         }
                         // if (this.state.result[index].value.value == "took") {

@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import { Text, View, StyleSheet } from "react-native";
 import ButtonNoClick from "../components/ButtonNoClick";
 
 const AreaProfile = (props) => {
   const [name, showName] = useState("Thanatcha");
-  const { display, level } = props;
-  const [sugggestion, hideSuggestion] = useState(
-    "You should practice adverb more"
-  );
-  return (
+  const { display, level, suggestion } = props;
+  console.log("In Area")
+  console.log(suggestion)
+  console.log(suggestion.length)
+  console.log("In Area")
+
+
+  return suggestion != null ? (
+
     <View style={{ flexDirection: "column" }}>
       <View style={{ flexDirection: "row" }}>
         <ButtonNoClick
@@ -34,12 +39,14 @@ const AreaProfile = (props) => {
         </Text>
       </View>
       <View style={{ display: display, marginTop: "3%" }}>
-        <Text style={styles.textSug}>{sugggestion} </Text>
-        <Text style={styles.textSug}>{sugggestion} </Text>
-        <Text style={styles.textSug}>{sugggestion} </Text>
+        <Text style={styles.textSug}>0</Text>
+        <Text style={styles.textSug}>0 </Text>
+        <Text style={styles.textSug}>0 </Text>
       </View>
     </View>
-  );
+  ) : (
+      <View> Loading Areaaaaaaaaaaaaaaa</View>
+    )
 };
 
 export default AreaProfile;

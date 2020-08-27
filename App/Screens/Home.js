@@ -32,6 +32,9 @@ const arrayReading = [];
 
 // const arrayId = [];
 
+
+
+
 const home = (props) => {
   console.log("This is props");
   console.log(props.text);
@@ -76,13 +79,29 @@ const home = (props) => {
         setResultNew(response.data);
       });
   };
+  const [suggestion, setSuggestion] = useState([]);
 
+
+  const getSuggestion = async () => {
+    const data = await axios
+      .get("http://10.0.2.2:3000/answer/suggestions/1")
+      .then((response) => {
+        console.log("Suggestion");
+        // console.log(response.data.length);
+        console.log(response.data.answer);
+        console.log("Suggestion");
+
+        setSuggestion(response.data.answer)
+
+      });
+  };
   useEffect(() => {
     read();
     getReadaingByCateId();
     getNewReading();
     vocab();
     newvocab();
+    getSuggestion();
   }, []);
 
   function goToContentScreen(readingId) {
@@ -206,13 +225,14 @@ const home = (props) => {
   };
 
   const tabSwitch = [{ title: "Reading" }, { title: "Vocabulary" }];
-  if (result) {
+  if (result&&suggestion) {
     return (
       <View style={styles.container}>
         <Header
           tabs={tabSwitch}
           ContentDefault={ContentDefault()}
           ContentChange={ContentChange()}
+          suggestion={suggestion}
         />
         {/*เดะ
         <SwitchType tabs={tabSwitch} /> */}
