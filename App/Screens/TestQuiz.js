@@ -26,7 +26,8 @@ export default class TestQuiz extends React.Component {
             dataArrayQuiz: [],
             result: [],
             modalVisible: false,
-            score: 0
+            score: 0,
+            correctChoice: []
         };
         this.fetchAPI();
     }
@@ -63,6 +64,7 @@ export default class TestQuiz extends React.Component {
 
         await this.converData().then((result) => {
             console.log(result.length + "eiei")
+            console.log(result)
             this.setState({
                 result: result,
             });
@@ -78,6 +80,27 @@ export default class TestQuiz extends React.Component {
         await this.checkAnswer();
     }
     checkAnswer = async () => {
+        // var tempCorrectChoice = [];
+        // for (let index = 0; index <= 100; index++) {
+        //     await axios.get("http://10.0.2.2:3000/correctChoices").then(
+        //         (response) => {
+        //             console.log(response.data);
+        //             tempCorrectChoice.push(response.data);
+        //             console.log(tempCorrectChoice.length);
+        //         },
+        //         (error) => {
+        //             console.log(error);
+        //         }
+        //     );
+        // }
+        // this.setState({
+        //    correctChoice: tempCorrectChoice,
+        // });
+        // console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++")
+        // console.log(correctChoice)
+        // this.setState({
+        //     quizs: dataArrayQuiz,
+        // });
         var count = 0;
         setTimeout(() => {
             if (this.state.result.length != 10) {
@@ -86,36 +109,45 @@ export default class TestQuiz extends React.Component {
                 console.log(this.state.result.length + "koko")
                 try {
                     for (let index = 0; index < this.state.result.length; index++) {
-                        if (this.state.result[index].value.value == "took") {
+                        console.log("index--" + this.state.result[index] + " is " + this.state.result[index].value.value)
+                        if (this.state.result[index].value.isRightChoice == 1) {
                             count += 1
-                        } else if (this.state.result[index].value.value == "instructions") {
-                            count += 1
-
-                        } else if (this.state.result[index].value.value == "compulsory") {
-                            count += 1
-
-                        } else if (this.state.result[index].value.value == "friendless") {
-                            count += 1
-
-                        } else if (this.state.result[index].value.value == "population") {
-                            count += 1
-
-                        } else if (this.state.result[index].value.value == "impression") {
-                            count += 1
-
-                        } else if (this.state.result[index].value.value == "atmosphere") {
-                            count += 1
-
-                        } else if (this.state.result[index].value.value == "consists?") {
-                            count += 1
-
-                        } else if (this.state.result[index].value.value == "pay") {
-                            count += 1
-
-                        } else if (this.state.result[index].value.value == "addition") {
-                            count += 1
-
+                            console.log("index " + this.state.result[index] + " is " + this.state.result[index].isRightChoice)
+                        }else{
+                            
+                            console.log("index " + this.state.result[index] + " is " + this.state.result[index].isRightChoice + " is wrong") 
+                           
                         }
+                        // if (this.state.result[index].value.value == "took") {
+                        //     count += 1
+                        // } else if (this.state.result[index].value.value == "instructions") {
+                        //     count += 1
+
+                        // } else if (this.state.result[index].value.value == "compulsory") {
+                        //     count += 1
+
+                        // } else if (this.state.result[index].value.value == "friendless") {
+                        //     count += 1
+
+                        // } else if (this.state.result[index].value.value == "population") {
+                        //     count += 1
+
+                        // } else if (this.state.result[index].value.value == "impression") {
+                        //     count += 1
+
+                        // } else if (this.state.result[index].value.value == "atmosphere") {
+                        //     count += 1
+
+                        // } else if (this.state.result[index].value.value == "consists?") {
+                        //     count += 1
+
+                        // } else if (this.state.result[index].value.value == "pay") {
+                        //     count += 1
+
+                        // } else if (this.state.result[index].value.value == "addition") {
+                        //     count += 1
+
+                        // }
                     }
                 } catch (error) {
 
