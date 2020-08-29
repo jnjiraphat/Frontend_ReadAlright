@@ -185,7 +185,7 @@ const home = (props) => {
             <Text style={[styles.topic, { marginLeft: "5%" }]}>Category</Text>
             <CategoryCardVocab result={cateVocabBox} />
           </View>
-          <ButtonClick
+          <ButtonClick 
             text="Challenge"
             fontSize={24}
             fontFamily="PT-Bold"

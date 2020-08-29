@@ -48,6 +48,15 @@ const AreaProfile = (props) => {
           }}  
           keyExtractor={(item, index) => index}
         />
+
+
+
+
+
+
+
+
+
       </View>
     </View>
   ) : (

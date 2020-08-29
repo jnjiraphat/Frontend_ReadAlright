@@ -27,10 +27,14 @@ export default class TestQuiz extends React.Component {
             result: [],
             modalVisible: false,
             score: 0,
-            correctChoice: []
+            correctChoice: [],
+            reading_id: this.props.text
+            
         };
         this.fetchAPI();
+        // console.log("This is  " + this.reading_id);
     }
+    
 
     onSurveyFinished(answers) {
         const infoQuestionsRemoved = [...answers];
@@ -133,7 +137,7 @@ export default class TestQuiz extends React.Component {
                                   );
                               
                             console.log("index " + this.state.result[index] + " is " + this.state.result[index].value.isRightChoice + " is wrong") 
-                           
+                        
                         }
                         // if (this.state.result[index].value.value == "took") {
                         //     count += 1
@@ -180,22 +184,26 @@ export default class TestQuiz extends React.Component {
 
     }
     fetchAPI = async () => {
-        var dataArrayQuiz = [];
-        for (let index = 7; index <= 16; index++) {
-            await axios.get("http://10.0.2.2:3000/quiz/" + index).then(
-                (response) => {
-                    console.log(response.data);
-                    dataArrayQuiz.push(response.data);
-                    console.log(dataArrayQuiz.length);
-                },
-                (error) => {
-                    console.log(error);
-                }
-            );
+        if(this.state.reading_id != null){
+            var dataArrayQuiz = [];
+            for (let index = 7; index <= 16; index++) {
+                await axios.get("http://10.0.2.2:3000/quiz/" + index).then(
+                    (response) => {
+                        console.log(response.data);
+                        dataArrayQuiz.push(response.data);
+                        console.log(dataArrayQuiz.length);
+                    },
+                    (error) => {
+                        console.log(error);
+                    }
+                );
+            }
+            this.setState({
+                quizs: dataArrayQuiz,
+            });
+        } else{
+            
         }
-        this.setState({
-            quizs: dataArrayQuiz,
-        });
     };
 
     renderPreviousButton(onPress, enabled) {
@@ -287,6 +295,7 @@ export default class TestQuiz extends React.Component {
                     <Text style={styles.header}>Pre-Test</Text>
                     <Text style={styles.subHeader}>
                         Fill the gaps with the correct word from the box.
+                        {/* {this.state.reading_id} */}
               </Text>
                     <View style={styles.whiteCardChoice}>
                         <SimpleSurvey

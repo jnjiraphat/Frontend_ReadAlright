@@ -50,9 +50,15 @@ const Content = (props) => {
   useEffect(() => {
     read();
   }, []);
-  console.log("This is reading id");
+  console.log("This is reading id  ");
   console.log(props.text);
 
+  function goToChallenge(reading_id) {
+    console.log("readingIDDDDDDDDDDDD  " + reading_id);
+    Actions.TestQuiz({ text: reading_id });
+    console.log("Finish " + reading_id)
+    // console.log("readingIDDDDDDDDDDDD" + reading_id);
+  }
   // const goToAbout = () => {
   //    Actions.about()
   // }
@@ -68,7 +74,7 @@ const Content = (props) => {
             <View style={styles.whiteCard}>
               <Text style={styles.content}>{item.content}</Text>
             </View>
-            <ButtonClick
+            <ButtonClick  onPressAction={() => goToChallenge(item.reading_id)}
               text="Challenge"
               fontSize={24}
               fontFamily="PT-Bold"
@@ -83,6 +89,8 @@ const Content = (props) => {
               // shadowRadius={30}
               colorsStart="#2DC897"
               colorsEnd="#7EF192"
+              
+              // contentId = {item.reading_id}
             />
           </View>
         )}

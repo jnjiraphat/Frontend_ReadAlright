@@ -89,9 +89,9 @@ const Routes = () => {
       <Router>
         <Scene key="root" hideNavBar showLabel={false}>
           <Scene
-            key="TestQuiz"
-            component={TestQuiz}
-            title="TestQuiz"
+            key="MyHome"
+            component={MyHome}
+            title="MyHome"
             hideNavBar
             hideTabBar
             showLabel={false}
@@ -165,6 +165,15 @@ const Routes = () => {
             key="ContentScreen"
             component={ContentScreen}
             title="ContentScreen"
+            // hideNavBar
+            hideTabBar
+            showLabel={false}
+          />
+
+          <Scene
+            key="TestQuiz"
+            component={TestQuiz}
+            title="TestQuiz"
             // hideNavBar
             hideTabBar
             showLabel={false}

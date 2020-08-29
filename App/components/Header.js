@@ -23,6 +23,10 @@ const Header = (props) => {
   console.log("In header")
   const onPress = () => {
     if (check == true) {
+
+
+
+      
       setCheck(false);
       console.log(check);
     } else if (check == false) {
