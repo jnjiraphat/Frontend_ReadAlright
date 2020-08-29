@@ -20,7 +20,6 @@ import TimelineCard from "../components/TimelineCard";
 import VocabCateApi from "../API/VocabCateAPI";
 
 import CarouselCard from "../components/CarouselCard";
-import CarouselCard2 from "../components/CarouselCard2";
 
 import CategoryCard from "../components/CategoryCard";
 import ButtonClick from "../components/ButtonClick";
@@ -143,7 +142,7 @@ const home = (props) => {
         </View>
         <View style={styles.ContentCarousel}>
           <Text style={styles.topic}>Maybe you like</Text>
-          <CarouselCard2 result={result} />
+          <CarouselCard result={result} />
         </View>
         <View style={styles.ContentCategory}>
           <Text style={[styles.topic, { marginLeft: "5%" }]}>Category</Text>
