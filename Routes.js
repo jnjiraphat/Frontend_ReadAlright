@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Text } from "react-native";
 import { Router, Scene, Tabs } from "react-native-router-flux";
 import Article from "./App/Screens/Article.js";
 // import MaybeYouLike from "./App/Screens/MaybeYouLike";
@@ -14,11 +13,14 @@ import PreTest from "./App/Screens/PreTestScreen";
 import uploadImage from "./App/Screens/uploadImage";
 import TestQuiz from "./App/Screens/TestQuiz";
 
+import Line from "./App/assets/Line.png"
+import img1 from './App/assets/img1.png'
+
 // import Article from "./App/Screens/Article"
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { StyleSheet, Dimensions, View } from "react-native";
+import { StyleSheet, Dimensions, View, TouchableOpacity,Image, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "@use-expo/font";
 
@@ -87,11 +89,11 @@ const Routes = () => {
   if (fontsLoaded) {
     return (
       <Router>
-        <Scene key="root" hideNavBar showLabel={false}>
-          <Scene
-            key="MyHome"
-            component={MyHome}
-            title="MyHome"
+        <Scene key="root" showLabel={false} navTransparent={true}>
+          {/* <Scene
+            key="TestQuiz"
+            component={TestQuiz}
+            title="TestQuiz"
             hideNavBar
             hideTabBar
             showLabel={false}
@@ -105,27 +107,19 @@ const Routes = () => {
             showLabel={false}
           />
           <Scene
-            key="PreTest"
-            component={PreTest}
-            title="PreTest"
-            hideNavBar
-            hideTabBar
-            showLabel={false}
-          />
-          <Scene
             key="Interest"
             component={InterestScreen}
             title="Interest"
             hideNavBar
             hideTabBar
             showLabel={false}
-          />
+          /> */}
           <Scene
             key="tabbar"
             tabs
             tabBarStyle={{ height: 61 }}
             wrap={false}
-            // initial
+            hideNavBar={true}
             showLabel={false}
           >
             <Scene
@@ -165,8 +159,8 @@ const Routes = () => {
             key="ContentScreen"
             component={ContentScreen}
             title="ContentScreen"
-            // hideNavBar
-            hideTabBar
+            titleStyle={styles.title}
+            back={true}
             showLabel={false}
           />
 
@@ -194,4 +188,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  backLine : {
+    width: 20
+  },
+  title : {
+    display: "none"
+  }
 });

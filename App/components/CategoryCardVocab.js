@@ -26,6 +26,7 @@ const CategoryCardVocab = (props) => {
               imgHeight={102}
               width={162.75}
               titleHeight={40}
+              
             />
           </View>
         </TouchableOpacity>

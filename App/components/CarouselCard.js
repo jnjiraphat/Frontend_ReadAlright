@@ -29,6 +29,8 @@ const CarouselCard = (props) => {
             imgHeight={92}
             width={180}
             titleHeight={40}
+            isLevel={true}
+            level_reading={item.level_reading}
           />
         </View>
         </TouchableOpacity>

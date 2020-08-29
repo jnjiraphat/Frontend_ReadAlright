@@ -1,9 +1,11 @@
 import React from "react";
-import { TouchableOpacity, StyleSheet, Text, Image } from "react-native";
+import { TouchableOpacity, StyleSheet, Text, Image, View, ViewPropTypes } from "react-native";
 import { Card } from "@ant-design/react-native";
 
+import ButtonNoClick from "../components/ButtonNoClick";
+
 const TimelineCard = (props) => {
-  const { title, img, imgHeight, width, titleHeight } = props;
+  const { title, img, imgHeight, width, titleHeight, isLevel,level_reading } = props;
   return (
     <TouchableOpacity style={[styles.item]}>
       <Card style={styles.card}>
@@ -13,8 +15,24 @@ const TimelineCard = (props) => {
             width: width,
             resizeMode: "contain",
             paddingTop: 0,
+            
           }}
         >
+          {isLevel && 
+          <View style={{position: 'absolute',bottom:0}}>
+            <ButtonNoClick
+              colorsStart="#86B8F3"
+              colorsEnd="#2DC897"
+              padding={0}
+              radius={5}
+              height={26}
+              width={51}
+              fontSize={12}
+              fontcolor="#000"
+              text={level_reading}
+              />
+            </View>
+          }
           <Image
             source={{ uri: img }}
             style={{
@@ -22,6 +40,7 @@ const TimelineCard = (props) => {
               width: width,
               borderTopRightRadius: 3,
               borderTopLeftRadius: 3,
+              position: "absolute"
             }}
           />
         </Card.Body>

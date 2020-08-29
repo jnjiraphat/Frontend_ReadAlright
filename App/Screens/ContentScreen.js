@@ -35,15 +35,7 @@ const Content = (props) => {
         }
       );
   };
-
-  const testData = [
-    {
-      content: "YOOOO",
-      topic: "Name's Topic",
-      img: require("./../assets/catagory/Animal.jpg"),
-    },
-  ];
-
+  
   const read = async () => {
     const data = await fetch();
   };
@@ -70,7 +62,8 @@ const Content = (props) => {
         renderItem={({ item }) => (
           <View style={styles.container}>
             <Image source={{ uri: item.image }} style={styles.headerImg} />
-            <Text style={styles.topic}>{item.topic}</Text>
+            <Text style={styles.category}>Reading | {item.categoryName} | Level {item.level_reading}</Text>
+            <Text style={styles.topic}>{item.title}</Text>
             <View style={styles.whiteCard}>
               <Text style={styles.content}>{item.content}</Text>
             </View>
@@ -104,14 +97,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    // justifyContent: "center",
     marginTop: Constants.statusBarHeight,
   },
+  category : {
+    marginTop: 20,
+    fontSize: 12,
+    fontFamily: "PT-Bold",
+    color: "#2DC897",
+    marginLeft: 30,
+    alignSelf: "flex-start"
+    },
   topic: {
     fontSize: 20,
     color: "#000",
-    marginVertical: 20,
+    marginBottom: 20,
+    marginLeft: 30,
     fontFamily: "PT-Bold",
+    alignSelf: "flex-start"
   },
   content: {
     fontSize: 16,

@@ -29,6 +29,7 @@ const CarouselCardVocab = (props) => {
             imgHeight={92}
             width={180}
             titleHeight={40}
+            isLevel={true}
           />
         </View>
         </TouchableOpacity>

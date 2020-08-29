@@ -22,8 +22,6 @@ const Article = (props) => {
     console.log("readingIdddddddddddddddddddddd++++++++++++++")
     console.log(reading_id);
     Actions.ContentScreen({ text: reading_id });
-
-    console.log("hello");
   }
   
   const [cate, setCate] = useState([]);
@@ -73,15 +71,6 @@ const Article = (props) => {
             />
           </TouchableOpacity>
         </View>
-        // <ListItem
-        //   onPressIn={() => setReadingId(item.reading_id)}
-        //   onPress={goToContentScreen}
-        //   key={item.category_id}
-        //   title={item.title}
-        //   leftIcon={{ name: item.icon }}
-        //   bottomDivider
-        //   chevron
-        // />
       )}
     />
   );
