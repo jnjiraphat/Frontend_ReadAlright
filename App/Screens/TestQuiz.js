@@ -1,7 +1,6 @@
 import React from "react";
 import {
     StyleSheet,
-    Button,
     ScrollView,
     Text,
     View,
@@ -12,6 +11,7 @@ import axios from "axios";
 import ModalSubmit from "../components/ModalSubmit";
 import { Actions } from "react-native-router-flux";
 import Constants from "expo-constants";
+import { Button } from '@ant-design/react-native'
 
 const GREEN = "rgba(141,196,63,1)";
 const PURPLE = "rgba(108,48,237,1)";
@@ -201,15 +201,15 @@ export default class TestQuiz extends React.Component {
     renderPreviousButton(onPress, enabled) {
         return (
             <View
-                style={{ flexGrow: 1, maxWidth: 100, marginTop: 10, marginBottom: 10 }}
+                style={{ flexGrow: 1, maxWidth: 110, marginTop: 10, marginBottom: 10 }}
             >
                 <Button
-                    color={GREEN}
                     onPress={onPress}
                     disabled={!enabled}
-                    backgroundColor={GREEN}
-                    title={"Previous"}
-                />
+                    style={styles.buttonFlow}
+                >
+                    <Text style={styles.buttonFlowText}>Previous</Text>
+                </Button>
             </View>
         );
     }
@@ -217,15 +217,15 @@ export default class TestQuiz extends React.Component {
     renderNextButton(onPress, enabled) {
         return (
             <View
-                style={{ flexGrow: 1, maxWidth: 100, marginTop: 10, marginBottom: 10 }}
+                style={{ flexGrow: 1, maxWidth: 110, marginTop: 10, marginBottom: 10 }}
             >
                 <Button
-                    color={GREEN}
+                    style={styles.buttonFlow}
                     onPress={onPress}
                     disabled={!enabled}
-                    backgroundColor={GREEN}
-                    title={"Next"}
-                />
+                >
+                    <Text style={styles.buttonFlowText}>Next</Text>
+                </Button>
             </View>
         );
     }
@@ -233,14 +233,15 @@ export default class TestQuiz extends React.Component {
     renderFinishedButton(onPress, enabled) {
         return (
             <View
-                style={{ flexGrow: 1, maxWidth: 100, marginTop: 10, marginBottom: 10 }}
+                style={{ flexGrow: 1, maxWidth: 110, marginTop: 10, marginBottom: 10 }}
             >
                 <Button
-                    title={"Finished"}
                     onPress={onPress}
                     disabled={!enabled}
-                    color={GREEN}
-                />
+                    style={styles.buttonFlow}
+                >
+                    <Text style={styles.buttonFlowText}>Finish</Text>
+                </Button>
             </View>
         );
     }
@@ -252,12 +253,12 @@ export default class TestQuiz extends React.Component {
                 style={{ marginTop: 5, marginBottom: 5, justifyContent: "flex-start" }}
             >
                 <Button
-                    title={data.optionText}
                     onPress={onPress}
-                    color={isSelected ? "#FFB777" : "#E68BEC"}
-                    style={isSelected ? { fontFamily: "PT-Bold" } : { fontFamily: "PT-Reg" }, { borderRadius: 10 }}
+                    style={[styles.choiceButton,isSelected ? styles.choiceBgSelected : styles.choiceBgUnSelect]}
                     key={`button_${index}`}
-                />
+                >
+                    <Text style={styles.choiceText}>{data.optionText}</Text>
+                </Button>
             </View>
         );
     }
@@ -268,14 +269,6 @@ export default class TestQuiz extends React.Component {
                 <Text numLines={1} style={styles.questionText}>
                     {questionText}
                 </Text>
-            </View>
-        );
-    }
-
-    renderInfoText(infoText) {
-        return (
-            <View style={{ marginLeft: 10, marginRight: 10 }}>
-                <Text style={styles.infoText}>{infoText}</Text>
             </View>
         );
     }
@@ -421,6 +414,34 @@ const styles = StyleSheet.create({
         marginVertical: "10%",
         paddingVertical: 20,
     },
+    choiceButton : {
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowRadius: 4.65,
+        shadowColor: "#000000",
+        shadowOpacity: 0.3,
+        elevation: 8,
+    },
+    choiceBgSelected : {
+        backgroundColor: 'rgba(141,196,63,1)'
+    },
+    choiceBgUnSelect : {
+        backgroundColor: 'rgba(108,48,237,1)'
+    },
+    buttonFlow : {
+        backgroundColor: "rgba(141,196,63,1)",
+    },
+    choiceText : {
+        fontFamily: "PT-Bold",
+        color: "#fff"
+    },
+    buttonFlowText : {
+        fontFamily: "PT-Bold",
+        color: "#fff"
+    }
+
     //   buttonChoiceNC: {
     //     fontFamily: "PT-Reg" ,
     //     fontSize: 14
