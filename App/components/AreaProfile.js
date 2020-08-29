@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, FlatList } from "react-native";
 import ButtonNoClick from "../components/ButtonNoClick";
 
 const AreaProfile = (props) => {
@@ -39,9 +39,15 @@ const AreaProfile = (props) => {
         </Text>
       </View>
       <View style={{ display: display, marginTop: "3%" }}>
-        <Text style={styles.textSug}>0</Text>
-        <Text style={styles.textSug}>0 </Text>
-        <Text style={styles.textSug}>0 </Text>
+        <FlatList
+          data={ suggestion }
+          renderItem={({item}) => {
+              return (
+                <Text style={styles.textSug}>{item.suggestion}</Text>    
+              )
+          }}  
+          keyExtractor={(item, index) => index}
+        />
       </View>
     </View>
   ) : (
