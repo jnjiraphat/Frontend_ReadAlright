@@ -20,9 +20,10 @@ import img1 from './App/assets/img1.png'
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { StyleSheet, Dimensions, View, TouchableOpacity,Image, Text } from "react-native";
+import { StyleSheet, Dimensions, View, TouchableOpacity, Image, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "@use-expo/font";
+import TestQuizChallenge from "./App/Screens/TestQuizChallenge.js";
 
 const TabIcon = ({ focused, title }) => {
   // var color = focused ? "black" : "grey";
@@ -172,6 +173,14 @@ const Routes = () => {
             hideTabBar
             showLabel={false}
           />
+          <Scene
+            key="TestQuizChallenge"
+            component={TestQuizChallenge}
+            title="TestQuizChallenge"
+            // hideNavBar
+            hideTabBar
+            showLabel={false}
+          />
         </Scene>
       </Router>
     );
@@ -188,10 +197,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  backLine : {
+  backLine: {
     width: 20
   },
-  title : {
+  title: {
     display: "none"
   }
 });

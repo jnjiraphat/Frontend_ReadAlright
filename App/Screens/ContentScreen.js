@@ -47,7 +47,7 @@ const Content = (props) => {
 
   function goToChallenge(reading_id) {
     console.log("readingIDDDDDDDDDDDD  " + reading_id);
-    Actions.TestQuiz({ text: reading_id });
+    Actions.TestQuizChallenge({ text: reading_id });
     console.log("Finish " + reading_id)
     // console.log("readingIDDDDDDDDDDDD" + reading_id);
   }
