@@ -92,10 +92,18 @@ const Routes = () => {
       <Router>
         <Scene key="root" showLabel={false} navTransparent={true}>
           {/* <Scene
+            key="PreTest"
+            component={PreTest}
+            title="PreTest"
+            hideNavBar
+            hideTabBar
+            showLabel={false}
+          /> */}
+          <Scene
             key="TestQuiz"
             component={TestQuiz}
             title="TestQuiz"
-            hideNavBar
+            // hideNavBar
             hideTabBar
             showLabel={false}
           />
@@ -114,7 +122,7 @@ const Routes = () => {
             hideNavBar
             hideTabBar
             showLabel={false}
-          /> */}
+          />
           <Scene
             key="tabbar"
             tabs
@@ -165,14 +173,7 @@ const Routes = () => {
             showLabel={false}
           />
 
-          <Scene
-            key="TestQuiz"
-            component={TestQuiz}
-            title="TestQuiz"
-            // hideNavBar
-            hideTabBar
-            showLabel={false}
-          />
+
           <Scene
             key="TestQuizChallenge"
             component={TestQuizChallenge}

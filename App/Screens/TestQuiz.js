@@ -107,7 +107,7 @@ export default class TestQuiz extends React.Component {
         // });
         var count = 0;
         setTimeout(() => {
-            if (this.state.result.length != 10) {
+            if (this.state.result.length != 18) {
                 this.setUp();
             } else {
                 console.log(this.state.result.length + "koko")
@@ -139,36 +139,7 @@ export default class TestQuiz extends React.Component {
                             console.log("index " + this.state.result[index] + " is " + this.state.result[index].value.isRightChoice + " is wrong") 
                         
                         }
-                        // if (this.state.result[index].value.value == "took") {
-                        //     count += 1
-                        // } else if (this.state.result[index].value.value == "instructions") {
-                        //     count += 1
-
-                        // } else if (this.state.result[index].value.value == "compulsory") {
-                        //     count += 1
-
-                        // } else if (this.state.result[index].value.value == "friendless") {
-                        //     count += 1
-
-                        // } else if (this.state.result[index].value.value == "population") {
-                        //     count += 1
-
-                        // } else if (this.state.result[index].value.value == "impression") {
-                        //     count += 1
-
-                        // } else if (this.state.result[index].value.value == "atmosphere") {
-                        //     count += 1
-
-                        // } else if (this.state.result[index].value.value == "consists?") {
-                        //     count += 1
-
-                        // } else if (this.state.result[index].value.value == "pay") {
-                        //     count += 1
-
-                        // } else if (this.state.result[index].value.value == "addition") {
-                        //     count += 1
-
-                        // }
+     
                     }
                 } catch (error) {
 
@@ -184,10 +155,15 @@ export default class TestQuiz extends React.Component {
 
     }
     fetchAPI = async () => {
-        if(this.state.reading_id != null){
             var dataArrayQuiz = [];
-            for (let index = 7; index <= 16; index++) {
-                await axios.get("http://10.0.2.2:3000/quiz/" + index).then(
+            for (let index = 1; index <= 6; index++) {
+                
+                
+            }
+
+
+            for (let index = 1; index <= 18; index++) {
+                await axios.get("http://10.0.2.2:3000/QuizPre/question/" + index).then(
                     (response) => {
                         console.log(response.data);
                         dataArrayQuiz.push(response.data);
@@ -201,9 +177,7 @@ export default class TestQuiz extends React.Component {
             this.setState({
                 quizs: dataArrayQuiz,
             });
-        } else{
-            
-        }
+        
     };
 
     renderPreviousButton(onPress, enabled) {
