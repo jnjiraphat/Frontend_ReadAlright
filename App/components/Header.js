@@ -17,16 +17,12 @@ import SwitchType from "../components/SwitchType";
 import { Ionicons } from "@expo/vector-icons";
 
 const Header = (props) => {
-  const { tabs, ContentDefault, ContentChange, suggestion } = props;
+  const { tabs, ContentDefault, ContentChange, suggestion, isSwitch } = props;
   console.log("In header")
   console.log(suggestion)
   console.log("In header")
   const onPress = () => {
     if (check == true) {
-
-
-
-      
       setCheck(false);
       console.log(check);
     } else if (check == false) {
@@ -107,11 +103,13 @@ const Header = (props) => {
             backgroundColor: "transparent",
           }}
         >
-          <SwitchType
-            tabs={tabs}
-            ContentDefault={ContentDefault}
-            ContentChange={ContentChange}
-          />
+          {isSwitch && 
+            <SwitchType
+              tabs={tabs}
+              ContentDefault={ContentDefault}
+              ContentChange={ContentChange}
+            />
+          }
         </View>
       </View>
     ) : (

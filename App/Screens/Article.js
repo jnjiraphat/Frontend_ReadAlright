@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { TouchableOpacity, Text } from "react-native";
 import { Actions } from "react-native-router-flux";
 import ReadingApi from "../API/ReadingAPI";
-import { FlatGrid } from "react-native-super-grid";
 import {
   StyleSheet,
   View,
@@ -11,8 +10,9 @@ import {
   FlatList,
 } from "react-native";
 import axios from "axios";
-import TimelineCard from "../components/TimelineCard";
 import CountViews from "../API/CountViewsAPI"
+import ArticleCard from "../components/ArticleCard";
+import Constants from "expo-constants";
 
 const Article = (props) => {
   const [readingId, setReadingId] = useState(0);
@@ -55,24 +55,37 @@ const Article = (props) => {
   //    Actions.about()
   // }
   return (
-    <FlatList
-      numColumns={2}
-      contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-      data={cate}
-      renderItem={({ item }) => (
-        <View>
-          <TouchableOpacity onPress={() => goToContentScreen(item.category_id,1,item.reading_id,1)} >
-            <TimelineCard
+    // <FlatList
+    //   numColumns={2}
+    //   contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+    //   data={cate}
+    //   renderItem={({ item }) => (
+    //     <View>
+    //       {/* <TouchableOpacity onPress={() => goToContentScreen(item.category_id,1,item.reading_id,1)} > */}
+    //         <ArticleCard
+    //           // img={item.image}
+    //           // title={item.title}
+    //         />
+    //       {/* </TouchableOpacity> */}
+    //     </View>
+    //   )}
+    // />
+    <ScrollView style={{
+      marginTop: Constants.statusBarHeight}}>
+      <Text style={styles.category}>Announce And Brochure</Text>
+      <FlatList
+        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+        data={cate}
+        renderItem={({ item }) => (
+          <View style={styles.container}>
+            <ArticleCard 
               img={item.image}
               title={item.title}
-              imgHeight={102}
-              width={162.75}
-              titleHeight={40}
             />
-          </TouchableOpacity>
-        </View>
-      )}
-    />
+          </View>
+        )}
+      />
+    </ScrollView>
   );
 };
 export default Article;
@@ -81,7 +94,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
   },
   gridView: {
     marginTop: 20,
@@ -113,5 +125,13 @@ const styles = StyleSheet.create({
     width: 200,
     marginTop: 20,
     marginBottom: 20,
+  },
+  category : {
+    marginTop: 44,
+    fontSize: 24,
+    fontFamily: "PT-Bold",
+    color: "#000",
+    alignSelf: "center",
+    marginBottom: 26
   },
 });

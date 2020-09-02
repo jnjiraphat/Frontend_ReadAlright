@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, StyleSheet, Text, Image, View, ViewPropTypes } from "react-native";
+import { TouchableOpacity, StyleSheet, Text, Image, View } from "react-native";
 import { Card } from "@ant-design/react-native";
 
 import ButtonNoClick from "../components/ButtonNoClick";

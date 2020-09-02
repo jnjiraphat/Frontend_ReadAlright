@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Actions } from "react-native-router-flux";
 import ReadingApi from "../API/ReadingAPI";
-import { FlatGrid } from "react-native-super-grid";
 import {
   StyleSheet,
   View,

@@ -232,6 +232,7 @@ const home = (props) => {
           ContentDefault={ContentDefault()}
           ContentChange={ContentChange()}
           suggestion={suggestion}
+          isSwitch={true}
         />
         {/*เดะ
         <SwitchType tabs={tabSwitch} /> */}
