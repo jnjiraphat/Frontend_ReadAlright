@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import ButtonClick from "../components/ButtonClick";
 import ModalWord from "../components/ModalWord"
+import ModalMoreDetail from '../components/ModalMoreDetail'
 
 import Constants from "expo-constants";
 import axios from "axios";
@@ -104,14 +105,21 @@ const Content = (props) => {
             />
             <ModalWord
               modalVisible={modalVisible}
-              ModalClose={()=>setModalVisible(false)}
+              modalClose={()=>setModalVisible(false)}
+              modalAction={()=>setModalMoreVisible(true)}
               modalButton="More Detail"
-              EngWord="Present"
-              TypeWord="n."
-              Meaning="ของขวัญ"
-              ExampleSentence="Thank you for the birthday present.k you for the birk you for the birk you for the birk you for the bir"
+              engWord="Present"
+              typeWord="n."
+              meaning="ของขวัญ"
+              exampleSentence="Thank you for the birthday present.k you for the birk you for the birk you for the birk you for the bir"
             />
-
+            <ModalMoreDetail
+              modalVisible={modalMoreVisible}
+              modalClose={()=>setModalMoreVisible(false)}
+              engWord="Present"
+              typeWord="n."
+              meaning="ปัจจุบัน"
+            />
           </View>
         )}
       />

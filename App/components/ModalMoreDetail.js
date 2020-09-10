@@ -1,22 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
-  Dimensions,
   Text,
   StyleSheet,
   Modal,
   TouchableOpacity,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import ButtonClick from "./ButtonClick";
 import { Fontisto } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const ModalWord = (props) => {
+const ModalMoreDetail = (props) => {
   const {
     engWord,
     typeWord,
     meaning,
-    exampleSentence,
     modalClose,
     modalAction,
     modalButton,
@@ -35,48 +34,38 @@ const ModalWord = (props) => {
           }}
         >
           <View style={styles.setCenter}>
-            <View style={styles.modalView}>
+          <LinearGradient
+              colors={["#FFD387", "#FFA26B"]}
+              style={styles.modalView}
+            >
               <View>
                 <View style={styles.headerArea}>
                   <View>
                     <Text style={styles.headerText}>{engWord}</Text>
-                    <Text style={styles.TypeWord}>({typeWord})</Text>
                   </View>
                   <View style={{flexDirection: "row"}}>
-                    <Fontisto name="bookmark" size={24} color="black" style={{marginRight:10}}/>
                     <TouchableOpacity onPress={modalClose}>
                       <MaterialCommunityIcons name="close-circle-outline" size={24} color="black" />
                     </TouchableOpacity>
                   </View>
                 </View>
-                <Text style={styles.Meaning}>{meaning}</Text>
+                <Text style={styles.Meaning}>({typeWord}) {meaning}</Text>
                 <View style={styles.hr}></View>
-                <Text style={styles.sentence}>Example Sentence</Text>
-                <Text style={styles.sentence}>{exampleSentence}</Text>
+                <Text style={styles.Meaning}>(adj.) {meaning}</Text>
+                <View style={styles.hr}></View>
+                <Text style={styles.Meaning}>(n.) {meaning}</Text>
+                <View style={styles.hr}></View>
+                {/* ส่วนนี้อาจต้องปรับเป็น card เพื่อ flatlist ความหมายออกมา */}
               </View>
-              <View style={{alignSelf:"flex-end", marginTop: 30}}>
-                <ButtonClick
-                  text={modalButton}
-                  fontSize={10}
-                  fontcolor="#000000"
-                  fontFamily="PT-Bold"
-                  height={17}
-                  width={86}
-                  radius={30}
-                  padding={0}
-                  onPressAction={modalAction}
-                  colorsStart="#FFD387"
-                  colorsEnd="#FCDE58"
-                />
-              </View>
-            </View>
+            
+            </LinearGradient>
           </View>
         </Modal>
       </View>
   );
 };
 
-export default ModalWord;
+export default ModalMoreDetail;
 
 const styles = StyleSheet.create({
   // modal
@@ -90,7 +79,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   modalView: {
-    width: 280,
+    width: 340,
     margin: 20,
     backgroundColor: "white",
     borderRadius: 5,
@@ -104,10 +93,6 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  modalText: {
-    fontSize: 90,
-    fontFamily: "PT-Bold",
-  },
   headerArea: {
     flexDirection: "row",
     justifyContent: "space-between"
@@ -115,25 +100,16 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 24,
     fontFamily: "PT-Bold",
-  },
-  TypeWord : {
-    fontSize: 12,
-    fontFamily: "PT-Reg"
+    marginBottom: 15
   },
   Meaning:{
     fontFamily: "PT-Reg",
     fontSize: 18,
-    alignSelf: "center"
   },
   hr: {
     width: "100%",
     borderTopColor: "#000",
     borderTopWidth: 1,
-    marginTop: 30
+    marginVertical: 10
   },
-  sentence: {
-    fontFamily: "PT-Reg",
-    fontSize: 16,
-    marginTop: 15
-  }
 });
