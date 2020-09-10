@@ -1,7 +1,6 @@
 import React, { Component, useCallback } from "react";
 import { useState, useEffect } from "react";
 import ModalSubmit from "../components/ModalSubmit";
-import Dialog, { DialogContent } from "react-native-popup-dialog";
 import { Actions } from "react-native-router-flux";
 
 import {
@@ -12,10 +11,6 @@ import {
   FlatList,
   StyleSheet,
   Dimensions,
-  SafeAreaView,
-  Image,
-  Modal,
-  Button,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import ButtonClick from "../components/ButtonClick";

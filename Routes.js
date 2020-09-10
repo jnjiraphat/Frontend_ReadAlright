@@ -13,11 +13,7 @@ import PreTest from "./App/Screens/PreTestScreen";
 import uploadImage from "./App/Screens/uploadImage";
 import TestQuiz from "./App/Screens/TestQuiz";
 
-import Line from "./App/assets/Line.png"
-import img1 from './App/assets/img1.png'
-
 // import Article from "./App/Screens/Article"
-import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { StyleSheet, Dimensions, View, TouchableOpacity, Image, Text } from "react-native";

@@ -5,13 +5,13 @@ import {
   StyleSheet,
   View,
   ScrollView,
-  ImageBackground,
   FlatList,
   Dimensions,
   Text,
   Image,
 } from "react-native";
 import ButtonClick from "../components/ButtonClick";
+import ModalWord from "../components/ModalWord"
 
 import Constants from "expo-constants";
 import axios from "axios";
@@ -53,6 +53,8 @@ const Content = (props) => {
   // const goToAbout = () => {
   //    Actions.about()
   // }
+    const [modalVisible, setModalVisible] = useState(false);
+    const [modalMoreVisible, setModalMoreVisible] = useState(false);
   return (
     <ScrollView>
       <FlatList
@@ -66,7 +68,8 @@ const Content = (props) => {
             <View style={styles.whiteCard}>
               <Text style={styles.content}>{item.content}</Text>
             </View>
-            <ButtonClick  onPressAction={() => goToChallenge(item.reading_id)}
+            <ButtonClick  
+              onPressAction={() => goToChallenge(item.reading_id)}
               text="Challenge"
               fontSize={24}
               fontFamily="PT-Bold"
@@ -77,13 +80,38 @@ const Content = (props) => {
               padding={0}
               marginTop={20}
               marginBottom={40}
-              // onPressAction={goToHome}
               // shadowRadius={30}
               colorsStart="#2DC897"
-              colorsEnd="#7EF192"
-              
+              colorsEnd="#7EF192"  
               // contentId = {item.reading_id}
             />
+            <ButtonClick  
+              onPressAction={()=>setModalVisible(true)}
+              text="Trans"
+              fontSize={24}
+              fontFamily="PT-Bold"
+              fontcolor="#000000"
+              height={39}
+              width={245}
+              radius={30}
+              padding={0}
+              marginTop={20}
+              marginBottom={40}
+              // shadowRadius={30}
+              colorsStart="#2DC897"
+              colorsEnd="#7EF192"  
+              // contentId = {item.reading_id}
+            />
+            <ModalWord
+              modalVisible={modalVisible}
+              ModalClose={()=>setModalVisible(false)}
+              modalButton="More Detail"
+              EngWord="Present"
+              TypeWord="n."
+              Meaning="ของขวัญ"
+              ExampleSentence="Thank you for the birthday present.k you for the birk you for the birk you for the birk you for the bir"
+            />
+
           </View>
         )}
       />

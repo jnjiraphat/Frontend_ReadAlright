@@ -21,23 +21,6 @@ const ModalSubmit = (props) => {
   // const [modalVisible, setModalVisible] = useState(false);
   return (
     <View>
-      {/* //   <ButtonClick
-    //     text="Submit"
-    //     fontSize={24}
-    //     fontcolor="#000000"
-    //     fontFamily="PT-Bold"
-    //     height={39}
-    //     width={245}
-    //     radius={30}
-    //     padding={0}
-    //     marginBottom="10%"
-    //     onPressAction={() => {
-    //       setModalVisible(true);
-    //     }}
-    //     // shadowRadius={30}
-    //     colorsStart="#7EF192"
-    //     colorsEnd="#2DC897"
-    //   /> */}
       <View style={styles.centeredView}>
         <Modal
           animationType="slide"
