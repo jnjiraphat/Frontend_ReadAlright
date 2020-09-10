@@ -178,28 +178,12 @@ const home = (props) => {
           </View>
           <View style={styles.ContentCarousel}>
             <Text style={styles.topic}>Maybe you like</Text>
-            <CarouselCard result={vb} />
+            <CarouselCardVocab result={vb} />
           </View>
           <View style={styles.ContentCategory}>
-            <Text style={[styles.topic, { marginLeft: "5%" }]}>Category</Text>
+            <Text style={[styles.topic, { marginLeft: "5%", marginBottom:Dimensions.get("window").height / 7 }]}>Category</Text>
             <CategoryCardVocab result={cateVocabBox} />
           </View>
-          <ButtonClick 
-            text="Challenge"
-            fontSize={24}
-            fontFamily="PT-Bold"
-            fontcolor="#000000"
-            height={39}
-            width={245}
-            radius={30}
-            padding={0}
-            marginTop={Dimensions.get("window").height / 16}
-            marginBottom={Dimensions.get("window").height / 7}
-            // onPressAction={goToHome}
-            // shadowRadius={30}
-            colorsStart="#7EF192"
-            colorsEnd="#2DC897"
-          />
         </View>
       </View>
     );
