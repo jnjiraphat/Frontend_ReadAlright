@@ -5,11 +5,14 @@ import { Card } from "@ant-design/react-native";
 import ButtonNoClick from "../components/ButtonNoClick";
 
 const ArticleCard = (props) => {
-  const { title, img, imgHeight, width, titleHeight, isLevel,level_reading } = props;
+  const { title, image, imgHeight, width, titleHeight, isLevel,level_reading } = props;
   return (
     <TouchableOpacity style={[styles.item]}>
         <View style={styles.rowItemImg}>
-            <Image source={img}/>
+            <Image source={{
+              uri:image
+              
+            }}/>
         </View>
         <View style={styles.rowItemTitle}>
             <Text style={{fontFamily: "PT-Reg", fontSize: 20}}>{title}</Text>
