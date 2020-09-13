@@ -6,7 +6,7 @@ import InterestScreen from "./App/Screens/InterestScreen.js";
 import ContentScreen from "./App/Screens/ContentScreen";
 import MyHome from "./App/Screens/Home.js";
 import Login from "./App/Screens/Login"
-// import Home from "../App/Screens/Home";
+import Vocabulary from './App/Screens/Vocabulary'
 import Tricks from "./App/Screens/Tricks";
 import Mylist from "./App/Screens/Mylist";
 import PreTest from "./App/Screens/PreTestScreen";
@@ -81,6 +81,7 @@ const Routes = () => {
   let [fontsLoaded] = useFonts({
     "PT-Reg": require("./App/assets/fonts/PTSansCaption-Regular.ttf"),
     "PT-Bold": require("./App/assets/fonts/PTSansCaption-Bold.ttf"),
+    "Noto-Reg": require("./App/assets/fonts/NotoSansThai-Regular.ttf"),
   });
 
   if (fontsLoaded) {
@@ -168,7 +169,13 @@ const Routes = () => {
             back={true}
             showLabel={false}
           />
-
+          <Scene
+            key="Vocabulary"
+            title="Vocabulary"
+            component={Vocabulary}
+            hideNavBar={true}
+            showLabel={false}
+          />
 
           <Scene
             key="TestQuizChallenge"

@@ -5,7 +5,7 @@ import { Card } from "@ant-design/react-native";
 import ButtonNoClick from "../components/ButtonNoClick";
 
 const TimelineCard = (props) => {
-  const { title, img, imgHeight, width, titleHeight, isLevel,level_reading } = props;
+  const { title, img, imgHeight, width, titleHeight, isLevel,level_reading, fontSize, subTitle } = props;
   return (
     <TouchableOpacity style={[styles.item]}>
       <Card style={styles.card}>
@@ -40,7 +40,7 @@ const TimelineCard = (props) => {
               width: width,
               borderTopRightRadius: 3,
               borderTopLeftRadius: 3,
-              position: "absolute"
+              position: "absolute",
             }}
           />
         </Card.Body>
@@ -50,7 +50,8 @@ const TimelineCard = (props) => {
             width: width,
           }}
         >
-          <Text style={styles.title}>{title}</Text>
+          <Text style={[styles.title,{fontSize: fontSize}]}>{title}</Text>
+          <Text style={[styles.subTitle,{fontSize: fontSize}]}>{subTitle}</Text>
         </Card.Body>
       </Card>
     </TouchableOpacity>
@@ -70,6 +71,11 @@ const styles = StyleSheet.create({
     fontSize: 10,
     paddingLeft: 5,
     fontFamily: "PT-Bold",
+  },
+  subTitle: {
+    fontSize: 10,
+    paddingLeft: 5,
+    fontFamily: "Noto-Reg",
   },
   card: {
     shadowOffset: {

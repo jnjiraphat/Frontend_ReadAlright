@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     fontFamily: "PT-Reg"
   },
   Meaning:{
-    fontFamily: "PT-Reg",
+    fontFamily: "Noto-Reg",
     fontSize: 18,
     alignSelf: "center"
   },

@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     marginBottom: 15
   },
   Meaning:{
-    fontFamily: "PT-Reg",
+    fontFamily: "Noto-Reg",
     fontSize: 18,
   },
   hr: {
