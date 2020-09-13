@@ -8,6 +8,7 @@ import {
   ScrollView,
   ImageBackground,
   FlatList,
+  Image,
 } from "react-native";
 import axios from "axios";
 import CountViews from "../API/CountViewsAPI"
@@ -54,6 +55,11 @@ const Article = (props) => {
   // const goToAbout = () => {
   //    Actions.about()
   // }
+
+  const ImageCards = () => {
+    return <Image />;
+  };
+  
   return (
     // <FlatList
     //   numColumns={2}
@@ -73,17 +79,21 @@ const Article = (props) => {
     <ScrollView style={{
       marginTop: Constants.statusBarHeight}}>
       <Text style={styles.category}>Announce And Brochure</Text>
-      <FlatList
+      <FlatList 
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
         data={cate}
         renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => goToContentScreen(item.category_id,1,item.reading_id,1)} >
           <View style={styles.container}>
+            
             <ArticleCard 
-              img={item.image}
+              image={item.image}
               title={item.title}
             />
           </View>
+           </TouchableOpacity>
         )}
+        keyExtractor={(item) => item.reading_id}
       />
     </ScrollView>
   );
