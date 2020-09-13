@@ -50,14 +50,14 @@ const About = (props) => {
   };
 
   const getReadaingByCateId = async () => {
-    for (let index = 0; index < props.text.length; index++) {
+     (let index = 0; index < props.text.length; index++) {
       console.log("cateId = " + props.text[index]);
 
       const data = await axios
         .get("http://10.0.2.2:3000/reading/categorys/" + props.text[index])
         .then((response) => {
           console.log("round = " + [index]);
-          for (let j = 0; j < response.data.reading.length; j++) {
+           (let j = 0; j < response.data.reading.length; j++) {
             arrayReading.push(response.data.reading[j]);
           }
         });
@@ -76,7 +76,7 @@ const About = (props) => {
     // console.log(mapIter.next().value);
     // console.log(props.text.size)
 
-    // props.text.forEach(logMapElements);
+    // props.text.Each(logMapElements);
 
     // var mapIter = props.text.values();
     // console.log(mapIter.next().value);

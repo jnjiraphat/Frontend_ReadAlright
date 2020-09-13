@@ -7,6 +7,7 @@ import ContentScreen from "./App/Screens/ContentScreen";
 import MyHome from "./App/Screens/Home.js";
 import Login from "./App/Screens/Login"
 import Vocabulary from './App/Screens/Vocabulary'
+import ContentVocab from './App/Screens/ContentVocab'
 import Tricks from "./App/Screens/Tricks";
 import Mylist from "./App/Screens/Mylist";
 import PreTest from "./App/Screens/PreTestScreen";
@@ -119,6 +120,14 @@ const Routes = () => {
             hideNavBar
             hideTabBar
             showLabel={false}
+          /> */}
+          {/* <Scene
+            key="ContentVocab"
+            title="ContentVocab"
+            component={ContentVocab}
+            showLabel={false}
+            titleStyle={styles.title}
+            back={true}
           /> */}
           <Scene
             key="tabbar"

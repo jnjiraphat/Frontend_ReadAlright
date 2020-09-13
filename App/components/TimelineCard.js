@@ -5,7 +5,17 @@ import { Card } from "@ant-design/react-native";
 import ButtonNoClick from "../components/ButtonNoClick";
 
 const TimelineCard = (props) => {
-  const { title, img, imgHeight, width, titleHeight, isLevel,level_reading, fontSize, subTitle } = props;
+  const {
+    title,
+    img,
+    imgHeight,
+    width,
+    titleHeight,
+    isLevel,
+    level_reading,
+    fontSize,
+    subTitle,
+  } = props;
   return (
     <TouchableOpacity style={[styles.item]}>
       <Card style={styles.card}>
@@ -15,24 +25,23 @@ const TimelineCard = (props) => {
             width: width,
             resizeMode: "contain",
             paddingTop: 0,
-            
           }}
         >
-          {isLevel && 
-          <View style={{position: 'absolute',bottom:0}}>
-            <ButtonNoClick
-              colorsStart="#86B8F3"
-              colorsEnd="#2DC897"
-              padding={0}
-              radius={5}
-              height={26}
-              width={51}
-              fontSize={12}
-              fontcolor="#000"
-              text={level_reading}
+          {isLevel && (
+            <View style={{ position: "absolute", bottom: 0 }}>
+              <ButtonNoClick
+                colorsStart="#86B8F3"
+                colorsEnd="#2DC897"
+                padding={0}
+                radius={5}
+                height={26}
+                width={51}
+                fontSize={12}
+                fontcolor="#000"
+                text={level_reading}
               />
             </View>
-          }
+          )}
           <Image
             source={{ uri: img }}
             style={{
@@ -50,8 +59,10 @@ const TimelineCard = (props) => {
             width: width,
           }}
         >
-          <Text style={[styles.title,{fontSize: fontSize}]}>{title}</Text>
-          <Text style={[styles.subTitle,{fontSize: fontSize}]}>{subTitle}</Text>
+          <Text style={[styles.title, { fontSize: fontSize }]}>{title}</Text>
+          <Text style={[styles.subTitle, { fontSize: fontSize }]}>
+            {subTitle}
+          </Text>
         </Card.Body>
       </Card>
     </TouchableOpacity>
