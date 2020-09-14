@@ -45,7 +45,7 @@ const data = [
 const Vocabulary = () => {
 
     // โค้ดส่วนเชื่อม Back นี้คือโค้ดของ Article
-  // const [readingId, setReadingId] = useState(0);
+  const [vocabBox, setVocabBox] = useState(0);
 
   // function goToContentScreen(category_id,user_id,reading_id,vocabBox_id ) {
   //   const views =  CountViews(category_id,user_id,reading_id,vocabBox_id)
@@ -56,21 +56,21 @@ const Vocabulary = () => {
   
   // const [cate, setCate] = useState([]);
 
-  // const fetch = async () => {
-  //   console.log("runningggggggggggggggggggggggggggggg");
-  //   await axios
-  //     .get("http://10.0.2.2:3000/reading/interest/" + props.text)
-  //     .then(
-  //       (response) => {
-  //         console.log("eiei");
-  //         console.log(response.data.reading);
-  //         setCate(response.data.reading);
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //       }
-  //     );
-  // };
+  const fetch = async () => {
+    console.log("runningggggggggggggggggggggggggggggg");
+    await axios
+      .get("http://10.0.2.2:3000/vocabBox/" + props.text)
+      .then(
+        (response) => {
+          console.log("eiei");
+          console.log(response.data);
+          setCate(response.data.reading);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  };
 
   // const read = async () => {
   //   const data = await fetch();
@@ -105,6 +105,7 @@ const Vocabulary = () => {
           )}
         />
       </View>
+      
       {/* <FlatList
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
         data={cate}
