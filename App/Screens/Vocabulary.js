@@ -89,6 +89,7 @@ const Vocabulary = (props) => {
           data={result}
           numColumns={2}
           renderItem={({ item }) => (
+            <TouchableOpacity>
             <View style={{ width: 178 }}>
               <TimelineCard
                 title={item.boxEngName}
@@ -100,6 +101,7 @@ const Vocabulary = (props) => {
                 subTitle={item.subTitle}
               />
             </View>
+            </TouchableOpacity>
           )}
         />
       </View>
