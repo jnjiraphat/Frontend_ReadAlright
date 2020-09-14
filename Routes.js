@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Router, Scene, Tabs } from "react-native-router-flux";
 import Article from "./App/Screens/Article.js";
+import ArticleVocab from "./App/Screens/ArticleVocab.js";
+
 // import MaybeYouLike from "./App/Screens/MaybeYouLike";
 import InterestScreen from "./App/Screens/InterestScreen.js";
 import ContentScreen from "./App/Screens/ContentScreen";
@@ -89,6 +91,7 @@ const Routes = () => {
     return (
       <Router>
         <Scene key="root" showLabel={false} navTransparent={true}>
+
           {/* <Scene
             key="PreTest"
             component={PreTest}
@@ -121,14 +124,7 @@ const Routes = () => {
             hideTabBar
             showLabel={false}
           /> */}
-          {/* <Scene
-            key="ContentVocab"
-            title="ContentVocab"
-            component={ContentVocab}
-            showLabel={false}
-            titleStyle={styles.title}
-            back={true}
-          /> */}
+
           <Scene
             key="tabbar"
             tabs
@@ -162,6 +158,7 @@ const Routes = () => {
               showLabel={false}
             />
           </Scene>
+
           <Scene
             key="Article"
             component={Article}
@@ -178,11 +175,20 @@ const Routes = () => {
             back={true}
             showLabel={false}
           />
+
           <Scene
             key="Vocabulary"
             title="Vocabulary"
             component={Vocabulary}
             hideNavBar={true}
+            showLabel={false}
+          />
+          <Scene
+            key="ContentVocab"
+            component={ContentVocab}
+            title="ContentVocab"
+            titleStyle={styles.title}
+            back={true}
             showLabel={false}
           />
 
@@ -194,6 +200,15 @@ const Routes = () => {
             hideTabBar
             showLabel={false}
           />
+          <Scene
+            key="ArticleVocab"
+            component={ArticleVocab}
+            title="ArticleVocab"
+            // hideNavBar
+            hideTabBar
+            showLabel={false}
+          />
+
         </Scene>
       </Router>
     );
