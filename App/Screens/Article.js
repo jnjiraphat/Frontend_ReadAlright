@@ -62,7 +62,7 @@ const Article = (props) => {
         console.log("eiei");
         console.log(response.data.reading[1]);
         setCate(response.data.reading);
-        // setCateName(response.data.reading[0].categoryName);
+        setCateName(response.data.reading[0].categoryName);
         console.log(cateName);
       },
       (error) => {

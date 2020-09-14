@@ -10,6 +10,10 @@ import {
   Text,
   Image,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { AntDesign } from '@expo/vector-icons'; 
+import { Fontisto } from '@expo/vector-icons';
+
 import ButtonClick from "../components/ButtonClick";
 import ModalWord from "../components/ModalWord";
 import ModalMoreDetail from "../components/ModalMoreDetail";
@@ -27,7 +31,7 @@ const data = [
     thaiWord: "ว่ายน้ำ",
   },
   {
-    engWord: "Swimming",
+    engWord: "Swimmingdddddd",
     thaiWord: "ว่ายน้ำ",
   },
   {
@@ -48,12 +52,15 @@ const Content = (props) => {
   const translationGoogle = async (word) => {
     console.log("translate------------------");
     axios
-      .post("https://translation.googleapis.com/language/translate/v2?key=AIzaSyCBEbjkNJ_6_DL8s5Ni6bfF0M4YwhrR-Dc", {
-        "q": word,
-        "source": "en",
-        "target": "th",
-        "format": "text"
-      })
+      .post(
+        "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCBEbjkNJ_6_DL8s5Ni6bfF0M4YwhrR-Dc",
+        {
+          q: word,
+          source: "en",
+          target: "th",
+          format: "text",
+        }
+      )
       .then(
         (response) => {
           console.log(response.data);
@@ -119,9 +126,49 @@ const Content = (props) => {
           data={data}
           renderItem={({ item }) => (
             <View style={styles.whiteCard}>
-              <Text style={styles.content}>
-                {item.engWord},{item.thaiWord}
-              </Text>
+              <View style={styles.flexArea}>
+                <View style={styles.yellowButton}>
+                  <LinearGradient
+                    colors={["#FFD387", "#FFE43A"]}
+                    style={{
+                      left: 0,
+                      right: 0,
+                      top: 0,
+                      height: 70,
+                      width: 43,
+                      borderRadius: 5,
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <AntDesign name="checksquareo" size={24} color="#8A63E5" />
+                  </LinearGradient>
+                </View>
+                <View style={styles.wordArea}>
+                  <Text style={styles.content}>
+                    {item.engWord}
+                  </Text>
+                </View>
+                <View style={styles.wordArea}>
+                  <Text style={styles.contentThai}>
+                    {item.thaiWord}
+                  </Text>
+                </View>
+                <View style={styles.yellowButton}>
+                  <LinearGradient
+                    colors={["#FFD387", "#FFE43A"]}
+                    style={{
+                      height: 70,
+                      width: 43,
+                      borderRadius: 5,
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <Fontisto name="bookmark" size={24} color="#8A63E5"/>
+                  </LinearGradient>
+                </View>
+              </View>
             </View>
           )}
         />
@@ -140,7 +187,7 @@ const Content = (props) => {
           // shadowRadius={30}
           colorsStart="#2DC897"
           colorsEnd="#7EF192"
-        // contentId = {item.reading_id}
+          // contentId = {item.reading_id}
         />
         <ButtonClick
           onPressAction={() => translationGoogle("ant")}
@@ -157,7 +204,7 @@ const Content = (props) => {
           // shadowRadius={30}
           colorsStart="#2DC897"
           colorsEnd="#7EF192"
-        // contentId = {item.reading_id}
+          // contentId = {item.reading_id}
         />
         <ModalWord
           modalVisible={modalVisible}
@@ -212,6 +259,11 @@ const styles = StyleSheet.create({
     color: "#000",
     fontFamily: "PT-Reg",
   },
+  contentThai: {
+    fontSize: 16,
+    color: "#000",
+    fontFamily: "Noto-Reg",
+  },
   itemTopic: {
     fontSize: 14,
     color: "#000",
@@ -226,11 +278,11 @@ const styles = StyleSheet.create({
   //whiteCard
   whiteCard: {
     // flex: 1,
-    width: Dimensions.get("window").width / 2,
+    width: 350,
+    height: 70,
     // justifyContent: "center",
     borderRadius: 5,
     backgroundColor: "white",
-    alignItems: "center",
     shadowOffset: {
       width: 0,
       height: 4,
@@ -240,7 +292,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     elevation: 8,
     marginBottom: "10%",
-    paddingVertical: 20,
-    paddingHorizontal: 10,
+  },
+  flexArea: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  yellowButton: {},
+  wordArea: {
+    // paddingVertical: 5,
+    maxWidth: 100,
+    minHeight: 70,
+    justifyContent: "center"
   },
 });
