@@ -13,6 +13,7 @@ import axios from "axios";
 import CountViews from "../API/CountViewsAPI"
 import TimelineCard from "../components/TimelineCard";
 import Constants from "expo-constants";
+import Header from "../components/Header";
 
 const data = [
   {
@@ -45,45 +46,69 @@ const data = [
 const Vocabulary = () => {
 
     // โค้ดส่วนเชื่อม Back นี้คือโค้ดของ Article
-  // const [readingId, setReadingId] = useState(0);
+  const [readingId, setReadingId] = useState(0);
 
-  // function goToContentScreen(category_id,user_id,reading_id,vocabBox_id ) {
-  //   const views =  CountViews(category_id,user_id,reading_id,vocabBox_id)
-  //   console.log("readingIdddddddddddddddddddddd++++++++++++++")
-  //   console.log(reading_id);
-  //   Actions.ContentScreen({ text: reading_id });
-  // }
+  const [suggestion, setSuggestion] = useState([]);
+
+
+  const getSuggestion = async () => {
+    const data = await axios
+      .get("http://10.0.2.2:3000/answer/suggestions/1")
+      .then((response) => {
+        console.log("Suggestion");
+        // console.log(response.data.length);
+        console.log(response.data.answer);
+        console.log("Suggestion");
+
+        setSuggestion(response.data.answer)
+
+      });
+  };
+
+  function goToContentScreen(category_id,user_id,reading_id,vocabBox_id ) {
+    const views =  CountViews(category_id,user_id,reading_id,vocabBox_id)
+    console.log("readingIdddddddddddddddddddddd++++++++++++++")
+    console.log(reading_id);
+    Actions.ContentScreen({ text: reading_id });
+  }
   
-  // const [cate, setCate] = useState([]);
+  const [cate, setCate] = useState([]);
 
-  // const fetch = async () => {
-  //   console.log("runningggggggggggggggggggggggggggggg");
-  //   await axios
-  //     .get("http://10.0.2.2:3000/reading/interest/" + props.text)
-  //     .then(
-  //       (response) => {
-  //         console.log("eiei");
-  //         console.log(response.data.reading);
-  //         setCate(response.data.reading);
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //       }
-  //     );
-  // };
+  const fetch = async () => {
+    console.log("runningggggggggggggggggggggggggggggg");
+    await axios
+      .get("http://10.0.2.2:3000/reading/interest/" + props.text)
+      .then(
+        (response) => {
+          console.log("eiei");
+          console.log(response.data.reading);
+          setCate(response.data.reading);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  };
 
-  // const read = async () => {
-  //   const data = await fetch();
-  // };
-  // useEffect(() => {
-  //   read();
-  // }, []);
-  // console.log("This is id");
-  // console.log(props.text);
+  const read = async () => {
+    const data = await fetch();
+  };
+  useEffect(() => {
+    read();
+    getSuggestion();
+  }, []);
+  console.log("This is id");
+  console.log(props.text);
+
+
 
   return (
     <ScrollView style={{
       marginTop: Constants.statusBarHeight}}>
+      <Header
+        suggestion={suggestion}
+        isSwitch={false}
+      />
       <View style={{alignSelf: "center",}}>
         <Text style={styles.category}>Sports</Text>
         <FlatList
