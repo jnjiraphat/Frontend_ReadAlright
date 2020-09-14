@@ -13,6 +13,7 @@ import {
 import ButtonClick from "../components/ButtonClick";
 import ModalWord from "../components/ModalWord";
 import ModalMoreDetail from "../components/ModalMoreDetail";
+import TransWordBar from "../components/TransWordBar"
 
 import Constants from "expo-constants";
 import axios from "axios";
@@ -75,7 +76,10 @@ const Content = (props) => {
   // }
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMoreVisible, setModalMoreVisible] = useState(false);
+  const [value, onChangeText] = useState('');
   return (
+    <View style={{flex:1}}>
+      
     <ScrollView>
       <FlatList
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
@@ -121,23 +125,6 @@ const Content = (props) => {
         colorsEnd="#7EF192"
         // contentId = {item.reading_id}
       />
-      <ButtonClick
-        onPressAction={() => setModalVisible(true)}
-        text="Trans"
-        fontSize={24}
-        fontFamily="PT-Bold"
-        fontcolor="#000000"
-        height={39}
-        width={245}
-        radius={30}
-        padding={0}
-        marginTop={20}
-        marginBottom={40}
-        // shadowRadius={30}
-        colorsStart="#2DC897"
-        colorsEnd="#7EF192"
-        // contentId = {item.reading_id}
-      />
       <ModalWord
         modalVisible={modalVisible}
         modalClose={() => setModalVisible(false)}
@@ -155,7 +142,14 @@ const Content = (props) => {
         typeWord="n."
         meaning="ปัจจุบัน"
       />
+      
     </ScrollView>
+    <TransWordBar
+      textSearch={text => onChangeText(text)}
+      value={value}
+      transAction={() => setModalVisible(true)}
+    />
+    </View>
   );
 };
 export default Content;
