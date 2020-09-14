@@ -13,6 +13,7 @@ import axios from "axios";
 import CountViews from "../API/CountViewsAPI"
 import TimelineCard from "../components/TimelineCard";
 import Constants from "expo-constants";
+import Header from "../components/Header";
 
 const data = [
   {
@@ -76,9 +77,12 @@ const Vocabulary = (props) => {
 
   return (
     <ScrollView style={{
-      marginTop: Constants.statusBarHeight
-    }}>
-      <View style={{ alignSelf: "center", }}>
+      marginTop: Constants.statusBarHeight}}>
+      <Header
+        suggestion={suggestion}
+        isSwitch={false}
+      />
+      <View style={{alignSelf: "center",}}>
         <Text style={styles.category}>Sports</Text>
         <FlatList
           contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
