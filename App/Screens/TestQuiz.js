@@ -245,6 +245,14 @@ export default class TestQuiz extends React.Component {
         );
     }
 
+    renderInfoText(infoText) {
+        return (
+            <View style={{ marginLeft: 10, marginRight: 10 }}>
+                <Text style={styles.infoText}>{infoText}</Text>
+            </View>
+        );
+    }
+
     renderQuestionText(questionText) {
         return (
             <View style={{ paddingHorizontal: 40 }}>

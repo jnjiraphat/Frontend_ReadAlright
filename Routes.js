@@ -100,7 +100,7 @@ const Routes = () => {
             hideTabBar
             showLabel={false}
           /> */}
-          {/* <Scene
+          <Scene
             key="TestQuiz"
             component={TestQuiz}
             title="TestQuiz"
@@ -123,7 +123,7 @@ const Routes = () => {
             hideNavBar
             hideTabBar
             showLabel={false}
-          /> */}
+          />
           
           <Scene
             key="tabbar"
