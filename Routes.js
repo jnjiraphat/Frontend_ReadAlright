@@ -175,11 +175,20 @@ const Routes = () => {
             back={true}
             showLabel={false}
           />
+
           <Scene
             key="Vocabulary"
             title="Vocabulary"
             component={Vocabulary}
             hideNavBar={true}
+            showLabel={false}
+          />
+          <Scene
+            key="ContentVocab"
+            component={ContentVocab}
+            title="ContentVocab"
+            titleStyle={styles.title}
+            back={true}
             showLabel={false}
           />
 

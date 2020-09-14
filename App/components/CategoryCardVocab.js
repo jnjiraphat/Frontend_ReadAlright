@@ -7,7 +7,7 @@ import { Actions } from "react-native-router-flux";
 const CategoryCardVocab = (props) => {
   function goToArticle(cateId) {
     console.log(cateId);
-    Actions.ArticleVocab({ text: cateId });
+    Actions.Vocabulary({ text: cateId });
 
     console.log("hello");
   }

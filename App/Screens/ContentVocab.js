@@ -45,6 +45,24 @@ const dataImg = [
 ];
 
 const Content = (props) => {
+  const translationGoogle = async (word) => {
+    console.log("translate------------------");
+    axios
+      .post("https://translation.googleapis.com/language/translate/v2?key=AIzaSyCBEbjkNJ_6_DL8s5Ni6bfF0M4YwhrR-Dc", {
+        "q": word,
+        "source": "en",
+        "target": "th",
+        "format": "text"
+      })
+      .then(
+        (response) => {
+          console.log(response.data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  };
   const [cate, setCate] = useState([]);
 
   const fetch = async () => {
@@ -122,10 +140,10 @@ const Content = (props) => {
           // shadowRadius={30}
           colorsStart="#2DC897"
           colorsEnd="#7EF192"
-          // contentId = {item.reading_id}
+        // contentId = {item.reading_id}
         />
         <ButtonClick
-          onPressAction={() => setModalVisible(true)}
+          onPressAction={() => translationGoogle("ant")}
           text="Trans"
           fontSize={24}
           fontFamily="PT-Bold"
@@ -139,7 +157,7 @@ const Content = (props) => {
           // shadowRadius={30}
           colorsStart="#2DC897"
           colorsEnd="#7EF192"
-          // contentId = {item.reading_id}
+        // contentId = {item.reading_id}
         />
         <ModalWord
           modalVisible={modalVisible}

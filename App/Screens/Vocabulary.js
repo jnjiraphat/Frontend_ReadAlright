@@ -42,58 +42,52 @@ const data = [
   },
 ]
 
-const Vocabulary = () => {
+const Vocabulary = (props) => {
+  const [result, setResult] = useState([]);
 
-    // โค้ดส่วนเชื่อม Back นี้คือโค้ดของ Article
-  const [vocabBox, setVocabBox] = useState(0);
-
-  // function goToContentScreen(category_id,user_id,reading_id,vocabBox_id ) {
-  //   const views =  CountViews(category_id,user_id,reading_id,vocabBox_id)
-  //   console.log("readingIdddddddddddddddddddddd++++++++++++++")
-  //   console.log(reading_id);
-  //   Actions.ContentScreen({ text: reading_id });
-  // }
-  
-  // const [cate, setCate] = useState([]);
 
   const fetch = async () => {
     console.log("runningggggggggggggggggggggggggggggg");
-    await axios
-      .get("http://10.0.2.2:3000/vocabBox/" + props.text)
-      .then(
-        (response) => {
-          console.log("eiei");
-          console.log(response.data);
-          setCate(response.data.reading);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    await axios.get("http://10.0.2.2:3000/vocabBox/" + props.text).then(
+      (response) => {
+        console.log("eiei");
+        console.log(response.data.reading);
+        //     setCate(response.data.reading);
+        //     // setCateName(response.data.reading[0].categoryName);
+        //     console.log(cateName);
+        setResult(response.data.reading)
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   };
 
-  // const read = async () => {
-  //   const data = await fetch();
-  // };
-  // useEffect(() => {
-  //   read();
-  // }, []);
-  // console.log("This is id");
-  // console.log(props.text);
+  const read = async () => {
+    const data = await fetch();
+  };
+  useEffect(() => {
+    read();
+    // getSuggestion();
+  }, []);
+  console.log("This is cate_id vocab");
+  console.log(props.text);
+
 
   return (
     <ScrollView style={{
-      marginTop: Constants.statusBarHeight}}>
-      <View style={{alignSelf: "center",}}>
+      marginTop: Constants.statusBarHeight
+    }}>
+      <View style={{ alignSelf: "center", }}>
         <Text style={styles.category}>Sports</Text>
         <FlatList
           contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-          data={data}
+          data={result}
           numColumns={2}
           renderItem={({ item }) => (
-            <View style={{width:178}}>
+            <View style={{ width: 178 }}>
               <TimelineCard
-                title={item.title}
+                title={item.boxEngName}
                 img={item.img}
                 imgHeight={167}
                 width={167}
@@ -105,7 +99,7 @@ const Vocabulary = () => {
           )}
         />
       </View>
-      
+
       {/* <FlatList
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
         data={cate}
@@ -159,7 +153,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
   },
-  category : {
+  category: {
     marginTop: 44,
     fontSize: 24,
     fontFamily: "PT-Bold",
