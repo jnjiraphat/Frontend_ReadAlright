@@ -350,7 +350,7 @@ export default class TestQuizChallenge extends React.Component {
 
                                 modalVisible: false
                             })
-                            Actions.Home();
+                            Actions.popTo('ContentScreen');
                         }}
                     />
                     {/* <ScrollView style={styles.answersContainer}>

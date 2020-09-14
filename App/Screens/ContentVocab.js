@@ -142,7 +142,8 @@ const Content = (props) => {
           colorsEnd="#7EF192"
         // contentId = {item.reading_id}
         />
-        <ButtonClick
+        <ButtonClick 
+        // onPressAction={() => setModalMoreVisible(true))}
           onPressAction={() => translationGoogle("ant")}
           text="Trans"
           fontSize={24}
