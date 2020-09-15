@@ -64,6 +64,7 @@ const Content = (props) => {
   }, []);
   console.log("This is reading id  ");
   console.log(props.text);
+  
 
   function goToChallenge(reading_id) {
     console.log("readingIDDDDDDDDDDDD  " + reading_id);
@@ -121,7 +122,7 @@ const Content = (props) => {
         marginTop={20}
         marginBottom={40}
         // shadowRadius={30}
-        colorsStart="#2DC897"
+        colorsStart="#2DC897" 
         colorsEnd="#7EF192"
         // contentId = {item.reading_id}
       />

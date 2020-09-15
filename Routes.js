@@ -100,30 +100,30 @@ const Routes = () => {
             hideTabBar
             showLabel={false}
           /> */}
-          <Scene
+          {/* <Scene
             key="TestQuiz"
             component={TestQuiz}
             title="TestQuiz"
             hideNavBar
             hideTabBar
             showLabel={false}
-          />
-          <Scene
+          /> */}
+          {/* <Scene
             key="Login"
             component={Login}
             title="Login"
             hideNavBar
             hideTabBar
             showLabel={false}
-          />
-          <Scene
+          /> */}
+          {/* <Scene
             key="Interest"
             component={InterestScreen}
             title="Interest"
             hideNavBar
             hideTabBar
             showLabel={false}
-          />
+          /> */}
           
           <Scene
             key="tabbar"

@@ -29,12 +29,13 @@ export default class TestQuiz extends React.Component {
             score: 0,
             correctChoice: [],
             reading_id: this.props.text
-            
+
         };
         this.fetchAPI();
+        this.fetchReading();
         // console.log("This is  " + this.reading_id);
     }
-    
+
 
     onSurveyFinished(answers) {
         const infoQuestionsRemoved = [...answers];
@@ -117,29 +118,29 @@ export default class TestQuiz extends React.Component {
                         if (this.state.result[index].value.isRightChoice == 1) {
                             count += 1
                             console.log("index " + this.state.result[index] + " is " + this.state.result[index].value.isRightChoice)
-                        }else{
-                                axios
-                                  .post("http://10.0.2.2:3000/answers", {
+                        } else {
+                            axios
+                                .post("http://10.0.2.2:3000/answers", {
                                     "isRightChoice": this.state.result[index].value.isRightChoice,
                                     "choice": this.state.result[index].value.choice,
                                     "optionText": this.state.result[index].value.optionText,
                                     "value": this.state.result[index].value.value,
                                     "choice_id": this.state.result[index].value.choice_id,
-                                    "question_id":this.state.result[index].value.question_id
-                                  })
-                                  .then(
+                                    "question_id": this.state.result[index].value.question_id
+                                })
+                                .then(
                                     (response) => {
-                                      console.log("upload success!!!");
+                                        console.log("upload success!!!");
                                     },
                                     (error) => {
-                                      console.log(error);
+                                        console.log(error);
                                     }
-                                  );
-                              
-                            console.log("index " + this.state.result[index] + " is " + this.state.result[index].value.isRightChoice + " is wrong") 
-                        
+                                );
+
+                            console.log("index " + this.state.result[index] + " is " + this.state.result[index].value.isRightChoice + " is wrong")
+
                         }
-     
+
                     }
                 } catch (error) {
 
@@ -155,30 +156,43 @@ export default class TestQuiz extends React.Component {
 
     }
     fetchAPI = async () => {
-            var dataArrayQuiz = [];
-            for (let index = 1; index <= 6; index++) {
-                
-                
-            }
+        var dataArrayQuiz = [];
+        for (let index = 1; index <= 6; index++) {
 
 
-            for (let index = 1; index <= 18; index++) {
-                await axios.get("http://10.0.2.2:3000/QuizPre/question/" + index).then(
-                    (response) => {
-                        console.log(response.data);
-                        dataArrayQuiz.push(response.data);
-                        console.log(dataArrayQuiz.length);
-                    },
-                    (error) => {
-                        console.log(error);
-                    }
-                );
-            }
-            this.setState({
-                quizs: dataArrayQuiz,
-            });
-        
+        }
+
+
+        for (let index = 1; index <= 18; index++) {
+            await axios.get("http://10.0.2.2:3000/QuizPre/question/" + index).then(
+                (response) => {
+                    console.log(response.data);
+                    dataArrayQuiz.push(response.data);
+                    console.log(dataArrayQuiz.length);
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        }
+        this.setState({
+            quizs: dataArrayQuiz,
+        });
+
     };
+    fetchReading = async () => {
+        console.log("runningggggggggggggggggggggggggggggg");
+        await axios.get("http://10.0.2.2:3000/ReadingPre").then(
+            (response) => {
+                console.log("eiei");
+                console.log(response.data.quiz);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    };
+
 
     renderPreviousButton(onPress, enabled) {
         return (
@@ -236,7 +250,7 @@ export default class TestQuiz extends React.Component {
             >
                 <Button
                     onPress={onPress}
-                    style={[styles.choiceButton,isSelected ? styles.choiceBgSelected : styles.choiceBgUnSelect]}
+                    style={[styles.choiceButton, isSelected ? styles.choiceBgSelected : styles.choiceBgUnSelect]}
                     key={`button_${index}`}
                 >
                     <Text style={styles.choiceText}>{data.optionText}</Text>
@@ -271,7 +285,7 @@ export default class TestQuiz extends React.Component {
                     <Text style={styles.subHeader}>
                         Fill the gaps with the correct word from the box.
                         {/* {this.state.reading_id} */}
-              </Text>
+                    </Text>
                     <View style={styles.whiteCardChoice}>
                         <SimpleSurvey
                             ref={(s) => {
@@ -405,7 +419,7 @@ const styles = StyleSheet.create({
         marginVertical: "10%",
         paddingVertical: 20,
     },
-    choiceButton : {
+    choiceButton: {
         shadowOffset: {
             width: 0,
             height: 4,
@@ -415,20 +429,20 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         elevation: 8,
     },
-    choiceBgSelected : {
+    choiceBgSelected: {
         backgroundColor: 'rgba(141,196,63,1)'
     },
-    choiceBgUnSelect : {
+    choiceBgUnSelect: {
         backgroundColor: 'rgba(108,48,237,1)'
     },
-    buttonFlow : {
+    buttonFlow: {
         backgroundColor: "rgba(141,196,63,1)",
     },
-    choiceText : {
+    choiceText: {
         fontFamily: "PT-Bold",
         color: "#fff"
     },
-    buttonFlowText : {
+    buttonFlowText: {
         fontFamily: "PT-Bold",
         color: "#fff"
     }
