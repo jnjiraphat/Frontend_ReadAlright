@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import ButtonClick from "./ButtonClick";
-import { Fontisto } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const ModalWord = (props) => {
   const {
@@ -21,58 +21,70 @@ const ModalWord = (props) => {
     modalAction,
     modalButton,
     modalVisible,
+    changeBookMark,
+    onBookMark,
+    getWord
   } = props;
-  // const [modalVisible, setModalVisible] = useState(false);
   return (
-    
-      <View style={styles.centeredView}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-          }}
-        >
-          <View style={styles.setCenter}>
-            <View style={styles.modalView}>
-              <View>
-                <View style={styles.headerArea}>
-                  <View>
-                    <Text style={styles.headerText}>{engWord}</Text>
-                    <Text style={styles.TypeWord}>({typeWord})</Text>
-                  </View>
-                  <View style={{flexDirection: "row"}}>
-                    <Fontisto name="bookmark" size={24} color="black" style={{marginRight:10}}/>
-                    <TouchableOpacity onPress={modalClose}>
-                      <MaterialCommunityIcons name="close-circle-outline" size={24} color="black" />
-                    </TouchableOpacity>
-                  </View>
+    <View style={styles.centeredView}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+        }}
+      >
+        <View style={styles.setCenter}>
+          <View style={styles.modalView}>
+            <View>
+              <View style={styles.headerArea}>
+                <View>
+                  <Text style={styles.headerText}>{engWord}</Text>
+                  <Text style={styles.TypeWord}>({typeWord})</Text>
                 </View>
-                <Text style={styles.Meaning}>{meaning}</Text>
-                <View style={styles.hr}></View>
-                <Text style={styles.sentence}>Example Sentence</Text>
-                <Text style={styles.sentence}>{exampleSentence}</Text>
+                <View style={{ flexDirection: "row" }}>
+                  <TouchableOpacity onPress={() => onBookMark(getWord)}>
+                    <MaterialIcons
+                      name={changeBookMark ? "bookmark" : "bookmark-border"}
+                      size={24}
+                      color="#8A63E5"
+                      style={{ marginRight: 10 }}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={modalClose}>
+                    <MaterialCommunityIcons
+                      name="close-circle-outline"
+                      size={24}
+                      color="black"
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
-              <View style={{alignSelf:"flex-end", marginTop: 30}}>
-                <ButtonClick
-                  text={modalButton}
-                  fontSize={10}
-                  fontcolor="#000000"
-                  fontFamily="PT-Bold"
-                  height={17}
-                  width={86}
-                  radius={30}
-                  padding={0}
-                  onPressAction={modalAction}
-                  colorsStart="#FFD387"
-                  colorsEnd="#FCDE58"
-                />
-              </View>
+              <Text style={styles.Meaning}>{meaning}</Text>
+              <View style={styles.hr}></View>
+              <Text style={styles.sentence}>Example Sentence</Text>
+              <Text style={styles.sentence}>{exampleSentence}</Text>
+            </View>
+            <View style={{ alignSelf: "flex-end", marginTop: 30 }}>
+              <ButtonClick
+                text={modalButton}
+                fontSize={10}
+                fontcolor="#000000"
+                fontFamily="PT-Bold"
+                height={17}
+                width={86}
+                radius={30}
+                padding={0}
+                onPressAction={modalAction}
+                colorsStart="#FFD387"
+                colorsEnd="#FCDE58"
+              />
             </View>
           </View>
-        </Modal>
-      </View>
+        </View>
+      </Modal>
+    </View>
   );
 };
 
@@ -84,10 +96,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   setCenter: {
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: "rgba(0,0,0,0.2)",
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   modalView: {
     width: 280,
@@ -110,30 +122,30 @@ const styles = StyleSheet.create({
   },
   headerArea: {
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   headerText: {
     fontSize: 24,
     fontFamily: "PT-Bold",
   },
-  TypeWord : {
+  TypeWord: {
     fontSize: 12,
-    fontFamily: "PT-Reg"
+    fontFamily: "PT-Reg",
   },
-  Meaning:{
+  Meaning: {
     fontFamily: "Noto-Reg",
     fontSize: 18,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   hr: {
     width: "100%",
     borderTopColor: "#000",
     borderTopWidth: 1,
-    marginTop: 30
+    marginTop: 30,
   },
   sentence: {
     fontFamily: "PT-Reg",
     fontSize: 16,
-    marginTop: 15
-  }
+    marginTop: 15,
+  },
 });

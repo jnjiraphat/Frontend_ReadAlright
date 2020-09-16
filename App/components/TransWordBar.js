@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useCallback } from "react";
 import {
   View,
   Text,
@@ -24,7 +24,28 @@ const TransWordBar = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMoreVisible, setModalMoreVisible] = useState(false);
   // const [value, onChangeText] = useState('');
+  const [isBookMark, setBookMark] = useState(new Map())
+  // const [selected, setSelected] = React.useState();
+  const [changeBookMark, setchangeBookMark] = useState(false)
 
+  const onBookMark = useCallback(
+    (getWord) => {
+      const newSelected = new Map(isBookMark);
+      newSelected.set(getWord, !isBookMark.get(getWord));
+
+      setBookMark(newSelected);
+      if(!isBookMark.get(getWord) == true) {
+        setchangeBookMark(true);
+      } 
+      if (!isBookMark.get(getWord) == false) {
+        setchangeBookMark(false);
+      }
+    },
+    [isBookMark],
+    console.log(getWord),
+    console.log(isBookMark),
+  );
+  
   const translationGoogle = async (word) => {
     setWord(word)
     console.log("translate------------------");
@@ -96,7 +117,9 @@ const TransWordBar = (props) => {
         engWord={getWord}
         typeWord="n."
         meaning={getTranslate}
-        exampleSentence="Thank you for the birthday present.k you for the birk you for the birk you for the birk you for the bir"
+        exampleSentence="If you want this. Please Pat for Upgrade version."
+        onBookMark={onBookMark}
+        changeBookMark={changeBookMark}
       />
       <ModalMoreDetail
         modalVisible={modalMoreVisible}

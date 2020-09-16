@@ -119,8 +119,8 @@ const Content = (props) => {
         width={245}
         radius={30}
         padding={0}
-        marginTop={20}
-        marginBottom={40}
+        marginTop={15}
+        marginBottom={115}
         // shadowRadius={30}
         colorsStart="#2DC897" 
         colorsEnd="#7EF192"
