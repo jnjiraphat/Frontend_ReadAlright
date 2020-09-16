@@ -101,7 +101,7 @@ const Vocabulary = (props) => {
             <View style={{ width: 178 }}>
               <TimelineCard
                 title={item.boxEngName}
-                img={item.img}
+                img={item.image}
                 imgHeight={167}
                 width={167}
                 titleHeight={78}
