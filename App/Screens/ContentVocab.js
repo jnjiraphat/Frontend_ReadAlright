@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Actions } from "react-native-router-flux";
 import ReadingApi from "../API/ReadingAPI";
 import {
@@ -11,8 +11,9 @@ import {
   Image,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { AntDesign } from '@expo/vector-icons'; 
-import { Fontisto } from '@expo/vector-icons';
+import { AntDesign } from "@expo/vector-icons";
+import { Fontisto } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 import ButtonClick from "../components/ButtonClick";
 import ModalWord from "../components/ModalWord";
@@ -108,6 +109,47 @@ const Content = (props) => {
   // }
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMoreVisible, setModalMoreVisible] = useState(false);
+  const [isBookMark, setBookMark] = useState(new Map());
+  const [changeBookMark, setchangeBookMark] = useState(false);
+  const [isCheck, setCheck] = useState(new Map());
+  const [changeCheck, setchangeCheck] = useState(false);
+
+  const onBookMark = useCallback(
+    (engWord) => {
+      const newSelected = new Map(isBookMark);
+      newSelected.set(engWord, !isBookMark.get(engWord));
+
+      setBookMark(newSelected);
+      if (!isBookMark.get(engWord) == true) {
+        setchangeBookMark(true);
+      }
+      if (!isBookMark.get(engWord) == false) {
+        setchangeBookMark(false);
+      }
+    },
+    [isBookMark],
+    console.log(engWord),
+    console.log(isBookMark)
+  );
+  
+  const onCheck = useCallback(
+    (engWord) => {
+      const newSelected = new Map(isCheck);
+      newSelected.set(engWord, !isCheck.get(engWord));
+
+      setCheck(newSelected);
+      if (!isCheck.get(engWord) == true) {
+        setchangeCheck(true);
+      }
+      if (!isCheck.get(engWord) == false) {
+        setchangeCheck(false);
+      }
+    },
+    [isCheck],
+    console.log(engWord),
+    console.log(isCheck)
+  );
+
   return (
     <ScrollView>
       <FlatList
@@ -138,21 +180,19 @@ const Content = (props) => {
                       width: 43,
                       borderRadius: 5,
                       justifyContent: "center",
-                      alignItems: "center"
+                      alignItems: "center",
                     }}
                   >
-                    <AntDesign name="checksquareo" size={24} color="#8A63E5" />
+                    <TouchableOpacity onPress={() => onCheck(item.engWord)}>
+                      <AntDesign name={changeCheck ? "checksquare" : "checksquareo"} size={24} color="#8A63E5" />
+                    </TouchableOpacity>
                   </LinearGradient>
                 </View>
                 <View style={styles.wordArea}>
-                  <Text style={styles.content}>
-                    {item.engWord}
-                  </Text>
+                  <Text style={styles.content}>{item.engWord}</Text>
                 </View>
                 <View style={styles.wordArea}>
-                  <Text style={styles.contentThai}>
-                    {item.thaiWord}
-                  </Text>
+                  <Text style={styles.contentThai}>{item.thaiWord}</Text>
                 </View>
                 <View style={styles.yellowButton}>
                   <LinearGradient
@@ -162,10 +202,18 @@ const Content = (props) => {
                       width: 43,
                       borderRadius: 5,
                       justifyContent: "center",
-                      alignItems: "center"
+                      alignItems: "center",
                     }}
                   >
-                    <Fontisto name="bookmark" size={24} color="#8A63E5"/>
+                    <TouchableOpacity onPress={() => onBookMark(item.engWord)}>
+                      {/* engWord คือตัวข้อความที่จะรับไว้ส่งค่า */}
+                      <MaterialIcons
+                        name={changeBookMark ? "bookmark" : "bookmark-border"}
+                        size={24}
+                        color="#8A63E5"
+                        style={{ marginRight: 10 }}
+                      />
+                    </TouchableOpacity>
                   </LinearGradient>
                 </View>
               </View>
@@ -189,8 +237,8 @@ const Content = (props) => {
           colorsEnd="#7EF192"
           // contentId = {item.reading_id}
         />
-        <ButtonClick 
-        // onPressAction={() => setModalMoreVisible(true))}
+        <ButtonClick
+          // onPressAction={() => setModalMoreVisible(true))}
           onPressAction={() => translationGoogle("ant")}
           text="Trans"
           fontSize={24}
@@ -297,13 +345,13 @@ const styles = StyleSheet.create({
   flexArea: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   },
   yellowButton: {},
   wordArea: {
     // paddingVertical: 5,
     maxWidth: 100,
     minHeight: 70,
-    justifyContent: "center"
+    justifyContent: "center",
   },
 });
