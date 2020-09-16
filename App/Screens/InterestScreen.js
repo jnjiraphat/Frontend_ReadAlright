@@ -73,7 +73,6 @@ function Item({ category_id, title, selected, onSelect, img }) {
   );
 }
 
-const arrayId = [];
 const arrayIdCate = [];
 
 export default function () {
@@ -101,7 +100,7 @@ export default function () {
     [selected],
     console.log(selected)
   );
-
+  
   if (result) {
     function logMapElements(value, key, map) {
       console.log(`m[${key}] = ${value}`);

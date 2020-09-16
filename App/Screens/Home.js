@@ -180,7 +180,7 @@ const home = (props) => {
             <Text style={styles.topic}>Maybe you like</Text>
             <CarouselCardVocab result={vb} />
           </View>
-          <View style={styles.ContentCategory}>
+          <View style={styles.ContentCategoryVocab}>
             <Text style={[styles.topic, { marginLeft: "5%", marginBottom:Dimensions.get("window").height / 7 }]}>Category</Text>
             <CategoryCardVocab result={cateVocabBox} />
           </View>
@@ -285,4 +285,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     // marginBottom: 100,
   },
+  ContentCategoryVocab: {
+    justifyContent: "center",
+    marginBottom: 100,  
+  }
 });
