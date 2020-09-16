@@ -74,6 +74,14 @@ const Vocabulary = (props) => {
   console.log("This is cate_id vocab");
   console.log(props.text);
 
+  function goToContentVocab(vocabBox_id) {
+    console.log("vocabBox_id   " + vocabBox_id);
+    Actions.ContentVocab({ text: vocabBox_id });
+    console.log("Finish " + vocabBox_id);
+    // console.log("readingIDDDDDDDDDDDD" + reading_id);
+  }
+
+  const [suggestion, setSuggestion] = useState([]);
 
   return (
     <ScrollView style={{
@@ -89,7 +97,7 @@ const Vocabulary = (props) => {
           data={result}
           numColumns={2}
           renderItem={({ item }) => (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => goToContentVocab(item.vocabBox_id)}>
             <View style={{ width: 178 }}>
               <TimelineCard
                 title={item.boxEngName}
