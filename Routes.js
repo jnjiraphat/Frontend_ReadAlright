@@ -125,14 +125,6 @@ const Routes = () => {
             showLabel={false}
           /> */}
           <Scene
-            key="ContentVocab"
-            component={ContentVocab}
-            title="ContentVocab"
-            titleStyle={styles.title}
-            back={true}
-            showLabel={false}
-          />
-          <Scene
             key="tabbar"
             tabs
             tabBarStyle={{ height: 61 }}

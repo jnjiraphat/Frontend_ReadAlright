@@ -95,6 +95,23 @@ const Content = (props) => {
             <View style={styles.whiteCard}>
               <Text style={styles.content}>{item.content}</Text>
             </View>
+            <ButtonClick
+            onPressAction={() => goToChallenge(item.reading_id)}
+            text="Challenge"
+            fontSize={24}
+            fontFamily="PT-Bold"
+            fontcolor="#000000"
+            height={39}
+            width={245}
+            radius={30}
+            padding={0}
+            marginTop={15}
+            marginBottom={115}
+            // shadowRadius={30}
+            colorsStart="#2DC897" 
+            colorsEnd="#7EF192"
+            // contentId = {item.reading_id}
+          />
           </View>
         )}
       />
@@ -109,40 +126,6 @@ const Content = (props) => {
           /> 
         </View>
       </View> */}
-      <ButtonClick
-        onPressAction={() => goToChallenge(item.reading_id)}
-        text="Challenge"
-        fontSize={24}
-        fontFamily="PT-Bold"
-        fontcolor="#000000"
-        height={39}
-        width={245}
-        radius={30}
-        padding={0}
-        marginTop={15}
-        marginBottom={115}
-        // shadowRadius={30}
-        colorsStart="#2DC897" 
-        colorsEnd="#7EF192"
-        // contentId = {item.reading_id}
-      />
-      <ModalWord
-        modalVisible={modalVisible}
-        modalClose={() => setModalVisible(false)}
-        modalAction={() => setModalMoreVisible(true)}
-        modalButton="More Detail"
-        engWord="Present"
-        typeWord="n."
-        meaning="ของขวัญ"
-        exampleSentence="Thank you for the birthday present.k you for the birk you for the birk you for the birk you for the bir"
-      />
-      <ModalMoreDetail
-        modalVisible={modalMoreVisible}
-        modalClose={() => setModalMoreVisible(false)}
-        engWord="Present"
-        typeWord="n."
-        meaning="ปัจจุบัน"
-      />
       
     </ScrollView>
     <TransWordBar
