@@ -169,7 +169,7 @@ export default class TestQuiz extends React.Component {
                     console.log(response.data);
                     dataArrayQuiz.push(response.data);
                     console.log(dataArrayQuiz.length);
-                },
+                },                                                                                                
                 (error) => {
                     console.log(error);
                 }

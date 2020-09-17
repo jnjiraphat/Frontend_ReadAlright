@@ -95,7 +95,21 @@ const Content = (props) => {
             <View style={styles.whiteCard}>
               <Text style={styles.content}>{item.content}</Text>
             </View>
-            <ButtonClick
+          </View>
+        )}
+      />
+      {/* <View style={styles.container}>
+        <View style={styles.whiteCard}>
+          <FlatList
+            contentContainerStyle={{ flexGrow: 1, flexDirection:"row" }}
+            data={cateContent}
+            renderItem={({ item }) => (
+            <Text style={styles.content}>{item}</Text>
+           )}
+          /> 
+        </View>
+      </View> */}
+      <ButtonClick
         onPressAction={() => goToChallenge(item.reading_id)}
         text="Challenge"
         fontSize={24}
@@ -112,21 +126,6 @@ const Content = (props) => {
         colorsEnd="#7EF192"
         // contentId = {item.reading_id}
       />
-          </View>
-        )}
-      />
-      {/* <View style={styles.container}>
-        <View style={styles.whiteCard}>
-          <FlatList
-            contentContainerStyle={{ flexGrow: 1, flexDirection:"row" }}
-            data={cateContent}
-            renderItem={({ item }) => (
-            <Text style={styles.content}>{item}</Text>
-           )}
-          /> 
-        </View>
-      </View> */}
-      
       <ModalWord
         modalVisible={modalVisible}
         modalClose={() => setModalVisible(false)}
@@ -219,3 +218,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
 });
+
