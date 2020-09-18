@@ -24,7 +24,7 @@ const CarouselCardVocab = (props) => {
         <TouchableOpacity onPress={() => goToContentScreen(item.reading_id)}>
         <View style={{ height: 200 }}>
           <TimelineCard
-            // img={item.image}
+            img={item.image}
             title={item.boxEngName}
             imgHeight={92}
             width={180}

@@ -116,14 +116,14 @@ const Routes = () => {
             hideTabBar
             showLabel={false}
           /> */}
-          {/* <Scene
+          <Scene
             key="Interest"
             component={InterestScreen}
             title="Interest"
             hideNavBar
             hideTabBar
             showLabel={false}
-          /> */}
+          />
           
           <Scene
             key="tabbar"
