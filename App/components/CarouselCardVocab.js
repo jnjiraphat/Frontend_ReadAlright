@@ -5,9 +5,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { Actions } from "react-native-router-flux";
 
 const CarouselCardVocab = (props) => {
-  function goToContentScreen(readingId) {
-    console.log(readingId);
-    Actions.ContentScreen({ text: readingId });
+  function goToContentVocab(vocabBox_id) {
+    console.log(vocabBox_id);
+    Actions.ContentVocab({ text: vocabBox_id });
 
     console.log("hello");
   }
@@ -21,7 +21,7 @@ const CarouselCardVocab = (props) => {
       // initialNumToRender={5}
       // contentContainerStyle={{ flexGrow: 1, flexDirection: "row" }}
       renderItem={({ item }) => (
-        <TouchableOpacity onPress={() => goToContentScreen(item.reading_id)}>
+        <TouchableOpacity onPress={() => goToContentVocab(item.vocabBox_id)}>
         <View style={{ height: 200 }}>
           <TimelineCard
             img={item.image}
