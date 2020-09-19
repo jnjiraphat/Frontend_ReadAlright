@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     shadowColor: "#000000",
     shadowOpacity: 0.3,
     elevation: 8,
-    marginVertical: "10%",
+    // marginVertical: "10%",
     paddingVertical: 20,
   },
   choiceButton: {
