@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Router, Scene, Tabs } from "react-native-router-flux";
 import Article from "./App/Screens/Article.js";
 import ArticleVocab from "./App/Screens/ArticleVocab.js";
+import UserAnswer from "./App/Screens/UserAnswer.js";
 
 // import MaybeYouLike from "./App/Screens/MaybeYouLike";
 import InterestScreen from "./App/Screens/InterestScreen.js";
@@ -218,6 +219,14 @@ const Routes = () => {
             key="ArticleVocab"
             component={ArticleVocab}
             title="ArticleVocab"
+            // hideNavBar
+            hideTabBar
+            showLabel={false}
+          />
+          <Scene
+            key="UserAnswer"
+            component={UserAnswer}
+            title="UserAnswer"
             // hideNavBar
             hideTabBar
             showLabel={false}
