@@ -6,9 +6,18 @@ import ModalSubmit from "../components/ModalSubmit";
 import { Actions } from "react-native-router-flux";
 import Constants from "expo-constants";
 import { Button } from "@ant-design/react-native";
+import { AsyncStorage } from "react-native";
+import { set } from "react-native-reanimated";
 
 const GREEN = "rgba(141,196,63,1)";
 const PURPLE = "rgba(108,48,237,1)";
+
+function goToQuizReading(readingId) {
+  console.log(readingId);
+  Actions.TestQuizReading({ text: readingId });
+
+  console.log("hello");
+}
 
 export default class TestQuiz extends React.Component {
   constructor(props) {
@@ -23,9 +32,13 @@ export default class TestQuiz extends React.Component {
       score: 0,
       correctChoice: [],
       reading_id: this.props.text,
+      questionId: [],
+      count: 0,
+      temp: []
     };
-    this.fetchAPI();
-    this.fetchReading();
+    this.setUpQuestion()
+    // this.setUp
+    // this.fetchReading();
     // console.log("This is  " + this.reading_id);
   }
 
@@ -36,19 +49,53 @@ export default class TestQuiz extends React.Component {
     for (const elem of infoQuestionsRemoved) {
       answersAsObj[elem.questionId] = elem.value;
     }
-    this.setUp();
+    // this.setState({
+    //   answersSoFar: JSON.stringify(this.surveyRef.getAnswers(), 2),
+    // }); 
+    // console.log("=============================")
+
+    // console.log(this.state.answersSoFar)
+    // console.log("=============================")
+    // var count = 2;   
+    setTimeout(() => {
+      this.setUp();
+    }, 1500);
+
+    if (this.state.reading_id != 6) {
+      console.log("=============================")
+      console.log(this.state.reading_id + 1)
+      Actions.TestQuizReading({ text: this.state.reading_id + 1 });
+      //  count = count+1;
+    } else {
+      console.log("Success")
+      Actions.UserAnswer();
+
+    }
+
+
 
     // console.log(answers);
   }
 
   onAnswerSubmitted(answer) {
+
+    console.log("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
+    console.log(JSON.stringify(this.surveyRef.getAnswers(), 2))
+    console.log("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
+
     this.setState({
+      count: this.state.count + 1,
       answersSoFar: JSON.stringify(this.surveyRef.getAnswers(), 2),
     });
+
   }
   converData() {
     return new Promise((resolve, reject) => {
       var data = JSON.parse(this.state.answersSoFar);
+      console.log("------------answer----------------")
+      console.log(data)
+      console.log("------------answer----------------")
+
 
       resolve(data);
     });
@@ -58,17 +105,29 @@ export default class TestQuiz extends React.Component {
 
     await this.converData().then((result) => {
       console.log(result.length + "eiei");
+      console.log("------------answerq----------------")
       console.log(result);
+      console.log("------------answerq----------------")
+      try {
+        AsyncStorage.setItem('userAnswer' + this.state.reading_id, JSON.stringify(result));
+      } catch (error) {
+        // Error saving data
+      }
       this.setState({
         result: result,
       });
     });
     // console.log(this.state.result.length + "eiei")
   };
+  setUpQuestion = async () => {
+    await this.fetchAPIBefore();
+    await this.fetchAPI;
+
+  };
   setUp = async () => {
     await this.convertJson();
 
-    await this.checkAnswer();
+    // await this.checkAnswer();
   };
   checkAnswer = async () => {
     // var tempCorrectChoice = [];
@@ -92,9 +151,11 @@ export default class TestQuiz extends React.Component {
     // this.setState({
     //     quizs: dataArrayQuiz,
     // });
+
+
     var count = 0;
     setTimeout(() => {
-      if (this.state.result.length != 18) {
+      if (this.state.result.length != 3) {
         this.setUp();
       } else {
         console.log(this.state.result.length + "koko");
@@ -102,17 +163,17 @@ export default class TestQuiz extends React.Component {
           for (let index = 0; index < this.state.result.length; index++) {
             console.log(
               "index--" +
-                this.state.result[index] +
-                " is " +
-                this.state.result[index].value.value
+              this.state.result[index] +
+              " is " +
+              this.state.result[index].value.value
             );
             if (this.state.result[index].value.isRightChoice == 1) {
               count += 1;
               console.log(
                 "index " +
-                  this.state.result[index] +
-                  " is " +
-                  this.state.result[index].value.isRightChoice
+                this.state.result[index] +
+                " is " +
+                this.state.result[index].value.isRightChoice
               );
             } else {
               axios
@@ -135,10 +196,10 @@ export default class TestQuiz extends React.Component {
 
               console.log(
                 "index " +
-                  this.state.result[index] +
-                  " is " +
-                  this.state.result[index].value.isRightChoice +
-                  " is wrong"
+                this.state.result[index] +
+                " is " +
+                this.state.result[index].value.isRightChoice +
+                " is wrong"
               );
             }
           }
@@ -152,12 +213,44 @@ export default class TestQuiz extends React.Component {
       }
     }, 1500);
   };
+  fetchAPIBefore = async () => {
+    var dataArrayQuiz2 = [];
+
+    try {
+
+      await axios.get("http://10.0.2.2:3000/QuizPre/question/reading/" + this.state.reading_id).then(
+        (response) => {
+          for (let index = 0; index < response.data.quiz.length; index++) {
+            dataArrayQuiz2.push(response.data.quiz[index].question_pretest_id);
+            console.log("eiei")
+            console.log(response.data.quiz[index].question_pretest_id)
+
+            console.log("eiei")
+
+          }
+          this.setState({
+            questionId: dataArrayQuiz2
+          });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } catch (error) {
+
+    } finally {
+      this.fetchAPI()
+    }
+
+
+    // this.setState({
+    //   quizs: dataArrayQuiz,
+    // });
+  };
   fetchAPI = async () => {
     var dataArrayQuiz = [];
-    for (let index = 1; index <= 6; index++) {}
-
-    for (let index = 1; index <= 18; index++) {
-      await axios.get("http://10.0.2.2:3000/QuizPre/question/" + index).then(
+    for (let index = 0; index < this.state.questionId.length; index++) {
+      await axios.get("http://10.0.2.2:3000/QuizPre/question/" + this.state.questionId[index]).then(
         (response) => {
           console.log(response.data);
           dataArrayQuiz.push(response.data);
@@ -172,18 +265,18 @@ export default class TestQuiz extends React.Component {
       quizs: dataArrayQuiz,
     });
   };
-  fetchReading = async () => {
-    console.log("runningggggggggggggggggggggggggggggg");
-    await axios.get("http://10.0.2.2:3000/ReadingPre").then(
-      (response) => {
-        console.log("eiei");
-        console.log(response.data.quiz);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  };
+  // fetchReading = async () => {
+  //   console.log("runningggggggggggggggggggggggggggggg");
+  //   await axios.get("http://10.0.2.2:3000/ReadingPre").then(
+  //     (response) => {
+  //       console.log("eiei");
+  //       console.log(response.data.quiz);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // };
 
   renderPreviousButton(onPress, enabled) {
     return (
@@ -191,7 +284,7 @@ export default class TestQuiz extends React.Component {
         style={{ flexGrow: 1, maxWidth: 110, marginTop: 10, marginBottom: 10 }}
       >
         <Button onPress={onPress} disabled={!enabled} style={
-      enabled ? styles.buttonFlowEnable : styles.buttonFlow}>
+          enabled ? styles.buttonFlowEnable : styles.buttonFlow}>
           <Text style={styles.buttonFlowText}>Previous</Text>
         </Button>
       </View>
@@ -204,7 +297,7 @@ export default class TestQuiz extends React.Component {
         style={{ flexGrow: 1, maxWidth: 110, marginTop: 10, marginBottom: 10 }}
       >
         <Button style={
-      enabled ? styles.buttonFlowEnable : styles.buttonFlow} onPress={onPress} disabled={!enabled}>
+          enabled ? styles.buttonFlowEnable : styles.buttonFlow} onPress={onPress} disabled={!enabled}>
           <Text style={styles.buttonFlowText}>Next</Text>
         </Button>
       </View>
@@ -217,8 +310,8 @@ export default class TestQuiz extends React.Component {
         style={{ flexGrow: 1, maxWidth: 110, marginTop: 10, marginBottom: 10 }}
       >
         <Button onPress={onPress} disabled={!enabled} style={
-      enabled ? styles.buttonFlowEnable : styles.buttonFlow}>
-          <Text style={styles.buttonFlowText}>Finish</Text>
+          enabled ? styles.buttonFlowEnable : styles.buttonFlow}>
+          <Text style={styles.buttonFlowText}>Next</Text>
         </Button>
       </View>
     );
@@ -268,7 +361,7 @@ export default class TestQuiz extends React.Component {
         <View style={styles.background}>
           <Text style={styles.header}>Pre-Test</Text>
           <Text style={styles.subHeader}>
-          Read the headline. Guess if a-c below are true (T) or false (F).
+            Read the headline. Guess if a-c below are true (T) or false (F).
             {/* {this.state.reading_id} */}
           </Text>
           <View style={styles.whiteCardChoice}>
