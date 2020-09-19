@@ -299,7 +299,7 @@ export default class TestQuiz extends React.Component {
           <ModalSubmit
             modalVisible={this.state.modalVisible}
             modalText={this.state.score}
-            modalHeader="Your Score is"
+            modalHeader="Your Level is"
             modalButton="Next"
             suggestionText="Hi Suggestion"
             modalAction={() => {

@@ -8,7 +8,6 @@ const AreaProfile = (props) => {
   const { display, level, suggestion } = props;
   console.log("In Area")
   console.log(suggestion)
-  console.log(suggestion.length)
   console.log("In Area")
 
 
@@ -48,19 +47,10 @@ const AreaProfile = (props) => {
           }}  
           keyExtractor={(item, index) => index}
         />
-
-
-
-
-
-
-
-
-
       </View>
     </View>
   ) : (
-      <View> Loading Areaaaaaaaaaaaaaaa</View>
+      <View><Text>Loading</Text></View>
     )
 };
 

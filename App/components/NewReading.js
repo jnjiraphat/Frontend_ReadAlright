@@ -26,7 +26,6 @@ const newReading = (props) => {
       .get("http://10.0.2.2:3000/newReading")
       .then((response) => {
         console.log("Newreadingggggggggggggggggggggggggggggggggg");
-        console.log(response.data.length);
         console.log("Newreadingggggggggggggggggggggggggggggggggg");
 
         setResultNew(response.data);
