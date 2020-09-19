@@ -1,24 +1,125 @@
-import React from "react";
-import { StyleSheet, ScrollView, Text, View, Dimensions } from "react-native";
+import React, { useEffect, useState, useCallback }  from "react";
+import { StyleSheet, ScrollView, Text, View, Dimensions, FlatList} from "react-native";
 import axios from "axios";
 import { Actions } from "react-native-router-flux";
 import Constants from "expo-constants";
 import ButtonClick from "../components/ButtonClick";
+import { set } from "react-native-reanimated";
 
-const TestQuizReading = () => {
+
+const TestQuizReading = (props) => {
+
+  // const[readId , setReadId] = useState("")
+  console.log("--------------------------------")
+  console.log(props.text)
+
+  const[index , setIndex] = useState("1");
+  // console.log("This is index")
+  // console.log(index)
+
+  function goToTestQuiz(readingId) {
+    console.log(readingId);
+    Actions.TestQuiz({ text: readingId });
+
+    console.log("hello");
+  }
+  const [readPretest, setReadPretest] = useState([]);
+
+  const fetch = async () => {
+    // var index = 1;
+    // var dataArrayQuiz = [];
+    if (props.text != null) {
+      console.log("$$$$$$$$$$$$$$$$$$$$$$")
+      console.log(props.text)
+          await axios         
+            .get(             
+              "http://10.0.2.2:3000/ReadingPre/" + props.text
+            )
+            .then(
+              (response) => {
+                console.log("prop not null")
+                console.log(response.data.quiz);
+                setReadPretest(response.data.quiz);
+                // setIndex(props.text)
+                // dataArrayQuiz.push(response.data.quiz);
+                // console.log(dataArrayQuiz.length);
+
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+    }else{
+      await axios
+      .get(
+        "http://10.0.2.2:3000/ReadingPre/" + index
+      )
+      .then(
+        (response) => {
+          console.log("prop null")
+          console.log(response.data.quiz);
+          setReadPretest(response.data.quiz)
+          setIndex(props.text)
+          // dataArrayQuiz.push(response.data.quiz);
+          // console.log(dataArrayQuiz.length);
+          
+        },
+        (error) => {
+          console.log(error);
+        }
+        );
+      }
+      
+    
+    // var dataArrayQuiz = [];
+    // for (let index = 1; index < 7; index++) {
+    //   await axios
+    //     .get(
+    //       "http://10.0.2.2:3000/ReadingPre/" + index
+    //     )
+    //     .then(
+    //       (response) => {
+    //         console.log(response.data.quiz);
+    //         dataArrayQuiz.push(response.data.quiz);
+    //         console.log(dataArrayQuiz.length);
+    //       },
+    //       (error) => {
+    //         console.log(error);
+    //       }
+    //     );
+    // }
+    // setReadPretest(dataArrayQuiz)
+  };
+
+  console.log("This is Read Pretest")
+  console.log(readPretest)
+
+  const read = async () => {
+    const data = await fetch();
+  };
+  useEffect(() => {
+    read();
+  }, []);
   return (
     <View style={styles.background}>
       <Text style={styles.header}>Pre-Test</Text>
       <Text style={styles.subHeader}>
         Read the headline. Guess if a-c below are true (T) or false (F).
       </Text>
-      <View style={styles.whiteCardChoice}>
-          <Text style={styles.questionText}>
-              Ddlsd;a'fklds;kfl;dsfdsgfs
-          </Text>
-      </View>
+      {/* <View style={styles.whiteCardChoice}> */}
+        <FlatList
+          contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+          data={readPretest}
+          renderItem={({ item }) => (
+            <View style={styles.whiteCardChoice}>   
+              <Text style = {styles.questionText}>{item.content}</Text>           
+            </View>
+          )}
+        />          
+      {/* </View> */}
+
       <ButtonClick
-        onPressAction={() => goToChallenge(item.reading_id)}
+        onPressAction={() => goToTestQuiz(1)}
         text="Ready"
         fontSize={24}
         fontFamily="PT-Bold"
@@ -32,7 +133,7 @@ const TestQuizReading = () => {
         // shadowRadius={30}
         colorsStart="#2DC897"
         colorsEnd="#7EF192"
-        // contentId = {item.reading_id}
+      // contentId = {item.reading_id}
       />
     </View>
   );

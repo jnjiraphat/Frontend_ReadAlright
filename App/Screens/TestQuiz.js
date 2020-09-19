@@ -10,6 +10,13 @@ import { Button } from "@ant-design/react-native";
 const GREEN = "rgba(141,196,63,1)";
 const PURPLE = "rgba(108,48,237,1)";
 
+function goToQuizReading(readingId) {
+  console.log(readingId);
+  Actions.TestQuizReading({ text: readingId });
+
+  console.log("hello");
+}
+
 export default class TestQuiz extends React.Component {
   constructor(props) {
     super(props);
@@ -25,7 +32,7 @@ export default class TestQuiz extends React.Component {
       reading_id: this.props.text,
     };
     this.fetchAPI();
-    this.fetchReading();
+    // this.fetchReading();
     // console.log("This is  " + this.reading_id);
   }
 
@@ -36,7 +43,14 @@ export default class TestQuiz extends React.Component {
     for (const elem of infoQuestionsRemoved) {
       answersAsObj[elem.questionId] = elem.value;
     }
-    this.setUp();
+    var count = 2;
+    if (this.state.reading_id != 6) {
+      console.log("=============================")
+      console.log(this.state.reading_id)
+     Actions.TestQuizReading({ text: count });
+     count = count+1;
+    }
+    // this.setUp();
 
     // console.log(answers);
   }
@@ -94,7 +108,7 @@ export default class TestQuiz extends React.Component {
     // });
     var count = 0;
     setTimeout(() => {
-      if (this.state.result.length != 18) {
+      if (this.state.result.length != 3) {
         this.setUp();
       } else {
         console.log(this.state.result.length + "koko");
@@ -154,9 +168,7 @@ export default class TestQuiz extends React.Component {
   };
   fetchAPI = async () => {
     var dataArrayQuiz = [];
-    for (let index = 1; index <= 6; index++) {}
-
-    for (let index = 1; index <= 18; index++) {
+    for (let index = 1; index <= 3; index++) {
       await axios.get("http://10.0.2.2:3000/QuizPre/question/" + index).then(
         (response) => {
           console.log(response.data);
@@ -172,18 +184,18 @@ export default class TestQuiz extends React.Component {
       quizs: dataArrayQuiz,
     });
   };
-  fetchReading = async () => {
-    console.log("runningggggggggggggggggggggggggggggg");
-    await axios.get("http://10.0.2.2:3000/ReadingPre").then(
-      (response) => {
-        console.log("eiei");
-        console.log(response.data.quiz);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  };
+  // fetchReading = async () => {
+  //   console.log("runningggggggggggggggggggggggggggggg");
+  //   await axios.get("http://10.0.2.2:3000/ReadingPre").then(
+  //     (response) => {
+  //       console.log("eiei");
+  //       console.log(response.data.quiz);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // };
 
   renderPreviousButton(onPress, enabled) {
     return (
@@ -218,7 +230,7 @@ export default class TestQuiz extends React.Component {
       >
         <Button onPress={onPress} disabled={!enabled} style={
       enabled ? styles.buttonFlowEnable : styles.buttonFlow}>
-          <Text style={styles.buttonFlowText}>Finish</Text>
+          <Text style={styles.buttonFlowText}>Next</Text>
         </Button>
       </View>
     );
