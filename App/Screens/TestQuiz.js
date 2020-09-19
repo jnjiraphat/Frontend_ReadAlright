@@ -46,8 +46,8 @@ export default class TestQuiz extends React.Component {
     var count = 2;
     if (this.state.reading_id != 6) {
       console.log("=============================")
-      console.log(this.state.reading_id)
-     Actions.TestQuizReading({ text: count });
+      console.log(this.state.reading_id+1)
+     Actions.TestQuizReading({ text: this.state.reading_id+1 });
      count = count+1;
     }
     // this.setUp();
@@ -168,7 +168,8 @@ export default class TestQuiz extends React.Component {
   };
   fetchAPI = async () => {
     var dataArrayQuiz = [];
-    for (let index = 1; index <= 3; index++) {
+    for (let index = this.state.reading_id ; index <= this.state.reading_id.length; index++) {
+      console.lo
       await axios.get("http://10.0.2.2:3000/QuizPre/question/" + index).then(
         (response) => {
           console.log(response.data);

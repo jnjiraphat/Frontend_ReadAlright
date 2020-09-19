@@ -119,7 +119,12 @@ const TestQuizReading = (props) => {
       {/* </View> */}
 
       <ButtonClick
-        onPressAction={() => goToTestQuiz(1)}
+        onPressAction={() => {if(props.text != null) {
+          goToTestQuiz(props.text)
+        } else {
+          goToTestQuiz(1)
+        }}
+          }
         text="Ready"
         fontSize={24}
         fontFamily="PT-Bold"
