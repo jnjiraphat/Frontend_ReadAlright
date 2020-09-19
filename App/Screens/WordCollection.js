@@ -9,6 +9,7 @@ import {
   Dimensions,
   Text,
   Image,
+  TouchableOpacity,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AntDesign } from "@expo/vector-icons";
@@ -49,38 +50,38 @@ const dataImg = [
 ];
 
 const WordCollection = (props) => {
-  const translationGoogle = async (word) => {
-    console.log("translate------------------");
-    axios
-      .post(
-        "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCBEbjkNJ_6_DL8s5Ni6bfF0M4YwhrR-Dc",
-        {
-          q: word,
-          source: "en",
-          target: "th",
-          format: "text",
-        }
-      )
-      .then(
-        (response) => {
-          console.log(response.data);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-  };
-  const [cate, setCate] = useState([]);
+  // const translationGoogle = async (word) => {
+  //   console.log("translate------------------");
+  //   axios
+  //     .post(
+  //       "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCBEbjkNJ_6_DL8s5Ni6bfF0M4YwhrR-Dc",
+  //       {
+  //         q: word,
+  //         source: "en",
+  //         target: "th",
+  //         format: "text",
+  //       }
+  //     )
+  //     .then(
+  //       (response) => {
+  //         console.log(response.data);
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       }
+  //     );
+  // };
+  const [wordCol, setWordCol] = useState([]);
 
   const fetch = async () => {
     console.log("runningggggggggggggggggggggggggggggg");
     await axios
-      .get("http://10.0.2.2:3000/reading/readingId/" + props.text)
+      .get("http://10.0.2.2:3000/wordCol")
       .then(
         (response) => {
-          console.log("eieiContent");
-          console.log(response.data.reading);
-          setCate(response.data.reading);
+          console.log("Word Collection");
+          console.log(response.data.quiz);
+          setWordCol(response.data.quiz);
         },
         (error) => {
           console.log(error);
@@ -94,15 +95,15 @@ const WordCollection = (props) => {
   useEffect(() => {
     read();
   }, []);
-  console.log("This is reading id  ");
-  console.log(props.text);
+  // console.log("This is reading id  ");
+  // console.log(props.text);
 
-  function goToChallenge(reading_id) {
-    console.log("readingIDDDDDDDDDDDD  " + reading_id);
-    Actions.TestQuizChallenge({ text: reading_id });
-    console.log("Finish " + reading_id);
+  // function goToChallenge(reading_id) {
+  //   console.log("readingIDDDDDDDDDDDD  " + reading_id);
+  //   Actions.TestQuizChallenge({ text: reading_id });
+    // console.log("Finish " + reading_id);
     // console.log("readingIDDDDDDDDDDDD" + reading_id);
-  }
+  // }
   // const goToAbout = () => {
   //    Actions.about()
   // }
@@ -112,20 +113,20 @@ const WordCollection = (props) => {
   const [changeBookMark, setchangeBookMark] = useState(false);
   
   const onBookMark = useCallback(
-    (engWord) => {
+    (wordCol) => {
       const newSelected = new Map(isBookMark);
-      newSelected.set(engWord, !isBookMark.get(engWord));
+      newSelected.set(wordCol, !isBookMark.get(wordCol));
 
       setBookMark(newSelected);
-      if (!isBookMark.get(engWord) == true) {
+      if (!isBookMark.get(wordCol) == true) {
         setchangeBookMark(true);
       }
-      if (!isBookMark.get(engWord) == false) {
+      if (!isBookMark.get(wordCol) == false) {
         setchangeBookMark(false);
       }
     },
     [isBookMark],
-    console.log(engWord),
+    console.log(wordCol),
     console.log(isBookMark)
   );
 
@@ -144,15 +145,15 @@ const WordCollection = (props) => {
       <View style={{ flex: 1, alignItems: "center" }}>
         <FlatList
           contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-          data={data}
+          data={wordCol}
           renderItem={({ item }) => (
             <View style={styles.whiteCard}>
               <View style={styles.flexArea}>
                 <View style={styles.wordArea}>
-                  <Text style={styles.content}>{item.engWord}</Text>
+                  <Text style={styles.content}>{item.wordCol_Eng}</Text>
                 </View>
                 <View style={styles.wordArea}>
-                  <Text style={styles.contentThai}>{item.thaiWord}</Text>
+                  <Text style={styles.contentThai}>{item.wordCol_Thai}</Text>
                 </View>
                 <View style={styles.yellowButton}>
                   <LinearGradient
@@ -165,7 +166,7 @@ const WordCollection = (props) => {
                       alignItems: "center",
                     }}
                   >
-                    <TouchableOpacity onPress={() => onBookMark(item.engWord)}>
+                    <TouchableOpacity onPress={() => onBookMark(item.wordCol_Eng)}>
                       {/* engWord คือตัวข้อความที่จะรับไว้ส่งค่า */}
                       <MaterialIcons
                         name={changeBookMark ? "bookmark" : "bookmark-border"}
