@@ -149,24 +149,6 @@ const home = (props) => {
 
   const [result, setResult] = useState([]);
 
-  const rd = [
-    { title: "Reading", img: require("./../assets/catagory/Animal.jpg") },
-    { title: "Vocabulary", img: require("./../assets/catagory/Animal.jpg") },
-    { title: "Reading", img: require("./../assets/catagory/Animal.jpg") },
-    { title: "Vocabulary", img: require("./../assets/catagory/Animal.jpg") },
-    { title: "Reading", img: require("./../assets/catagory/Animal.jpg") },
-    { title: "Vocabulary", img: require("./../assets/catagory/Animal.jpg") },
-  ];
-
-  const vb = [
-    { title: "Reading", img: require("./../assets/catagory/News.jpg") },
-    { title: "Vocabulary", img: require("./../assets/catagory/News.jpg") },
-    { title: "Reading", img: require("./../assets/catagory/News.jpg") },
-    { title: "Vocabulary", img: require("./../assets/catagory/News.jpg") },
-    { title: "Reading", img: require("./../assets/catagory/News.jpg") },
-    { title: "Vocabulary", img: require("./../assets/catagory/News.jpg") },
-  ];
-
   function ContentDefault() {
     return (
       <View style={styles.ContentSwitch}>
@@ -211,7 +193,7 @@ const home = (props) => {
             <CarouselCardVocab result={newVocab} />
           </View>
           <View style={styles.ContentCarousel}>
-            <Text style={styles.topic}>Maybe you likeeeeeeeeee</Text>
+            <Text style={styles.topic}>Maybe you like</Text>
             <CarouselCardVocab result={MaybeVb} />
           </View>
           <View style={styles.ContentCategoryVocab}>
@@ -313,7 +295,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   ContentCarousel: {
-    height: 200,
+    height: 250,
     marginLeft: "5%",
   },
   ContentCategory: {
