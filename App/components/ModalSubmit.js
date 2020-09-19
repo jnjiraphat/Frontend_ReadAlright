@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Modal,
   TouchableOpacity,
+  FlatList
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import ButtonClick from "./ButtonClick";
@@ -15,8 +16,9 @@ const ModalSubmit = (props) => {
     modalText,
     modalHeader,
     modalButton,
-    ModalAction,
+    modalAction,
     modalVisible,
+    suggestionText
   } = props;
   // const [modalVisible, setModalVisible] = useState(false);
   return (
@@ -45,7 +47,17 @@ const ModalSubmit = (props) => {
                 <Text style={styles.modalText}>{modalText}</Text>
               </LinearGradient>
               {/* circleLayout */}
-
+              {/* <Text>Your Suggestion</Text>
+              <LinearGradient
+                colors={["#FFD387", "#FCDE58"]} style={styles.suggestionArea}>
+                <FlatList
+                  data={suggestionText}
+                  renderItem={({ item }) => (
+                    <Text></Text>
+                  )}
+                />
+              </LinearGradient> */}
+              
               {/* next Step */}
               <ButtonClick
                 text={modalButton}
@@ -57,7 +69,7 @@ const ModalSubmit = (props) => {
                 radius={30}
                 padding={0}
                 marginBottom="20%"
-                onPressAction={ModalAction}
+                onPressAction={modalAction}
                 // shadowRadius={30}
                 colorsStart="#FFD387"
                 colorsEnd="#FCDE58"
@@ -122,4 +134,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "PT-Bold",
   },
+  suggestionArea : {
+    
+  }
 });

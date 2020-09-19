@@ -12,9 +12,9 @@ import Vocabulary from './App/Screens/Vocabulary'
 import ContentVocab from './App/Screens/ContentVocab'
 import Tricks from "./App/Screens/Tricks";
 import Mylist from "./App/Screens/Mylist";
-import PreTest from "./App/Screens/PreTestScreen";
 import uploadImage from "./App/Screens/uploadImage";
 import TestQuiz from "./App/Screens/TestQuiz";
+import WordCollection from './App/Screens/WordCollection'
 
 // import Article from "./App/Screens/Article"
 import { FontAwesome } from "@expo/vector-icons";
@@ -61,7 +61,7 @@ const TabIcon = ({ focused, title }) => {
       );
     }
   }
-  if (title == "Mylist") {
+  if (title == "WordCollection") {
     if (focused) {
       return (
         <LinearGradient colors={["#7EF192", "#2DC897"]} style={styles.gradient}>
@@ -92,22 +92,14 @@ const Routes = () => {
       <Router>
         <Scene key="root" showLabel={false} navTransparent={true}>
 
-          {/* <Scene
-            key="PreTest"
-            component={PreTest}
-            title="PreTest"
-            hideNavBar
-            hideTabBar
-            showLabel={false}
-          /> */}
-          {/* <Scene
+          <Scene
             key="TestQuiz"
             component={TestQuiz}
             title="TestQuiz"
             hideNavBar
             hideTabBar
             showLabel={false}
-          /> */}
+          />
           {/* <Scene
             key="Login"
             component={Login}
@@ -116,14 +108,15 @@ const Routes = () => {
             hideTabBar
             showLabel={false}
           /> */}
-          {/* <Scene
+          <Scene
             key="Interest"
             component={InterestScreen}
             title="Interest"
             hideNavBar
             hideTabBar
             showLabel={false}
-          /> */}
+          />
+         
           <Scene
             key="tabbar"
             tabs
@@ -140,6 +133,7 @@ const Routes = () => {
               hideNavBar={true}
               showLabel={false}
             />
+            
             <Scene
               key="Trick"
               title="Trick"
@@ -148,14 +142,22 @@ const Routes = () => {
               hideNavBar={true}
               showLabel={false}
             />
-            <Scene
+             <Scene
+              key="WordCollection"
+              title="WordCollection"
+              icon={TabIcon}
+              component={WordCollection}
+              hideNavBar={true}
+              showLabel={false}
+            />
+            {/* <Scene
               key="Mylist"
               title="Mylist"
               icon={TabIcon}
               component={Mylist}
               hideNavBar={true}
               showLabel={false}
-            />
+            /> */}
           </Scene>
 
           <Scene
@@ -195,6 +197,7 @@ const Routes = () => {
             key="TestQuizChallenge"
             component={TestQuizChallenge}
             title="TestQuizChallenge"
+            titleStyle={styles.title}
             // hideNavBar
             hideTabBar
             showLabel={false}
