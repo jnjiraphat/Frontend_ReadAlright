@@ -15,6 +15,7 @@ import Mylist from "./App/Screens/Mylist";
 import uploadImage from "./App/Screens/uploadImage";
 import TestQuiz from "./App/Screens/TestQuiz";
 import WordCollection from './App/Screens/WordCollection'
+import TestQuizReading from './App/Screens/TestQuizReading'
 
 // import Article from "./App/Screens/Article"
 import { FontAwesome } from "@expo/vector-icons";
@@ -91,7 +92,15 @@ const Routes = () => {
     return (
       <Router>
         <Scene key="root" showLabel={false} navTransparent={true}>
-          {/* <Scene
+          <Scene
+            key="TestQuizReading"
+            component={TestQuizReading}
+            title="TestQuizReading"
+            hideNavBar
+            hideTabBar
+            showLabel={false}
+          />
+          <Scene
             key="TestQuiz"
             component={TestQuiz}
             title="TestQuiz"

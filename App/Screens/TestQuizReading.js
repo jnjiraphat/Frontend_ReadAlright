@@ -1,0 +1,154 @@
+import React from "react";
+import { StyleSheet, ScrollView, Text, View, Dimensions } from "react-native";
+import axios from "axios";
+import { Actions } from "react-native-router-flux";
+import Constants from "expo-constants";
+import ButtonClick from "../components/ButtonClick";
+
+const TestQuizReading = () => {
+  return (
+    <View style={styles.background}>
+      <Text style={styles.header}>Pre-Test</Text>
+      <Text style={styles.subHeader}>
+        Read the headline. Guess if a-c below are true (T) or false (F).
+      </Text>
+      <View style={styles.whiteCardChoice}>
+          <Text style={styles.questionText}>
+              Ddlsd;a'fklds;kfl;dsfdsgfs
+          </Text>
+      </View>
+      <ButtonClick
+        onPressAction={() => goToChallenge(item.reading_id)}
+        text="Ready"
+        fontSize={24}
+        fontFamily="PT-Bold"
+        fontcolor="#000000"
+        height={39}
+        width={245}
+        radius={30}
+        padding={0}
+        marginTop={15}
+        marginBottom={115}
+        // shadowRadius={30}
+        colorsStart="#2DC897"
+        colorsEnd="#7EF192"
+        // contentId = {item.reading_id}
+      />
+    </View>
+  );
+};
+
+export default TestQuizReading;
+
+const styles = StyleSheet.create({
+  container: {
+    minWidth: "70%",
+    maxWidth: "90%",
+    alignItems: "stretch",
+    justifyContent: "center",
+
+    elevation: 20,
+    borderRadius: 10,
+    flex: 1,
+  },
+  answersContainer: {
+    width: "90%",
+    maxHeight: "20%",
+    marginTop: 50,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginBottom: 20,
+    backgroundColor: "white",
+    elevation: 20,
+    borderRadius: 10,
+  },
+  surveyContainer: {
+    width: "auto",
+    alignSelf: "center",
+    backgroundColor: "white",
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+    alignContent: "center",
+    padding: 5,
+    flexGrow: 0,
+  },
+  selectionGroupContainer: {
+    flexDirection: "column",
+    backgroundColor: "white",
+    alignContent: "flex-end",
+  },
+  background: {
+    flex: 1,
+    minHeight: 800,
+    maxHeight: 800,
+    // justifyContent: 'center',
+    alignItems: "center",
+    marginTop: Constants.statusBarHeight,
+    backgroundColor: "#FFD686",
+  },
+  questionText: {
+    marginBottom: 20,
+    fontSize: 16,
+    alignSelf: "center",
+    fontFamily: "PT-Bold",
+  },
+  header: {
+    fontSize: 24,
+    fontFamily: "PT-Bold",
+    marginTop: "5%",
+  },
+  subHeader: {
+    marginTop: "2%",
+    fontSize: 16,
+    fontFamily: "PT-Reg",
+    padding: 20,
+  },
+  whiteCardChoice: {
+    width: Dimensions.get("window").width / 1.15,
+    borderRadius: 0,
+    backgroundColor: "#ffffff",
+    alignItems: "center",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowRadius: 4.65,
+    shadowColor: "#000000",
+    shadowOpacity: 0.3,
+    elevation: 8,
+    marginVertical: "10%",
+    paddingVertical: 20,
+  },
+  choiceButton: {
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowRadius: 4.65,
+    shadowColor: "#000000",
+    shadowOpacity: 0.3,
+    elevation: 8,
+  },
+  choiceBgSelected: {
+    backgroundColor: "#FFC258",
+  },
+  choiceBgUnSelect: {
+    backgroundColor: "#E68BEC",
+  },
+  buttonFlow: {
+    backgroundColor: "#FFD686",
+  },
+  buttonFlowEnable: {
+    backgroundColor: "#44E05F",
+  },
+  choiceText: {
+    fontFamily: "PT-Bold",
+    color: "#fff",
+  },
+  buttonFlowText: {
+    fontFamily: "PT-Bold",
+    color: "#fff",
+  },
+});

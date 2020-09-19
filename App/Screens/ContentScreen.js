@@ -13,7 +13,7 @@ import {
 import ButtonClick from "../components/ButtonClick";
 import ModalWord from "../components/ModalWord";
 import ModalMoreDetail from "../components/ModalMoreDetail";
-import TransWordBar from "../components/TransWordBar"
+import TransWordBar from "../components/TransWordBar";
 
 import Constants from "expo-constants";
 import axios from "axios";
@@ -64,7 +64,6 @@ const Content = (props) => {
   }, []);
   console.log("This is reading id  ");
   console.log(props.text);
-  
 
   function goToChallenge(reading_id) {
     console.log("readingIDDDDDDDDDDDD  " + reading_id);
@@ -77,45 +76,44 @@ const Content = (props) => {
   // }
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMoreVisible, setModalMoreVisible] = useState(false);
-  const [value, onChangeText] = useState('');
+  const [value, onChangeText] = useState("");
   return (
-    <View style={{flex:1}}>
-      
-    <ScrollView>
-      <FlatList
-        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-        data={cate}
-        renderItem={({ item }) => (
-          <View style={styles.container}>
-            <Image source={{ uri: item.image }} style={styles.headerImg} />
-            <Text style={styles.category}>
-              Reading | {item.categoryName} | Level {item.level_reading}
-            </Text>
-            <Text style={styles.topic}>{item.title}</Text>
-            <View style={styles.whiteCard}>
-              <Text style={styles.content}>{item.content}</Text>
+    <View style={{ flex: 1 }}>
+      <ScrollView>
+        <FlatList
+          contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+          data={cate}
+          renderItem={({ item }) => (
+            <View style={styles.container}>
+              <Image source={{ uri: item.image }} style={styles.headerImg} />
+              <Text style={styles.category}>
+                Reading | {item.categoryName} | Level {item.level_reading}
+              </Text>
+              <Text style={styles.topic}>{item.title}</Text>
+              <View style={styles.whiteCard}>
+                <Text style={styles.content}>{item.content}</Text>
+              </View>
+              <ButtonClick
+                onPressAction={() => goToChallenge(item.reading_id)}
+                text="Challenge"
+                fontSize={24}
+                fontFamily="PT-Bold"
+                fontcolor="#000000"
+                height={39}
+                width={245}
+                radius={30}
+                padding={0}
+                marginTop={15}
+                marginBottom={115}
+                // shadowRadius={30}
+                colorsStart="#2DC897"
+                colorsEnd="#7EF192"
+                // contentId = {item.reading_id}
+              />
             </View>
-            <ButtonClick
-            onPressAction={() => goToChallenge(item.reading_id)}
-            text="Challenge"
-            fontSize={24}
-            fontFamily="PT-Bold"
-            fontcolor="#000000"
-            height={39}
-            width={245}
-            radius={30}
-            padding={0}
-            marginTop={15}
-            marginBottom={115}
-            // shadowRadius={30}
-            colorsStart="#2DC897" 
-            colorsEnd="#7EF192"
-            // contentId = {item.reading_id}
-          />
-          </View>
-        )}
-      />
-      {/* <View style={styles.container}>
+          )}
+        />
+        {/* <View style={styles.container}>
         <View style={styles.whiteCard}>
           <FlatList
             contentContainerStyle={{ flexGrow: 1, flexDirection:"row" }}
@@ -126,13 +124,12 @@ const Content = (props) => {
           /> 
         </View>
       </View> */}
-      
-    </ScrollView>
-    <TransWordBar
-      textSearch={text => onChangeText(text)}
-      value={value}
-      transAction={() => setModalVisible(true)}
-    />
+      </ScrollView>
+      <TransWordBar
+        textSearch={(text) => onChangeText(text)}
+        value={value}
+        transAction={() => setModalVisible(true)}
+      />
     </View>
   );
 };

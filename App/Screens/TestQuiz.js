@@ -190,7 +190,8 @@ export default class TestQuiz extends React.Component {
       <View
         style={{ flexGrow: 1, maxWidth: 110, marginTop: 10, marginBottom: 10 }}
       >
-        <Button onPress={onPress} disabled={!enabled} style={styles.buttonFlow}>
+        <Button onPress={onPress} disabled={!enabled} style={
+      enabled ? styles.buttonFlowEnable : styles.buttonFlow}>
           <Text style={styles.buttonFlowText}>Previous</Text>
         </Button>
       </View>
@@ -202,7 +203,8 @@ export default class TestQuiz extends React.Component {
       <View
         style={{ flexGrow: 1, maxWidth: 110, marginTop: 10, marginBottom: 10 }}
       >
-        <Button style={styles.buttonFlow} onPress={onPress} disabled={!enabled}>
+        <Button style={
+      enabled ? styles.buttonFlowEnable : styles.buttonFlow} onPress={onPress} disabled={!enabled}>
           <Text style={styles.buttonFlowText}>Next</Text>
         </Button>
       </View>
@@ -214,7 +216,8 @@ export default class TestQuiz extends React.Component {
       <View
         style={{ flexGrow: 1, maxWidth: 110, marginTop: 10, marginBottom: 10 }}
       >
-        <Button onPress={onPress} disabled={!enabled} style={styles.buttonFlow}>
+        <Button onPress={onPress} disabled={!enabled} style={
+      enabled ? styles.buttonFlowEnable : styles.buttonFlow}>
           <Text style={styles.buttonFlowText}>Finish</Text>
         </Button>
       </View>
@@ -265,7 +268,7 @@ export default class TestQuiz extends React.Component {
         <View style={styles.background}>
           <Text style={styles.header}>Pre-Test</Text>
           <Text style={styles.subHeader}>
-            Answer the questions from Reading Part.
+          Read the headline. Guess if a-c below are true (T) or false (F).
             {/* {this.state.reading_id} */}
           </Text>
           <View style={styles.whiteCardChoice}>
@@ -347,10 +350,10 @@ const styles = StyleSheet.create({
     width: "auto",
     alignSelf: "center",
     backgroundColor: "white",
-    borderBottomLeftRadius: 5,
-    borderBottomRightRadius: 5,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
     alignContent: "center",
     padding: 5,
     flexGrow: 0,
@@ -367,7 +370,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     alignItems: "center",
     marginTop: Constants.statusBarHeight,
-    backgroundColor: "#FFF2AC",
+    backgroundColor: "#FFD686",
   },
   questionText: {
     marginBottom: 20,
@@ -384,10 +387,11 @@ const styles = StyleSheet.create({
     marginTop: "2%",
     fontSize: 16,
     fontFamily: "PT-Reg",
+    padding: 20
   },
   whiteCardChoice: {
     width: Dimensions.get("window").width / 1.15,
-    borderRadius: 5,
+    borderRadius: 0,
     backgroundColor: "#ffffff",
     alignItems: "center",
     shadowOffset: {
@@ -418,6 +422,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#E68BEC",
   },
   buttonFlow: {
+    backgroundColor: "#FFD686",
+  },
+  buttonFlowEnable: {
     backgroundColor: "#44E05F",
   },
   choiceText: {
