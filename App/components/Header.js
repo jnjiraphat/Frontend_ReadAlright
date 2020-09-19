@@ -46,7 +46,8 @@ const Header = (props) => {
               left: 0,
               right: 0,
               top: 0,
-              height: Dimensions.get("window").height / 3.8,
+              // height: Dimensions.get("window").height / 3.8,
+              height: 200,
               width: Dimensions.get("window").width,
               borderBottomLeftRadius: 30,
               borderBottomRightRadius: 30,
@@ -63,8 +64,10 @@ const Header = (props) => {
             >
               <Avatar
                 source={require("./../assets/demo-profile.png")}
-                width={Dimensions.get("window").width / 3.5}
-                height={Dimensions.get("window").height / 7}
+                // width={Dimensions.get("window").width / 3.5}
+                // height={Dimensions.get("window").height / 7}
+                width={110}
+                height={110}
               />
               <AreaProfile level="A1" suggestion={suggestion} />
             </View>
@@ -114,7 +117,8 @@ const Header = (props) => {
             left: 0,
             right: 0,
             top: 0,
-            height: Dimensions.get("window").height / 8,
+            // height: Dimensions.get("window").height / 8,
+            height: 100,
             width: Dimensions.get("window").width,
             borderBottomLeftRadius: 30,
             borderBottomRightRadius: 30,
@@ -131,8 +135,10 @@ const Header = (props) => {
           >
             <Avatar
               source={require("./../assets/demo-profile.png")}
-              width={Dimensions.get("window").width / 5.5}
-              height={Dimensions.get("window").height / 10}
+              // width={Dimensions.get("window").width / 5.5}
+              width={80}
+              // height={Dimensions.get("window").height / 10}
+              height={80}
             />
             <AreaProfile level="A1" display="none" />
           </View>
