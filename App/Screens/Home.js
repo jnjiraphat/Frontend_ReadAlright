@@ -211,7 +211,7 @@ const home = (props) => {
             <CarouselCardVocab result={newVocab} />
           </View>
           <View style={styles.ContentCarousel}>
-            <Text style={styles.topic}>Maybe you likeeeeeeeeee</Text>
+            <Text style={styles.topic}>Maybe you like</Text>
             <CarouselCardVocab result={MaybeVb} />
           </View>
           <View style={styles.ContentCategoryVocab}>
