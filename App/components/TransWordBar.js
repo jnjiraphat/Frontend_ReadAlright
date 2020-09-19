@@ -1,4 +1,4 @@
-import React, { useState,useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   View,
   Text,
@@ -16,10 +16,12 @@ import ModalMoreDetail from "../components/ModalMoreDetail";
 import { get } from "react-native/Libraries/Utilities/PixelRatio";
 
 const TransWordBar = (props) => {
+  const [engWordBook, setEngWordBook] = useState("");
 
   const { textSearch, value, transAction } = props;
-  const [getTranslate, setGetTranslate] = useState(""); 
+  const [getTranslate, setGetTranslate] = React.useState("");
   const [getWord, setWord] = useState("");
+  const [getChecked, setChecked] = useState(false);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMoreVisible, setModalMoreVisible] = useState(false);
@@ -28,28 +30,126 @@ const TransWordBar = (props) => {
   // const [selected, setSelected] = React.useState();
   const [changeBookMark, setchangeBookMark] = useState(false)
 
-  const onBookMark = useCallback(
-    (getWord) => {
+  const [postWord, setPostWord] = useState("")
+
+  const onBookMark = React.useCallback(
+    async (getWord) => {
       const newSelected = new Map(isBookMark);
       newSelected.set(getWord, !isBookMark.get(getWord));
-
       setBookMark(newSelected);
-      if(!isBookMark.get(getWord) == true) {
+      if (!isBookMark.get(getWord) == true) {
+        setChecked(true)
+        var bookmark = []
         setchangeBookMark(true);
-      } 
+        // console.log(newSelected);
+        // function logMapElements(value, key, map) {
+        //   console.log(`m[${key}] = ${value}`);
+        //   if (value == true) {
+        //     bookmark.push(key);
+        //   }
+        //   console.log("length = " + bookmark.length);
+        // }
+        // newSelected.forEach(logMapElements);
+        // console.log("eieiei" + getTranslate);
+        // for (let index = 0; index < bookmark.length; index++) {
+        //   await axios
+        //     .post("http://10.0.2.2:3000/wordCol", {
+        //       wordCol_Thai: getTranslate,
+        //       wordCol_Eng: getWord,
+        //       user_id: 1
+        //     })
+        //     .then(
+        //       (response) => {
+        //         console.log("upload bookmark success!!!");
+        //       },
+        //       (error) => {
+        //         console.log(error);
+        //       }
+        //     );
+        // }
+
+        // axios
+        // .post(
+        //   "http://10.0.2.2:3000/wordCol",
+        //   {
+        //     "wordCol_Thai": this.,
+        //     "wordCol_Eng": "Calf",
+        //     "vocabCard_id": 5,
+        //     "user_id": null
+        // }
+        // )
+        // .then(
+        //   (responsee) => {
+        //     console.log(response.data.data.translations[0].translatedText);
+        //     setGetTranslate(response.data.data.translations[0].translatedText);
+        //     setModalVisible(true)
+        //   },
+        //   (error) => {
+        //     console.log(error);
+        //   }
+        // )
+      }
+
       if (!isBookMark.get(getWord) == false) {
         setchangeBookMark(false);
+        setChecked(false)
+        console.log(getWord)
+        await axios
+          .delete("http://10.0.2.2:3000/wordCol/del/" + getWord)
+          .then(
+            (response) => {
+              console.log("delete bookmark success!!!");
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
       }
     },
     [isBookMark],
-    console.log(getWord),
-    console.log(isBookMark),
+    // console.log(getWord),
+    // console.log(isBookMark),
   );
-  
+  useEffect(() => {
+    if (getChecked == true) {
+      console.log(isBookMark)
+      console.log(getTranslate)
+      var bookmark = [];
+      function logMapElements(value, key, map) {
+        console.log(`m[${key}] = ${value}`);
+        if (value == true) {
+          bookmark.push(key);
+        }
+        console.log("length = " + bookmark.length);
+      }
+      isBookMark.forEach(logMapElements);
+      for (let index = 0; index < bookmark.length; index++) {
+        axios
+          .post("http://10.0.2.2:3000/wordCol", {
+            wordCol_Thai: getTranslate,
+            wordCol_Eng: getWord,
+            user_id: 1
+          })
+          .then(
+            (response) => {
+              console.log("upload bookmark success!!!");
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+      }
+    } else {
+
+    }
+
+
+  }, [getChecked]);
+
   const translationGoogle = async (word) => {
     setWord(word)
     console.log("translate------------------");
-    axios
+    await axios
       .post(
         "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCBEbjkNJ_6_DL8s5Ni6bfF0M4YwhrR-Dc",
         {
@@ -63,6 +163,9 @@ const TransWordBar = (props) => {
         (response) => {
           console.log(response.data.data.translations[0].translatedText);
           setGetTranslate(response.data.data.translations[0].translatedText);
+          var mean = response.data.data.translations[0].translatedText;
+          setEngWordBook(mean)
+          console.log("innon" + getTranslate);
           setModalVisible(true)
         },
         (error) => {
@@ -118,7 +221,7 @@ const TransWordBar = (props) => {
         typeWord="n."
         meaning={getTranslate}
         exampleSentence="If you want this. Please Pat for Upgrade version."
-        onBookMark={onBookMark}
+        onBookMark={() => onBookMark(getWord)}
         changeBookMark={changeBookMark}
       />
       <ModalMoreDetail

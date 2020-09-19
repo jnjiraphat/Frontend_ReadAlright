@@ -26,6 +26,7 @@ import ButtonClick from "../components/ButtonClick";
 import NewVocab from "../API/NewVocabAPI";
 import CarouselCardVocab from "../components/CarouselCardVocab";
 import CategoryCardVocab from "../components/CategoryCardVocab";
+import { out } from "react-native/Libraries/Animated/src/Easing";
 
 const arrayReading = [];
 
@@ -36,7 +37,10 @@ const arrayReading = [];
 
 const home = (props) => {
   console.log("This is props");
+  console.log(props.text.connectType);
+
   console.log(props.text);
+
   const [cate, setCate] = useState([]);
   const read = async () => {
     const data = await ReadingApi();
@@ -78,6 +82,35 @@ const home = (props) => {
         setResultNew(response.data);
       });
   };
+
+  const [MaybeVb, setMaybeVb] = useState([]);
+  const getMaybeVb = async () => {
+    console.log("nonnnns")
+    console.log(props.text)
+    try {
+      var output = []
+      for (let index = 0; index < props.text.length; index++) {
+        const data = await axios
+          .get("http://10.0.2.2:3000/vocabBox/maybeYouLike/" + props.text[index])
+          .then((response) => {
+            console.log("testnon");
+            console.log(response.data.reading.length)
+            for (let j = 0; j < response.data.reading.length; j++) {
+              output.push(response.data.reading[j])
+            }
+            console.log("testnon");
+
+          });
+      }
+    } catch (error) {
+
+    } finally {
+      setMaybeVb(output);
+
+    }
+
+
+  };
   const [suggestion, setSuggestion] = useState([]);
 
 
@@ -101,6 +134,7 @@ const home = (props) => {
     vocab();
     newvocab();
     getSuggestion();
+    getMaybeVb();
   }, []);
 
   function goToContentScreen(readingId) {
@@ -177,11 +211,11 @@ const home = (props) => {
             <CarouselCardVocab result={newVocab} />
           </View>
           <View style={styles.ContentCarousel}>
-            <Text style={styles.topic}>Maybe you like</Text>
-            <CarouselCardVocab result={vb} />
+            <Text style={styles.topic}>Maybe you likeeeeeeeeee</Text>
+            <CarouselCardVocab result={MaybeVb} />
           </View>
           <View style={styles.ContentCategoryVocab}>
-            <Text style={[styles.topic, { marginLeft: "5%", marginBottom:Dimensions.get("window").height / 7 }]}>Category</Text>
+            <Text style={[styles.topic, { marginLeft: "5%", marginBottom: Dimensions.get("window").height / 7 }]}>Category</Text>
             <CategoryCardVocab result={cateVocabBox} />
           </View>
         </View>
@@ -207,8 +241,9 @@ const home = (props) => {
     // setCheck(true)
   };
 
+
   const tabSwitch = [{ title: "Reading" }, { title: "Vocabulary" }];
-  if (result&&suggestion) {
+  if (result && suggestion) {
     return (
       <View style={styles.container}>
         <Header
@@ -287,6 +322,6 @@ const styles = StyleSheet.create({
   },
   ContentCategoryVocab: {
     justifyContent: "center",
-    marginBottom: 100,  
+    marginBottom: 100,
   }
 });

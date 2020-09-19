@@ -91,8 +91,7 @@ const Routes = () => {
     return (
       <Router>
         <Scene key="root" showLabel={false} navTransparent={true}>
-
-          <Scene
+          {/* <Scene
             key="TestQuiz"
             component={TestQuiz}
             title="TestQuiz"
@@ -116,7 +115,7 @@ const Routes = () => {
             hideTabBar
             showLabel={false}
           />
-         
+          
           <Scene
             key="tabbar"
             tabs
@@ -169,6 +168,22 @@ const Routes = () => {
             showLabel={false}
           />
           <Scene
+            key="ContentVocab"
+            component={ContentVocab}
+            title="ContentVocab"
+            titleStyle={styles.title}
+            back={true}
+            showLabel={false}
+          />
+        <Scene
+            key="Vocabulary"
+            title="Vocabulary"
+            component={Vocabulary}
+            hideNavBar={true}
+            showLabel={false}
+          />
+
+          <Scene
             key="ContentScreen"
             component={ContentScreen}
             title="ContentScreen"
@@ -177,21 +192,9 @@ const Routes = () => {
             showLabel={false}
           />
 
-          <Scene
-            key="Vocabulary"
-            title="Vocabulary"
-            component={Vocabulary}
-            hideNavBar={true}
-            showLabel={false}
-          />
-          <Scene
-            key="ContentVocab"
-            component={ContentVocab}
-            title="ContentVocab"
-            titleStyle={styles.title}
-            back={true}
-            showLabel={false}
-          />
+          
+          
+          
 
           <Scene
             key="TestQuizChallenge"

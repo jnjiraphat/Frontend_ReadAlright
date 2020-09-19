@@ -9,6 +9,8 @@ import {
   Dimensions,
   Text,
   Image,
+  TouchableOpacity,
+
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AntDesign } from "@expo/vector-icons";
@@ -50,38 +52,43 @@ const dataImg = [
 ];
 
 const Content = (props) => {
-  const translationGoogle = async (word) => {
-    console.log("translate------------------");
-    axios
-      .post(
-        "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCBEbjkNJ_6_DL8s5Ni6bfF0M4YwhrR-Dc",
-        {
-          q: word,
-          source: "en",
-          target: "th",
-          format: "text",
-        }
-      )
-      .then(
-        (response) => {
-          console.log(response.data);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-  };
-  const [cate, setCate] = useState([]);
+  // const translationGoogle = async (word) => {
+  //   console.log("translate------------------");
+  //   axios
+  //     .post(
+  //       "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCBEbjkNJ_6_DL8s5Ni6bfF0M4YwhrR-Dc",
+  //       {
+  //         q: word,
+  //         source: "en",
+  //         target: "th",
+  //         format: "text",
+  //       }
+  //     )
+  //     .then(
+  //       (response) => {
+  //         console.log(response.data);
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       }
+  //     );
+  // };
+  const [vocabCard, setVocabCard] = useState([]);
+
+  // const [title , setTitle] = useState([]);
 
   const fetch = async () => {
     console.log("runningggggggggggggggggggggggggggggg");
     await axios
-      .get("http://10.0.2.2:3000/reading/readingId/" + props.text)
+      .get("http://10.0.2.2:3000/vocabCard/" + props.text)
       .then(
         (response) => {
-          console.log("eieiContent");
+          console.log("eieiContentVocab");
           console.log(response.data.reading);
-          setCate(response.data.reading);
+          setVocabCard(response.data.reading);
+          console.log("---------------------------------------");
+          // console.log(response.data[0].reading);
+          // setTitle(response.data[0].reading);
         },
         (error) => {
           console.log(error);
@@ -95,15 +102,17 @@ const Content = (props) => {
   useEffect(() => {
     read();
   }, []);
-  console.log("This is reading id  ");
-  console.log(props.text);
 
-  function goToChallenge(reading_id) {
-    console.log("readingIDDDDDDDDDDDD  " + reading_id);
-    Actions.TestQuizChallenge({ text: reading_id });
-    console.log("Finish " + reading_id);
+  
+  // console.log("This is reading id  ");
+  // console.log(props.text);
+
+  // function goToChallenge(reading_id) {
+  //   console.log("readingIDDDDDDDDDDDD  " + reading_id);
+  //   Actions.TestQuizChallenge({ text: reading_id });
+  //   console.log("Finish " + reading_id);
     // console.log("readingIDDDDDDDDDDDD" + reading_id);
-  }
+  // }
   // const goToAbout = () => {
   //    Actions.about()
   // }
@@ -114,41 +123,41 @@ const Content = (props) => {
   const [isCheck, setCheck] = useState(new Map());
   const [changeCheck, setchangeCheck] = useState(false);
 
-  const onBookMark = useCallback(
-    (engWord) => {
-      const newSelected = new Map(isBookMark);
-      newSelected.set(engWord, !isBookMark.get(engWord));
+  // const onBookMark = useCallback(
+  //   (engWord) => {
+  //     const newSelected = new Map(isBookMark);
+  //     newSelected.set(engWord, !isBookMark.get(engWord));
 
-      setBookMark(newSelected);
-      if (!isBookMark.get(engWord) == true) {
-        setchangeBookMark(true);
-      }
-      if (!isBookMark.get(engWord) == false) {
-        setchangeBookMark(false);
-      }
-    },
-    [isBookMark],
-    console.log(engWord),
-    console.log(isBookMark)
-  );
+  //     setBookMark(newSelected);
+  //     if (!isBookMark.get(engWord) == true) {
+  //       setchangeBookMark(true);
+  //     }
+  //     if (!isBookMark.get(engWord) == false) {
+  //       setchangeBookMark(false);
+  //     }
+  //   },
+  //   [isBookMark],
+  //   console.log(engWord),
+  //   console.log(isBookMark)
+  // );
   
-  const onCheck = useCallback(
-    (engWord) => {
-      const newSelected = new Map(isCheck);
-      newSelected.set(engWord, !isCheck.get(engWord));
+  // const onCheck = useCallback(
+  //   (engWord) => {
+  //     const newSelected = new Map(isCheck);
+  //     newSelected.set(engWord, !isCheck.get(engWord));
 
-      setCheck(newSelected);
-      if (!isCheck.get(engWord) == true) {
-        setchangeCheck(true);
-      }
-      if (!isCheck.get(engWord) == false) {
-        setchangeCheck(false);
-      }
-    },
-    [isCheck],
-    console.log(engWord),
-    console.log(isCheck)
-  );
+  //     setCheck(newSelected);
+  //     if (!isCheck.get(engWord) == true) {
+  //       setchangeCheck(true);
+  //     }
+  //     if (!isCheck.get(engWord) == false) {
+  //       setchangeCheck(false);
+  //     }
+  //   },
+  //   [isCheck],
+  //   console.log(engWord),
+  //   console.log(isCheck)
+  // );
 
   return (
     <ScrollView>
@@ -165,7 +174,7 @@ const Content = (props) => {
       <View style={{ flex: 1, alignItems: "center" }}>
         <FlatList
           contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-          data={data}
+          data={vocabCard}
           renderItem={({ item }) => (
             <View style={styles.whiteCard}>
               <View style={styles.flexArea}>
@@ -205,15 +214,15 @@ const Content = (props) => {
                       alignItems: "center",
                     }}
                   >
-                    <TouchableOpacity onPress={() => onBookMark(item.engWord)}>
+                    {/* <TouchableOpacity onPress={() => onBookMark(item.engWord)}> */}
                       {/* engWord คือตัวข้อความที่จะรับไว้ส่งค่า */}
-                      <MaterialIcons
+                      {/* <MaterialIcons
                         name={changeBookMark ? "bookmark" : "bookmark-border"}
                         size={24}
                         color="#8A63E5"
                         style={{ marginRight: 10 }}
                       />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                   </LinearGradient>
                 </View>
               </View>

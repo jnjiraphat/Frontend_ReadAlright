@@ -111,6 +111,7 @@ export default function () {
     //Navigator
     const goToHome = () => {
       function logMapElements(value, key, map) {
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         console.log(`m[${key}] = ${value}`);
         if (value == true) {
           arrayIdCate.push(key);
