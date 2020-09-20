@@ -509,7 +509,7 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   choiceBgSelected: {
-    backgroundColor: "#FFC258",
+    backgroundColor: "#F24FFD",
   },
   choiceBgUnSelect: {
     backgroundColor: "#E68BEC",

@@ -53,8 +53,6 @@ const home = (props) => {
     return (
       <View style={styles.ContentSwitch}>
           <Text style={styles.topic}>Suggestion</Text>
-          
-    
       </View>
     );
   }
