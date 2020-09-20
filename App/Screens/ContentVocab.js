@@ -74,6 +74,9 @@ const Content = (props) => {
   //     );
   // };
   const [vocabCard, setVocabCard] = useState([]);
+  const [vocabBoxName, setvocabBoxName] = useState("");
+  const [vocabBoxImg, setvocabBoxImg] = useState("");
+
 
   // const [title , setTitle] = useState([]);
 
@@ -87,6 +90,10 @@ const Content = (props) => {
           console.log(response.data.reading);
           setVocabCard(response.data.reading);
           console.log("---------------------------------------");
+          setvocabBoxName(response.data.reading[0].boxEngName);
+          console.log(vocabBoxName);
+          setvocabBoxImg(response.data.reading[0].image);
+          console.log(vocabBoxImg);
           // console.log(response.data[0].reading);
           // setTitle(response.data[0].reading);
         },
@@ -123,6 +130,73 @@ const Content = (props) => {
   const [isCheck, setCheck] = useState(new Map());
   const [changeCheck, setchangeCheck] = useState(false);
 
+  const onBookMark = React.useCallback(
+    async (getWord) => {
+      const newSelected = new Map(isBookMark);
+      newSelected.set(getWord, !isBookMark.get(getWord));
+      setBookMark(newSelected);
+      if (!isBookMark.get(getWord) == true) {
+        setChecked(true)
+        var bookmark = []
+        setchangeBookMark(true);
+      }
+
+      if (!isBookMark.get(getWord) == false) {
+        setchangeBookMark(false);
+        setChecked(false)
+        console.log(getWord)
+        await axios
+          .delete("http://10.0.2.2:3000/wordCol/del/" + getWord)
+          .then(
+            (response) => {
+              console.log("delete bookmark success!!!");
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+      }
+    },
+    [isBookMark],
+    // console.log(getWord),
+    // console.log(isBookMark),
+  );
+  useEffect(() => {
+    if (getChecked == true) {
+      console.log(isBookMark)
+      console.log(getTranslate)
+      var bookmark = [];
+      function logMapElements(value, key, map) {
+        console.log(`m[${key}] = ${value}`);
+        if (value == true) {
+          bookmark.push(key);
+        }
+        console.log("length = " + bookmark.length);
+      }
+      isBookMark.forEach(logMapElements);
+      for (let index = 0; index < bookmark.length; index++) {
+        axios
+          .post("http://10.0.2.2:3000/wordCol", {
+            wordCol_Thai: getTranslate,
+            wordCol_Eng: getWord,
+            user_id: 1
+          })
+          .then(
+            (response) => {
+              console.log("upload bookmark success!!!");
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+      }
+    } else {
+
+    }
+
+
+  }, [getChecked]);
+
   // const onBookMark = useCallback(
   //   (engWord) => {
   //     const newSelected = new Map(isBookMark);
@@ -141,36 +215,32 @@ const Content = (props) => {
   //   console.log(isBookMark)
   // );
   
-  // const onCheck = useCallback(
-  //   (engWord) => {
-  //     const newSelected = new Map(isCheck);
-  //     newSelected.set(engWord, !isCheck.get(engWord));
+  const onCheck = useCallback(
+    (engWord) => {
+      const newSelected = new Map(isCheck);
+      newSelected.set(engWord, !isCheck.get(engWord));
 
-  //     setCheck(newSelected);
-  //     if (!isCheck.get(engWord) == true) {
-  //       setchangeCheck(true);
-  //     }
-  //     if (!isCheck.get(engWord) == false) {
-  //       setchangeCheck(false);
-  //     }
-  //   },
-  //   [isCheck],
-  //   console.log(engWord),
-  //   console.log(isCheck)
-  // );
+      setCheck(newSelected);
+      if (!isCheck.get(engWord) == true) {
+        setchangeCheck(true);
+      }
+      if (!isCheck.get(engWord) == false) {
+        setchangeCheck(false);
+      }
+    },
+    [isCheck],
+    console.log(engWord),
+    console.log(isCheck)
+  );
 
   return (
     <ScrollView>
-      <FlatList
-        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-        data={dataImg}
-        renderItem={({ item }) => (
+      
           <View style={styles.container}>
-            <Image source={{ uri: item.image }} style={styles.headerImg} />
-            <Text style={styles.topic}>{item.title}</Text>
+            <Image source={{ uri: vocabBoxImg }} style={styles.headerImg} />
+            <Text style={styles.topic}>{vocabBoxName}</Text>
           </View>
-        )}
-      />
+        
       <View style={{ flex: 1, alignItems: "center" }}>
         <FlatList
           contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
@@ -214,72 +284,20 @@ const Content = (props) => {
                       alignItems: "center",
                     }}
                   >
-                    {/* <TouchableOpacity onPress={() => onBookMark(item.engWord)}> */}
+                    <TouchableOpacity onPress={() => onBookMark(item.engWord)}>
                       {/* engWord คือตัวข้อความที่จะรับไว้ส่งค่า */}
-                      {/* <MaterialIcons
+                      <MaterialIcons
                         name={changeBookMark ? "bookmark" : "bookmark-border"}
                         size={24}
                         color="#8A63E5"
                         style={{ marginRight: 10 }}
                       />
-                    </TouchableOpacity> */}
+                    </TouchableOpacity>
                   </LinearGradient>
                 </View>
               </View>
             </View>
           )}
-        />
-        <ButtonClick
-          onPressAction={() => goToChallenge(item.reading_id)}
-          text="Challenge"
-          fontSize={24}
-          fontFamily="PT-Bold"
-          fontcolor="#000000"
-          height={39}
-          width={245}
-          radius={30}
-          padding={0}
-          marginTop={20}
-          marginBottom={40}
-          // shadowRadius={30}
-          colorsStart="#2DC897"
-          colorsEnd="#7EF192"
-          // contentId = {item.reading_id}
-        />
-        <ButtonClick
-          // onPressAction={() => setModalMoreVisible(true))}
-          onPressAction={() => translationGoogle("ant")}
-          text="Trans"
-          fontSize={24}
-          fontFamily="PT-Bold"
-          fontcolor="#000000"
-          height={39}
-          width={245}
-          radius={30}
-          padding={0}
-          marginTop={20}
-          marginBottom={40}
-          // shadowRadius={30}
-          colorsStart="#2DC897"
-          colorsEnd="#7EF192"
-          // contentId = {item.reading_id}
-        />
-        <ModalWord
-          modalVisible={modalVisible}
-          modalClose={() => setModalVisible(false)}
-          modalAction={() => setModalMoreVisible(true)}
-          modalButton="More Detail"
-          engWord="Present"
-          typeWord="n."
-          meaning="ของขวัญ"
-          exampleSentence="Thank you for the birthday present.k you for the birk you for the birk you for the birk you for the bir"
-        />
-        <ModalMoreDetail
-          modalVisible={modalMoreVisible}
-          modalClose={() => setModalMoreVisible(false)}
-          engWord="Present"
-          typeWord="n."
-          meaning="ปัจจุบัน"
         />
       </View>
     </ScrollView>

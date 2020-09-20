@@ -17,6 +17,7 @@ import uploadImage from "./App/Screens/uploadImage";
 import TestQuiz from "./App/Screens/TestQuiz";
 import WordCollection from './App/Screens/WordCollection'
 import TestQuizReading from './App/Screens/TestQuizReading'
+import SuggestionTips from './App/Screens/SuggestionTips'
 
 // import Article from "./App/Screens/Article"
 import { FontAwesome } from "@expo/vector-icons";
@@ -45,7 +46,7 @@ const TabIcon = ({ focused, title }) => {
       );
     }
   }
-  if (title == "Trick") {
+  if (title == "SuggestionTips") {
     if (focused) {
       return (
         <LinearGradient colors={["#7EF192", "#2DC897"]} style={styles.gradient}>
@@ -93,7 +94,7 @@ const Routes = () => {
     return (
       <Router>
         <Scene key="root" showLabel={false} navTransparent={true}>
-          <Scene
+          {/* <Scene
             key="TestQuizReading"
             component={TestQuizReading}
             title="TestQuizReading"
@@ -108,7 +109,7 @@ const Routes = () => {
             hideNavBar
             hideTabBar
             showLabel={false}
-          />
+          /> */}
           {/* <Scene
             key="Login"
             component={Login}
@@ -144,10 +145,10 @@ const Routes = () => {
             />
             
             <Scene
-              key="Trick"
-              title="Trick"
+              key="SuggestionTips"
+              title="SuggestionTips"
               icon={TabIcon}
-              component={Tricks}
+              component={SuggestionTips}
               hideNavBar={true}
               showLabel={false}
             />
