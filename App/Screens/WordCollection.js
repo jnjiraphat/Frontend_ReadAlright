@@ -22,33 +22,6 @@ import ModalMoreDetail from "../components/ModalMoreDetail";
 import Constants from "expo-constants";
 import axios from "axios";
 
-const data = [
-  {
-    engWord: "Swimming",
-    thaiWord: "ว่ายน้ำ",
-  },
-  {
-    engWord: "Swimming",
-    thaiWord: "ว่ายน้ำ",
-  },
-  {
-    engWord: "Swimmingdddddd",
-    thaiWord: "ว่ายน้ำ",
-  },
-  {
-    engWord: "Swimming",
-    thaiWord: "ว่ายน้ำ",
-  },
-];
-
-const dataImg = [
-  {
-    image:
-      "https://vignette.wikia.nocookie.net/diamondnoace/images/9/96/Haruichi_Act_2.png/revision/latest?cb=20190709155009",
-    title: "Marine Sport",
-  },
-];
-
 const WordCollection = (props) => {
   // const translationGoogle = async (word) => {
   //   console.log("translate------------------");
@@ -75,18 +48,16 @@ const WordCollection = (props) => {
 
   const fetch = async () => {
     console.log("runningggggggggggggggggggggggggggggg");
-    await axios
-      .get("http://10.0.2.2:3000/wordCol")
-      .then(
-        (response) => {
-          console.log("Word Collection");
-          console.log(response.data.quiz);
-          setWordCol(response.data.quiz);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    await axios.get("http://10.0.2.2:3000/wordCol").then(
+      (response) => {
+        console.log("Word Collection");
+        console.log(response.data.quiz);
+        setWordCol(response.data.quiz);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   };
 
   const read = async () => {
@@ -101,8 +72,8 @@ const WordCollection = (props) => {
   // function goToChallenge(reading_id) {
   //   console.log("readingIDDDDDDDDDDDD  " + reading_id);
   //   Actions.TestQuizChallenge({ text: reading_id });
-    // console.log("Finish " + reading_id);
-    // console.log("readingIDDDDDDDDDDDD" + reading_id);
+  // console.log("Finish " + reading_id);
+  // console.log("readingIDDDDDDDDDDDD" + reading_id);
   // }
   // const goToAbout = () => {
   //    Actions.about()
@@ -111,7 +82,7 @@ const WordCollection = (props) => {
   const [modalMoreVisible, setModalMoreVisible] = useState(false);
   const [isBookMark, setBookMark] = useState(new Map());
   const [changeBookMark, setchangeBookMark] = useState(false);
-  
+
   const onBookMark = useCallback(
     (wordCol) => {
       const newSelected = new Map(isBookMark);
@@ -132,17 +103,10 @@ const WordCollection = (props) => {
 
   return (
     <ScrollView>
-      <FlatList
-        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-        data={dataImg}
-        renderItem={({ item }) => (
-          <View style={styles.container}>
-            <Image source={{ uri: item.image }} style={styles.headerImg} />
-            <Text style={styles.topic}>{item.title}</Text>
-          </View>
-        )}
-      />
-      <View style={{ flex: 1, alignItems: "center" }}>
+      <View style={styles.container}>
+        <Text style={styles.topic}>Word Collection</Text>
+      </View>
+      <View style={{ flex: 1, alignItems: "center", marginTop: 20 }}>
         <FlatList
           contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
           data={wordCol}
@@ -166,13 +130,14 @@ const WordCollection = (props) => {
                       alignItems: "center",
                     }}
                   >
-                    <TouchableOpacity onPress={() => onBookMark(item.wordCol_Eng)}>
+                    <TouchableOpacity
+                      onPress={() => onBookMark(item.wordCol_Eng)}
+                    >
                       {/* engWord คือตัวข้อความที่จะรับไว้ส่งค่า */}
                       <MaterialIcons
                         name={changeBookMark ? "bookmark" : "bookmark-border"}
                         size={24}
                         color="#8A63E5"
-                        style={{ marginRight: 10 }}
                       />
                     </TouchableOpacity>
                   </LinearGradient>
@@ -190,8 +155,6 @@ export default WordCollection;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
     marginTop: Constants.statusBarHeight,
   },
   category: {
@@ -206,13 +169,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#000",
     marginBottom: 20,
-    marginLeft: 30,
+    marginTop: 40,
     fontFamily: "PT-Bold",
-    alignSelf: "flex-start",
-    position: "absolute",
     alignSelf: "center",
   },
   content: {
+    marginLeft: 20,
     fontSize: 16,
     color: "#000",
     fontFamily: "PT-Reg",
@@ -240,6 +202,9 @@ const styles = StyleSheet.create({
     height: 70,
     // justifyContent: "center",
     borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderBottomWidth: 0,
     backgroundColor: "white",
     shadowOffset: {
       width: 0,
@@ -249,6 +214,7 @@ const styles = StyleSheet.create({
     shadowColor: "#000000",
     shadowOpacity: 0.3,
     elevation: 8,
+    shadowColor: "#000",
     marginBottom: "10%",
   },
   flexArea: {
