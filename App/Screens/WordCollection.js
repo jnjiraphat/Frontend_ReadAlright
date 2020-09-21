@@ -18,6 +18,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import ButtonClick from "../components/ButtonClick";
 import ModalWord from "../components/ModalWord";
 import ModalMoreDetail from "../components/ModalMoreDetail";
+import WordCard from '../components/WordCard'
 
 import Constants from "expo-constants";
 import axios from "axios";
@@ -83,22 +84,32 @@ const WordCollection = (props) => {
   const [isBookMark, setBookMark] = useState(new Map());
   const [changeBookMark, setchangeBookMark] = useState(false);
 
-  const onBookMark = useCallback(
-    (wordCol) => {
+  const onBookMark = React.useCallback(
+    async (wordCol_Eng) => {
       const newSelected = new Map(isBookMark);
-      newSelected.set(wordCol, !isBookMark.get(wordCol));
-
+      newSelected.set(wordCol_Eng, !isBookMark.get(wordCol_Eng));
       setBookMark(newSelected);
-      if (!isBookMark.get(wordCol) == true) {
-        setchangeBookMark(true);
+      if (!isBookMark.get(wordCol_Eng) == true) {
+        var bookmark = []
       }
-      if (!isBookMark.get(wordCol) == false) {
-        setchangeBookMark(false);
+
+      if (!isBookMark.get(wordCol_Eng) == false) {
+        console.log(wordCol_Eng)
+        await axios
+          .delete("http://10.0.2.2:3000/wordCol/del/" + wordCol_Eng)
+          .then(
+            (response) => {
+              console.log("delete bookmark success!!!");
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
       }
     },
     [isBookMark],
-    console.log(wordCol),
-    console.log(isBookMark)
+    // console.log(getWord),
+    // console.log(isBookMark),
   );
 
   return (
@@ -111,39 +122,13 @@ const WordCollection = (props) => {
           contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
           data={wordCol}
           renderItem={({ item }) => (
-            <View style={styles.whiteCard}>
-              <View style={styles.flexArea}>
-                <View style={styles.wordArea}>
-                  <Text style={styles.content}>{item.wordCol_Eng}</Text>
-                </View>
-                <View style={styles.wordArea}>
-                  <Text style={styles.contentThai}>{item.wordCol_Thai}</Text>
-                </View>
-                <View style={styles.yellowButton}>
-                  <LinearGradient
-                    colors={["#FFD387", "#FFE43A"]}
-                    style={{
-                      height: 70,
-                      width: 43,
-                      borderRadius: 5,
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <TouchableOpacity
-                      onPress={() => onBookMark(item.wordCol_Eng)}
-                    >
-                      {/* engWord คือตัวข้อความที่จะรับไว้ส่งค่า */}
-                      <MaterialIcons
-                        name={changeBookMark ? "bookmark" : "bookmark-border"}
-                        size={24}
-                        color="#8A63E5"
-                      />
-                    </TouchableOpacity>
-                  </LinearGradient>
-                </View>
-              </View>
-            </View>
+            <WordCard
+              engWord={item.wordCol_Eng}
+              thaiWord={item.wordCol_Thai}
+              onBookMark={onBookMark}
+              isBookMark={!!isBookMark.get(item.wordCol_Eng)}
+              forWordCollection={true}
+            />
           )}
         />
       </View>

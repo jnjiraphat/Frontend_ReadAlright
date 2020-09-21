@@ -19,31 +19,49 @@ import { MaterialIcons } from "@expo/vector-icons";
 import Constants from "expo-constants";
 
 const WordCard = (props) => {
-    const {engWord, thaiWord,onBookMark,isBookMark,isCheck,onCheck} = props
-    return (
-    <View style={styles.whiteCard}>
+  const {
+    engWord,
+    thaiWord,
+    onBookMark,
+    isBookMark,
+    isCheck,
+    onCheck,
+    forWordCollection,
+  } = props;
+  return (
+    <View style={[styles.whiteCard, {borderWidth: forWordCollection? 1 : 0, borderColor: forWordCollection ? "#ddd" : ""}]}>
       <View style={styles.flexArea}>
-        <View style={styles.yellowButton}>
-          <LinearGradient
-            colors={["#FFD387", "#FFE43A"]}
-            style={{
-              left: 0,
-              right: 0,
-              top: 0,
-              height: 70,
-              width: 43,
-              borderRadius: 5,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <TouchableOpacity onPress={() => onCheck(engWord)}>
-                <AntDesign name={isCheck ? "checksquare" : "checksquareo"} size={24} color="#8A63E5" />
-            </TouchableOpacity>
-          </LinearGradient>
-        </View>
+        {!forWordCollection && (
+          <View style={styles.yellowButton}>
+            <LinearGradient
+              colors={["#FFD387", "#FFE43A"]}
+              style={{
+                left: 0,
+                right: 0,
+                top: 0,
+                height: 70,
+                width: 43,
+                borderRadius: 5,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <TouchableOpacity onPress={() => onCheck(engWord)}>
+                <AntDesign
+                  name={isCheck ? "checksquare" : "checksquareo"}
+                  size={24}
+                  color="#8A63E5"
+                />
+              </TouchableOpacity>
+            </LinearGradient>
+          </View>
+        )}
         <View style={styles.wordArea}>
-          <Text style={styles.content}>{engWord}</Text>
+          <Text
+            style={[styles.content, { marginLeft: forWordCollection ? 50 : 0 }]}
+          >
+            {engWord}
+          </Text>
         </View>
         <View style={styles.wordArea}>
           <Text style={styles.contentThai}>{thaiWord}</Text>

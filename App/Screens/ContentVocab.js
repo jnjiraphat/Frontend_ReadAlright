@@ -248,14 +248,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: Constants.statusBarHeight,
   },
-  category: {
-    marginTop: 20,
-    fontSize: 12,
-    fontFamily: "PT-Bold",
-    color: "#2DC897",
-    marginLeft: 30,
-    alignSelf: "flex-start",
-  },
   topic: {
     fontSize: 20,
     color: "#000",
@@ -266,16 +258,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignSelf: "center",
   },
-  content: {
-    fontSize: 16,
-    color: "#000",
-    fontFamily: "PT-Reg",
-  },
-  contentThai: {
-    fontSize: 16,
-    color: "#000",
-    fontFamily: "Noto-Reg",
-  },
   itemTopic: {
     fontSize: 14,
     color: "#000",
@@ -285,36 +267,5 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height / 3.5,
     width: Dimensions.get("window").width,
     opacity: 0.75,
-  },
-
-  //whiteCard
-  whiteCard: {
-    // flex: 1,
-    width: 350,
-    height: 70,
-    // justifyContent: "center",
-    borderRadius: 5,
-    backgroundColor: "white",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowRadius: 4.65,
-    shadowColor: "#000000",
-    shadowOpacity: 0.3,
-    elevation: 8,
-    marginBottom: "10%",
-  },
-  flexArea: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  yellowButton: {},
-  wordArea: {
-    // paddingVertical: 5,
-    maxWidth: 100,
-    minHeight: 70,
-    justifyContent: "center",
   },
 });
