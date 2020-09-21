@@ -41,53 +41,6 @@ const TransWordBar = (props) => {
         setChecked(true)
         var bookmark = []
         setchangeBookMark(true);
-        // console.log(newSelected);
-        // function logMapElements(value, key, map) {
-        //   console.log(`m[${key}] = ${value}`);
-        //   if (value == true) {
-        //     bookmark.push(key);
-        //   }
-        //   console.log("length = " + bookmark.length);
-        // }
-        // newSelected.forEach(logMapElements);
-        // console.log("eieiei" + getTranslate);
-        // for (let index = 0; index < bookmark.length; index++) {
-        //   await axios
-        //     .post("http://10.0.2.2:3000/wordCol", {
-        //       wordCol_Thai: getTranslate,
-        //       wordCol_Eng: getWord,
-        //       user_id: 1
-        //     })
-        //     .then(
-        //       (response) => {
-        //         console.log("upload bookmark success!!!");
-        //       },
-        //       (error) => {
-        //         console.log(error);
-        //       }
-        //     );
-        // }
-
-        // axios
-        // .post(
-        //   "http://10.0.2.2:3000/wordCol",
-        //   {
-        //     "wordCol_Thai": this.,
-        //     "wordCol_Eng": "Calf",
-        //     "vocabCard_id": 5,
-        //     "user_id": null
-        // }
-        // )
-        // .then(
-        //   (responsee) => {
-        //     console.log(response.data.data.translations[0].translatedText);
-        //     setGetTranslate(response.data.data.translations[0].translatedText);
-        //     setModalVisible(true)
-        //   },
-        //   (error) => {
-        //     console.log(error);
-        //   }
-        // )
       }
 
       if (!isBookMark.get(getWord) == false) {

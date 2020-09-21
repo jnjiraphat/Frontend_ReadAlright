@@ -20,6 +20,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import ButtonClick from "../components/ButtonClick";
 import ModalWord from "../components/ModalWord";
 import ModalMoreDetail from "../components/ModalMoreDetail";
+import WordCard from '../components/WordCard'
 
 import Constants from "expo-constants";
 import axios from "axios";
@@ -126,27 +127,21 @@ const Content = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMoreVisible, setModalMoreVisible] = useState(false);
   const [isBookMark, setBookMark] = useState(new Map());
-  const [changeBookMark, setchangeBookMark] = useState(false);
   const [isCheck, setCheck] = useState(new Map());
-  const [changeCheck, setchangeCheck] = useState(false);
 
   const onBookMark = React.useCallback(
-    async (getWord) => {
+    async (engWord) => {
       const newSelected = new Map(isBookMark);
-      newSelected.set(getWord, !isBookMark.get(getWord));
+      newSelected.set(engWord, !isBookMark.get(engWord));
       setBookMark(newSelected);
-      if (!isBookMark.get(getWord) == true) {
-        setChecked(true)
+      if (!isBookMark.get(engWord) == true) {
         var bookmark = []
-        setchangeBookMark(true);
       }
 
-      if (!isBookMark.get(getWord) == false) {
-        setchangeBookMark(false);
-        setChecked(false)
-        console.log(getWord)
+      if (!isBookMark.get(engWord) == false) {
+        console.log(engWord)
         await axios
-          .delete("http://10.0.2.2:3000/wordCol/del/" + getWord)
+          .delete("http://10.0.2.2:3000/wordCol/del/" + engWord)
           .then(
             (response) => {
               console.log("delete bookmark success!!!");
@@ -161,41 +156,18 @@ const Content = (props) => {
     // console.log(getWord),
     // console.log(isBookMark),
   );
-  useEffect(() => {
-    if (getChecked == true) {
-      console.log(isBookMark)
-      console.log(getTranslate)
-      var bookmark = [];
-      function logMapElements(value, key, map) {
-        console.log(`m[${key}] = ${value}`);
-        if (value == true) {
-          bookmark.push(key);
-        }
-        console.log("length = " + bookmark.length);
-      }
-      isBookMark.forEach(logMapElements);
-      for (let index = 0; index < bookmark.length; index++) {
-        axios
-          .post("http://10.0.2.2:3000/wordCol", {
-            wordCol_Thai: getTranslate,
-            wordCol_Eng: getWord,
-            user_id: 1
-          })
-          .then(
-            (response) => {
-              console.log("upload bookmark success!!!");
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
-      }
-    } else {
 
-    }
+  const onCheck = React.useCallback(
+    async (engWord) => {
+      const newChecked = new Map(isCheck);
+      newChecked.set(engWord, !isCheck.get(engWord));
+      setCheck(newChecked);
+    },
+    [isCheck],
+    // console.log(getWord),
+    // console.log(isBookMark),
+  );
 
-
-  }, [getChecked]);
 
   // const onBookMark = useCallback(
   //   (engWord) => {
@@ -215,23 +187,29 @@ const Content = (props) => {
   //   console.log(isBookMark)
   // );
   
-  const onCheck = useCallback(
-    (engWord) => {
-      const newSelected = new Map(isCheck);
-      newSelected.set(engWord, !isCheck.get(engWord));
+  // const onCheck = useCallback(
+  //   (engWord) => {
+  //     const newSelected = new Map(isCheck);
+  //     newSelected.set(engWord, !isCheck.get(engWord));
 
-      setCheck(newSelected);
-      if (!isCheck.get(engWord) == true) {
-        setchangeCheck(true);
-      }
-      if (!isCheck.get(engWord) == false) {
-        setchangeCheck(false);
-      }
-    },
-    [isCheck],
-    console.log(engWord),
-    console.log(isCheck)
-  );
+  //     setCheck(newSelected);
+  //     if (!isCheck.get(engWord) == true) {
+  //       setchangeCheck(true);
+  //     }
+  //     if (!isCheck.get(engWord) == false) {
+  //       setchangeCheck(false);
+  //     }
+  //   },
+  //   [isCheck],
+  //   console.log(engWord),
+  //   console.log(isCheck)
+  // );
+
+  
+  //   // console.log(getWord),
+  //   // console.log(isBookMark),
+  // );
+  
 
   return (
     <ScrollView>
@@ -245,58 +223,16 @@ const Content = (props) => {
         <FlatList
           contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
           data={vocabCard}
+          keyExtractor={item => item.vocabCard_id}
           renderItem={({ item }) => (
-            <View style={styles.whiteCard}>
-              <View style={styles.flexArea}>
-                <View style={styles.yellowButton}>
-                  <LinearGradient
-                    colors={["#FFD387", "#FFE43A"]}
-                    style={{
-                      left: 0,
-                      right: 0,
-                      top: 0,
-                      height: 70,
-                      width: 43,
-                      borderRadius: 5,
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <TouchableOpacity onPress={() => onCheck(item.engWord)}>
-                      <AntDesign name={changeCheck ? "checksquare" : "checksquareo"} size={24} color="#8A63E5" />
-                    </TouchableOpacity>
-                  </LinearGradient>
-                </View>
-                <View style={styles.wordArea}>
-                  <Text style={styles.content}>{item.engWord}</Text>
-                </View>
-                <View style={styles.wordArea}>
-                  <Text style={styles.contentThai}>{item.thaiWord}</Text>
-                </View>
-                <View style={styles.yellowButton}>
-                  <LinearGradient
-                    colors={["#FFD387", "#FFE43A"]}
-                    style={{
-                      height: 70,
-                      width: 43,
-                      borderRadius: 5,
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <TouchableOpacity onPress={() => onBookMark(item.engWord)}>
-                      {/* engWord คือตัวข้อความที่จะรับไว้ส่งค่า */}
-                      <MaterialIcons
-                        name={changeBookMark ? "bookmark" : "bookmark-border"}
-                        size={24}
-                        color="#8A63E5"
-                        style={{ marginRight: 10 }}
-                      />
-                    </TouchableOpacity>
-                  </LinearGradient>
-                </View>
-              </View>
-            </View>
+            <WordCard
+              engWord={item.engWord}
+              thaiWord={item.thaiWord}
+              onBookMark={onBookMark}
+              isBookMark={!!isBookMark.get(item.engWord)}
+              onCheck={onCheck}
+              isCheck={!!isCheck.get(item.engWord)}
+            />
           )}
         />
       </View>

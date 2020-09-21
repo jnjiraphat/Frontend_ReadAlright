@@ -197,7 +197,7 @@ const home = (props) => {
             <CarouselCardVocab result={MaybeVb} />
           </View>
           <View style={styles.ContentCategoryVocab}>
-            <Text style={[styles.topic, { marginLeft: "5%", marginBottom: Dimensions.get("window").height / 7 }]}>Category</Text>
+            <Text style={[styles.topic, { marginLeft: "5%" }]}>Category</Text>
             <CategoryCardVocab result={cateVocabBox} />
           </View>
         </View>
