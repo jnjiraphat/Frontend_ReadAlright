@@ -93,7 +93,7 @@ const Vocabulary = (props) => {
       <View style={{alignSelf: "center",}}>
         <Text style={styles.category}>Sports</Text>
         <FlatList
-          contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+          contentContainerStyle={{ flexGrow: 1 }}
           data={result}
           numColumns={2}
           renderItem={({ item }) => (
