@@ -1,58 +1,56 @@
-import { TouchableOpacity, Text } from "react-native";
 import { Actions } from "react-native-router-flux";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
-  ScrollView,
-  ImageBackground,
+  TouchableOpacity,
   FlatList,
-  Image,
-  Dimensions,
+  Text,
 } from "react-native";
 import ReadingApi from "../API/ReadingAPI";
 import Constants from "expo-constants";
 import Header from "../components/Header";
+import { LinearGradient } from "expo-linear-gradient";
 import VocabCateApi from "../API/VocabCateAPI";
 
-import CarouselCard from "../components/CarouselCard";
-
-import CategoryCard from "../components/CategoryCard";
-import ButtonClick from "../components/ButtonClick";
-import NewVocab from "../API/NewVocabAPI";
-import CarouselCardVocab from "../components/CarouselCardVocab";
-import CategoryCardVocab from "../components/CategoryCardVocab";
+import SuggestionCard from "../components/SuggestionCard";
 
 const home = (props) => {
-  
-    const [suggestion, setSuggestion] = useState([]);
+  const [suggestion, setSuggestion] = useState([]);
 
+  const getSuggestion = async () => {
+    const data = await axios
+      .get("http://10.0.2.2:3000/answer/suggestions/1")
+      .then((response) => {
+        console.log("Suggestion");
+        // console.log(response.data.length);
+        console.log(response.data.answer);
+        console.log("Suggestion");
 
-    const getSuggestion = async () => {
-      const data = await axios
-        .get("http://10.0.2.2:3000/answer/suggestions/1")
-        .then((response) => {
-          console.log("Suggestion");
-          // console.log(response.data.length);
-          console.log(response.data.answer);
-          console.log("Suggestion");
-  
-          setSuggestion(response.data.answer)
-  
-        });
-    };
+        setSuggestion(response.data.answer);
+      });
+  };
 
   useEffect(() => {
-    getSuggestion();
+    // getSuggestion();
   }, []);
-
-  
 
   function ContentDefault() {
     return (
       <View style={styles.ContentSwitch}>
-          <Text style={styles.topic}>Suggestion</Text>
+        <Text style={styles.topic}>Suggestion</Text>
+        <FlatList
+          contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+          data={suggestion}
+          renderItem={({ item }) => (
+            <SuggestionCard
+              isCheck={!!isCheck.get(item.suggestion)}
+              onCheck={onCheck}
+              suggestion={item.suggestion}
+            />
+          )}
+        />
       </View>
     );
   }
@@ -61,9 +59,32 @@ const home = (props) => {
     return (
       <View>
         <View style={styles.ContentSwitch}>
-            <Text style={styles.topic}>Tips</Text>
-          </View>
-         </View>
+          <Text style={styles.topic}>Tips</Text>
+          <FlatList
+            contentContainerStyle={{ flexGrow: 1, justifyContent: "center", marginTop: 25 }}
+            data={trick}
+            renderItem={({ item }) => (
+              <LinearGradient
+                colors={["#FFD387", "#FFA26B"]}
+                style={{
+                  left: 0,
+                  right: 0,
+                  top: 0,
+                  height: 90,
+                  width: 350,
+                  borderRadius: 5,
+                  alignItems: "center",
+                }}
+              >
+                <TouchableOpacity>
+                  {/* //onPress={()=>} */}
+                  <Text style={{fontFamily: "Noto-Reg", fontSize: 20}}>{item.trick_title}</Text>
+                </TouchableOpacity>
+              </LinearGradient>
+            )}
+          />
+        </View>
+      </View>
     );
   }
 
@@ -78,7 +99,6 @@ const home = (props) => {
           suggestion={suggestion}
           isSwitch={true}
         />
-       
       </View>
     );
   } else {
@@ -114,6 +134,6 @@ const styles = StyleSheet.create({
   },
   ContentSwitch: {
     flex: 1,
-    padding: "5%"
+    padding: "5%",
   },
 });

@@ -11,13 +11,6 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { AntDesign } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
-
-import ButtonClick from "../components/ButtonClick";
-import ModalWord from "../components/ModalWord";
-import ModalMoreDetail from "../components/ModalMoreDetail";
 import WordCard from '../components/WordCard'
 
 import Constants from "expo-constants";
