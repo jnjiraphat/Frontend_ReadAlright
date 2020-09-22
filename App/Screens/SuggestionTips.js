@@ -17,23 +17,48 @@ import VocabCateApi from "../API/VocabCateAPI";
 import SuggestionCard from "../components/SuggestionCard";
 
 const home = (props) => {
+  const [isCheck, setCheck] = useState();
   const [suggestion, setSuggestion] = useState([]);
+  const [trick, setTrick] = useState([]);
 
   const getSuggestion = async () => {
-    const data = await axios
-      .get("http://10.0.2.2:3000/answer/suggestions/1")
-      .then((response) => {
+    await axios.get("http://10.0.2.2:3000/answer/suggestions/1").then(
+      (response) => {
         console.log("Suggestion");
-        // console.log(response.data.length);
         console.log(response.data.answer);
-        console.log("Suggestion");
-
         setSuggestion(response.data.answer);
-      });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   };
 
+  const getTrick = async () => {
+    try {
+      const data = await axios.get("http://10.0.2.2:3000/tricks").then(
+        (response) => {
+          console.log("Trikcs");
+          console.log(response.data.quiz)
+          setTrick(response.data.quiz)
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } catch (error) {
+
+    } finally {
+      // setTrick(allTrick);
+    }
+
+  };
+
+  console.log("This is Tricks")
+  console.log(trick)
   useEffect(() => {
-    // getSuggestion();
+    getTrick();
+    // read();
   }, []);
 
   function ContentDefault() {
@@ -45,8 +70,8 @@ const home = (props) => {
           data={suggestion}
           renderItem={({ item }) => (
             <SuggestionCard
-              isCheck={!!isCheck.get(item.suggestion)}
-              onCheck={onCheck}
+              // isCheck={!!isCheck.get(item.suggestion)}
+              // onCheck={onCheck}
               suggestion={item.suggestion}
             />
           )}
@@ -56,36 +81,41 @@ const home = (props) => {
   }
 
   function ContentChange() {
-    return (
-      <View>
-        <View style={styles.ContentSwitch}>
-          <Text style={styles.topic}>Tips</Text>
-          <FlatList
-            contentContainerStyle={{ flexGrow: 1, justifyContent: "center", marginTop: 25 }}
-            data={trick}
-            renderItem={({ item }) => (
-              <LinearGradient
-                colors={["#FFD387", "#FFA26B"]}
-                style={{
-                  left: 0,
-                  right: 0,
-                  top: 0,
-                  height: 90,
-                  width: 350,
-                  borderRadius: 5,
-                  alignItems: "center",
-                }}
-              >
-                <TouchableOpacity>
-                  {/* //onPress={()=>} */}
-                  <Text style={{fontFamily: "Noto-Reg", fontSize: 20}}>{item.trick_title}</Text>
-                </TouchableOpacity>
-              </LinearGradient>
-            )}
-          />
+    if (trick) {
+      return (
+        <View>
+          <View style={styles.ContentSwitch}>
+            <Text style={styles.topic}>Tips</Text>
+            <FlatList
+              contentContainerStyle={{ flexGrow: 1, justifyContent: "center", marginTop: 25 }}
+              data={trick}
+              renderItem={({ item }) => (
+                <LinearGradient
+                  colors={["#FFD387", "#FFA26B"]}
+                  style={{
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    height: 90,
+                    width: 350,
+                    borderRadius: 5,
+                    alignItems: "center",
+                  }}
+                >
+                  <TouchableOpacity>
+                    {/* //onPress={()=>} */}
+                    <Text style={{ fontFamily: "Noto-Reg", fontSize: 20 }}>{item.trick_title}</Text>
+                  </TouchableOpacity>
+                </LinearGradient>
+              )}
+            />
+          </View>
         </View>
-      </View>
-    );
+      );
+    }else{
+      <View><Text>Loading</Text></View>
+    }
+
   }
 
   const tabSwitch = [{ title: "Suggestion" }, { title: "Tips" }];

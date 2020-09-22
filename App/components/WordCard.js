@@ -26,6 +26,7 @@ const WordCard = (props) => {
     isBookMark,
     isCheck,
     onCheck,
+    onBookMarkNon,
     forWordCollection,
   } = props;
   return (
@@ -46,7 +47,7 @@ const WordCard = (props) => {
                 alignItems: "center",
               }}
             >
-              <TouchableOpacity onPress={() => onCheck(engWord)}>
+              <TouchableOpacity onPress={() => onCheck(engWord,thaiWord)}>
                 <AntDesign
                   name={isCheck ? "checksquare" : "checksquareo"}
                   size={24}
@@ -77,7 +78,7 @@ const WordCard = (props) => {
               alignItems: "center",
             }}
           >
-            <TouchableOpacity onPress={() => onBookMark(engWord)}>
+            <TouchableOpacity onPress={() => onBookMark(engWord,thaiWord)}>
               {/* engWord คือตัวข้อความที่จะรับไว้ส่งค่า */}
               <MaterialIcons
                 // name={"bookmark"}

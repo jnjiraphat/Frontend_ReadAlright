@@ -111,7 +111,7 @@ const Content = (props) => {
     read();
   }, []);
 
-  
+
   // console.log("This is reading id  ");
   // console.log(props.text);
 
@@ -119,7 +119,7 @@ const Content = (props) => {
   //   console.log("readingIDDDDDDDDDDDD  " + reading_id);
   //   Actions.TestQuizChallenge({ text: reading_id });
   //   console.log("Finish " + reading_id);
-    // console.log("readingIDDDDDDDDDDDD" + reading_id);
+  // console.log("readingIDDDDDDDDDDDD" + reading_id);
   // }
   // const goToAbout = () => {
   //    Actions.about()
@@ -128,28 +128,56 @@ const Content = (props) => {
   const [modalMoreVisible, setModalMoreVisible] = useState(false);
   const [isBookMark, setBookMark] = useState(new Map());
   const [isCheck, setCheck] = useState(new Map());
+  const [getChecked, setChecked] = useState(false);
+  const [getChecked2, setChecked2] = useState(false);
+
+  const [changeBookMark, setchangeBookMark] = useState(false)
+  const [temp, setTemp] = useState(0)
+  const [newThaiWord, setNewThaiWord] = useState("")
+
 
   const onBookMark = React.useCallback(
-    async (engWord) => {
+    async (engWord, thaiWord) => {
+      setChecked(false)
+      setChecked2(false)
+      console.log(thaiWord)
+      setNewThaiWord(thaiWord)
       const newSelected = new Map(isBookMark);
       newSelected.set(engWord, !isBookMark.get(engWord));
       setBookMark(newSelected);
       if (!isBookMark.get(engWord) == true) {
+        setChecked(true)
+        setChecked2(true)
+
         var bookmark = []
+        setchangeBookMark(true);
+
       }
 
-      if (!isBookMark.get(engWord) == false) {
-        console.log(engWord)
-        await axios
-          .delete("http://10.0.2.2:3000/wordCol/del/" + engWord)
-          .then(
-            (response) => {
-              console.log("delete bookmark success!!!");
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
+      else if (!isBookMark.get(engWord) == false) {
+        try {
+
+          console.log(engWord)
+          await axios
+            .delete("http://10.0.2.2:3000/wordCol/del/" + engWord)
+            .then(
+              (response) => {
+                console.log("delete bookmark success!!!");
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+        } catch (error) {
+
+        } finally {
+          setchangeBookMark(false);
+          setChecked(false);
+          setChecked2(false);
+
+          setTemp(temp - 1);
+
+        }
       }
     },
     [isBookMark],
@@ -157,8 +185,57 @@ const Content = (props) => {
     // console.log(isBookMark),
   );
 
+  useEffect(() => {
+
+    if (getChecked2 === true) {
+      try {
+        console.log(isBookMark)
+        // console.log(getTranslate)
+        var bookmark = [];
+        function logMapElements(value, key, map) {
+          console.log(`m[${key}] = ${value}`);
+          if (value == true) {
+            bookmark.push(key);
+          }
+          console.log("length = " + bookmark.length);
+        }
+        console.log(temp)
+        isBookMark.forEach(logMapElements);
+        for (let index = temp; index < bookmark.length; index++) {
+          axios
+            .post("http://10.0.2.2:3000/wordCol", {
+              wordCol_Thai: newThaiWord,
+              wordCol_Eng: bookmark[index],
+              user_id: 1
+            })
+            .then(
+              (response) => {
+                console.log("upload bookmark success!!!");
+
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+        }
+      } catch (error) {
+
+      } finally {
+        setTemp(temp + 1);
+
+        setChecked(false)        
+        setChecked2(false)
+
+      }
+
+    } else {
+      console.log("getCheck = false")
+    }
+  }, [getChecked]);
+
   const onCheck = React.useCallback(
-    async (engWord) => {
+    async (engWord, thaiWord) => {
+      console.log(thaiWord)
       const newChecked = new Map(isCheck);
       newChecked.set(engWord, !isCheck.get(engWord));
       setCheck(newChecked);
@@ -186,7 +263,7 @@ const Content = (props) => {
   //   console.log(engWord),
   //   console.log(isBookMark)
   // );
-  
+
   // const onCheck = useCallback(
   //   (engWord) => {
   //     const newSelected = new Map(isCheck);
@@ -205,20 +282,20 @@ const Content = (props) => {
   //   console.log(isCheck)
   // );
 
-  
+
   //   // console.log(getWord),
   //   // console.log(isBookMark),
   // );
-  
+
 
   return (
     <ScrollView>
-      
-          <View style={styles.container}>
-            <Image source={{ uri: vocabBoxImg }} style={styles.headerImg} />
-            <Text style={styles.topic}>{vocabBoxName}</Text>
-          </View>
-        
+
+      <View style={styles.container}>
+        <Image source={{ uri: vocabBoxImg }} style={styles.headerImg} />
+        <Text style={styles.topic}>{vocabBoxName}</Text>
+      </View>
+
       <View style={{ flex: 1, alignItems: "center" }}>
         <FlatList
           contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
@@ -229,9 +306,9 @@ const Content = (props) => {
               engWord={item.engWord}
               thaiWord={item.thaiWord}
               onBookMark={onBookMark}
-              isBookMark={!!isBookMark.get(item.engWord)}
+              isBookMark={!!isBookMark.get(item.engWord, item.thaiWord)}
               onCheck={onCheck}
-              isCheck={!!isCheck.get(item.engWord)}
+              isCheck={!!isCheck.get(item.engWord, item.thaiWord)}
             />
           )}
         />
