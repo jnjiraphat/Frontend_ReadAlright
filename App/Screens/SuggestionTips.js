@@ -18,7 +18,7 @@ import SuggestionCard from "../components/SuggestionCard";
 
 const home = (props) => {
   const [isCheck, setCheck] = useState();
-  const [suggestion, setSuggestion] = useState([]);
+  const [suggestions, setSuggestion] = useState([]);
   const [trick, setTrick] = useState([]);
 
   const getSuggestion = async () => {
@@ -33,6 +33,8 @@ const home = (props) => {
       }
     );
   };
+  console.log("This is suggestion")
+  console.log(suggestions)
 
   const getTrick = async () => {
     try {
@@ -58,26 +60,32 @@ const home = (props) => {
   console.log(trick)
   useEffect(() => {
     getTrick();
+    getSuggestion();
     // read();
   }, []);
 
   function ContentDefault() {
-    return (
-      <View style={styles.ContentSwitch}>
-        <Text style={styles.topic}>Suggestion</Text>
-        <FlatList
-          contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-          data={suggestion}
-          renderItem={({ item }) => (
-            <SuggestionCard
-              // isCheck={!!isCheck.get(item.suggestion)}
-              // onCheck={onCheck}
-              suggestion={item.suggestion}
-            />
-          )}
-        />
-      </View>
-    );
+    if (suggestions) {
+      return (
+        <View style={styles.ContentSwitch}>
+          <Text style={styles.topic}>Suggestion</Text>
+          <FlatList
+            contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+            data={suggestions}
+            renderItem={({ item }) => (
+              <SuggestionCard
+                // isCheck={!!isCheck.get(item.suggestion)}
+                // onCheck={onCheck}
+                suggestion={item.suggestion}
+              />
+            )}
+          />
+        </View>
+      );
+    } else (
+      <View><Text>Loading</Text></View>
+    )
+
   }
 
   function ContentChange() {
@@ -112,21 +120,21 @@ const home = (props) => {
           </View>
         </View>
       );
-    }else{
+    } else {
       <View><Text>Loading</Text></View>
     }
 
   }
 
   const tabSwitch = [{ title: "Suggestion" }, { title: "Tips" }];
-  if (suggestion) {
+  if (suggestions) {
     return (
       <View style={styles.container}>
         <Header
           tabs={tabSwitch}
           ContentDefault={ContentDefault()}
           ContentChange={ContentChange()}
-          suggestion={suggestion}
+          suggestion={suggestions}
           isSwitch={true}
         />
       </View>
