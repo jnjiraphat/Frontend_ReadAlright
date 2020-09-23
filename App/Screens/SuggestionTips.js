@@ -17,23 +17,51 @@ import VocabCateApi from "../API/VocabCateAPI";
 import SuggestionCard from "../components/SuggestionCard";
 
 const home = (props) => {
-  const [suggestion, setSuggestion] = useState([]);
+  const [isCheck, setCheck] = useState();
+  const [suggestions, setSuggestion] = useState([]);
+  const [trick, setTrick] = useState([]);
 
   const getSuggestion = async () => {
-    const data = await axios
-      .get("http://10.0.2.2:3000/answer/suggestions/1")
-      .then((response) => {
+    await axios.get("http://10.0.2.2:3000/answer/suggestions/1").then(
+      (response) => {
         console.log("Suggestion");
-        // console.log(response.data.length);
         console.log(response.data.answer);
-        console.log("Suggestion");
-
         setSuggestion(response.data.answer);
-      });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+  console.log("This is suggestion")
+  console.log(suggestions)
+
+  const getTrick = async () => {
+    try {
+      const data = await axios.get("http://10.0.2.2:3000/tricks").then(
+        (response) => {
+          console.log("Trikcs");
+          console.log(response.data.quiz)
+          setTrick(response.data.quiz)
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } catch (error) {
+
+    } finally {
+      // setTrick(allTrick);
+    }
+
   };
 
+  console.log("This is Tricks")
+  console.log(trick)
   useEffect(() => {
-    // getSuggestion();
+    getTrick();
+    getSuggestion();
+    // read();
   }, []);
 
   const [isCheck, setCheck] = useState(new Map());
@@ -68,66 +96,76 @@ const home = (props) => {
   );
 
   function ContentDefault() {
-    return (
-      <View style={styles.ContentSwitch}>
-        <Text style={styles.topic}>Suggestion</Text>
-        <FlatList
-          contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-          data={suggestion}
-          renderItem={({ item }) => (
-            <SuggestionCard
-              isCheck={!!isCheck.get(item.suggestion)}
-              onCheck={onCheck}
-              suggestion={item.suggestion}
-            />
-          )}
-        />
-      </View>
-    );
-  }
-
-  function ContentChange() {
-    return (
-      <View>
+    if (suggestions) {
+      return (
         <View style={styles.ContentSwitch}>
-          <Text style={styles.topic}>Tips</Text>
+          <Text style={styles.topic}>Suggestion</Text>
           <FlatList
-            contentContainerStyle={{ flexGrow: 1, justifyContent: "center", marginTop: 25 }}
-            data={trick}
+            contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+            data={suggestions}
             renderItem={({ item }) => (
-              <LinearGradient
-                colors={["#FFD387", "#FFA26B"]}
-                style={{
-                  left: 0,
-                  right: 0,
-                  top: 0,
-                  height: 90,
-                  width: 350,
-                  borderRadius: 5,
-                  alignItems: "center",
-                }}
-              >
-                <TouchableOpacity>
-                  {/* //onPress={()=>} */}
-                  <Text style={{fontFamily: "Noto-Reg", fontSize: 20}}>{item.trick_title}</Text>
-                </TouchableOpacity>
-              </LinearGradient>
+              <SuggestionCard
+                // isCheck={!!isCheck.get(item.suggestion)}
+                // onCheck={onCheck}
+                suggestion={item.suggestion}
+              />
             )}
           />
         </View>
-      </View>
-    );
+      );
+    } else (
+      <View><Text>Loading</Text></View>
+    )
+
+  }
+
+  function ContentChange() {
+    if (trick) {
+      return (
+        <View>
+          <View style={styles.ContentSwitch}>
+            <Text style={styles.topic}>Tips</Text>
+            <FlatList
+              contentContainerStyle={{ flexGrow: 1, justifyContent: "center", marginTop: 25 }}
+              data={trick}
+              renderItem={({ item }) => (
+                <LinearGradient
+                  colors={["#FFD387", "#FFA26B"]}
+                  style={{
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    height: 90,
+                    width: 350,
+                    borderRadius: 5,
+                    alignItems: "center",
+                  }}
+                >
+                  <TouchableOpacity>
+                    {/* //onPress={()=>} */}
+                    <Text style={{ fontFamily: "Noto-Reg", fontSize: 20 }}>{item.trick_title}</Text>
+                  </TouchableOpacity>
+                </LinearGradient>
+              )}
+            />
+          </View>
+        </View>
+      );
+    } else {
+      <View><Text>Loading</Text></View>
+    }
+
   }
 
   const tabSwitch = [{ title: "Suggestion" }, { title: "Tips" }];
-  if (suggestion) {
+  if (suggestions) {
     return (
       <View style={styles.container}>
         <Header
           tabs={tabSwitch}
           ContentDefault={ContentDefault()}
           ContentChange={ContentChange()}
-          suggestion={suggestion}
+          suggestion={suggestions}
           isSwitch={true}
         />
       </View>
