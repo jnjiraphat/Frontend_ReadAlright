@@ -75,8 +75,7 @@ const WordCollection = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMoreVisible, setModalMoreVisible] = useState(false);
   const [isBookMark, setBookMark] = useState(new Map());
-  const [changeBookMark, setchangeBookMark] = useState(false);
-
+ 
   const onBookMark = React.useCallback(
     async (wordCol_Eng) => {
       const newSelected = new Map(isBookMark);

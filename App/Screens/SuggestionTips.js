@@ -36,6 +36,37 @@ const home = (props) => {
     // getSuggestion();
   }, []);
 
+  const [isCheck, setCheck] = useState(new Map());
+
+  const onCheck = React.useCallback(
+    async (suggestion) => {
+      const newSelected = new Map(isCheck);
+      newSelected.set(suggestion, !isCheck.get(suggestion));
+      setBookMark(newSelected);
+      if (!isCheck.get(suggestion) == true) {
+        var bookmark = []
+      }
+
+      if (!isCheck.get(suggestion) == false) {
+        console.log(suggestion)
+        await axios
+          .delete("http://10.0.2.2:3000/wordCol/del/" + suggestion)
+          //เปลี่ยนตรงนี้
+          .then(
+            (response) => {
+              console.log("delete suggestion success!!!");
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+      }
+    },
+    [isCheck],
+    // console.log(getWord),
+    // console.log(isBookMark),
+  );
+
   function ContentDefault() {
     return (
       <View style={styles.ContentSwitch}>
