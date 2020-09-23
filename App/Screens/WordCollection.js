@@ -43,11 +43,18 @@ const WordCollection = (props) => {
   const [wordCol, setWordCol] = useState([]);
 
   const fetch = async () => {
+    const newSelected = new Map(isBookMark);
+
     console.log("runningggggggggggggggggggggggggggggg");
     await axios.get("http://10.0.2.2:3000/wordCol").then(
       (response) => {
         console.log("Word Collection");
         console.log(response.data.quiz);
+        for (let index = 0; index < response.data.quiz.length; index++) {
+          newSelected.set(response.data.quiz[index]['wordCol_Eng'], true);
+
+        }
+        setBookMark(newSelected);
         setWordCol(response.data.quiz);
       },
       (error) => {
@@ -106,12 +113,12 @@ const WordCollection = (props) => {
     // console.log(isBookMark),
   );
   const [refreshing, setRefreshing] = React.useState(false);
-const wait = (timeout) => {
-  return new Promise(resolve => {
-    read();
-    setTimeout(resolve, timeout);
-  });
-}
+  const wait = (timeout) => {
+    return new Promise(resolve => {
+      read();
+      setTimeout(resolve, timeout);
+    });
+  }
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
 
