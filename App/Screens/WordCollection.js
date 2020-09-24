@@ -10,6 +10,8 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  RefreshControl,
+
 } from "react-native";
 import WordCard from '../components/WordCard'
 
@@ -41,11 +43,18 @@ const WordCollection = (props) => {
   const [wordCol, setWordCol] = useState([]);
 
   const fetch = async () => {
+    const newSelected = new Map(isBookMark);
+
     console.log("runningggggggggggggggggggggggggggggg");
     await axios.get("http://10.0.2.2:3000/wordCol").then(
       (response) => {
         console.log("Word Collection");
         console.log(response.data.quiz);
+        for (let index = 0; index < response.data.quiz.length; index++) {
+          newSelected.set(response.data.quiz[index]['wordCol_Eng'], true);
+
+        }
+        setBookMark(newSelected);
         setWordCol(response.data.quiz);
       },
       (error) => {
@@ -75,7 +84,7 @@ const WordCollection = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMoreVisible, setModalMoreVisible] = useState(false);
   const [isBookMark, setBookMark] = useState(new Map());
- 
+
   const onBookMark = React.useCallback(
     async (wordCol_Eng) => {
       const newSelected = new Map(isBookMark);
@@ -103,9 +112,24 @@ const WordCollection = (props) => {
     // console.log(getWord),
     // console.log(isBookMark),
   );
+  const [refreshing, setRefreshing] = React.useState(false);
+  const wait = (timeout) => {
+    return new Promise(resolve => {
+      read();
+      setTimeout(resolve, timeout);
+    });
+  }
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
 
   return (
-    <ScrollView>
+    <ScrollView refreshControl={
+      <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+    }
+    >
       <View style={styles.container}>
         <Text style={styles.topic}>Word Collection</Text>
       </View>

@@ -72,7 +72,7 @@ const Content = (props) => {
   //       (error) => {
   //         console.log(error);
   //       }
-  //     );
+  //     ); 
   // };
   const [vocabCard, setVocabCard] = useState([]);
   const [vocabBoxName, setvocabBoxName] = useState("");

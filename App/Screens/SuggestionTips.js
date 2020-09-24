@@ -18,8 +18,8 @@ import SuggestionCard from "../components/SuggestionCard";
 import LoadingScreen from './LoadingScreen'
 
 const home = (props) => {
-  const [isCheck, setCheck] = useState();
-  const [suggestions, setSuggestion] = useState([]);
+  // const [isCheck, setCheck] = useState();
+  const [suggestion, setSuggestion] = useState([]);
   const [trick, setTrick] = useState([]);
 
   const getSuggestion = async () => {
@@ -35,7 +35,7 @@ const home = (props) => {
     );
   };
   console.log("This is suggestion")
-  console.log(suggestions)
+  console.log(suggestion)
 
   const getTrick = async () => {
     try {
@@ -96,13 +96,13 @@ const home = (props) => {
   }, []);
 
   function ContentDefault() {
-    if (suggestions) {
+    if (suggestion) {
       return (
         <View style={styles.ContentSwitch}>
-          <Text style={styles.topic}>Suggestion</Text>
+          <Text style={styles.topic}>Suggestionnn</Text>
           <FlatList
             contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-            data={suggestions}
+            data={suggestion}
             renderItem={({ item }) => (
               <SuggestionCard
                 isCheck={!!isCheck.get(item.suggestion)}
@@ -162,14 +162,14 @@ const home = (props) => {
   }
 
   const tabSwitch = [{ title: "Suggestion" }, { title: "Tips" }];
-  if (suggestions) {
+  if (suggestion) {
     return (
       <View style={styles.container}>
         <Header
           tabs={tabSwitch}
           ContentDefault={ContentDefault()}
           ContentChange={ContentChange()}
-          suggestion={suggestions}
+          suggestion={suggestion}
           isSwitch={true}
         />
       </View>
