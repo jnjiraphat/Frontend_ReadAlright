@@ -27,6 +27,7 @@ import NewVocab from "../API/NewVocabAPI";
 import CarouselCardVocab from "../components/CarouselCardVocab";
 import CategoryCardVocab from "../components/CategoryCardVocab";
 import { out } from "react-native/Libraries/Animated/src/Easing";
+import LoadingScreen from './LoadingScreen'
 
 const arrayReading = [];
 
@@ -261,7 +262,9 @@ const home = (props) => {
       </View>
     );
   } else {
-    return <Text>Loading</Text>;
+    return <View style={{flex:1}}>
+    <LoadingScreen/>
+  </View>;
   }
 };
 export default home;

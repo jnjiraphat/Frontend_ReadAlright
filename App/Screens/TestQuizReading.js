@@ -67,6 +67,7 @@ const TestQuizReading = (props) => {
     }
 
     // var dataArrayQuiz = [];
+    
     // for (let index = 1; index < 7; index++) {
     //   await axios
     //     .get(
@@ -183,7 +184,8 @@ const styles = StyleSheet.create({
     shadowColor: "#000000",
     shadowOpacity: 0.3,
     elevation: 8,
-    marginVertical: "10%",
+    marginBottom: "10%",
+    marginTop: "3%",
     paddingVertical: 20,
     paddingHorizontal: 15
   },

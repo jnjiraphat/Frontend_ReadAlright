@@ -17,6 +17,7 @@ import { Actions } from "react-native-router-flux";
 import ButtonClick from "./../components/ButtonClick";
 import Constants from "expo-constants";
 import CountView from "../API/CountViewsAPI";
+import LoadingScreen from './LoadingScreen'
 
 //API
 import ReadingApi from "../API/ReadingAPI";
@@ -198,7 +199,9 @@ export default function () {
       </SafeAreaView>
     );
   } else {
-    return <Text>Loading</Text>;
+    return <View style={{flex:1}}>
+    <LoadingScreen/>
+  </View>;
   }
 }
 

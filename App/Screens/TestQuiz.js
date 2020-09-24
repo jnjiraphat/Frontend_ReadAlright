@@ -9,6 +9,8 @@ import { Button } from "@ant-design/react-native";
 import { AsyncStorage } from "react-native";
 import { set } from "react-native-reanimated";
 
+import LoadingScreen from './LoadingScreen'
+
 const GREEN = "rgba(141,196,63,1)";
 const PURPLE = "rgba(108,48,237,1)";
 
@@ -410,8 +412,8 @@ export default class TestQuiz extends React.Component {
       );
     else
       return (
-        <View>
-          <Text>Loading</Text>
+        <View style={{flex:1}}>
+          <LoadingScreen/>
         </View>
       );
   }

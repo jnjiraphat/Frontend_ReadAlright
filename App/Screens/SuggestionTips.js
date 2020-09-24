@@ -15,6 +15,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import VocabCateApi from "../API/VocabCateAPI";
 
 import SuggestionCard from "../components/SuggestionCard";
+import LoadingScreen from './LoadingScreen'
 
 const home = (props) => {
   const [isCheck, setCheck] = useState();
@@ -56,16 +57,6 @@ const home = (props) => {
 
   };
 
-  console.log("This is Tricks")
-  console.log(trick)
-  useEffect(() => {
-    getTrick();
-    getSuggestion();
-    // read();
-  }, []);
-
-  const [isCheck, setCheck] = useState(new Map());
-
   const onCheck = React.useCallback(
     async (suggestion) => {
       const newSelected = new Map(isCheck);
@@ -95,6 +86,15 @@ const home = (props) => {
     // console.log(isBookMark),
   );
 
+
+  console.log("This is Tricks")
+  console.log(trick)
+  useEffect(() => {
+    getTrick();
+    getSuggestion();
+    // read();
+  }, []);
+
   function ContentDefault() {
     if (suggestions) {
       return (
@@ -105,8 +105,8 @@ const home = (props) => {
             data={suggestions}
             renderItem={({ item }) => (
               <SuggestionCard
-                // isCheck={!!isCheck.get(item.suggestion)}
-                // onCheck={onCheck}
+                isCheck={!!isCheck.get(item.suggestion)}
+                onCheck={onCheck}
                 suggestion={item.suggestion}
               />
             )}
@@ -114,7 +114,9 @@ const home = (props) => {
         </View>
       );
     } else (
-      <View><Text>Loading</Text></View>
+      <View style={{flex:1}}>
+          <LoadingScreen/>
+        </View>
     )
 
   }
@@ -152,7 +154,9 @@ const home = (props) => {
         </View>
       );
     } else {
-      <View><Text>Loading</Text></View>
+      <View style={{flex:1}}>
+          <LoadingScreen/>
+        </View>
     }
 
   }

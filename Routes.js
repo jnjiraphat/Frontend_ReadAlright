@@ -18,6 +18,8 @@ import TestQuiz from "./App/Screens/TestQuiz";
 import WordCollection from './App/Screens/WordCollection'
 import TestQuizReading from './App/Screens/TestQuizReading'
 import SuggestionTips from './App/Screens/SuggestionTips'
+import TestQuizChallenge from "./App/Screens/TestQuizChallenge.js";
+import LoadingScreen from './App/Screens/LoadingScreen'
 
 // import Article from "./App/Screens/Article"
 import { FontAwesome } from "@expo/vector-icons";
@@ -25,7 +27,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { StyleSheet, Dimensions, View, TouchableOpacity, Image, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "@use-expo/font";
-import TestQuizChallenge from "./App/Screens/TestQuizChallenge.js";
 
 const TabIcon = ({ focused, title }) => {
   // var color = focused ? "black" : "grey";
@@ -94,7 +95,7 @@ const Routes = () => {
     return (
       <Router>
         <Scene key="root" showLabel={false} navTransparent={true}>
-          {/* <Scene
+          <Scene
             key="TestQuizReading"
             component={TestQuizReading}
             title="TestQuizReading"
@@ -109,11 +110,19 @@ const Routes = () => {
             hideNavBar
             hideTabBar
             showLabel={false}
-          /> */}
+          />
           {/* <Scene
             key="Login"
             component={Login}
             title="Login"
+            hideNavBar
+            hideTabBar
+            showLabel={false}
+          />
+          {/* <Scene
+            key="LoadingScreen"
+            component={LoadingScreen}
+            title="LoadingScreen"
             hideNavBar
             hideTabBar
             showLabel={false}

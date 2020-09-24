@@ -6,6 +6,7 @@ import ModalSubmit from "../components/ModalSubmit";
 import { Actions } from "react-native-router-flux";
 import Constants from "expo-constants";
 import { Button } from "@ant-design/react-native";
+import LoadingScreen from './LoadingScreen'
 
 const GREEN = "rgba(141,196,63,1)";
 const PURPLE = "rgba(108,48,237,1)";
@@ -358,8 +359,8 @@ export default class TestQuizChallenge extends React.Component {
       );
     else
       return (
-        <View>
-          <Text>Loading</Text>
+        <View style={{flex:1}}>
+          <LoadingScreen/>
         </View>
       );
   }
