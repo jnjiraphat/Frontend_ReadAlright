@@ -109,7 +109,7 @@ const TestQuizReading = (props) => {
             data={readPretest}
             renderItem={({ item }) => (
               <View >
-                <Text style={styles.questionText}>{item.content}</Text>
+                <Text style={styles.questionText}>{item.reading_Pretest_id}). {item.content}</Text>
               </View>
             )}
           />
