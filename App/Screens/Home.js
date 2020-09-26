@@ -128,6 +128,8 @@ const home = (props) => {
 
       });
   };
+
+
   useEffect(() => {
     read();
     getReadaingByCateId();

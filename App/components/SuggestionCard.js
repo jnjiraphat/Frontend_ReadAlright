@@ -15,7 +15,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import Constants from "expo-constants";
 
 const WordCard = (props) => {
-  const { isCheck, onCheck, suggestion } = props;
+  const { isCheck, onCheck, suggestion ,suggestId} = props;
   console.log("Hi Suggestion")
   console.log(props.suggestion)
   console.log(props.suggestion.length)
@@ -25,44 +25,44 @@ const WordCard = (props) => {
     return (
       <View>
         {/* {isCheck && ( */}
-          <View style={styles.whiteCard}>
-            <View style={styles.flexArea}>
-              <View style={styles.wordArea}>
-                <Text style={styles.content}>{props.suggestion}</Text>
-              </View>
-              <View style={styles.yellowButton}>
-                <LinearGradient
-                  colors={["#FFD387", "#FFE43A"]}
-                  style={{
-                    height: 70,
-                    width: 43,
-                    borderRadius: 5,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <TouchableOpacity onPress={() => onCheck(suggestion)}>
-                    {/* engWord คือตัวข้อความที่จะรับไว้ส่งค่า */}
-                    <MaterialIcons
-                      // name={"bookmark"}
-                      name={isCheck ? "checksquare" : "checksquareo"}
-                      size={24}
-                      color="#8A63E5"
-                    />
-                  </TouchableOpacity>
-                </LinearGradient>
-              </View>
+        <View style={styles.whiteCard}>
+          <View style={styles.flexArea}>
+            <View style={styles.wordArea}>
+              <Text style={styles.content}>{props.suggestion}</Text>
+            </View>
+            <View style={styles.yellowButton}>
+              <LinearGradient
+                colors={["#FFD387", "#FFE43A"]}
+                style={{
+                  height: 70,
+                  width: 43,
+                  borderRadius: 5,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <TouchableOpacity onPress={() => onCheck(props.suggestId)}>
+                  {/* engWord คือตัวข้อความที่จะรับไว้ส่งค่า */}
+                  <MaterialIcons
+                    name={"bookmark"}
+                    name={isCheck ? "bookmark-border" : "bookmark"}
+                    size={24}
+                    color="#8A63E5"
+                  />
+                </TouchableOpacity>
+              </LinearGradient>
             </View>
           </View>
+        </View>
         {/* )} */}
       </View>
     );
   } else {
-    return(
+    return (
       <View><Text>Loading</Text></View>
     )
   }
-  
+
 };
 export default WordCard;
 

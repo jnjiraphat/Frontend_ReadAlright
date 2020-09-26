@@ -16,18 +16,30 @@ import VocabCateApi from "../API/VocabCateAPI";
 
 import SuggestionCard from "../components/SuggestionCard";
 import LoadingScreen from './LoadingScreen'
+const suggestionTypeId = [];
 
 const home = (props) => {
   const [isCheck, setCheck] = useState(new Map());
   const [suggestion, setSuggestion] = useState([]);
   const [trick, setTrick] = useState([]);
+  const getAndPostSuggestion = async () => {
 
+    await getSuggestion();
+    setTimeout(() => {
+      postSuggestion();
+    }, 5000);
+
+
+  }
   const getSuggestion = async () => {
-    await axios.get("http://10.0.2.2:3000/answer/suggestions/1").then(
+    axios.get("http://10.0.2.2:3000/answer/suggestions/1").then(
       (response) => {
-        console.log("Suggestion");
+        console.log("SuggestionNon");
         console.log(response.data.answer);
         setSuggestion(response.data.answer);
+        for (let index = 0; index < response.data.answer.length; index++) {
+          suggestionTypeId.push(response.data.answer[index]);
+        }
       },
       (error) => {
         console.log(error);
@@ -56,20 +68,44 @@ const home = (props) => {
     }
 
   };
+  const postSuggestion = async () => {
+    console.log("PostSuggestionNon");
+    console.log(suggestionTypeId.length);
+    console.log(suggestionTypeId[0]);
+    console.log(suggestionTypeId[1]);
+
+    console.log("PostSuggestionNon");
+
+    for (let index = 0; index < suggestionTypeId.length; index++) {
+      axios
+        .post("http://10.0.2.2:3000/suggestion_user", {
+          typeOfSuggestion_id: suggestionTypeId[index].typeOfSuggestion_id,
+          user_id: 1
+        })
+        .then(
+          (response) => {
+            console.log("post suggesttion success!!!");
+
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    }
+  };
 
   const onCheck = React.useCallback(
-    async (suggestion) => {
+    async (suggestId) => {
       const newSelected = new Map(isCheck);
-      newSelected.set(suggestion, !isCheck.get(suggestion));
-      setBookMark(newSelected);
-      if (!isCheck.get(suggestion) == true) {
-        var bookmark = []
-      }
+      newSelected.set(suggestId, !isCheck.get(suggestId));
+      setCheck(newSelected);
+      if (!isCheck.get(suggestId) == true) {
+        console.log("Suggestion Nontest")
+        console.log(suggestId)
+        console.log("Suggestion Nontest")
 
-      if (!isCheck.get(suggestion) == false) {
-        console.log(suggestion)
         await axios
-          .delete("http://10.0.2.2:3000/wordCol/del/" + suggestion)
+          .delete("http://10.0.2.2:3000/suggestion_user/" + suggestId)
           //เปลี่ยนตรงนี้
           .then(
             (response) => {
@@ -79,6 +115,10 @@ const home = (props) => {
               console.log(error);
             }
           );
+      }
+
+      if (!isCheck.get(suggestion) == false) {
+
       }
     },
     [isCheck],
@@ -91,7 +131,7 @@ const home = (props) => {
   console.log(trick)
   useEffect(() => {
     getTrick();
-    getSuggestion();
+    getAndPostSuggestion();
     // read();
   }, []);
 
@@ -105,7 +145,8 @@ const home = (props) => {
             data={suggestion}
             renderItem={({ item }) => (
               <SuggestionCard
-                isCheck={!!isCheck.get(item.suggestion)}
+                suggestId={item.typeOfSuggestion_id}
+                isCheck={!!isCheck.get(item.typeOfSuggestion_id)}
                 onCheck={onCheck}
                 suggestion={item.suggestion}
               />
@@ -114,9 +155,9 @@ const home = (props) => {
         </View>
       );
     } else (
-      <View style={{flex:1}}>
-          <LoadingScreen/>
-        </View>
+      <View style={{ flex: 1 }}>
+        <LoadingScreen />
+      </View>
     )
 
   }
@@ -154,9 +195,9 @@ const home = (props) => {
         </View>
       );
     } else {
-      <View style={{flex:1}}>
-          <LoadingScreen/>
-        </View>
+      <View style={{ flex: 1 }}>
+        <LoadingScreen />
+      </View>
     }
 
   }
