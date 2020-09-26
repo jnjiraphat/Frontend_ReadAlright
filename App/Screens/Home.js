@@ -151,13 +151,16 @@ const home = (props) => {
   const [result, setResult] = useState([]);
 
   function ContentDefault() {
-    if (resultNew == null) {
+    if (resultNew.length == 0 && result.length == 0 && cate.length == 0) {
       return (
         <View style={{ flex: 1 }}>
           <LoadingScreen></LoadingScreen>
         </View>
       )
+
+
     } else {
+
       return (
 
         <View style={styles.ContentSwitch}>
@@ -191,7 +194,6 @@ const home = (props) => {
           />
         </View>
       );
-
 
     }
 
