@@ -128,6 +128,8 @@ const home = (props) => {
 
       });
   };
+
+
   useEffect(() => {
     read();
     getReadaingByCateId();
@@ -151,38 +153,52 @@ const home = (props) => {
   const [result, setResult] = useState([]);
 
   function ContentDefault() {
-    return (
-      <View style={styles.ContentSwitch}>
-        <View style={styles.ContentCarousel}>
-          <Text style={styles.topic}>News!</Text>
-          <CarouselCard result={resultNew} />
+    if (resultNew.length == 0 && result.length == 0 && cate.length == 0) {
+      return (
+        <View style={{ flex: 1 }}>
+          <LoadingScreen></LoadingScreen>
         </View>
-        <View style={styles.ContentCarousel}>
-          <Text style={styles.topic}>Maybe you like</Text>
-          <CarouselCard result={result} />
+      )
+
+
+    } else {
+
+      return (
+
+        <View style={styles.ContentSwitch}>
+          <View style={styles.ContentCarousel}>
+            <Text style={styles.topic}>News!</Text>
+            <CarouselCard result={resultNew} />
+          </View>
+          <View style={styles.ContentCarousel}>
+            <Text style={styles.topic}>Maybe you like</Text>
+            <CarouselCard result={result} />
+          </View>
+          <View style={styles.ContentCategory}>
+            <Text style={[styles.topic, { marginLeft: "5%" }]}>Category</Text>
+            <CategoryCard result={cate} />
+          </View>
+          <ButtonClick
+            text="Challenge"
+            fontSize={24}
+            fontFamily="PT-Bold"
+            fontcolor="#000000"
+            height={39}
+            width={245}
+            radius={30}
+            padding={0}
+            marginTop={Dimensions.get("window").height / 16}
+            marginBottom={Dimensions.get("window").height / 7}
+            // onPressAction={goToHome}
+            // shadowRadius={30}
+            colorsStart="#7EF192"
+            colorsEnd="#2DC897"
+          />
         </View>
-        <View style={styles.ContentCategory}>
-          <Text style={[styles.topic, { marginLeft: "5%" }]}>Category</Text>
-          <CategoryCard result={cate} />
-        </View>
-        <ButtonClick
-          text="Challenge"
-          fontSize={24}
-          fontFamily="PT-Bold"
-          fontcolor="#000000"
-          height={39}
-          width={245}
-          radius={30}
-          padding={0}
-          marginTop={Dimensions.get("window").height / 16}
-          marginBottom={Dimensions.get("window").height / 7}
-          // onPressAction={goToHome}
-          // shadowRadius={30}
-          colorsStart="#7EF192"
-          colorsEnd="#2DC897"
-        />
-      </View>
-    );
+      );
+
+    }
+
   }
 
   function ContentChange() {
@@ -262,9 +278,9 @@ const home = (props) => {
       </View>
     );
   } else {
-    return <View style={{flex:1}}>
-    <LoadingScreen/>
-  </View>;
+    return <View style={{ flex: 1 }}>
+      <LoadingScreen />
+    </View>;
   }
 };
 export default home;
