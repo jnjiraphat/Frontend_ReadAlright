@@ -49,6 +49,7 @@ function Item({ category_id, title, selected, onSelect, img }) {
         styles.item,
         {
           borderColor: selected ? "#7EF192" : "transparent",
+          borderWidth: selected ? 5 : 5,
         },
       ]}
     >
@@ -222,8 +223,9 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderWidth: 2,
     borderColor: "transparent",
+    justifyContent: "center",
     borderRadius: 5,
-    marginHorizontal: 10,
+    marginHorizontal: 8,
     marginVertical: 10,
   },
   title: {
