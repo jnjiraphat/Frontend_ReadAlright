@@ -160,7 +160,7 @@ export default function () {
         <View style={styles.textLayout}>
           <Text style={styles.header}>Interest</Text>
           <Text style={styles.subHeader}>
-            Choose 3 categories that you interested.
+          Choose categories that you interested.
           </Text>
         </View>
         <FlatList

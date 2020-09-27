@@ -141,7 +141,7 @@ const home = (props) => {
         <View style={styles.ContentSwitch}>
           <Text style={styles.topic}>Suggestion</Text>
           <FlatList
-            contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+            contentContainerStyle={{ flexGrow: 1, justifyContent: "center", alignItems: "center"  }}
             data={suggestion}
             renderItem={({ item }) => (
               <SuggestionCard
@@ -170,7 +170,7 @@ const home = (props) => {
           <View style={styles.ContentSwitch}>
             <Text style={styles.topic}>Tips</Text>
             <FlatList
-              contentContainerStyle={{ flexGrow: 1, justifyContent: "center", marginTop: 25 }}
+              contentContainerStyle={{ flexGrow: 1, justifyContent: "center", marginTop: 25, marginBottom: 100, alignItems: "center" }}
               data={trick}
               renderItem={({ item }) => (
                 <LinearGradient
@@ -182,10 +182,12 @@ const home = (props) => {
                     height: 90,
                     width: 350,
                     borderRadius: 5,
-                    alignItems: "center",
+                    // alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: 20
                   }}
                 >
-                  <TouchableOpacity>
+                  <TouchableOpacity style={{padding: 10}}>
                     {/* //onPress={()=>} */}
                     <Text style={{ fontFamily: "Noto-Reg", fontSize: 20 }}>{item.trick_title}</Text>
                   </TouchableOpacity>
