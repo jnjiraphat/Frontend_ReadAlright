@@ -18,7 +18,7 @@ import SuggestionCard from "../components/SuggestionCard";
 import LoadingScreen from './LoadingScreen'
 
 const home = (props) => {
-  // const [isCheck, setCheck] = useState();
+  const [isCheck, setCheck] = useState();
   const [suggestion, setSuggestion] = useState([]);
   const [trick, setTrick] = useState([]);
 
