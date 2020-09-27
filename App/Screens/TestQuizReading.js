@@ -6,7 +6,7 @@ import {
   View,
   Dimensions,
   FlatList,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
 import axios from "axios";
 import { Actions } from "react-native-router-flux";
@@ -67,7 +67,7 @@ const TestQuizReading = (props) => {
     }
 
     // var dataArrayQuiz = [];
-    
+
     // for (let index = 1; index < 7; index++) {
     //   await axios
     //     .get(
@@ -97,46 +97,46 @@ const TestQuizReading = (props) => {
     read();
   }, []);
   return (
-    <ScrollView >
-      <View style={styles.background}>
-        <Text style={styles.header}>Pre-Test</Text>
-        <Text style={styles.subHeader}>
-          Read the headline. Guess if a-c below are true (T) or false (F).
-        </Text>
-        
-        <View style={styles.whiteCardArea}>
-          <FlatList style={styles.whiteCardChoice}
-            data={readPretest}
-            renderItem={({ item }) => (
-              <View >
-                <Text style={styles.questionText}>{item.reading_Pretest_id}). {item.content}</Text>
+    <FlatList
+      data={readPretest}
+      renderItem={({ item, index }) => (
+        <>
+          <View style={styles.background}>
+            <Text style={styles.header}>Pre-Test</Text>
+            <Text style={styles.subHeader}>
+              Read the headline. Guess if a-c below are true (T) or false (F).
+            </Text>
+            <View style={styles.whiteCardChoice}>
+            <View style={styles.whiteCardArea}>
+                <Text style={styles.questionText}>
+                  {item.reading_Pretest_id}). {item.content}
+                </Text>
               </View>
-            )}
-          />
-        </View>
-        <ButtonClick
-          onPressAction={() => {
-            if (props.text != null) {
-              goToTestQuiz(props.text);
-            } else {
-              goToTestQuiz(1);
-            }
-          }}
-          text="Ready"
-          fontSize={24}
-          fontFamily="PT-Bold"
-          fontcolor="#000000"
-          height={39}
-          width={245}
-          radius={30}
-          padding={0}
-          colorsStart="#2DC897"
-          colorsEnd="#7EF192"
-        />
-
-        
-      </View>
-    </ScrollView>
+            </View>
+            <ButtonClick
+              onPressAction={() => {
+                if (props.text != null) {
+                  goToTestQuiz(props.text);
+                } else {
+                  goToTestQuiz(1);
+                }
+              }}
+              text="Ready"
+              fontSize={24}
+              fontFamily="PT-Bold"
+              fontcolor="#000000"
+              height={39}
+              width={245}
+              radius={30}
+              padding={0}
+              colorsStart="#2DC897"
+              colorsEnd="#7EF192"
+            />
+          </View>
+        </>
+      )}
+      keyExtractor = { (item, index) => index.toString() }
+    />
   );
 };
 
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight,
     backgroundColor: "#FFD686",
     height: "100%",
-    minHeight: Dimensions.get("window").height
+    minHeight: Dimensions.get("window").height,
   },
   questionText: {
     // marginBottom: 20,
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     marginBottom: "10%",
     marginTop: "3%",
     paddingVertical: 20,
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
   },
   whiteCardArea: {
     // flexGrow: 1,
