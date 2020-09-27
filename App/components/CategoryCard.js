@@ -31,9 +31,8 @@ const CategoryCard = (props) => {
           </View>
         </TouchableOpacity>
       )}
-
-      // keyExtractor={(item) => item.category_id}
-    />
+      keyExtractor = { (item, index) => index.toString() }
+      />
   );
 };
 export default CategoryCard;

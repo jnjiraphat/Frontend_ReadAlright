@@ -144,7 +144,7 @@ export default function () {
     };
 
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <LinearGradient
           colors={["#FFB382", "#F07590"]}
           style={{
@@ -177,7 +177,7 @@ export default function () {
               onSelect={onSelect}
             />
           )}
-          keyExtractor={(item) => item.category_id}
+          keyExtractor = { (item, index) => index.toString() }
           extraData={selected}
         />
         <ButtonClick
@@ -196,7 +196,7 @@ export default function () {
           colorsEnd="#2DC897"
           flex={1}
         />
-      </SafeAreaView>
+      </View>
     );
   } else {
     return <View style={{flex:1}}>

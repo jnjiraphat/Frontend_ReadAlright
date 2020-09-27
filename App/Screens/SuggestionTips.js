@@ -151,6 +151,7 @@ const home = (props) => {
                 suggestion={item.suggestion}
               />
             )}
+            keyExtractor = { (item, index) => index.toString() }
           />
         </View>
       );
@@ -190,6 +191,7 @@ const home = (props) => {
                   </TouchableOpacity>
                 </LinearGradient>
               )}
+              keyExtractor = { (item, index) => index.toString() }
             />
           </View>
         </View>

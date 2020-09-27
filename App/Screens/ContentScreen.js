@@ -112,6 +112,7 @@ const Content = (props) => {
               />
             </View>
           )}
+          keyExtractor = { (item, index) => index.toString() }
         />
         {/* <View style={styles.container}>
         <View style={styles.whiteCard}>

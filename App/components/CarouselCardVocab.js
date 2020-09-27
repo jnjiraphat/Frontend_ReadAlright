@@ -33,7 +33,7 @@ const CarouselCardVocab = (props) => {
         </View>
         </TouchableOpacity>
       )}
-      // keyExtractor={(item) => item.category_id}
+      keyExtractor = { (item, index) => index.toString() }
     />
   );
 };

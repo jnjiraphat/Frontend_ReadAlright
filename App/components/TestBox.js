@@ -307,7 +307,7 @@ const TestBox = (props) => {
                 
               />
             )}
-            keyExtractor={(item) => item.choice_id}
+            keyExtractor = { (item, index) => index.toString() }
             extraData={selected}
           />
         </View>
@@ -330,6 +330,7 @@ const TestBox = (props) => {
             renderItem={({ item }) => (
               <Text style={styles.textQuestion}>{item.question}</Text>
             )}
+            keyExtractor = { (item, index) => index.toString() }
           // keyExtractor={keyExtractor}
           />
         </View>

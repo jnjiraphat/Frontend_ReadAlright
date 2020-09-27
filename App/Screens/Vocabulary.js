@@ -111,6 +111,7 @@ const Vocabulary = (props) => {
             </View>
             </TouchableOpacity>
           )}
+          keyExtractor = { (item, index) => index.toString() }
         />
       </View>
 

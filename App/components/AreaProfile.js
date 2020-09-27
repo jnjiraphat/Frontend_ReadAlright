@@ -41,7 +41,7 @@ const AreaProfile = (props) => {
           renderItem={({ item }) => {
             return <Text style={styles.textSug}>{item.suggestion}</Text>;
           }}
-          keyExtractor={(item, index) => index}
+          keyExtractor = { (item, index) => index.toString() }
         />
       </View>
     </View>

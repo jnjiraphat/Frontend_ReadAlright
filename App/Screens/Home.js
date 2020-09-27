@@ -7,12 +7,10 @@ import {
   View,
   ScrollView,
   ImageBackground,
-  FlatList,
   Image,
   Dimensions,
 } from "react-native";
 import ReadingApi from "../API/ReadingAPI";
-import { Card } from "@ant-design/react-native";
 import Constants from "expo-constants";
 import Header from "../components/Header";
 import NewReading from "../components/NewReading";

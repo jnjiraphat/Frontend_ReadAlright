@@ -311,6 +311,7 @@ const Content = (props) => {
               isCheck={!!isCheck.get(item.engWord, item.thaiWord)}
             />
           )}
+          keyExtractor = { (item, index) => index.toString() }
         />
       </View>
     </ScrollView>

@@ -146,6 +146,7 @@ const WordCollection = (props) => {
               forWordCollection={true}
             />
           )}
+          keyExtractor = { (item, index) => index.toString() }
         />
       </View>
     </ScrollView>

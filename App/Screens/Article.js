@@ -133,7 +133,7 @@ const Article = (props) => {
             </View>
           </TouchableOpacity>
         )}
-        keyExtractor={(item) => item.reading_id}
+        keyExtractor = { (item, index) => index.toString() }
       />
     </ScrollView>
   );
