@@ -58,10 +58,9 @@ const ArticleVocab = (props) => {
     console.log(props.text);
 
     return (
-        <ScrollView
-        >
+        <View>
             <Text>{props.text}</Text>
-        </ScrollView>
+        </View>
     );
 };
 export default ArticleVocab;

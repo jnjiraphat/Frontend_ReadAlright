@@ -79,7 +79,6 @@ const Content = (props) => {
   const [value, onChangeText] = useState("");
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView>
         <FlatList
           contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
           data={cate}
@@ -125,7 +124,6 @@ const Content = (props) => {
           /> 
         </View>
       </View> */}
-      </ScrollView>
       <TransWordBar
         textSearch={(text) => onChangeText(text)}
         value={value}
