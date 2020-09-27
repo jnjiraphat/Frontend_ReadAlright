@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   yellowButton: {},
   wordArea: {
     // paddingVertical: 5,
-    maxWidth: 100,
+    // maxWidth: 100,
     minHeight: 70,
     justifyContent: "center",
   },

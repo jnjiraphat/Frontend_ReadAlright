@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { TouchableOpacity, Text } from "react-native";
 import { Actions } from "react-native-router-flux";
 import ReadingApi from "../API/ReadingAPI";
 import { AsyncStorage } from "react-native";
@@ -14,6 +13,7 @@ import {
     FlatList,
     Image,
 } from "react-native";
+
 import axios from "axios";
 import CountViews from "../API/CountViewsAPI";
 import ArticleCard from "../components/ArticleCard";

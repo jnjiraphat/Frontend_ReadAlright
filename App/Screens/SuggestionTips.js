@@ -139,7 +139,7 @@ const home = (props) => {
     if (suggestion) {
       return (
         <View style={styles.ContentSwitch}>
-          <Text style={styles.topic}>Suggestionnn</Text>
+          <Text style={styles.topic}>Suggestion</Text>
           <FlatList
             contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
             data={suggestion}
