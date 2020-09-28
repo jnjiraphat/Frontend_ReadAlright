@@ -17,6 +17,7 @@ import uploadImage from "./App/Screens/uploadImage";
 import TestQuiz from "./App/Screens/TestQuiz";
 import WordCollection from './App/Screens/WordCollection'
 import TestQuizReading from './App/Screens/TestQuizReading'
+import QuizInstruction from './App/Screens/QuizInstruction'
 import SuggestionTips from './App/Screens/SuggestionTips'
 import TestQuizChallenge from "./App/Screens/TestQuizChallenge.js";
 import LoadingScreen from './App/Screens/LoadingScreen'
@@ -95,7 +96,15 @@ const Routes = () => {
     return (
       <Router>
         <Scene key="root" showLabel={false} navTransparent={true}>
-          {/* <Scene
+          <Scene
+            key="QuizInstruction"
+            component={QuizInstruction}
+            title="QuizInstruction"
+            hideNavBar
+            hideTabBar
+            showLabel={false}
+          />
+          <Scene
             key="TestQuizReading"
             component={TestQuizReading}
             title="TestQuizReading"
@@ -110,7 +119,7 @@ const Routes = () => {
             hideNavBar
             hideTabBar
             showLabel={false}
-          /> */}
+          />
           {/* <Scene
             key="Login"
             component={Login}
