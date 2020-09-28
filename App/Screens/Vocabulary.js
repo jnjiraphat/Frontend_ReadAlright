@@ -45,7 +45,7 @@ const data = [
 
 const Vocabulary = (props) => {
   const [result, setResult] = useState([]);
-
+  const [cateName, setCateName] = useState("");
 
   const fetch = async () => {
     console.log("runningggggggggggggggggggggggggggggg");
@@ -57,6 +57,8 @@ const Vocabulary = (props) => {
         //     // setCateName(response.data.reading[0].categoryName);
         //     console.log(cateName);
         setResult(response.data.reading)
+        setCateName(response.data.reading[0].categoryName);
+        console.log(cateName);
       },
       (error) => {
         console.log(error);
@@ -91,7 +93,7 @@ const Vocabulary = (props) => {
         isSwitch={false}
       />
       <View style={{alignSelf: "center",}}>
-        <Text style={styles.category}>Sports</Text>
+        <Text style={styles.category}>{cateName}</Text>
         <FlatList
           contentContainerStyle={{ flexGrow: 1 }}
           data={result}
