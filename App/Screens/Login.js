@@ -1,13 +1,62 @@
 import React, { useEffect } from 'react'
-import {SafeAreaView, Text, StyleSheet,View, TextInput, Alert} from 'react-native'
+import { SafeAreaView, Text, StyleSheet, View, TextInput, Alert } from 'react-native'
 import Constants from 'expo-constants'
 import { useForm, Controller } from "react-hook-form";
+import * as Facebook from 'expo-facebook';
+import * as firebase from 'firebase';
 
 import ButtonClick from "../components/ButtonClick"
 
 const Login = () => {
-    
-    const { control,register, handleSubmit, setValue, errors } = useForm();
+
+    // const FACEBOOK_APP_ID = '791616524971373';
+
+    // const auth = firebase.auth();
+    // // Enter your Firebase app web configuration settings here.
+    // async function loginWithFacebook() {
+    //     await Facebook.initializeAsync({
+    //         appId: '791616524971373', appName: 'readalright'
+    //     });        //ENTER YOUR APP ID 
+    //     const { type, token } = await Facebook.logInWithReadPermissionsAsync({ permissions: ['public_profile'] })
+
+    //     if (type == 'success') {
+
+    //         const credential = firebase.auth.FacebookAuthProvider.credential(token)
+
+    //         firebase.auth().signInWithCredential(credential).catch((error) => {
+    //             console.log(error)
+    //         })
+    //     }
+    // }
+    // async function logOut() {
+    //     Facebook.log
+    // }
+    async function logIn() {
+        try {
+            await Facebook.initializeAsync(
+                '791616524971373'
+            );
+            const {
+                type,
+                token,
+                expirationDate,
+                permissions,
+                declinedPermissions,
+            } = await Facebook.logInWithReadPermissionsAsync({
+                permissions: ['public_profile'],
+            });
+            if (type === 'success') {
+                // Get the user's name using Facebook's Graph API
+                const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+                Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+            } else {
+                // type === 'cancel'
+            }
+        } catch ({ message }) {
+            alert(`Facebook Login Error: ${message}`);
+        }
+    }
+    const { control, register, handleSubmit, setValue, errors } = useForm();
     const onSubmit = data => {
         console.log(data)
     };
@@ -17,32 +66,32 @@ const Login = () => {
             <Controller
                 control={control}
                 render={({ onChange, onBlur, value }) => (
-                <TextInput
-                    style={styles.input}
-                    onBlur={onBlur}
-                    onChangeText={value => onChange(value)}
-                    value={value}
-                    placeholder="Username"
-                    style={styles.textInput}
-                />
+                    <TextInput
+                        style={styles.input}
+                        onBlur={onBlur}
+                        onChangeText={value => onChange(value)}
+                        value={value}
+                        placeholder="Username"
+                        style={styles.textInput}
+                    />
                 )}
                 name="username"
                 rules={{ required: true }}
                 defaultValue=""
             />
             {errors.username && <Text style={styles.errorArea}>This is required.</Text>}
-            
+
             <Controller
                 control={control}
                 render={({ onChange, onBlur, value }) => (
-                <TextInput
-                    style={styles.input}
-                    onBlur={onBlur}
-                    onChangeText={value => onChange(value)}
-                    value={value}
-                    placeholder="Password"
-                    style={styles.textInput}
-                />
+                    <TextInput
+                        style={styles.input}
+                        onBlur={onBlur}
+                        onChangeText={value => onChange(value)}
+                        value={value}
+                        placeholder="Password"
+                        style={styles.textInput}
+                    />
                 )}
                 name="password"
                 rules={{ required: true }}
@@ -69,9 +118,9 @@ const Login = () => {
                 onPressAction={handleSubmit(onSubmit)}
             />
             <View style={styles.textBar}>
-                <View style={styles.hr}/>
+                <View style={styles.hr} />
                 <Text style={styles.title}>OR CONNECT WITH</Text>
-                <View style={styles.hr}/>
+                <View style={styles.hr} />
             </View>
             <ButtonClick
                 text="Facebook"
@@ -86,7 +135,7 @@ const Login = () => {
                 marginTop="5%"
                 colorsStart="#4666D5"
                 colorsEnd="#4666D5"
-                // onPressAction={goToHome}
+                onPressAction={logIn}
             />
             <ButtonClick
                 text="Google"
@@ -99,7 +148,7 @@ const Login = () => {
                 padding={0}
                 colorsStart="#FF3E30"
                 colorsEnd="#FF3E30"
-                // onPressAction={goToHome}
+            // onPressAction={goToHome}
             />
         </SafeAreaView>
     )
@@ -130,7 +179,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignContent: "center",
-        
+
     },
     textInput: {
         width: 275,
@@ -161,5 +210,5 @@ const styles = StyleSheet.create({
         width: 275,
         alignSelf: "center",
     }
-    
+
 })

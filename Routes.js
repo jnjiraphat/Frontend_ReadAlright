@@ -97,6 +97,22 @@ const Routes = () => {
       <Router>
         <Scene key="root" showLabel={false} navTransparent={true}>
           <Scene
+            key="Login"
+            component={Login}
+            title="Login"
+            hideNavBar
+            hideTabBar
+            showLabel={false}
+          />
+          <Scene
+            key="LoadingScreen"
+            component={LoadingScreen}
+            title="LoadingScreen"
+            hideNavBar
+            hideTabBar
+            showLabel={false}
+          />
+          <Scene
             key="QuizInstruction"
             component={QuizInstruction}
             title="QuizInstruction"
@@ -144,7 +160,7 @@ const Routes = () => {
             hideTabBar
             showLabel={false}
           />
-          
+
           <Scene
             key="tabbar"
             tabs
@@ -161,7 +177,7 @@ const Routes = () => {
               hideNavBar={true}
               showLabel={false}
             />
-            
+
             <Scene
               key="SuggestionTips"
               title="SuggestionTips"
@@ -170,7 +186,7 @@ const Routes = () => {
               hideNavBar={true}
               showLabel={false}
             />
-             <Scene
+            <Scene
               key="WordCollection"
               title="WordCollection"
               icon={TabIcon}
@@ -204,7 +220,7 @@ const Routes = () => {
             back={true}
             showLabel={false}
           />
-        <Scene
+          <Scene
             key="Vocabulary"
             title="Vocabulary"
             component={Vocabulary}
@@ -221,9 +237,9 @@ const Routes = () => {
             showLabel={false}
           />
 
-          
-          
-          
+
+
+
 
           <Scene
             key="TestQuizChallenge"
