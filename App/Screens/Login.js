@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from "react";
 import { SafeAreaView, Text, StyleSheet, View, TextInput, Alert } from 'react-native'
 import Constants from 'expo-constants'
 import { useForm, Controller } from "react-hook-form";
 import * as Facebook from 'expo-facebook';
 import * as firebase from 'firebase';
+import { AsyncStorage } from "react-native";
 
 import ButtonClick from "../components/ButtonClick"
 
@@ -31,6 +32,9 @@ const Login = () => {
     // async function logOut() {
     //     Facebook.log
     // }
+    const [userName, setUserName] = useState([]);
+    const [picURL, setPicURL] = useState([]);
+
     async function logIn() {
         try {
             await Facebook.initializeAsync(
@@ -47,8 +51,21 @@ const Login = () => {
             });
             if (type === 'success') {
                 // Get the user's name using Facebook's Graph API
-                const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
-                Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+                const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture`);
+                const data = await response.json();
+                console.log(data)
+                Alert.alert('Logged in!', `Hi ${data.name}!`);
+                setUserName(data.name)
+                setPicURL(data.picture.data.url)
+
+                AsyncStorage.setItem('userName', data.name)
+                AsyncStorage.setItem('userPicURL', data.picture.data.url)
+                // var userName = await AsyncStorage.getItem('userName'); ////ตัวอย่างการเรียกใช้ AsyncStorage อย้าลืม import
+                // setUserName(`${(await response.json()).name}`)
+                // console.log(await response.json().name)
+                // console.log(" User Name")
+                // console.log(userName)
+
             } else {
                 // type === 'cancel'
             }
@@ -56,6 +73,10 @@ const Login = () => {
             alert(`Facebook Login Error: ${message}`);
         }
     }
+    console.log(" User Name 2")
+    console.log(userName)
+    console.log(picURL)
+
     const { control, register, handleSubmit, setValue, errors } = useForm();
     const onSubmit = data => {
         console.log(data)
