@@ -7,6 +7,8 @@ import * as firebase from 'firebase';
 import { AsyncStorage } from "react-native";
 
 import ButtonClick from "../components/ButtonClick"
+import { Actions } from "react-native-router-flux";
+import axios from "axios";
 
 const Login = () => {
 
@@ -35,7 +37,45 @@ const Login = () => {
     const [userName, setUserName] = useState([]);
     const [picURL, setPicURL] = useState([]);
 
+    function goToInterest() {
+        console.log("Goto Interest");
+        Actions.Interest();
+        console.log("hello");
+    }
+
+    const setUpUser = async () => {
+        await this.logIn();
+        await this.postUser();
+    };
+
+
+
+    const postUser = async () => {
+        console.log("postUser");
+        console.log(userName)
+        axios
+            .post("http://10.0.2.2:3000/users",
+                {
+                    regtime: null,
+                    username: "userName",
+                    pwd: "A1",
+                    level: "A1",
+                    image: "picURL"
+                }
+            )
+            .then(
+                (response) => {
+                    console.log("post user success!!!");
+                    console.log(respose)
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+    };
+
     async function logIn() {
+        // setUpUser()
         try {
             await Facebook.initializeAsync(
                 '791616524971373'
@@ -54,12 +94,36 @@ const Login = () => {
                 const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture`);
                 const data = await response.json();
                 console.log(data)
-                Alert.alert('Logged in!', `Hi ${data.name}!`);
+                // Alert.alert('Logged in!', `Hi ${data.name}!`);
                 setUserName(data.name)
                 setPicURL(data.picture.data.url)
 
                 AsyncStorage.setItem('userName', data.name)
                 AsyncStorage.setItem('userPicURL', data.picture.data.url)
+
+                console.log("postUser");
+                console.log(userName)
+                axios
+                    .post("http://10.0.2.2:3000/user",
+                        {
+                            regtime: null,
+                            username: data.name,
+                            pwd: "A1",
+                            level: "A1",
+                            image: data.picture.data.url
+                        }
+                    )
+                    .then(
+                        (response) => {
+                            console.log("post user success!!!");
+                            console.log(response)
+                        },
+                        (error) => {
+                            console.log(error);
+                        }
+                    );
+
+
                 // var userName = await AsyncStorage.getItem('userName'); ////ตัวอย่างการเรียกใช้ AsyncStorage อย้าลืม import
                 // setUserName(`${(await response.json()).name}`)
                 // console.log(await response.json().name)
@@ -71,6 +135,9 @@ const Login = () => {
             }
         } catch ({ message }) {
             alert(`Facebook Login Error: ${message}`);
+        } finally {
+
+            goToInterest()
         }
     }
     console.log(" User Name 2")
@@ -81,6 +148,7 @@ const Login = () => {
     const onSubmit = data => {
         console.log(data)
     };
+    // Actions.goToInterest()
 
     return (
         <SafeAreaView style={styles.container}>
