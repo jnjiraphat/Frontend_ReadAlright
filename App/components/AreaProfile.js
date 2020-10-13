@@ -2,9 +2,30 @@ import React, { useState, useEffect } from "react";
 
 import { Text, View, StyleSheet, FlatList } from "react-native";
 import ButtonNoClick from "../components/ButtonNoClick";
-
+import { AsyncStorage } from "react-native";
 const AreaProfile = (props) => {
-  const [name, showName] = useState("Thanatcha");
+
+  useEffect(() => {
+    getUserName();
+  }, []);
+
+  const getUserName = async () => {
+    try {
+      console.log("MyUser 1")
+      var user = await AsyncStorage.getItem('userName');
+      console.log("MyUser 2")
+      console.log(user)
+      console.log("MyUser 2")
+      
+    } catch (error) {
+      console.log("MyUser 3")
+    } finally {
+     showName(user)
+  }
+}
+  console.log("this is user")
+  console.log(name)
+  const [name, showName] = useState("");
   const { display, level, suggestion } = props;
   console.log("In Area");
   console.log(suggestion);
@@ -41,37 +62,37 @@ const AreaProfile = (props) => {
           renderItem={({ item }) => {
             return <Text style={styles.textSug}>{item.suggestion}</Text>;
           }}
-          keyExtractor = { (item, index) => index.toString() }
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
     </View>
   ) : (
-    <View style={{ flexDirection: "column" }}>
-      <View style={{ flexDirection: "row" }}>
-        <ButtonNoClick
-          colorsStart="#86B8F3"
-          colorsEnd="#2DC897"
-          padding={0}
-          radius={5}
-          height={26}
-          width={51}
-          fontSize={12}
-          fontcolor="#000"
-          text={level}
-        />
-        <Text
-          style={{
-            fontSize: 16,
-            color: "#000000",
-            marginLeft: "3%",
-            fontFamily: "PT-Bold",
-          }}
-        >
-          {name}
-        </Text>
+      <View style={{ flexDirection: "column" }}>
+        <View style={{ flexDirection: "row" }}>
+          <ButtonNoClick
+            colorsStart="#86B8F3"
+            colorsEnd="#2DC897"
+            padding={0}
+            radius={5}
+            height={26}
+            width={51}
+            fontSize={12}
+            fontcolor="#000"
+            text={level}
+          />
+          <Text
+            style={{
+              fontSize: 16,
+              color: "#000000",
+              marginLeft: "3%",
+              fontFamily: "PT-Bold",
+            }}
+          >
+            {name}
+          </Text>
+        </View>
       </View>
-    </View>
-  );
+    );
 };
 
 export default AreaProfile;

@@ -45,7 +45,6 @@ const UserAnswer = (props) => {
             if (myArray !== null) {
                 // We have data!!
                 console.log("============userAnswer=================")
-
                 console.log(JSON.parse(myArray));
                 console.log(JSON.parse(myArray2));
                 console.log(JSON.parse(myArray3));
@@ -53,10 +52,6 @@ const UserAnswer = (props) => {
                 console.log(JSON.parse(myArray5));
                 console.log(JSON.parse(myArray6));
                 console.log("===============userAnswer==============")
-
-
-
-
             }
         } catch (error) {
             // Error retrieving data

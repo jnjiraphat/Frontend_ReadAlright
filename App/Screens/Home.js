@@ -152,6 +152,7 @@ const home = (props) => {
 
   function ContentDefault() {
     if (resultNew.length == 0 && result.length == 0 && cate.length == 0) {
+      
       return (
         <View style={{ flex: 1 }}>
           <LoadingScreen></LoadingScreen>
