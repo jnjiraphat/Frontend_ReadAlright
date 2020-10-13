@@ -14,7 +14,7 @@ const Avatar = (props) => {
       }}
     >
       <Image
-        source={source}
+        source={{ uri: source }}
         style={{
           width: width,
           height: height,

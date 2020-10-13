@@ -13,14 +13,39 @@ import { LinearGradient } from "expo-linear-gradient";
 import Avatar from "../components/Avatar";
 import AreaProfile from "../components/AreaProfile";
 import SwitchType from "../components/SwitchType";
+import { AsyncStorage } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
 
 const Header = (props) => {
   const { tabs, ContentDefault, ContentChange, suggestion, isSwitch } = props;
-  console.log("In header");
+
+
+
+  const [picture, showPic] = useState("");
+
+  const getUserPic = async () => {
+    try {
+      console.log("MyUserPIc 1")
+      var userPicture = await AsyncStorage.getItem('userPicURL');
+      console.log("MyUserPIc 2")
+      console.log(userPicture)
+      console.log("MyUserPIc 2")
+
+    } catch (error) {
+      console.log("MyUserPIc 3")
+    } finally {
+      
+      showPic(userPicture)
+    }
+  }
+  useEffect(() => {
+    getUserPic();
+  }, []);
+  console.log("In headerNOn");
+  console.log(picture)
   console.log(suggestion);
-  console.log("In header");
+  console.log("In headerNon");
   const onPress = () => {
     if (check == true) {
       setCheck(false);
@@ -32,11 +57,11 @@ const Header = (props) => {
   };
   const [check, setCheck] = useState(true);
 
-  return suggestion != null ? (
+  return suggestion != null && picture != "" ? (
     check == true ? (
       <View
         style={
-          isSwitch ? {height: Dimensions.get("window").height} : {}
+          isSwitch ? { height: Dimensions.get("window").height } : {}
         }
       >
         <View>
@@ -63,7 +88,7 @@ const Header = (props) => {
               }}
             >
               <Avatar
-                source={require("./../assets/demo-profile.png")}
+                source={picture}
                 // width={Dimensions.get("window").width / 3.5}
                 // height={Dimensions.get("window").height / 7}
                 width={110}
@@ -104,74 +129,74 @@ const Header = (props) => {
         )}
       </View>
     ) : (
-      <View
-        style={{
-          height: Dimensions.get("window").height,
-          // backgroundColor: "red",
-        }}
-      >
-        <LinearGradient
-          colors={["#F07590", "#FFB382"]}
+        <View
           style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            top: 0,
-            // height: Dimensions.get("window").height / 8,
-            height: 100,
-            width: Dimensions.get("window").width,
-            borderBottomLeftRadius: 30,
-            borderBottomRightRadius: 30,
+            height: Dimensions.get("window").height,
+            // backgroundColor: "red",
           }}
         >
-          <View
+          <LinearGradient
+            colors={["#F07590", "#FFB382"]}
             style={{
-              flexDirection: "row",
-              flex: 1,
-              marginTop: "2%",
-              marginLeft: 15,
-              marginRight: 15,
+              position: "absolute",
+              left: 0,
+              right: 0,
+              top: 0,
+              // height: Dimensions.get("window").height / 8,
+              height: 100,
+              width: Dimensions.get("window").width,
+              borderBottomLeftRadius: 30,
+              borderBottomRightRadius: 30,
             }}
           >
-            <Avatar
-              source={require("./../assets/demo-profile.png")}
-              // width={Dimensions.get("window").width / 5.5}
-              width={80}
-              // height={Dimensions.get("window").height / 10}
-              height={80}
+            <View
+              style={{
+                flexDirection: "row",
+                flex: 1,
+                marginTop: "2%",
+                marginLeft: 15,
+                marginRight: 15,
+              }}
+            >
+              <Avatar
+                source={picture}
+                // width={Dimensions.get("window").width / 5.5}
+                width={80}
+                // height={Dimensions.get("window").height / 10}
+                height={80}
+              />
+              <AreaProfile level="A1" display="none" />
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+            >
+              <TouchableOpacity onPress={onPress}>
+                <Ionicons
+                  name="ios-arrow-down"
+                  size={32}
+                  color="black"
+                ></Ionicons>
+              </TouchableOpacity>
+            </View>
+          </LinearGradient>
+          <View style={{ flex: 1, top: "18%" }}>
+            <SwitchType
+              tabs={tabs}
+              ContentDefault={ContentDefault}
+              ContentChange={ContentChange}
+              SwitchDisplay="none"
             />
-            <AreaProfile level="A1" display="none" />
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            <TouchableOpacity onPress={onPress}>
-              <Ionicons
-                name="ios-arrow-down"
-                size={32}
-                color="black"
-              ></Ionicons>
-            </TouchableOpacity>
-          </View>
-        </LinearGradient>
-        <View style={{ flex: 1, top: "18%" }}>
-          <SwitchType
-            tabs={tabs}
-            ContentDefault={ContentDefault}
-            ContentChange={ContentChange}
-            SwitchDisplay="none"
-          />
         </View>
-      </View>
-    )
+      )
   ) : (
-    <View>
-      <Text> Loadingggggggggggggggggggggggggggggg</Text>
-    </View>
-  );
+      <View>
+        <Text> Loadingggggggggggggggggggggggggggggg</Text>
+      </View>
+    );
 };
 
 export default Header;

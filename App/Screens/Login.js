@@ -97,7 +97,7 @@ const Login = () => {
                 // Alert.alert('Logged in!', `Hi ${data.name}!`);
                 setUserName(data.name)
                 setPicURL(data.picture.data.url)
-
+                console.log("PHOTO",data.picture.data.url);
                 AsyncStorage.setItem('userName', data.name)
                 AsyncStorage.setItem('userPicURL', data.picture.data.url)
 
