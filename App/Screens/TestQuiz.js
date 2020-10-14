@@ -514,7 +514,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F24FFD",
   },
   choiceBgUnSelect: {
-    backgroundColor: "#E68BEC",
+    backgroundColor: "#FFC258",
   },
   buttonFlow: {
     backgroundColor: "#FFD686",

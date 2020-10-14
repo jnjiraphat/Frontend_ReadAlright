@@ -22,6 +22,7 @@ import SuggestionTips from './App/Screens/SuggestionTips'
 import TestQuizChallenge from "./App/Screens/TestQuizChallenge.js";
 import LoadingScreen from './App/Screens/LoadingScreen'
 import Register from './App/Screens/Register'
+import ContentTip from './App/Screens/ContentTip'
 
 // import Article from "./App/Screens/Article"
 import { FontAwesome } from "@expo/vector-icons";
@@ -91,12 +92,22 @@ const Routes = () => {
     "PT-Reg": require("./App/assets/fonts/PTSansCaption-Regular.ttf"),
     "PT-Bold": require("./App/assets/fonts/PTSansCaption-Bold.ttf"),
     "Noto-Reg": require("./App/assets/fonts/NotoSansThai-Regular.ttf"),
+    "Noto-Bold": require("./App/assets/fonts/NotoSansThai-SemiBold.ttf"),
   });
 
   if (fontsLoaded) {
     return (
       <Router>
         <Scene key="root" showLabel={false} navTransparent={true}>
+          <Scene
+            key="ContentTip"
+            component={ContentTip}
+            title="ContentTip"
+            hideTabBar
+            titleStyle={styles.title}
+            back={true}
+            showLabel={false}
+          />
           <Scene
             key="Login"
             component={Login}
