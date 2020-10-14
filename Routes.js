@@ -21,6 +21,7 @@ import QuizInstruction from './App/Screens/QuizInstruction'
 import SuggestionTips from './App/Screens/SuggestionTips'
 import TestQuizChallenge from "./App/Screens/TestQuizChallenge.js";
 import LoadingScreen from './App/Screens/LoadingScreen'
+import Register from './App/Screens/Register'
 
 // import Article from "./App/Screens/Article"
 import { FontAwesome } from "@expo/vector-icons";
@@ -262,6 +263,14 @@ const Routes = () => {
             key="UserAnswer"
             component={UserAnswer}
             title="UserAnswer"
+            hideNavBar
+            hideTabBar
+            showLabel={false}
+          />
+          <Scene
+            key="Register"
+            component={Register}
+            title="Register"
             hideNavBar
             hideTabBar
             showLabel={false}
