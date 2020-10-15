@@ -126,6 +126,12 @@ const home = (props) => {
     // console.log(isBookMark),
   );
 
+  function goToContentTip(tricks_id) {   
+    console.log("Content Tip");
+    console.log(tricks_id);
+    Actions.ContentTip({ text: tricks_id });
+  }
+
 
   console.log("This is Tricks")
   console.log(trick)
@@ -187,8 +193,8 @@ const home = (props) => {
                     marginBottom: 20
                   }}
                 >
-                  <TouchableOpacity style={{padding: 10}}>
-                    {/* //onPress={()=>} */}
+                  <TouchableOpacity style={{padding: 10}}  onPress={() => goToContentTip(item.tricks_id)
+            }>                   
                     <Text style={{ fontFamily: "Noto-Reg", fontSize: 20 }}>{item.trick_title}</Text>
                   </TouchableOpacity>
                 </LinearGradient>

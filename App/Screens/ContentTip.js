@@ -17,18 +17,21 @@ import Constants from "expo-constants";
 import axios from "axios";
 
 const ContentTip = (props) => {
-  const [cate, setCate] = useState([]);
-  const [cateContent, setCateContent] = useState([]);
+  console.log("this is trick id ")
+  console.log(props.text)
+  const [tricks, setTricks] = useState([]);
+  // const [cateContent, setCateContent] = useState([]);
 
   const fetch = async () => {
     console.log("runningggggggggggggggggggggggggggggg");
     await axios
-      .get("http://10.0.2.2:3000/reading/readingId/" + props.text)
+      .get("http://10.0.2.2:3000/getTricksByTrickID/" + props.text)
       .then(
         (response) => {
-          console.log("eieiContent");
-          console.log(response.data.reading);
-          setCate(response.data.reading);
+          console.log("Tip");
+          console.log(response.data.quiz);
+          setTricks(response.data.quiz)
+          // setCate(response.data.reading);
           // var str = "my car is red";
           // var stringArray = str
           //   .split(/(\s+)/)
@@ -44,6 +47,9 @@ const ContentTip = (props) => {
   const read = async () => {
     const data = await fetch();
   };
+
+  console.log("After get tricks")
+  console.log(tricks)
   // const getContent = async () => {
   //   const contentStory = cate[0].content;
   //   console.log(contentStory);
@@ -60,15 +66,15 @@ const ContentTip = (props) => {
     // getContent();
     // console.log(cate[0].content);
   }, []);
-  console.log("This is reading id  ");
-  console.log(props.text);
+  // console.log("This is reading id  ");
+  // console.log(props.text);
 
-  function goToChallenge(reading_id) {
-    console.log("readingIDDDDDDDDDDDD  " + reading_id);
-    Actions.TestQuizChallenge({ text: reading_id });
-    console.log("Finish " + reading_id);
-    // console.log("readingIDDDDDDDDDDDD" + reading_id);
-  }
+  // function goToChallenge(reading_id) {
+  //   console.log("readingIDDDDDDDDDDDD  " + reading_id);
+  //   Actions.TestQuizChallenge({ text: reading_id });
+  //   console.log("Finish " + reading_id);
+  //   console.log("readingIDDDDDDDDDDDD" + reading_id);
+  // }
   // const goToAbout = () => {
   //    Actions.about()
   // }
@@ -79,7 +85,7 @@ const ContentTip = (props) => {
     <View style={{ flex: 1 }}>
         <FlatList
           contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-          data={cate}
+          data={tricks}
           renderItem={({ item }) => (
             <View style={styles.container}>
               <LinearGradient
@@ -87,12 +93,12 @@ const ContentTip = (props) => {
                   style={styles.headerImg}
                 >
                 {/* <Text style={styles.topic}>{item.title}</Text> */}
-                <Text style={styles.topic}>สวัสดี</Text>
+                <Text style={styles.topic}>{item.trick_title}</Text>
               
               </LinearGradient>
               <View style={styles.whiteCard}>
                 {/* <Text style={styles.content}>{item.content}</Text> */}
-                <Text style={styles.content}>สวัสดี</Text>
+                <Text style={styles.content}>{item.trick_detail}</Text>
               </View>
             </View>
           )}

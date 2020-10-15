@@ -99,16 +99,8 @@ const Routes = () => {
     return (
       <Router>
         <Scene key="root" showLabel={false} navTransparent={true}>
-          <Scene
-            key="ContentTip"
-            component={ContentTip}
-            title="ContentTip"
-            hideTabBar
-            titleStyle={styles.title}
-            back={true}
-            showLabel={false}
-          />
-          <Scene
+         
+          {/* <Scene
             key="Login"
             component={Login}
             title="Login"
@@ -123,7 +115,7 @@ const Routes = () => {
             hideNavBar
             hideTabBar
             showLabel={false}
-          />
+          /> */}
           {/* <Scene
             key="QuizInstruction"
             component={QuizInstruction}
@@ -244,6 +236,15 @@ const Routes = () => {
             key="ContentScreen"
             component={ContentScreen}
             title="ContentScreen"
+            titleStyle={styles.title}
+            back={true}
+            showLabel={false}
+          />
+           <Scene
+            key="ContentTip"
+            component={ContentTip}
+            title="ContentTip"
+            hideTabBar
             titleStyle={styles.title}
             back={true}
             showLabel={false}
