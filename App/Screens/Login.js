@@ -61,27 +61,27 @@ const Login = () => {
     await this.postUser();
   };
 
-  const postUser = async () => {
-    console.log("postUser");
-    console.log(userName);
-    axios
-      .post("http://10.0.2.2:3000/users", {
-        regtime: null,
-        username: "userName",
-        pwd: "A1",
-        level: "A1",
-        image: "picURL",
-      })
-      .then(
-        (response) => {
-          console.log("post user success!!!");
-          console.log(respose);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-  };
+  // const postUser = async () => {
+  //   console.log("postUser");
+  //   console.log(userName);
+  //   axios
+  //     .post("http://10.0.2.2:3000/users", {
+  //       regtime: null,
+  //       username: "userName",
+  //       pwd: "A1",
+  //       level: "A1",
+  //       image: "picURL",
+  //     })
+  //     .then(
+  //       (response) => {
+  //         console.log("post user success!!!");
+  //         console.log(respose);
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       }
+  //     );
+  // };
 
   async function logIn() {
     // setUpUser()

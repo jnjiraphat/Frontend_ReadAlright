@@ -100,7 +100,7 @@ const Routes = () => {
       <Router>
         <Scene key="root" showLabel={false} navTransparent={true}>
          
-          {/* <Scene
+          <Scene
             key="Login"
             component={Login}
             title="Login"
@@ -115,7 +115,7 @@ const Routes = () => {
             hideNavBar
             hideTabBar
             showLabel={false}
-          /> */}
+          />
           {/* <Scene
             key="QuizInstruction"
             component={QuizInstruction}
