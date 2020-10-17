@@ -4,6 +4,7 @@ import Interest from "./App/Screens/InterestScreen";
 import Routes from "./Routes.js";
 import * as firebase from "firebase";
 
+
 var firebaseConfig = {
   apiKey: "AIzaSyA6-ykf9ZduUIbdsgdsgAuE08pH3SFAo6M",
   authDomain: "readalright.firebaseapp.com",

@@ -19,6 +19,7 @@ import Loader from "../assets/icon.png";
 import ButtonClick from "../components/ButtonClick";
 import { Actions } from "react-native-router-flux";
 import axios from "axios";
+import * as Google from 'expo-google-app-auth';
 
 const Login = () => {
   // const FACEBOOK_APP_ID = '791616524971373';
@@ -82,7 +83,49 @@ const Login = () => {
   //       }
   //     );
   // };
+  async function signInWithGoogleAsync() {
+    try {
+      const result = await Google.logInAsync({
+        androidClientId: "730744212125-66abd009jc25dg1p5ntbrdt8hoejjv2v.apps.googleusercontent.com",
+        iosClientId: "",
+        scopes: ['profile', 'email'],
+      });
 
+      if (result.type === 'success') {
+
+        console.log(result.accessToken)
+        const response = await fetch('https://www.googleapis.com/userinfo/v2/me', {
+          headers: { Authorization: `Bearer ${result.accessToken}` },
+        });
+        const data = await response.json();
+        console.log(data.name);
+        console.log(data.picture);
+
+        axios
+          .post("http://10.0.2.2:3000/user", {
+            regtime: null,
+            username: data.name,
+            pwd: "A1",
+            level: "A1",
+            image: data.picture,
+          })
+          .then(
+            (response) => {
+              console.log("post user success!!!");
+              console.log(response.status);
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        return result.accessToken;
+      } else {
+        return { cancelled: true };
+      }
+    } catch (e) {
+      return { error: true };
+    }
+  }
   async function logIn() {
     // setUpUser()
     try {
@@ -248,7 +291,7 @@ const Login = () => {
         padding={0}
         colorsStart="#FF3E30"
         colorsEnd="#FF3E30"
-        // onPressAction={goToHome}
+        onPressAction={signInWithGoogleAsync}
       />
     </SafeAreaView>
   );
