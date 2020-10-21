@@ -82,6 +82,9 @@ const Login = () => {
     await this.postUser();
   };
 
+  
+
+
   // const postUser = async () => {
   //   console.log("postUser");
   //   console.log(userName);
@@ -217,6 +220,11 @@ const Login = () => {
         permissions: ["public_profile"],
       });
       if (type === "success") {
+        const credential = firebase.auth.FacebookAuthProvider.credential(token)
+        firebase.auth().signInWithCredential(credential).catch((error) => {
+          console.log(error)
+        })
+
         // Get the user's name using Facebook's Graph API
         const response = await fetch(
           `https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture`
