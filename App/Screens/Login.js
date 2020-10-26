@@ -140,11 +140,20 @@ const Login = () => {
         firebase.auth().signInWithCredential(credential).then(function (result) {
 
           console.log("google sign in")
+          if(result.additionalUserInfo.isNewUser){
           firebase.database().ref('/users/' + result.user.uid).set({
             gmail: result.user.email,
             profile_picture: result.user.photoURL,
-            full_name: result.user.displayName
+            full_name: result.user.displayName,
+            created_at : Date.now()
           }).then(function (snapshot) { });
+        }else{
+          firebase.database().ref('/users/' + result.user.uid)({
+            last_logged_in : Date.now()
+          })
+          goToInterest();
+
+        }
         }).catch(function (error) {
           // Handle Errors here.
           var errorCode = error.code;

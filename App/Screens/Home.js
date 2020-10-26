@@ -9,6 +9,7 @@ import {
   ImageBackground,
   Image,
   Dimensions,
+  
 } from "react-native";
 import ReadingApi from "../API/ReadingAPI";
 import Constants from "expo-constants";
@@ -16,6 +17,8 @@ import Header from "../components/Header";
 import NewReading from "../components/NewReading";
 import TimelineCard from "../components/TimelineCard";
 import VocabCateApi from "../API/VocabCateAPI";
+import * as firebase from "firebase";
+
 
 import CarouselCard from "../components/CarouselCard";
 
@@ -26,6 +29,7 @@ import CarouselCardVocab from "../components/CarouselCardVocab";
 import CategoryCardVocab from "../components/CategoryCardVocab";
 import { out } from "react-native/Libraries/Animated/src/Easing";
 import LoadingScreen from './LoadingScreen'
+import { Button } from "react-native";
 
 const arrayReading = [];
 
@@ -138,6 +142,13 @@ const home = (props) => {
     getMaybeVb();
   }, []);
 
+  function goToLogin(){
+    console.log("Log out already 1")
+
+    Actions.Login(); 
+    console.log("Log out already 2")
+  }
+
   function goToContentScreen(readingId) {
     console.log(readingId);
     Actions.ContentScreen({ text: readingId });
@@ -166,6 +177,9 @@ const home = (props) => {
 
         <View style={styles.ContentSwitch}>
           <View style={styles.ContentCarousel}>
+            <TouchableOpacity>
+                <Button title = "Sign out" onPress = {() => firebase.auth().signOut()} onPress={() => goToLogin()}> </Button>
+            </TouchableOpacity>
             <Text style={styles.topic}>News!</Text>
             <CarouselCard result={resultNew} />
           </View>
