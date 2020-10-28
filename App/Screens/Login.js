@@ -59,7 +59,6 @@ const Login = () => {
 
   async function checkAuth() {
     var token = await AsyncStorage.getItem("token");
-
     firebase.auth().onAuthStateChanged(function (user) {
       if (user || token) {
 
@@ -142,6 +141,8 @@ const Login = () => {
 
           console.log("google sign in")
           if (result.additionalUserInfo.isNewUser) {
+            console.log("UIDDDDDDDDDDDDDDDDDDDDDDDDD1")
+            console.log(result.user.uid)
             AsyncStorage.setItem('uid', result.user.uid);
             firebase.database().ref('/users/' + result.user.uid).set({
               gmail: result.user.email,
@@ -196,6 +197,10 @@ const Login = () => {
             //     }
             //   );
           } else {
+            console.log("UIDDDDDDDDDDDDDDDDDDDDDDDDD2")
+
+            console.log(result.user.uid)
+            AsyncStorage.setItem('uid', result.user.uid);
             firebase.database().ref('/users/' + result.user.uid)({
               last_logged_in: Date.now()
             })

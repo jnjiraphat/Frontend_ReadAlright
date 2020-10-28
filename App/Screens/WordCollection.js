@@ -47,51 +47,66 @@ const WordCollection = (props) => {
 
 
   async function getUid() {
-    var uid = await AsyncStorage.getItem('uid');
-    setUuid(uid);
+    try {
+      var uid = await AsyncStorage.getItem('uid');
+      await getUser(uid);
+      setUuid(uid);
+    } catch (error) {
+
+    } finally {
+    }
+
   }
 
-  const getUser = async () => {
-    console.log("Get id user");
-    console.log(uuid);
+  const getUser = async (uuidTemp) => {
+    try {
+      console.log("Get id user");
+      console.log(uuidTemp);
 
-    // const response = await fetch('http://10.0.2.2:3000/user/'+uuid, {
-    //   method: 'GET',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json',
-    //   }
-    // });
-    // const data = await response.json();
-    // console.log(response)
-    await axios.get("http://10.0.2.2:3000/user/" + uuid).then(
-      (response) => {
-        console.log("id user");
-        console.log(response.data.user);
-        console.log(response.data.user[0].user_id)
-        setUserId(response.data.user[0].user_id)
+      // const response = await fetch('http://10.0.2.2:3000/user/'+uuid, {
+      //   method: 'GET',
+      //   headers: {
+      //     'Accept': 'application/json',
+      //     'Content-Type': 'application/json',
+      //   }
+      // });
+      // const data = await response.json();
+      // console.log(response)
+      await axios.get("http://10.0.2.2:3000/user/" + uuidTemp).then(
+        (response) => {
+          console.log("id user");
+          console.log(response.data.user);
+          console.log(response.data.user[0].user_id);
+          setUserId(response.data.user[0].user_id);
+          fetch(response.data.user[0].user_id);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } catch (error) {
 
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    } finally {
+
+    }
+
 
   }
   async function setUp() {
+    console.log("processingg")
     await getUid();
-    await getUser();
-    await fetch();
+    // await getUser();
+    // await fetch();
   }
 
 
   const [wordCol, setWordCol] = useState([]);
 
-  const fetch = async () => {
+  const fetch = async (userIdTemp) => {
     const newSelected = new Map(isBookMark);
 
     console.log("runningggggggggggggggggggggggggggggg");
-    await axios.get("http://10.0.2.2:3000/wordCol/" + userId).then(
+    await axios.get("http://10.0.2.2:3000/wordCol/" + userIdTemp).then(
       (response) => {
         console.log("Word Collection");
         console.log(response.data.word);
@@ -164,7 +179,7 @@ const WordCollection = (props) => {
   const [refreshing, setRefreshing] = React.useState(false);
   const wait = (timeout) => {
     return new Promise(resolve => {
-      read();
+      fetch(userId);
       setTimeout(resolve, timeout);
     });
   }
@@ -174,32 +189,42 @@ const WordCollection = (props) => {
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
-  return (
-    <ScrollView refreshControl={
-      <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-    }
-    >
-      <View style={styles.container}>
-        <Text style={styles.topic}>Word Collection</Text>
+  if (wordCol.length != 0) {
+    return (
+      <ScrollView refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+      >
+        <View style={styles.container}>
+          <Text style={styles.topic}>Word Collection</Text>
+        </View>
+        <View style={{ flex: 1, alignItems: "center", marginTop: 20 }}>
+          <FlatList
+            contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+            data={wordCol}
+            renderItem={({ item }) => (
+              <WordCard
+                engWord={item.wordCol_Eng}
+                thaiWord={item.wordCol_Thai}
+                onBookMark={onBookMark}
+                isBookMark={!!isBookMark.get(item.wordCol_Eng)}
+                forWordCollection={true}
+              />
+            )}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        </View>
+      </ScrollView>
+    );
+  } else {
+    return (
+      <View>
+        <Text>
+          Loadinggggggg
+        </Text>
       </View>
-      <View style={{ flex: 1, alignItems: "center", marginTop: 20 }}>
-        <FlatList
-          contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-          data={wordCol}
-          renderItem={({ item }) => (
-            <WordCard
-              engWord={item.wordCol_Eng}
-              thaiWord={item.wordCol_Thai}
-              onBookMark={onBookMark}
-              isBookMark={!!isBookMark.get(item.wordCol_Eng)}
-              forWordCollection={true}
-            />
-          )}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      </View>
-    </ScrollView>
-  );
+    );
+  }
 };
 export default WordCollection;
 

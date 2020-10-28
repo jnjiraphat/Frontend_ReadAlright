@@ -153,9 +153,14 @@ const home = (props) => {
   }
   function goToLogin() {
     console.log("Log out already 1")
-
+    firebase.auth().signOut();
+    clearAsyncStorage();
     Actions.Login();
     console.log("Log out already 2")
+  }
+
+  async function clearAsyncStorage() {
+    AsyncStorage.clear();
   }
 
   function goToContentScreen(readingId) {
@@ -187,7 +192,7 @@ const home = (props) => {
         <View style={styles.ContentSwitch}>
           <View style={styles.ContentCarousel}>
             <TouchableOpacity>
-              <Button title="Sign out" onPress={() => firebase.auth().signOut()} onPress={() => goToLogin()}> </Button>
+              <Button title="Sign out" onPress={() => goToLogin()} > </Button>
             </TouchableOpacity>
             <Text style={styles.topic}>News!</Text>
             <CarouselCard result={resultNew} />
