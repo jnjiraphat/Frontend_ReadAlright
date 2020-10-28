@@ -17,6 +17,8 @@ import WordCard from '../components/WordCard'
 
 import Constants from "expo-constants";
 import axios from "axios";
+import { AsyncStorage } from "react-native";
+
 
 const WordCollection = (props) => {
   // const translationGoogle = async (word) => {
@@ -40,22 +42,65 @@ const WordCollection = (props) => {
   //       }
   //     );
   // };
+  const [uuid, setUuid] = useState("");
+  const [userId, setUserId] = useState("");
+
+
+  async function getUid() {
+    var uid = await AsyncStorage.getItem('uid');
+    setUuid(uid);
+  }
+
+  const getUser = async () => {
+    console.log("Get id user");
+    console.log(uuid);
+
+    // const response = await fetch('http://10.0.2.2:3000/user/'+uuid, {
+    //   method: 'GET',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json',
+    //   }
+    // });
+    // const data = await response.json();
+    // console.log(response)
+    await axios.get("http://10.0.2.2:3000/user/" + uuid).then(
+      (response) => {
+        console.log("id user");
+        console.log(response.data.user);
+        console.log(response.data.user[0].user_id)
+        setUserId(response.data.user[0].user_id)
+
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+  }
+  async function setUp() {
+    await getUid();
+    await getUser();
+    await fetch();
+  }
+
+
   const [wordCol, setWordCol] = useState([]);
 
   const fetch = async () => {
     const newSelected = new Map(isBookMark);
 
     console.log("runningggggggggggggggggggggggggggggg");
-    await axios.get("http://10.0.2.2:3000/wordCol").then(
+    await axios.get("http://10.0.2.2:3000/wordCol/" + userId).then(
       (response) => {
         console.log("Word Collection");
-        console.log(response.data.quiz);
-        for (let index = 0; index < response.data.quiz.length; index++) {
-          newSelected.set(response.data.quiz[index]['wordCol_Eng'], true);
+        console.log(response.data.word);
+        for (let index = 0; index < response.data.word.length; index++) {
+          newSelected.set(response.data.word[index]['wordCol_Eng'], true);
 
         }
         setBookMark(newSelected);
-        setWordCol(response.data.quiz);
+        setWordCol(response.data.word);
       },
       (error) => {
         console.log(error);
@@ -67,7 +112,11 @@ const WordCollection = (props) => {
     const data = await fetch();
   };
   useEffect(() => {
-    read();
+    setUp();
+    // getUid();
+    // getUser();
+    // read();
+
   }, []);
   // console.log("This is reading id  ");
   // console.log(props.text);
@@ -146,7 +195,7 @@ const WordCollection = (props) => {
               forWordCollection={true}
             />
           )}
-          keyExtractor = { (item, index) => index.toString() }
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
     </ScrollView>
