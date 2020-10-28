@@ -46,6 +46,7 @@ const Login = () => {
   // }
   const [userName, setUserName] = useState([]);
   const [picURL, setPicURL] = useState([]);
+  const [uuid, setuuid] = useState([]);
 
   function goToInterest() {
     console.log("Goto Interest");
@@ -82,7 +83,7 @@ const Login = () => {
     await this.postUser();
   };
 
-  
+
 
 
   // const postUser = async () => {
@@ -140,20 +141,67 @@ const Login = () => {
         firebase.auth().signInWithCredential(credential).then(function (result) {
 
           console.log("google sign in")
-          if(result.additionalUserInfo.isNewUser){
-          firebase.database().ref('/users/' + result.user.uid).set({
-            gmail: result.user.email,
-            profile_picture: result.user.photoURL,
-            full_name: result.user.displayName,
-            created_at : Date.now()
-          }).then(function (snapshot) { });
-        }else{
-          firebase.database().ref('/users/' + result.user.uid)({
-            last_logged_in : Date.now()
-          })
-          goToInterest();
+          if (result.additionalUserInfo.isNewUser) {
+            AsyncStorage.setItem('uid', result.user.uid);
+            firebase.database().ref('/users/' + result.user.uid).set({
+              gmail: result.user.email,
+              profile_picture: result.user.photoURL,
+              full_name: result.user.displayName,
+              created_at: Date.now()
+            }).then(function (snapshot) { });
 
-        }
+            fetch('http://10.0.2.2:3000/user', {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                regtime: null,
+                username: result.user.displayName,
+                pwd: "A1",
+                level: "A1",
+                image: result.user.photoURL,
+                uid: result.user.uid
+              }),
+            }).then((response) => {
+              console.log("post user success!!!---------------------------");
+              console.log(response.json())
+              console.log("post user success!!!");
+              console.log(response.body)
+              console.log(response.statusText)
+
+            });
+            // axios
+            //   .post("http://10.0.2.2:3000/user", {
+            //     regtime: null,
+            //     username: result.user.displayName,
+            //     pwd: "A1",
+            //     level: "A1",
+            //     image: result.user.photoURL,
+            //     uid: result.user.uid
+            //   })
+            //   .then(
+            //     (response) => {
+            //       console.log("post user success!!!");
+            //       console.log(response.status);
+            //       console.log(response);
+
+
+            //     },
+            //     (error) => {
+            //       console.log("running error post user")
+
+            //       console.log(error);
+            //     }
+            //   );
+          } else {
+            firebase.database().ref('/users/' + result.user.uid)({
+              last_logged_in: Date.now()
+            })
+            goToInterest();
+
+          }
         }).catch(function (error) {
           // Handle Errors here.
           var errorCode = error.code;
@@ -190,23 +238,8 @@ const Login = () => {
         console.log(data.name);
         console.log(data.picture);
 
-        axios
-          .post("http://10.0.2.2:3000/user", {
-            regtime: null,
-            username: data.name,
-            pwd: "A1",
-            level: "A1",
-            image: data.picture,
-          })
-          .then(
-            (response) => {
-              console.log("post user success!!!");
-              console.log(response.status);
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
+
+
         return result.accessToken;
       } else {
         return { cancelled: true };
@@ -298,7 +331,7 @@ const Login = () => {
       const email = data.email;
       const password = data.password;
       if (data !== null) {
-        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
           // Handle Errors here.
           var errorCode = error.code;
           var errorMessage = error.message;
@@ -341,7 +374,7 @@ const Login = () => {
         <Text style={styles.errorArea}>Enter a valid email address.</Text>
       )}
 
-<Controller
+      <Controller
         control={control}
         render={({ onChange, onBlur, value }) => (
           <TextInput

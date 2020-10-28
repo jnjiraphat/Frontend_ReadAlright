@@ -9,7 +9,7 @@ import {
   ImageBackground,
   Image,
   Dimensions,
-  
+
 } from "react-native";
 import ReadingApi from "../API/ReadingAPI";
 import Constants from "expo-constants";
@@ -30,6 +30,7 @@ import CategoryCardVocab from "../components/CategoryCardVocab";
 import { out } from "react-native/Libraries/Animated/src/Easing";
 import LoadingScreen from './LoadingScreen'
 import { Button } from "react-native";
+import { AsyncStorage } from "react-native";
 
 const arrayReading = [];
 
@@ -43,6 +44,8 @@ const home = (props) => {
   console.log(props.text.connectType);
 
   console.log(props.text);
+
+
 
   const [cate, setCate] = useState([]);
   const read = async () => {
@@ -133,6 +136,7 @@ const home = (props) => {
 
 
   useEffect(() => {
+    getUid();
     read();
     getReadaingByCateId();
     getNewReading();
@@ -141,11 +145,16 @@ const home = (props) => {
     getSuggestion();
     getMaybeVb();
   }, []);
+  const [uuid, setUuid] = useState("");
 
-  function goToLogin(){
+  async function getUid() {
+    var uid = await AsyncStorage.getItem('uid');
+    setUuid(uid);
+  }
+  function goToLogin() {
     console.log("Log out already 1")
 
-    Actions.Login(); 
+    Actions.Login();
     console.log("Log out already 2")
   }
 
@@ -163,7 +172,7 @@ const home = (props) => {
 
   function ContentDefault() {
     if (resultNew.length == 0 && result.length == 0 && cate.length == 0) {
-      
+
       return (
         <View style={{ flex: 1 }}>
           <LoadingScreen></LoadingScreen>
@@ -178,7 +187,7 @@ const home = (props) => {
         <View style={styles.ContentSwitch}>
           <View style={styles.ContentCarousel}>
             <TouchableOpacity>
-                <Button title = "Sign out" onPress = {() => firebase.auth().signOut()} onPress={() => goToLogin()}> </Button>
+              <Button title="Sign out" onPress={() => firebase.auth().signOut()} onPress={() => goToLogin()}> </Button>
             </TouchableOpacity>
             <Text style={styles.topic}>News!</Text>
             <CarouselCard result={resultNew} />
@@ -202,7 +211,7 @@ const home = (props) => {
             padding={0}
             marginTop={Dimensions.get("window").height / 16}
             marginBottom={Dimensions.get("window").height / 7}
-            // onPressAction={goToHome}
+            onPressAction={() => console.log(uuid)}
             // shadowRadius={30}
             colorsStart="#7EF192"
             colorsEnd="#2DC897"
