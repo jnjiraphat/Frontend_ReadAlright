@@ -280,8 +280,31 @@ const Login = () => {
   const { control, register, handleSubmit, setValue, errors } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+    signInEmail(data);
   };
-  // Actions.goToInterest()
+
+  async function signInEmail(data) {
+    // setUpUser()
+    try {
+      const email = data.email;
+      const password = data.password;
+      if (data !== null) {
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ...
+        });
+        //ไม่ได้ axios กลับเพราะมีการ post ตอน register แล้ว
+      }
+      console.log(email);
+      console.log(password);
+    } catch ({ message }) {
+      alert(`SignInEmail Error: ${message}`);
+    } finally {
+      goToInterest();
+    }
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -294,19 +317,22 @@ const Login = () => {
             onBlur={onBlur}
             onChangeText={(value) => onChange(value)}
             value={value}
-            placeholder="Username"
+            placeholder="Email"
             style={styles.textInput}
           />
         )}
-        name="username"
+        name="email"
         rules={{ required: true }}
         defaultValue=""
       />
-      {errors.username && (
+      {errors.email && errors.email.type === "required" && (
         <Text style={styles.errorArea}>This is required.</Text>
       )}
+      {errors.email && errors.email.type === "pattern" && (
+        <Text style={styles.errorArea}>Enter a valid email address.</Text>
+      )}
 
-      <Controller
+<Controller
         control={control}
         render={({ onChange, onBlur, value }) => (
           <TextInput
@@ -315,14 +341,20 @@ const Login = () => {
             onChangeText={(value) => onChange(value)}
             value={value}
             placeholder="Password"
+            secureTextEntry={true}
             style={styles.textInput}
           />
         )}
         name="password"
-        rules={{ required: true }}
+        rules={{ required: true, minLength: 8 }}
         defaultValue=""
       />
-      {errors.password && (
+      {errors.password && errors.password.type === "minLength" && (
+        <Text style={styles.errorArea}>
+          This is field required min lenght of 8.
+        </Text>
+      )}
+      {errors.password && errors.password.type === "required" && (
         <Text style={styles.errorArea}>This is required.</Text>
       )}
 
