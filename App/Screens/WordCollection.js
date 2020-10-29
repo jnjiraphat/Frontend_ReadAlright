@@ -42,28 +42,33 @@ const WordCollection = (props) => {
   //       }
   //     );
   // };
+
+
   const [uuid, setUuid] = useState("");
   const [userId, setUserId] = useState("");
 
 
   async function getUid() {
     try {
-      var uid = await AsyncStorage.getItem('uid');
-      await getUser(uid);
-      setUuid(uid);
+      const value = await AsyncStorage.getItem('uid');
+      if (value !== null) {
+        // We have data!!
+        getUser(value)
+        setUuid(value);
+        console.log(value);
+      }
     } catch (error) {
-
-    } finally {
+      console.log("error getItem")
+      // Error retrieving data
     }
-
   }
 
   const getUser = async (uuidTemp) => {
     try {
-      console.log("Get id user");
+      console.log("Get UuidTemp");
       console.log(uuidTemp);
 
-      // const response = await fetch('http://10.0.2.2:3000/user/'+uuid, {
+      // const response = await fetch('http://10.0.2.2:3000/user/' + uuid, {
       //   method: 'GET',
       //   headers: {
       //     'Accept': 'application/json',
@@ -78,38 +83,34 @@ const WordCollection = (props) => {
           console.log(response.data.user);
           console.log(response.data.user[0].user_id);
           setUserId(response.data.user[0].user_id);
-          fetch(response.data.user[0].user_id);
+          fetch(response.data.user[0].user_id)
         },
         (error) => {
+          console.log("error in get userId")
+
           console.log(error);
         }
       );
     } catch (error) {
-
-    } finally {
-
+      console.log("error get userId")
     }
-
-
   }
-  async function setUp() {
-    console.log("processingg")
-    await getUid();
-    // await getUser();
-    // await fetch();
-  }
+  // async function setUp() {
+  //   console.log("processingg")
+  //   await getUid();
+  // await getUser();
+  // await fetch();
+  // }
 
 
   const [wordCol, setWordCol] = useState([]);
 
   const fetch = async (userIdTemp) => {
     const newSelected = new Map(isBookMark);
-
-    console.log("runningggggggggggggggggggggggggggggg");
+    console.log("userId")
+    console.log(userIdTemp)
     await axios.get("http://10.0.2.2:3000/wordCol/" + userIdTemp).then(
       (response) => {
-        console.log("Word Collection");
-        console.log(response.data.word);
         for (let index = 0; index < response.data.word.length; index++) {
           newSelected.set(response.data.word[index]['wordCol_Eng'], true);
 
@@ -118,17 +119,18 @@ const WordCollection = (props) => {
         setWordCol(response.data.word);
       },
       (error) => {
+        console.log("error in fetch")
         console.log(error);
       }
     );
   };
 
-  const read = async () => {
-    const data = await fetch();
-  };
+  // const read = async () => {
+  //   const data = await fetch();
+  // };
   useEffect(() => {
-    setUp();
-    // getUid();
+    // setUp();
+    getUid();
     // getUser();
     // read();
 
@@ -185,7 +187,7 @@ const WordCollection = (props) => {
   }
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-
+ 
     wait(2000).then(() => setRefreshing(false));
   }, []);
 

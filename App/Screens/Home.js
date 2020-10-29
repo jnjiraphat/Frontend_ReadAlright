@@ -40,71 +40,47 @@ const arrayReading = [];
 
 
 const home = (props) => {
-  console.log("This is props");
-  console.log(props.text.connectType);
-
-  console.log(props.text);
-
-
-
   const [cate, setCate] = useState([]);
   const read = async () => {
     const data = await ReadingApi();
     setCate(data);
   };
-  console.log("This is category");
-  console.log(cate);
-
   const [cateVocabBox, setCateVocabBox] = useState([]);
   const vocab = async () => {
     const word = await VocabCateApi();
     setCateVocabBox(word);
   };
-  console.log("This is vocabBox");
-  console.log(cateVocabBox);
+
 
   const [newVocab, setNewVocab] = useState([]);
   const newvocab = async () => {
     const newword = await NewVocab();
-    console.log("--------------vocab-----------------");
-    console.log(newword);
-    console.log("--------------vocab-----------------");
 
     setNewVocab(newword);
   };
-  console.log("This is newVocab");
-  console.log(newVocab);
+
 
   const [resultNew, setResultNew] = useState([]);
   const getNewReading = async () => {
     const data = await axios
       .get("http://10.0.2.2:3000/newReading")
       .then((response) => {
-        console.log("Newreadingggggggggggggggggggggggggggggggggg");
-        console.log(response.data.length);
-        console.log(response.data);
-        console.log("Newreadingggggggggggggggggggggggggggggggggg");
-
         setResultNew(response.data);
       });
   };
 
   const [MaybeVb, setMaybeVb] = useState([]);
   const getMaybeVb = async () => {
-    console.log("nonnnns")
-    console.log(props.text)
+
     try {
       var output = []
       for (let index = 0; index < props.text.length; index++) {
         const data = await axios
           .get("http://10.0.2.2:3000/vocabBox/maybeYouLike/" + props.text[index])
           .then((response) => {
-            console.log("testnon");
-            console.log(response.data.reading.length)
             for (let j = 0; j < response.data.reading.length; j++) {
               output.push(response.data.reading[j])
             }
-            console.log("testnon");
 
           });
       }
@@ -124,11 +100,6 @@ const home = (props) => {
     const data = await axios
       .get("http://10.0.2.2:3000/answer/suggestions/1")
       .then((response) => {
-        console.log("Suggestion");
-        // console.log(response.data.length);
-        console.log(response.data.answer);
-        console.log("Suggestion");
-
         setSuggestion(response.data.answer)
 
       });
@@ -146,28 +117,54 @@ const home = (props) => {
     getMaybeVb();
   }, []);
   const [uuid, setUuid] = useState("");
-
+ 
   async function getUid() {
-    var uid = await AsyncStorage.getItem('uid');
-    setUuid(uid);
+    try {
+      const value = await AsyncStorage.getItem('uid');
+      if (value !== null) {
+        // We have data!!
+        setUuid(value);
+        console.log(value);
+      }
+    } catch (error) {
+      console.log("error getItem")
+      // Error retrieving data
+    }
   }
-  function goToLogin() {
+  async function goToLogin() {
     console.log("Log out already 1")
-    firebase.auth().signOut();
-    clearAsyncStorage();
-    Actions.Login();
+    // clearAppData()
+    await removeItemValue()
+    await firebase.auth().signOut();
+    await Actions.Login();
     console.log("Log out already 2")
   }
 
-  async function clearAsyncStorage() {
-    AsyncStorage.clear();
+  // const clearAppData = async function () {
+  //   try {
+  //     const keys = await AsyncStorage.getAllKeys();
+  //     await AsyncStorage.multiRemove(keys);
+  //     console.log("clear already")
+  //   } catch (error) {
+  //     console.error('Error clearing app data.');
+  //   }
+  // }
+  async function removeItemValue() {
+    try {
+      await AsyncStorage.removeItem('uid');
+    }
+    catch (exception) {
+      console.log("error remove item")
+    }
   }
+  // async function clearAsyncStorage() {
+  //   await AsyncStorage.removeItem('uid');
+  //   // await AsyncStorage.clear();
+  // }
 
   function goToContentScreen(readingId) {
-    console.log(readingId);
     Actions.ContentScreen({ text: readingId });
 
-    console.log("hello");
   }
 
   // const [check, setCheck] = useState(false);
@@ -253,13 +250,6 @@ const home = (props) => {
     const data = await axios
       .get("http://10.0.2.2:3000/reading/user/1")
       .then((response) => {
-        // console.log("------------mookkakeiei-------------");
-        console.log(response.data.reading);
-        console.log("-------------------------abcdef");
-        // console.log("round = " + [index]);
-        // for (let j = 0; j < response.data.reading.length; j++) {
-        //   arrayReading.push(response.data.reading[j]);
-        // }
         setResult(response.data.reading);
       });
 

@@ -46,7 +46,7 @@ const Login = () => {
   // }
   const [userName, setUserName] = useState([]);
   const [picURL, setPicURL] = useState([]);
-  const [uuid, setuuid] = useState([]);
+  const [uuid, setuuid] = useState("");
 
   function goToInterest() {
     console.log("Goto Interest");
@@ -55,8 +55,15 @@ const Login = () => {
   }
   useEffect(() => {
     checkAuth();
+    // sendUidToWordCol();
   }, []);
 
+
+  // function sendUidToWordCol() {
+  //     console.log("Goto wordcol");
+  //     // Actions.WordCollection({ text: uuid });
+  //     console.log("Goto wordcol already");
+  //   }
   async function checkAuth() {
     var token = await AsyncStorage.getItem("token");
     firebase.auth().onAuthStateChanged(function (user) {
@@ -81,34 +88,6 @@ const Login = () => {
     await this.logIn();
     await this.postUser();
   };
-
-
-
-
-  // const postUser = async () => {
-  //   console.log("postUser");
-  //   console.log(userName);
-  //   axios
-  //     .post("http://10.0.2.2:3000/users", {
-  //       regtime: null,
-  //       username: "userName",
-  //       pwd: "A1",
-  //       level: "A1",
-  //       image: "picURL",
-  //     })
-  //     .then(
-  //       (response) => {
-  //         console.log("post user success!!!");
-  //         console.log(respose);
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //       }
-  //     );
-  // };
-
-
-
   function isUserEqual(googleUser, firebaseUser) {
     if (firebaseUser) {
       var providerData = firebaseUser.providerData;
@@ -122,9 +101,29 @@ const Login = () => {
     }
     return false;
   }
-
-
-  function onSignIn(googleUser) {
+  async function setUid(uidTemp1) {
+    try {
+      await AsyncStorage.setItem(
+        'uid',
+        uidTemp1
+      );
+    } catch (error) {
+      console.log("error setItem new user")
+      // Error saving data
+    }
+  }
+  async function setUid2(uidTemp2) {
+    try {
+      await AsyncStorage.setItem(
+        'uid',
+        uidTemp2
+      );
+    } catch (error) {
+      console.log("error setItem not new user")
+      // Error saving data
+    }
+  }
+  async function onSignIn(googleUser) {
 
     console.log('Google Auth Response', googleUser);
     // We need to register an Observer on Firebase Auth to make sure auth is initialized.
@@ -141,9 +140,10 @@ const Login = () => {
 
           console.log("google sign in")
           if (result.additionalUserInfo.isNewUser) {
-            console.log("UIDDDDDDDDDDDDDDDDDDDDDDDDD1")
+            console.log("new user UIDDDDDDDDDDDDDDDDDDDDDDDDD1")
             console.log(result.user.uid)
-            AsyncStorage.setItem('uid', result.user.uid);
+            // setuuid(result.user.uid)
+            setUid(result.user.uid)
             firebase.database().ref('/users/' + result.user.uid).set({
               gmail: result.user.email,
               profile_picture: result.user.photoURL,
@@ -151,60 +151,43 @@ const Login = () => {
               created_at: Date.now()
             }).then(function (snapshot) { });
 
-            fetch('http://10.0.2.2:3000/user', {
-              method: 'POST',
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                regtime: null,
-                username: result.user.displayName,
-                pwd: "A1",
-                level: "A1",
-                image: result.user.photoURL,
-                uid: result.user.uid
-              }),
-            }).then((response) => {
-              console.log("post user success!!!---------------------------");
-              console.log(response.json())
-              console.log("post user success!!!");
-              console.log(response.body)
-              console.log(response.statusText)
+            try {
+              fetch('http://10.0.2.2:3000/user', {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  regtime: null,
+                  username: result.user.displayName,
+                  pwd: "A1",
+                  level: "A1",
+                  image: result.user.photoURL,
+                  uid: result.user.uid
+                }),
+              }).then((response) => {
+                console.log("post user success!!!---------------------------");
+                console.log(response.json())
+                console.log("post user success!!!");
+                console.log(response.body)
+                console.log(response.statusText)
 
-            });
-            // axios
-            //   .post("http://10.0.2.2:3000/user", {
-            //     regtime: null,
-            //     username: result.user.displayName,
-            //     pwd: "A1",
-            //     level: "A1",
-            //     image: result.user.photoURL,
-            //     uid: result.user.uid
-            //   })
-            //   .then(
-            //     (response) => {
-            //       console.log("post user success!!!");
-            //       console.log(response.status);
-            //       console.log(response);
+              });
+            } catch (error) {
+              console.log("error post user")
 
-
-            //     },
-            //     (error) => {
-            //       console.log("running error post user")
-
-            //       console.log(error);
-            //     }
-            //   );
+            }
           } else {
-            console.log("UIDDDDDDDDDDDDDDDDDDDDDDDDD2")
-
+            console.log("not new user UIDDDDDDDDDDDDDDDDDDDDDDDDD2")
             console.log(result.user.uid)
-            AsyncStorage.setItem('uid', result.user.uid);
+            setUid2(result.user.uid)
+
+            // setuuid(result.user.uid)
+            // AsyncStorage.setItem('uid', result.user.uid);
             firebase.database().ref('/users/' + result.user.uid)({
               last_logged_in: Date.now()
             })
-            goToInterest();
 
           }
         }).catch(function (error) {
@@ -222,11 +205,8 @@ const Login = () => {
       }
     }.bind(this));
   }
-
   async function signInWithGoogleAsync() {
-
     try {
-
       const result = await Google.logInAsync({
         androidClientId: "730744212125-66abd009jc25dg1p5ntbrdt8hoejjv2v.apps.googleusercontent.com",
         iosClientId: "",
@@ -240,8 +220,8 @@ const Login = () => {
           headers: { Authorization: `Bearer ${result.accessToken}` },
         });
         const data = await response.json();
-        console.log(data.name);
-        console.log(data.picture);
+        // console.log(data.name);
+        // console.log(data.picture);
 
 
 
