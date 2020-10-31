@@ -77,7 +77,7 @@ function Item({ category_id, title, selected, onSelect, img }) {
 
 const arrayIdCate = [];
 
-export default function () {
+const interest = (props) => {
   //Fetch(GET) Catagory Name
   const [result, setResult] = useState([]);
   const read = async () => {
@@ -85,6 +85,8 @@ export default function () {
     setResult(data);
   };
   useEffect(() => {
+    // console.log("uuid interest = ")
+    // console.log(props.text)
     read();
   }, []);
 
@@ -102,7 +104,7 @@ export default function () {
     [selected],
     console.log(selected)
   );
-  
+
   if (result) {
     function logMapElements(value, key, map) {
       console.log(`m[${key}] = ${value}`);
@@ -160,7 +162,7 @@ export default function () {
         <View style={styles.textLayout}>
           <Text style={styles.header}>Interest</Text>
           <Text style={styles.subHeader}>
-          Choose categories that you interested.
+            Choose categories that you interested.
           </Text>
         </View>
         <FlatList
@@ -178,7 +180,7 @@ export default function () {
               onSelect={onSelect}
             />
           )}
-          keyExtractor = { (item, index) => index.toString() }
+          keyExtractor={(item, index) => index.toString()}
           extraData={selected}
         />
         <ButtonClick
@@ -200,11 +202,13 @@ export default function () {
       </View>
     );
   } else {
-    return <View style={{flex:1}}>
-    <LoadingScreen/>
-  </View>;
+    return <View style={{ flex: 1 }}>
+      <LoadingScreen />
+    </View>;
   }
 }
+export default interest;
+
 
 const styles = StyleSheet.create({
   container: {

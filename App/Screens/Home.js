@@ -117,19 +117,22 @@ const home = (props) => {
     getMaybeVb();
   }, []);
   const [uuid, setUuid] = useState("");
- 
+
   async function getUid() {
-    try {
-      const value = await AsyncStorage.getItem('uid');
-      if (value !== null) {
-        // We have data!!
-        setUuid(value);
-        console.log(value);
-      }
-    } catch (error) {
-      console.log("error getItem")
-      // Error retrieving data
-    }
+    var uid = firebase.auth().currentUser.uid;
+    console.log("uid home = ", uid)
+    setUuid(uid);
+    // try {
+    //   const value = await AsyncStorage.getItem('uid');
+    //   if (value !== null) {
+    //     // We have data!!
+    //     setUuid(value);
+    //     console.log(value);
+    //   }
+    // } catch (error) {
+    //   console.log("error getItem")
+    //   // Error retrieving data
+    // }
   }
   async function goToLogin() {
     console.log("Log out already 1")

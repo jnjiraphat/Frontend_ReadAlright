@@ -18,6 +18,8 @@ import WordCard from '../components/WordCard'
 import Constants from "expo-constants";
 import axios from "axios";
 import { AsyncStorage } from "react-native";
+import * as firebase from "firebase";
+import { get } from "react-native/Libraries/Utilities/PixelRatio";
 
 
 const WordCollection = (props) => {
@@ -50,13 +52,16 @@ const WordCollection = (props) => {
 
   async function getUid() {
     try {
-      const value = await AsyncStorage.getItem('uid');
-      if (value !== null) {
-        // We have data!!
-        getUser(value)
-        setUuid(value);
-        console.log(value);
-      }
+      var uid = firebase.auth().currentUser.uid;
+      console.log(uid)
+      getUser(uid);
+      // const value = await AsyncStorage.getItem('uid');
+      // if (value !== null) {
+      //   // We have data!!
+      //   getUser(value)
+      //   setUuid(value);
+      //   console.log(value);
+      // }
     } catch (error) {
       console.log("error getItem")
       // Error retrieving data
@@ -187,7 +192,7 @@ const WordCollection = (props) => {
   }
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
- 
+
     wait(2000).then(() => setRefreshing(false));
   }, []);
 

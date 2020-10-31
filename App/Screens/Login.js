@@ -46,7 +46,7 @@ const Login = () => {
   // }
   const [userName, setUserName] = useState([]);
   const [picURL, setPicURL] = useState([]);
-  const [uuid, setuuid] = useState("");
+  const [uuid, setIuid] = useState("");
 
   function goToInterest() {
     console.log("Goto Interest");
@@ -57,7 +57,7 @@ const Login = () => {
     checkAuth();
     // sendUidToWordCol();
   }, []);
-
+ 
 
   // function sendUidToWordCol() {
   //     console.log("Goto wordcol");

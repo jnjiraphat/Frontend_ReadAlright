@@ -104,6 +104,7 @@ const Routes = () => {
             key="Login"
             component={Login}
             title="Login"
+            type="reset"
             hideNavBar
             hideTabBar
             showLabel={false}
