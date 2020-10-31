@@ -52,6 +52,7 @@ const WordCollection = (props) => {
 
   async function getUid() {
     try {
+      console.log("get uid first")
       var uid = firebase.auth().currentUser.uid;
       console.log(uid)
       getUser(uid);

@@ -24,6 +24,9 @@ import WordCard from '../components/WordCard'
 
 import Constants from "expo-constants";
 import axios from "axios";
+import { AsyncStorage } from "react-native";
+import * as firebase from "firebase";
+
 
 const data = [
   {
@@ -77,6 +80,8 @@ const Content = (props) => {
   const [vocabCard, setVocabCard] = useState([]);
   const [vocabBoxName, setvocabBoxName] = useState("");
   const [vocabBoxImg, setvocabBoxImg] = useState("");
+  const [userId, setUserId] = useState("");
+
 
 
   // const [title , setTitle] = useState([]);
@@ -109,7 +114,45 @@ const Content = (props) => {
   };
   useEffect(() => {
     read();
+    getUid();
   }, []);
+
+  async function getUid() {
+    try {
+      console.log("get uid first")
+      var uid = firebase.auth().currentUser.uid;
+      console.log("uid in content vocabbbbbbbbbbbbbbbb")
+      console.log(uid)
+      getUser(uid);
+
+    } catch (error) {
+      console.log("error getItem")
+    }
+  }
+
+  const getUser = async (uuidTemp) => {
+    try {
+      console.log("Get UuidTemp");
+      console.log(uuidTemp);
+
+      await axios.get("http://10.0.2.2:3000/user/" + uuidTemp).then(
+        (response) => {
+          console.log("id user in content vocab");
+          console.log(response.data.user);
+          console.log(response.data.user[0].user_id);
+          setUserId(response.data.user[0].user_id);
+          // fetch(response.data.user[0].user_id)
+        },
+        (error) => {
+          console.log("error in get userId")
+
+          console.log(error);
+        }
+      );
+    } catch (error) {
+      console.log("error get userId")
+    }
+  }
 
 
   // console.log("This is reading id  ");
@@ -206,7 +249,7 @@ const Content = (props) => {
             .post("http://10.0.2.2:3000/wordCol", {
               wordCol_Thai: newThaiWord,
               wordCol_Eng: bookmark[index],
-              user_id: 1
+              user_id: userId
             })
             .then(
               (response) => {
