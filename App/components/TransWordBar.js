@@ -14,6 +14,7 @@ import axios from "axios";
 import ModalWord from "../components/ModalWord";
 import ModalMoreDetail from "../components/ModalMoreDetail";
 import { get } from "react-native/Libraries/Utilities/PixelRatio";
+import * as firebase from "firebase";
 
 const TransWordBar = (props) => {
   const [engWordBook, setEngWordBook] = useState("");
@@ -31,6 +32,9 @@ const TransWordBar = (props) => {
   const [changeBookMark, setchangeBookMark] = useState(false)
 
   const [postWord, setPostWord] = useState("")
+
+  const [userId, setUserId] = useState("");
+
 
   const onBookMark = React.useCallback(
     async (getWord) => {
@@ -63,6 +67,50 @@ const TransWordBar = (props) => {
     // console.log(getWord),
     // console.log(isBookMark),
   );
+
+
+  useEffect(() => {
+    getUid();
+  }, []);
+
+  async function getUid() {
+    try {
+      console.log("get uid first")
+      var uid = firebase.auth().currentUser.uid;
+      console.log("uid in content vocabbbbbbbbbbbbbbbb")
+      console.log(uid)
+      getUser(uid);
+
+    } catch (error) {
+      console.log("error getItem")
+    }
+  }
+
+  const getUser = async (uuidTemp) => {
+    try {
+      console.log("Get UuidTemp");
+      console.log(uuidTemp);
+
+      await axios.get("http://10.0.2.2:3000/user/" + uuidTemp).then(
+        (response) => {
+          console.log("id user in content vocab");
+          console.log(response.data.user);
+          console.log(response.data.user[0].user_id);
+          setUserId(response.data.user[0].user_id);
+          // fetch(response.data.user[0].user_id)
+        },
+        (error) => {
+          console.log("error in get userId")
+
+          console.log(error);
+        }
+      );
+    } catch (error) {
+      console.log("error get userId")
+    }
+  }
+
+
   useEffect(() => {
     if (getChecked == true) {
       console.log(isBookMark)
@@ -81,7 +129,7 @@ const TransWordBar = (props) => {
           .post("http://10.0.2.2:3000/wordCol", {
             wordCol_Thai: getTranslate,
             wordCol_Eng: getWord,
-            user_id: 1
+            user_id: userId
           })
           .then(
             (response) => {
