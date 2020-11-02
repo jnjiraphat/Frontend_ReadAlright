@@ -7,6 +7,7 @@ import { Actions } from "react-native-router-flux";
 import Constants from "expo-constants";
 import { Button } from "@ant-design/react-native";
 import LoadingScreen from './LoadingScreen'
+import * as firebase from "firebase";
 
 const GREEN = "rgba(141,196,63,1)";
 const PURPLE = "rgba(108,48,237,1)";
@@ -25,6 +26,7 @@ export default class TestQuizChallenge extends React.Component {
       correctChoice: [],
       reading_id: this.props.text,
       dataArrayQuizChallenge: [],
+      userId: "",
     };
     this.setUpPage();
     // console.log("This is  " + this.reading_id);
@@ -50,6 +52,10 @@ export default class TestQuizChallenge extends React.Component {
   setUpPage = async () => {
     await this.fetchApiChallenge();
     await this.fetchAPI();
+    await this.getUid();
+    // await this.getUser();
+
+    
   };
   converData() {
     return new Promise((resolve, reject) => {
@@ -128,6 +134,7 @@ export default class TestQuizChallenge extends React.Component {
                   value: this.state.result[index].value.value,
                   choice_id: this.state.result[index].value.choice_id,
                   question_id: this.state.result[index].value.question_id,
+                  user_id: this.state.userId,
                 })
                 .then(
                   (response) => {
@@ -237,6 +244,62 @@ export default class TestQuizChallenge extends React.Component {
     } else {
     }
   };
+
+  
+
+
+  getUid = async () => {
+    try {
+      console.log("get uid first in test quiz chal")
+      var uid = firebase.auth().currentUser.uid;
+      console.log(uid)
+      this.getUser(uid)
+      // getUser(uid);
+      // const value = await AsyncStorage.getItem('uid');
+      // if (value !== null) {
+      //   // We have data!!
+      //   getUser(value)
+      //   setUuid(value);
+      //   console.log(value);
+      // }
+    } catch (error) {
+      console.log("error getItem")
+      // Error retrieving data
+    }
+  }
+
+  getUser = async (uuidTemp) => {
+    console.log("find uid in get user")
+    // var userIdTemp = "";
+    try {
+      console.log("Get UuidTemp");
+      // userIdTemp = uuidTemp;
+      console.log(uuidTemp);
+
+      await axios.get("http://10.0.2.2:3000/user/" + uuidTemp).then(
+        (response) => {
+          console.log("id user");
+          console.log(response.data.user);
+          console.log(response.data.user[0].user_id);
+          this.setState({
+            userId: response.data.user[0].user_id,
+          });
+          // userIdTemp : response.data.user[0].user_id;
+          // fetch(response.data.user[0].user_id)
+        },
+        (error) => {
+          console.log("error in get userId")
+
+          console.log(error);
+        }
+      );
+    } catch (error) {
+      console.log("error get userId")
+    } finally{
+      console.log("user id in testquizchal")
+      console.log(this.state.userId)
+    }
+  }
 
   renderPreviousButton(onPress, enabled) {
     return (

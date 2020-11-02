@@ -16,23 +16,68 @@ import VocabCateApi from "../API/VocabCateAPI";
 
 import SuggestionCard from "../components/SuggestionCard";
 import LoadingScreen from './LoadingScreen'
+import * as firebase from "firebase";
+
 const suggestionTypeId = [];
 
 const home = (props) => {
   const [isCheck, setCheck] = useState(new Map());
   const [suggestion, setSuggestion] = useState([]);
+
+  const [userId, setUserId] = useState("");
+
+
+  async function getUid() {
+    try {
+      console.log("get uid first in suggestion")
+      var uid = firebase.auth().currentUser.uid;
+      console.log(uid)
+      getUser(uid);
+
+    } catch (error) {
+      console.log("error getItem")
+      // Error retrieving data
+    }
+  }
+
+  const getUser = async (uuidTemp) => {
+    try {
+      console.log("Get UuidTemp");
+      console.log(uuidTemp);
+
+      await axios.get("http://10.0.2.2:3000/user/" + uuidTemp).then(
+        (response) => {
+          console.log("id user");
+          console.log(response.data.user);
+          console.log(response.data.user[0].user_id);
+          setUserId(response.data.user[0].user_id);
+          getSuggestion(response.data.user[0].user_id);
+          // fetch(response.data.user[0].user_id)
+        },
+        (error) => {
+          console.log("error in get userId")
+
+          console.log(error);
+        }
+      );
+    } catch (error) {
+      console.log("error get userId")
+    }
+  }
+
   const [trick, setTrick] = useState([]);
   const getAndPostSuggestion = async () => {
-
     await getSuggestion();
     setTimeout(() => {
       postSuggestion();
     }, 5000);
-
-
   }
-  const getSuggestion = async () => {
-    axios.get("http://10.0.2.2:3000/answer/suggestions/1").then(
+
+
+  const getSuggestion = async (userIdTemp) => {
+    console.log("userIdTemp")
+    console.log(userIdTemp)
+    axios.get("http://10.0.2.2:3000/answer/suggestions/" + userIdTemp).then(
       (response) => {
         console.log("SuggestionNon");
         console.log(response.data.answer);
@@ -135,9 +180,11 @@ const home = (props) => {
 
   console.log("This is Tricks")
   console.log(trick)
+
   useEffect(() => {
     getTrick();
     getAndPostSuggestion();
+    getUid();
     // read();
   }, []);
 

@@ -98,12 +98,17 @@ const home = (props) => {
 
   const getSuggestion = async () => {
     const data = await axios
-      .get("http://10.0.2.2:3000/answer/suggestions/1")
+      .get("http://10.0.2.2:3000/answer/suggestions/"  + userId)
       .then((response) => {
+        console.log("sug in home")
+        console.log(response.data.answer)
         setSuggestion(response.data.answer)
 
       });
   };
+ 
+  console.log("suggestion in home")
+  console.log(suggestion)
 
 
   useEffect(() => {
@@ -113,26 +118,40 @@ const home = (props) => {
     getNewReading();
     vocab();
     newvocab();
-    getSuggestion();
+    // getSuggestion();
     getMaybeVb();
   }, []);
   const [uuid, setUuid] = useState("");
+  const [userId, setUserId] = useState("");
 
   async function getUid() {
     var uid = firebase.auth().currentUser.uid;
     console.log("uid home = ", uid)
     setUuid(uid);
-    // try {
-    //   const value = await AsyncStorage.getItem('uid');
-    //   if (value !== null) {
-    //     // We have data!!
-    //     setUuid(value);
-    //     console.log(value);
-    //   }
-    // } catch (error) {
-    //   console.log("error getItem")
-    //   // Error retrieving data
-    // }
+    getUser(uid)
+  }
+
+  const getUser = async (uuidTemp) => {
+    try {
+      console.log("Get UuidTemp in home");
+      console.log(uuidTemp);
+      await axios.get("http://10.0.2.2:3000/user/" + uuidTemp).then(
+        (response) => {
+          console.log("id user in home");
+          console.log(response.data.user);
+          console.log(response.data.user[0].user_id);
+          setUserId(response.data.user[0].user_id);
+          // fetch(response.data.user[0].user_id)
+        },
+        (error) => {
+          console.log("error in get userId")
+
+          console.log(error);
+        }
+      );
+    } catch (error) {
+      console.log("error get userId")
+    }
   }
   async function goToLogin() {
     console.log("Log out already 1")

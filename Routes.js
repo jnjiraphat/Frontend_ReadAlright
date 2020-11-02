@@ -240,6 +240,7 @@ const Routes = () => {
             titleStyle={styles.title}
             back={true}
             showLabel={false}
+            renderBackButton={null}
           />
            <Scene
             key="ContentTip"

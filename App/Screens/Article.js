@@ -15,7 +15,7 @@ import CountViews from "../API/CountViewsAPI";
 import ArticleCard from "../components/ArticleCard";
 import Constants from "expo-constants";
 import Header from "../components/Header";
-
+import * as firebase from "firebase";
 const data = [
   {
     img:
@@ -34,12 +34,53 @@ const Article = (props) => {
     Actions.ContentScreen({ text: reading_id });
   }
 
+  const [userId, setUserId] = useState("");
+  async function getUid() {
+    try {
+      console.log("get uid first in article")
+      var uid = firebase.auth().currentUser.uid;
+      console.log(uid)
+      getUser(uid);
+
+    } catch (error) {
+      console.log("error getItem")
+
+    }
+  }
+
+  const getUser = async (uuidTemp) => {
+    try {
+      console.log("Get UuidTemp in article");
+      console.log(uuidTemp);
+
+      await axios.get("http://10.0.2.2:3000/user/" + uuidTemp).then(
+        (response) => {
+          console.log("id user in article");
+          console.log(response.data.user);
+          console.log(response.data.user[0].user_id);
+          setUserId(response.data.user[0].user_id);
+          fetch(response.data.user[0].user_id)
+        },
+        (error) => {
+          console.log("error in get userId")
+
+          console.log(error);
+        }
+      );
+    } catch (error) {
+      console.log("error get userId")
+    }
+  }
+
+
   const [suggestion, setSuggestion] = useState([]);
 
 
   const getSuggestion = async () => {
+    console.log("user id in article suggestion")
+    console.log(userId)
     const data = await axios
-      .get("http://10.0.2.2:3000/answer/suggestions/1")
+      .get("http://10.0.2.2:3000/answer/suggestions/" + userId)
       .then((response) => {
         console.log("Suggestion");
         // console.log(response.data.length);
@@ -76,7 +117,9 @@ const Article = (props) => {
   };
   useEffect(() => {
     read();
+    getUid();
     getSuggestion();
+
   }, []);
   console.log("This is id");
   console.log(props.text);

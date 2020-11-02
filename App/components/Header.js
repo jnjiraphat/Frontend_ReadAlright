@@ -24,6 +24,7 @@ const Header = (props) => {
 
   const [picture, showPic] = useState("");
 
+  
   const getUserPic = async () => {
     try {
       console.log("MyUserPIc 1")
