@@ -396,7 +396,8 @@ export default class TestQuiz extends React.Component {
             modalText={this.state.score}
             modalHeader="Your Level is"
             modalButton="Next"
-            suggestionText="Hi Suggestion"
+            suggestionText="Hi 
+            tion"
             modalAction={() => {
               this.setState({
                 modalVisible: false,

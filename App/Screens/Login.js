@@ -22,6 +22,7 @@ import axios from "axios";
 import * as Google from 'expo-google-app-auth';
 
 const Login = () => {
+  
   // const FACEBOOK_APP_ID = '791616524971373';
 
   // const auth = firebase.auth();
@@ -222,9 +223,6 @@ const Login = () => {
         const data = await response.json();
         // console.log(data.name);
         // console.log(data.picture);
-
-
-
         return result.accessToken;
       } else {
         return { cancelled: true };
