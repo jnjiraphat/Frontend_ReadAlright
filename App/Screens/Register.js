@@ -66,7 +66,9 @@ const Register = () => {
     } catch ({ message }) {
       alert(`CreateAccount Error: ${message}`);
     } finally {
-      goToInterest();
+      console.log("Go to login")
+      Actions.Login();
+      // goToInterest();
     }
   }
 

@@ -57,7 +57,7 @@ const Login = () => {
   useEffect(() => {
     checkAuth();
     // sendUidToWordCol();
-  }, []);
+  }, );
  
 
   // function sendUidToWordCol() {
@@ -67,8 +67,13 @@ const Login = () => {
   //   }
   async function checkAuth() {
     var token = await AsyncStorage.getItem("token");
+    var emailSign = await AsyncStorage.getItem("emailSign");
+
+    var googleSign = await AsyncStorage.getItem("googleSign");
+
     firebase.auth().onAuthStateChanged(function (user) {
-      if (user || token) {
+      
+      if (emailSign || token || googleSign) {
 
         console.log("Signed In------------------")
         goToInterest();
@@ -216,11 +221,14 @@ const Login = () => {
 
       if (result.type === 'success') {
         onSignIn(result)
+        AsyncStorage.setItem("googleSign", result.accessToken);
+
         console.log(result.accessToken)
         const response = await fetch('https://www.googleapis.com/userinfo/v2/me', {
           headers: { Authorization: `Bearer ${result.accessToken}` },
         });
         const data = await response.json();
+
         // console.log(data.name);
         // console.log(data.picture);
         return result.accessToken;
@@ -320,6 +328,8 @@ const Login = () => {
           var errorMessage = error.message;
           // ...
         });
+        AsyncStorage.setItem("emailSign", email);
+
         //ไม่ได้ axios กลับเพราะมีการ post ตอน register แล้ว
       }
       console.log(email);
@@ -385,7 +395,7 @@ const Login = () => {
 
       <View style={styles.forgotArea}>
         <Text style={styles.forgot}>FORGOT PASSWORD?</Text>
-        <TouchableOpacity onPress={goToRegister}>
+        <TouchableOpacity onPress={()=>goToRegister()}>
           <Text style={styles.forgot}>Register</Text>
         </TouchableOpacity>
       </View>
