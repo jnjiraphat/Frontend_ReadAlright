@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   StyleSheet,
   ScrollView,
@@ -13,11 +13,14 @@ import { Actions } from "react-native-router-flux";
 import Constants from "expo-constants";
 import ButtonClick from "../components/ButtonClick";
 import { set } from "react-native-reanimated";
+import { AsyncStorage } from "react-native";
+import * as firebase from "firebase";
 
 const QuizInstruction = (props) => {
   // const[readId , setReadId] = useState("")
   console.log("--------------------------------");
   console.log(props.text);
+  const [user, setUser] = useState([]);
 
   const [index, setIndex] = useState("1");
   // console.log("This is index")
@@ -30,44 +33,76 @@ const QuizInstruction = (props) => {
     console.log("hello");
   }
   const [readPretest, setReadPretest] = useState([]);
+  // async function checkPretest() {
+  //   var checkPretest = await AsyncStorage.getItem('pretest');
+  //   console.log(checkPretest)
+  //   if (checkPretest == "true") {
+  //     Actions.Home()
+  //   } else {
 
+  //   }
+  // } 
+  const fetchUser = async () => {
+    setInterval(async () => {
+      var uuid = firebase.auth().currentUser.uid;
+      if (firebase.auth().currentUser.uid == null) {
+        Actions.QuizInstruction()
+      }
+      var response = await axios.get("http://10.0.2.2:3000/user/" + uuid);
+      console.log("response user");
+      setUser(response.data.user)
+      console.log(response.data.user);
+      console.log(response.data.user[0].isTested);
+      if (response.data.user[0].isTested == "true") {
+        Actions.Home()
+      } else {
 
-  const read = async () => {
-    const data = await fetch();
-  };
+      }
+    }, 1000);
+
+  }
+  const setUp = async () => {
+    await fetchUser()
+
+  }
+  // const read = async () => {
+  //   const data = await fetch();
+  // };
   useEffect(() => {
-    read();
+    setUp();
+    // checkPretest();
+    // read();
   }, []);
   return (
-        <>
-          <View style={styles.background}>
-            <Text style={styles.header}>Pre-Test Instruction</Text>
-            <View style={styles.whiteCardChoice}>
-            <View style={styles.whiteCardArea}>
-                <Text style={styles.questionText}>
-                    Read all 6 articles, ranging from Levels A1 - B1 and answer 18 True (T) or False (F) statements. 
-                    When you click the next button, you can't go back to read it.
+
+    <View style={styles.background}>
+      <Text style={styles.header}>Pre-Test Instruction</Text>
+      <View style={styles.whiteCardChoice}>
+        <View style={styles.whiteCardArea}>
+          <Text style={styles.questionText}>
+            Read all 6 articles, ranging from Levels A1 - B1 and answer 18 True (T) or False (F) statements.
+            When you click the next button, you can't go back to read it.
                 </Text>
-              </View>
-            </View>
-            <ButtonClick
-              onPressAction={() => {
-                goToTestQuizReading(1);
-                }
-              }
-              text="Ready"
-              fontSize={24}
-              fontFamily="PT-Bold"
-              fontcolor="#000000"
-              height={39}
-              width={245}
-              radius={30}
-              padding={0}
-              colorsStart="#2DC897"
-              colorsEnd="#7EF192"
-            />
-          </View>
-        </>
+        </View>
+      </View>
+      <ButtonClick
+        onPressAction={() => {
+          goToTestQuizReading(1);
+        }
+        }
+        text="Ready"
+        fontSize={24}
+        fontFamily="PT-Bold"
+        fontcolor="#000000"
+        height={39}
+        width={245}
+        radius={30}
+        padding={0}
+        colorsStart="#2DC897"
+        colorsEnd="#7EF192"
+      />
+    </View>
+
   );
 };
 

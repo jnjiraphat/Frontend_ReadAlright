@@ -106,7 +106,7 @@ const TransWordBar = (props) => {
         }
       );
     } catch (error) {
-      console.log("error get userId")
+      console.log("error get userId2")
     }
   }
 

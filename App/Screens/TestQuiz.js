@@ -8,6 +8,7 @@ import Constants from "expo-constants";
 import { Button } from "@ant-design/react-native";
 import { AsyncStorage } from "react-native";
 import { set } from "react-native-reanimated";
+import * as firebase from "firebase";
 
 import LoadingScreen from './LoadingScreen'
 
@@ -38,11 +39,16 @@ export default class TestQuiz extends React.Component {
       count: 0,
       temp: []
     };
+    // this.checkPretest()
+    // this.editUser()
+
     this.setUpQuestion()
+
     // this.setUp
     // this.fetchReading();
     // console.log("This is  " + this.reading_id);
   }
+
 
   onSurveyFinished(answers) {
     const infoQuestionsRemoved = [...answers];
@@ -69,8 +75,8 @@ export default class TestQuiz extends React.Component {
       Actions.TestQuizReading({ text: this.state.reading_id + 1 });
       //  count = count+1;
     } else {
+      this.editUser();
       console.log("Success")
-      Actions.UserAnswer();
 
     }
 
@@ -81,6 +87,7 @@ export default class TestQuiz extends React.Component {
 
   onAnswerSubmitted(answer) {
 
+    console.log("pretest true")
     console.log("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
     console.log(JSON.stringify(this.surveyRef.getAnswers(), 2))
     console.log("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
@@ -102,6 +109,35 @@ export default class TestQuiz extends React.Component {
       resolve(data);
     });
   }
+  editUser = async () => {
+    try {
+      var name = firebase.auth().currentUser.displayName;
+      var photo = firebase.auth().currentUser.photoURL;
+      var uuid = firebase.auth().currentUser.uid
+      if (name == null) {
+        console.log("name null")
+        name = firebase.auth().currentUser.email;
+      }
+      var response = await axios.put("http://10.0.2.2:3000/user/updateUser/" + uuid, {
+        "regtime": null,
+        "username": name,
+        "pwd": "Panda",
+        "level": "A1",
+        "image": photo,
+        "uid": uuid,
+        "isTested":"true"
+      });
+      console.log(response);
+      console.log("Edit user !!");
+    } catch (error) {
+
+    } finally {
+      Actions.UserAnswer();
+
+    }
+
+
+  }
   convertJson = async () => {
     // console.log(this.state.answersSoFar.length)
 
@@ -111,6 +147,7 @@ export default class TestQuiz extends React.Component {
       console.log(result);
       console.log("------------answerq----------------")
       try {
+        AsyncStorage.setItem("pretest", "true");
         AsyncStorage.setItem('userAnswer' + this.state.reading_id, JSON.stringify(result));
       } catch (error) {
         // Error saving data
@@ -399,6 +436,7 @@ export default class TestQuiz extends React.Component {
             suggestionText="Hi 
             tion"
             modalAction={() => {
+
               this.setState({
                 modalVisible: false,
               });
@@ -413,8 +451,8 @@ export default class TestQuiz extends React.Component {
       );
     else
       return (
-        <View style={{flex:1}}>
-          <LoadingScreen/>
+        <View style={{ flex: 1 }}>
+          <LoadingScreen />
         </View>
       );
   }

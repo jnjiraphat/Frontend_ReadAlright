@@ -117,7 +117,7 @@ const Routes = () => {
             hideTabBar
             showLabel={false}
           />
-          {/* <Scene
+          <Scene
             key="QuizInstruction"
             component={QuizInstruction}
             title="QuizInstruction"
@@ -140,7 +140,7 @@ const Routes = () => {
             hideNavBar
             hideTabBar
             showLabel={false}
-          /> */}
+          />
           {/* <Scene
             key="Login"
             component={Login}
@@ -198,6 +198,7 @@ const Routes = () => {
               component={WordCollection}
               hideNavBar={true}
               showLabel={false}
+
             />
             {/* <Scene
               key="Mylist"
@@ -296,6 +297,7 @@ const Routes = () => {
   } else {
     return <Text>Loading</Text>;
   }
+
 };
 export default Routes;
 

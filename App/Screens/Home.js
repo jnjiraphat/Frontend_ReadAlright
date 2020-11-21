@@ -150,17 +150,16 @@ const home = (props) => {
         }
       );
     } catch (error) {
-      console.log("error get userId")
+      console.log("error get userId5")
     }
   }
   async function goToLogin() {
     console.log("Log out already 1")
     // clearAppData()
-    await removeItemValue()
     await firebase.auth().signOut();
-    setInterval(function () {
-      Actions.Login();
-    }, 3000);
+    await removeItemValue()
+
+
 
     console.log("Log out already 2")
   }
@@ -180,10 +179,17 @@ const home = (props) => {
       console.log("token in home")
       console.log(token)
       await AsyncStorage.removeItem('uid');
+      await AsyncStorage.removeItem('pretest');
+      await AsyncStorage.removeItem('emailSign');
+      await AsyncStorage.removeItem('googleSign');
+
       await AsyncStorage.removeItem('token')
     }
     catch (exception) {
       console.log("error remove item")
+    } finally {
+      Actions.Login();
+
     }
   }
   // async function clearAsyncStorage() {
