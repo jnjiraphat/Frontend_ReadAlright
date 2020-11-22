@@ -98,7 +98,7 @@ const home = (props) => {
 
   const getSuggestion = async () => {
     const data = await axios
-      .get("http://10.0.2.2:3000/answer/suggestions/"  + userId)
+      .get("http://10.0.2.2:3000/answer/suggestions/" + userId)
       .then((response) => {
         console.log("sug in home")
         console.log(response.data.answer)
@@ -106,7 +106,7 @@ const home = (props) => {
 
       });
   };
- 
+
   console.log("suggestion in home")
   console.log(suggestion)
 
@@ -150,15 +150,17 @@ const home = (props) => {
         }
       );
     } catch (error) {
-      console.log("error get userId")
+      console.log("error get userId5")
     }
   }
   async function goToLogin() {
     console.log("Log out already 1")
     // clearAppData()
-    await removeItemValue()
     await firebase.auth().signOut();
-    await Actions.Login();
+    await removeItemValue()
+
+
+
     console.log("Log out already 2")
   }
 
@@ -173,10 +175,21 @@ const home = (props) => {
   // }
   async function removeItemValue() {
     try {
+      var token = await AsyncStorage.getItem('token');
+      console.log("token in home")
+      console.log(token)
       await AsyncStorage.removeItem('uid');
+      await AsyncStorage.removeItem('pretest');
+      await AsyncStorage.removeItem('emailSign');
+      await AsyncStorage.removeItem('googleSign');
+
+      await AsyncStorage.removeItem('token')
     }
     catch (exception) {
       console.log("error remove item")
+    } finally {
+      Actions.Login();
+
     }
   }
   // async function clearAsyncStorage() {

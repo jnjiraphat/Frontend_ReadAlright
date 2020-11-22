@@ -30,7 +30,7 @@ const UserAnswer = (props) => {
         getValue();
     }, []);
 
-    getValue = async () => {
+   const getValue = async () => {
         var count1 = 0;
         var count2 = 0;
         var count3 = 0;

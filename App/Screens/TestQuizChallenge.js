@@ -294,7 +294,7 @@ export default class TestQuizChallenge extends React.Component {
         }
       );
     } catch (error) {
-      console.log("error get userId")
+      console.log("error get userId 7")
     } finally{
       console.log("user id in testquizchal")
       console.log(this.state.userId)

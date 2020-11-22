@@ -62,7 +62,7 @@ const AreaProfile = (props) => {
         }
       );
     } catch (error) {
-      console.log("error get userId")
+      console.log("error get userId1")
     }
   }
   const getUserName = async () => {
