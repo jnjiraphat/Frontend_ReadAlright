@@ -84,7 +84,7 @@ const ContentTip = (props) => {
   return (
     <View style={{ flex: 1 }}>
         <FlatList
-          contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+          contentContainerStyle={{ flexGrow: 1 }}
           data={tricks}
           renderItem={({ item }) => (
             <View style={styles.container}>
