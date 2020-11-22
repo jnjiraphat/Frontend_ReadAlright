@@ -11,10 +11,12 @@ const AreaProfile = (props) => {
   const [suggestion2, setSuggestion2] = useState([]);
   const [uuid, setUuid] = useState("");
   const [userId, setUserId] = useState("");
+
   useEffect(() => {
     getUserName();
     getUid();
   }, []);
+
   const getSuggestion = async (uUidTemp2) => {
     const data = await axios
       .get("http://10.0.2.2:3000/answer/suggestions/" + uUidTemp2)

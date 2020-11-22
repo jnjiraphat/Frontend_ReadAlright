@@ -138,10 +138,16 @@ const UserAnswer = (props) => {
         console.log("Score 2 = " + count2)
         console.log("Score 3 = " + count3)
         if (count1 < 4) {
+            AsyncStorage.setItem('level',"A1")
+
             setLevel("A1")
         } else if (count1 >= 4 && count2 < 4) {
+            AsyncStorage.setItem('level',"A2")
+
             setLevel("A2")
         } else if (count3 >= 4) {
+            AsyncStorage.setItem('level',"B1")
+
             setLevel("B1")
         }
     }
