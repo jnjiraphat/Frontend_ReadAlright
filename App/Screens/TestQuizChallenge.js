@@ -256,7 +256,7 @@ export default class TestQuizChallenge extends React.Component {
       this.getUser(uid)
       // getUser(uid);
       // const value = await AsyncStorage.getItem('uid');
-      // if (value !== null) {
+      // if (value !== null) { 
       //   // We have data!!
       //   getUser(value)
       //   setUuid(value);

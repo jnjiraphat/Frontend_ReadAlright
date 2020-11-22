@@ -49,6 +49,7 @@ const Register = () => {
             pwd: "A1",
             level: "A1",
             image: null,
+            isTested:"false"
           })
           .then(
             (response) => {
