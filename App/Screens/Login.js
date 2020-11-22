@@ -48,23 +48,23 @@ const Login = () => {
   const [userName, setUserName] = useState([]);
   const [picURL, setPicURL] = useState([]);
   const [uuid, setIuid] = useState("");
-var check = false;
+  var check = false;
   function goToInterest() {
     console.log("Goto Interest");
     Actions.QuizInstruction();
     console.log("hello");
   }
   useEffect(() => {
-    if(check==true){
+    if (check == true) {
 
-    }else{
-      check=true;
+    } else {
+      check = true;
       checkAuth()
 
     }
     // sendUidToWordCol();
   }, []);
-  
+
   // function sendUidToWordCol() {
   //     console.log("Goto wordcol");
   //     // Actions.WordCollection({ text: uuid });
@@ -77,16 +77,16 @@ var check = false;
 
 
 
-      if (emailSign || token || googleSign) {
+    if (emailSign || token || googleSign) {
 
-        console.log("Signed In------------------")
-        goToInterest();
-  
-      } else {
-        console.log("Not Signed In------------------")
+      console.log("Signed In------------------")
+      goToInterest();
 
-      }
-    
+    } else {
+      console.log("Not Signed In------------------")
+
+    }
+
 
 
 
@@ -102,8 +102,10 @@ var check = false;
   };
   function isUserEqual(googleUser, firebaseUser) {
     if (firebaseUser) {
+      Actions.QuizInstruction()
       var providerData = firebaseUser.providerData;
       for (var i = 0; i < providerData.length; i++) {
+
         if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
           providerData[i].uid === googleUser.getBasicProfile().getId()) {
           // We don't need to reauth the Firebase connection.
@@ -161,8 +163,10 @@ var check = false;
               profile_picture: result.user.photoURL,
               full_name: result.user.displayName,
               created_at: Date.now()
-            }).then(function (snapshot) { });
+            }).then(function (snapshot) {
 
+
+            });
             try {
               fetch('http://10.0.2.2:3000/user', {
                 method: 'POST',
@@ -177,7 +181,7 @@ var check = false;
                   level: "A1",
                   image: result.user.photoURL,
                   uid: result.user.uid,
-                  isTested:"false"
+                  isTested: "false"
                 }),
               }).then((response) => {
                 console.log("post user success!!!---------------------------");
@@ -190,17 +194,83 @@ var check = false;
             } catch (error) {
               console.log("error post user")
 
+            } finally {
+              AsyncStorage.setItem("userName",result.user.displayName);
+              AsyncStorage.setItem("userPicURL", result.user.photoURL);
+
+              AsyncStorage.setItem("googleSign", result.user.uid);
+              Actions.QuizInstruction()
+
             }
+
           } else {
             console.log("not new user UIDDDDDDDDDDDDDDDDDDDDDDDDD2")
             console.log(result.user.uid)
             setUid2(result.user.uid)
+            try {
+              AsyncStorage.setItem("userName",result.user.displayName);
+              AsyncStorage.setItem("userPicURL", result.user.photoURL);
+              AsyncStorage.setItem("googleSign", result.user.uid);
+            } catch (error) {
+              
+            }finally{
+              Actions.QuizInstruction()
+
+
+            }
+
 
             // setuuid(result.user.uid)
             // AsyncStorage.setItem('uid', result.user.uid);
             firebase.database().ref('/users/' + result.user.uid)({
               last_logged_in: Date.now()
             })
+            // axios.get("http://10.0.2.2:3000/user/" + uuid).then((response) => {
+            //   console.log("response user");
+            //   setUser(response.data.user)
+            //   // console.log(response.data.user);
+            //   // console.log(response.data.user[0].isTested);
+            //   if (response.data.user[0] == null) {
+
+            //     try {
+            //       fetch('http://10.0.2.2:3000/user', {
+            //         method: 'POST',
+            //         headers: {
+            //           'Accept': 'application/json',
+            //           'Content-Type': 'application/json',
+            //         },
+            //         body: JSON.stringify({
+            //           regtime: null,
+            //           username: result.user.displayName,
+            //           pwd: "A1",
+            //           level: "A1",
+            //           image: result.user.photoURL,
+            //           uid: result.user.uid,
+            //           isTested: "false"
+            //         }),
+            //       }).then((response) => {
+
+            //         console.log("dont have acc")
+            //         console.log("post user success!!!---------------------------");
+            //         console.log(response.json())
+            //         console.log("post user success!!!");
+            //         console.log(response.body)
+            //         console.log(response.statusText)
+
+            //       });
+            //     } catch (error) {
+
+            //     } finally {
+            //       Actions.QuizInstruction()
+
+            //     }
+
+            //   } else {
+            //     console.log("have acc")
+
+
+            //   }
+            // });
 
           }
         }).catch(function (error) {
@@ -228,7 +298,7 @@ var check = false;
 
       if (result.type === 'success') {
         onSignIn(result)
-        AsyncStorage.setItem("googleSign", result.accessToken);
+
         // console.log("id krub"+result.user.id);
         // console.log("id krub2"+result.idToken);
 
@@ -264,27 +334,27 @@ var check = false;
       });
       if (type === "success") {
         const credential = firebase.auth.FacebookAuthProvider.credential(token)
-        firebase.auth().signInWithCredential(credential).then((response)=>{
-          console.log("uuid Facebook"+response.user.uid);
+        firebase.auth().signInWithCredential(credential).then((response) => {
+          console.log("uuid Facebook" + response.user.uid);
           axios
-          .post("http://10.0.2.2:3000/user", {
-            regtime: null,
-            username: data.name,
-            pwd: "A1",
-            level: "A1",
-            image: data.picture.data.url,
-            uid: response.user.uid,
-            isTested:"false"
-          })
-          .then(
-            (response) => {
-              console.log("post user success!!!");
-              console.log(response);
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
+            .post("http://10.0.2.2:3000/user", {
+              regtime: null,
+              username: data.name,
+              pwd: "A1",
+              level: "A1",
+              image: data.picture.data.url,
+              uid: response.user.uid,
+              isTested: "false"
+            })
+            .then(
+              (response) => {
+                console.log("post user success!!!");
+                console.log(response);
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
         }).catch((error) => {
           console.log(error)
         })
@@ -353,29 +423,31 @@ var check = false;
       const email = data.email;
       const password = data.password;
       if (data !== null) {
-        firebase.auth().signInWithEmailAndPassword(email, password).then((response)=>{
+        firebase.auth().signInWithEmailAndPassword(email, password).then((response) => {
 
-          console.log("uuid Facebook"+response.user.uid);
+          console.log("uuid Facebook" + response.user.uid);
           axios
-          .post("http://10.0.2.2:3000/user", {
-            regtime: null,
-            username: response.user.email,
-            pwd: "A1",
-            level: "A1",
-            image:  response.user.photoURL,
-            uid: response.user.uid,
-            isTested:"false"
-          })
-          .then(
-            (response) => {
-              console.log("post user success Email!!!");
-              console.log(response);
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
-       
+            .post("http://10.0.2.2:3000/user", {
+              regtime: null,
+              username: response.user.email,
+              pwd: "A1",
+              level: "A1",
+              image: response.user.photoURL,
+              uid: response.user.uid,
+              isTested: "false"
+            })
+            .then(
+              (response) => {
+                AsyncStorage.setItem("userName",response.user.email);
+                AsyncStorage.setItem("userPicURL", response.user.photoURL);
+                console.log("post user success Email!!!");
+                console.log(response);
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+
         }).catch(function (error) {
           // Handle Errors here.
           var errorCode = error.code;
