@@ -206,22 +206,6 @@ const home = (props) => {
             <Text style={[styles.topic, { marginLeft: "5%" }]}>Category</Text>
             <CategoryCard result={cate} />
           </View>
-          <ButtonClick
-            text="Challenge"
-            fontSize={24}
-            fontFamily="PT-Bold"
-            fontcolor="#000000"
-            height={39}
-            width={245}
-            radius={30}
-            padding={0}
-            marginTop={Dimensions.get("window").height / 16}
-            marginBottom={Dimensions.get("window").height / 7}
-            onPressAction={() => console.log(uuid)}
-            // shadowRadius={30}
-            colorsStart="#7EF192"
-            colorsEnd="#2DC897"
-          />
         </View>
       );
 
