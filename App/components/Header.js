@@ -18,6 +18,8 @@ import { AsyncStorage } from "react-native";
 import * as firebase from "firebase";
 import { Ionicons } from "@expo/vector-icons";
 import { setLogLevel } from "firebase";
+import ButtonClick from '../components/ButtonClick'
+import LoadingScreen from '../Screens/LoadingScreen'
 
 const Header = (props) => {
   const { tabs, ContentDefault, ContentChange, suggestion, isSwitch } = props;
@@ -69,24 +71,20 @@ const Header = (props) => {
 
   async function removeItemValue() {
     try {
-      var token = await AsyncStorage.getItem('token');
-      console.log("token in home")
-      console.log(token)
-      await AsyncStorage.removeItem('uid');
-      await AsyncStorage.removeItem('pretest');
-      await AsyncStorage.removeItem('emailSign');
-      await AsyncStorage.removeItem('googleSign');
-      await AsyncStorage.removeItem('userName');
-      await AsyncStorage.removeItem('userPicURL');
-      await AsyncStorage.removeItem('token')
-  
-
-    }
-    catch (exception) {
-      console.log("error remove item")
+      var token = await AsyncStorage.getItem("token");
+      console.log("token in home");
+      console.log(token);
+      await AsyncStorage.removeItem("uid");
+      await AsyncStorage.removeItem("pretest");
+      await AsyncStorage.removeItem("emailSign");
+      await AsyncStorage.removeItem("googleSign");
+      await AsyncStorage.removeItem("userName");
+      await AsyncStorage.removeItem("userPicURL");
+      await AsyncStorage.removeItem("token");
+    } catch (exception) {
+      console.log("error remove item");
     } finally {
       Actions.Login();
-
     }
   }
 
@@ -116,6 +114,23 @@ const Header = (props) => {
                 marginRight: 15,
               }}
             >
+              <View>
+        <View style={{ position: "absolute", bottom: 0, zIndex: 1}}>
+        <ButtonClick
+              text="Logout"
+              fontSize={12}
+              fontFamily="PT-Bold"
+              fontcolor="#000000"
+              height={30}
+              width={50}
+              radius={30}
+              padding={0}
+              onPressAction={() => goToLogout()}
+              // shadowRadius={30}
+              colorsStart="#FF3E30"
+              colorsEnd="#FF3E30"
+              />
+        </View>
               <Avatar
                 source={picture}
                 // width={Dimensions.get("window").width / 3.5}
@@ -123,19 +138,24 @@ const Header = (props) => {
                 width={110}
                 height={110}
               />
+      </View>
               <AreaProfile level={level} suggestion={suggestion} />
-              <TouchableOpacity>
-              <Button title="Sign out" onPress={() => goToLogout()}>
-                Logout
-              </Button>
-            </TouchableOpacity>
             </View>
+
+              
+              {/* <TouchableOpacity onPress={() => goToLogout()} style={styles.button}>
+                <Text>
+                  Logout
+                </Text>
+              </TouchableOpacity> */}
             <View
               style={{
                 flexDirection: "row",
                 justifyContent: "center",
               }}
             >
+              <View>
+              </View>
               <TouchableOpacity onPress={onPress}>
                 <Ionicons
                   name="ios-arrow-up"
@@ -143,6 +163,7 @@ const Header = (props) => {
                   color="black"
                 ></Ionicons>
               </TouchableOpacity>
+              
             </View>
           </LinearGradient>
         </View>
@@ -200,12 +221,8 @@ const Header = (props) => {
               height={80}
             />
             <AreaProfile level={level} display="none" />
-            <TouchableOpacity>
-              <Button title="Sign out" onPress={() => goToLogout()}>
-                Logout
-              </Button>
-            </TouchableOpacity>
           </View>
+         
           <View
             style={{
               flexDirection: "row",
@@ -232,10 +249,24 @@ const Header = (props) => {
       </View>
     )
   ) : (
-    <View>
-      <Text> Loadingggggggggggggggggggggggggggggg</Text>
+    <View style={{ flex: 1 }}>
+      <LoadingScreen />
     </View>
   );
 };
 
 export default Header;
+
+const styles = StyleSheet.create({
+  button: {
+    width: 50,
+    
+  },rowItemImg: {
+    borderColor: "transparent",
+    borderBottomLeftRadius: 5,
+    borderTopLeftRadius: 5,
+    width: 100,
+    height: 90,
+    // backgroundColor: "blue",
+  },
+});

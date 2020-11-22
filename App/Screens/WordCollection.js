@@ -20,7 +20,7 @@ import axios from "axios";
 import { AsyncStorage } from "react-native";
 import * as firebase from "firebase";
 import { get } from "react-native/Libraries/Utilities/PixelRatio";
-
+import LoadingScreen from '../Screens/LoadingScreen'
 
 const WordCollection = (props) => {
   // const translationGoogle = async (word) => {
@@ -226,11 +226,9 @@ const WordCollection = (props) => {
     );
   } else {
     return (
-      <View>
-        <Text>
-          Loadinggggggg
-        </Text>
-      </View>
+      <View style={{ flex: 1 }}>
+      <LoadingScreen />
+    </View>
     );
   }
 };
