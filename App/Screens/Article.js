@@ -53,7 +53,7 @@ const Article = (props) => {
       console.log("Get UuidTemp in article");
       console.log(uuidTemp);
 
-      await axios.get("http://10.0.2.2:3000/user/" + uuidTemp).then(
+      await axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/user/" + uuidTemp).then(
         (response) => {
           console.log("id user in article");
           console.log(response.data.user);
@@ -80,7 +80,7 @@ const Article = (props) => {
     console.log("user id in article suggestion")
     console.log(userId)
     const data = await axios
-      .get("http://10.0.2.2:3000/answer/suggestions/" + userId)
+      .get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/answer/suggestions/" + userId)
       .then((response) => {
         console.log("Suggestion");
         // console.log(response.data.length);
@@ -98,7 +98,7 @@ const Article = (props) => {
 
   const fetch = async () => {
     console.log("runningggggggggggggggggggggggggggggg");
-    await axios.get("http://10.0.2.2:3000/reading/interest/" + props.text).then(
+    await axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/reading/interest/" + props.text).then(
       (response) => {
         console.log("eiei");
         console.log(response.data.reading[1]);

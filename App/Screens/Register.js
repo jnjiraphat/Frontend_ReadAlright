@@ -43,7 +43,7 @@ const Register = () => {
             // ...
           });
         axios
-          .post("http://10.0.2.2:3000/user", {
+          .post("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/user", {
             regtime: null,
             username: data.name,
             pwd: "A1",

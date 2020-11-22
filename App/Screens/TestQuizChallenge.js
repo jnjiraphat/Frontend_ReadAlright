@@ -127,7 +127,7 @@ export default class TestQuizChallenge extends React.Component {
               );
             } else {
               axios
-                .post("http://10.0.2.2:3000/answers", {
+                .post("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/answers", {
                   isRightChoice: this.state.result[index].value.isRightChoice,
                   choice: this.state.result[index].value.choice,
                   optionText: this.state.result[index].value.optionText,
@@ -203,7 +203,7 @@ export default class TestQuizChallenge extends React.Component {
     ) {
       await axios
         .get(
-          "http://10.0.2.2:3000/quiz/" +
+          "http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/quiz/" +
             this.state.dataArrayQuizChallenge[0][index].question_id
         )
         .then(
@@ -227,7 +227,7 @@ export default class TestQuizChallenge extends React.Component {
 
     if (this.state.reading_id != null) {
       await axios
-        .get("http://10.0.2.2:3000/quizInContent/" + this.state.reading_id)
+        .get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/quizInContent/" + this.state.reading_id)
         .then(
           (response) => {
             console.log(response.data.quiz);
@@ -276,7 +276,7 @@ export default class TestQuizChallenge extends React.Component {
       // userIdTemp = uuidTemp;
       console.log(uuidTemp);
 
-      await axios.get("http://10.0.2.2:3000/user/" + uuidTemp).then(
+      await axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/user/" + uuidTemp).then(
         (response) => {
           console.log("id user");
           console.log(response.data.user);

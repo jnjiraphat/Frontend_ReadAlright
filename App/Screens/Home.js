@@ -62,7 +62,7 @@ const home = (props) => {
   const [resultNew, setResultNew] = useState([]);
   const getNewReading = async () => {
     const data = await axios
-      .get("http://10.0.2.2:3000/newReading")
+      .get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/newReading")
       .then((response) => {
         setResultNew(response.data);
       });
@@ -75,7 +75,7 @@ const home = (props) => {
       var output = []
       for (let index = 0; index < props.text.length; index++) {
         const data = await axios
-          .get("http://10.0.2.2:3000/vocabBox/maybeYouLike/" + props.text[index])
+          .get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/vocabBox/maybeYouLike/" + props.text[index])
           .then((response) => {
             for (let j = 0; j < response.data.reading.length; j++) {
               output.push(response.data.reading[j])
@@ -97,7 +97,7 @@ const home = (props) => {
 
   const getSuggestion = async () => {
     const data = await axios
-      .get("http://10.0.2.2:3000/answer/suggestions/" + userId)
+      .get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/answer/suggestions/" + userId)
       .then((response) => {
         console.log("sug in home")
         console.log(response.data.answer)
@@ -133,7 +133,7 @@ const home = (props) => {
     try {
       console.log("Get UuidTemp in home");
       console.log(uuidTemp);
-      await axios.get("http://10.0.2.2:3000/user/" + uuidTemp).then(
+      await axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/user/" + uuidTemp).then(
         (response) => {
           console.log("id user in home");
           console.log(response.data.user);
@@ -236,7 +236,7 @@ const home = (props) => {
 
   const getReadaingByCateId = async () => {
     const data = await axios
-      .get("http://10.0.2.2:3000/reading/user/1")
+      .get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/reading/user/1")
       .then((response) => {
         setResult(response.data.reading);
       });

@@ -32,7 +32,7 @@ const ArticleVocab = (props) => {
 
     const fetch = async () => {
         console.log("runningggggggggggggggggggggggggggggg");
-        await axios.get("http://10.0.2.2:3000/vocabBox/" + props.text).then(
+        await axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/vocabBox/" + props.text).then(
             (response) => {
                 console.log("eiei");
                 console.log(response.data.reading);
