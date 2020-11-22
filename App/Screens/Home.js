@@ -29,7 +29,6 @@ import CarouselCardVocab from "../components/CarouselCardVocab";
 import CategoryCardVocab from "../components/CategoryCardVocab";
 import { out } from "react-native/Libraries/Animated/src/Easing";
 import LoadingScreen from './LoadingScreen'
-import { Button } from "react-native";
 import { AsyncStorage } from "react-native";
 
 const arrayReading = [];
@@ -152,16 +151,7 @@ const home = (props) => {
       console.log("error get userId5")
     }
   }
-  async function goToLogin() {
-    console.log("Log out already 1")
-    // clearAppData()
-    await firebase.auth().signOut();
-    await removeItemValue()
-
-
-
-    console.log("Log out already 2")
-  }
+  
 
   // const clearAppData = async function () {
   //   try {
@@ -172,28 +162,7 @@ const home = (props) => {
   //     console.error('Error clearing app data.');
   //   } 
   // }
-  async function removeItemValue() {
-    try {
-      var token = await AsyncStorage.getItem('token');
-      console.log("token in home")
-      console.log(token)
-      await AsyncStorage.removeItem('uid');
-      await AsyncStorage.removeItem('pretest');
-      await AsyncStorage.removeItem('emailSign');
-      await AsyncStorage.removeItem('googleSign');
-      await AsyncStorage.removeItem('userName');
-      await AsyncStorage.removeItem('userPicURL');
-      await AsyncStorage.removeItem('token')
   
-
-    }
-    catch (exception) {
-      console.log("error remove item")
-    } finally {
-      Actions.Login();
-
-    }
-  }
   // async function clearAsyncStorage() {
   //   await AsyncStorage.removeItem('uid');
   //   // await AsyncStorage.clear();
@@ -225,9 +194,7 @@ const home = (props) => {
 
         <View style={styles.ContentSwitch}>
           <View style={styles.ContentCarousel}>
-            <TouchableOpacity>
-              <Button title="Sign out" onPress={() => goToLogin()} > </Button>
-            </TouchableOpacity>
+           
             <Text style={styles.topic}>News!</Text>
             <CarouselCard result={resultNew} />
           </View>
