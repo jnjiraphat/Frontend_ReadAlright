@@ -58,7 +58,7 @@ const QuizInstruction = (props) => {
       } else {
 
       }
-    }, 2000);
+    }, 1000);
 
   } 
   const setUp = async () => {

@@ -184,6 +184,8 @@ const home = (props) => {
       await AsyncStorage.removeItem('userName');
       await AsyncStorage.removeItem('userPicURL');
       await AsyncStorage.removeItem('token')
+  
+
     }
     catch (exception) {
       console.log("error remove item")

@@ -16,12 +16,13 @@ import SwitchType from "../components/SwitchType";
 import { AsyncStorage } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
+import { setLogLevel } from "firebase";
 
 const Header = (props) => {
   const { tabs, ContentDefault, ContentChange, suggestion, isSwitch } = props;
 
 
-
+  const [level, setLevel] = useState(""); 
   const [picture, showPic] = useState("");
 
   
@@ -29,6 +30,8 @@ const Header = (props) => {
     try {
       console.log("MyUserPIc 1")
       var userPicture = await AsyncStorage.getItem('userPicURL');
+      var level = await AsyncStorage.getItem('level');
+
       console.log("MyUserPIc 2")
       console.log(userPicture)
       console.log("MyUserPIc 2")
@@ -36,7 +39,7 @@ const Header = (props) => {
     } catch (error) {
       console.log("MyUserPIc 3")
     } finally {
-      
+      setLevel(level);
       showPic(userPicture)
     }
   }
@@ -95,7 +98,7 @@ const Header = (props) => {
                 width={110}
                 height={110}
               />
-              <AreaProfile level="A1" suggestion={suggestion} />
+              <AreaProfile level={level} suggestion={suggestion} />
             </View>
             <View
               style={{
@@ -166,7 +169,7 @@ const Header = (props) => {
                 // height={Dimensions.get("window").height / 10}
                 height={80}
               />
-              <AreaProfile level="A1" display="none" />
+              <AreaProfile level={level} display="none" />
             </View>
             <View
               style={{
