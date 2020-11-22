@@ -118,7 +118,6 @@ const home = (props) => {
     getNewReading();
     vocab();
     newvocab();
-    // getSuggestion();
     getMaybeVb();
   }, []);
   const [uuid, setUuid] = useState("");
@@ -171,7 +170,7 @@ const home = (props) => {
   //     console.log("clear already")
   //   } catch (error) {
   //     console.error('Error clearing app data.');
-  //   }
+  //   } 
   // }
   async function removeItemValue() {
     try {
@@ -182,7 +181,8 @@ const home = (props) => {
       await AsyncStorage.removeItem('pretest');
       await AsyncStorage.removeItem('emailSign');
       await AsyncStorage.removeItem('googleSign');
-
+      await AsyncStorage.removeItem('userName');
+      await AsyncStorage.removeItem('userPicURL');
       await AsyncStorage.removeItem('token')
     }
     catch (exception) {
