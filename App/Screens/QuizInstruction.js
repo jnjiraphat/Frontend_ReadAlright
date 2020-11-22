@@ -43,22 +43,22 @@ const QuizInstruction = (props) => {
   //   }
   // } 
   const fetchUser = async () => {
-    setInterval(async () => {
+    // setInterval(async () => {
       var uuid = firebase.auth().currentUser.uid;
       if (firebase.auth().currentUser.uid == null) {
         Actions.QuizInstruction()
       }
       var response = await axios.get("http://10.0.2.2:3000/user/" + uuid);
-      console.log("response user");
+      // console.log("response user");
       setUser(response.data.user)
-      console.log(response.data.user);
-      console.log(response.data.user[0].isTested);
+      // console.log(response.data.user);
+      // console.log(response.data.user[0].isTested);
       if (response.data.user[0].isTested == "true") {
         Actions.Home()
       } else {
 
       }
-    }, 1000);
+    // }, 1000);
 
   }
   const setUp = async () => {
