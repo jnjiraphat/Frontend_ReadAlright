@@ -89,7 +89,7 @@ const Content = (props) => {
   const fetch = async () => {
     console.log("runningggggggggggggggggggggggggggggg");
     await axios
-      .get("http://10.0.2.2:3000/vocabCard/" + props.text)
+      .get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/vocabCard/" + props.text)
       .then(
         (response) => {
           console.log("eieiContentVocab");
@@ -135,7 +135,7 @@ const Content = (props) => {
       console.log("Get UuidTemp");
       console.log(uuidTemp);
 
-      await axios.get("http://10.0.2.2:3000/user/" + uuidTemp).then(
+      await axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/user/" + uuidTemp).then(
         (response) => {
           console.log("id user in content vocab");
           console.log(response.data.user);
@@ -202,7 +202,7 @@ const Content = (props) => {
 
           console.log(engWord)
           await axios
-            .delete("http://10.0.2.2:3000/wordCol/del/" + engWord)
+            .delete("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/wordCol/del/" + engWord)
             .then(
               (response) => {
                 console.log("delete bookmark success!!!");
@@ -246,7 +246,7 @@ const Content = (props) => {
         isBookMark.forEach(logMapElements);
         for (let index = temp; index < bookmark.length; index++) {
           axios
-            .post("http://10.0.2.2:3000/wordCol", {
+            .post("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/wordCol", {
               wordCol_Thai: newThaiWord,
               wordCol_Eng: bookmark[index],
               user_id: userId

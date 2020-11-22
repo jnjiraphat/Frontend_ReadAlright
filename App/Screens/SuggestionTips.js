@@ -45,7 +45,7 @@ const home = (props) => {
       console.log("Get UuidTemp");
       console.log(uuidTemp);
 
-      await axios.get("http://10.0.2.2:3000/user/" + uuidTemp).then(
+      await axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/user/" + uuidTemp).then(
         (response) => {
           console.log("id user");
           console.log(response.data.user);
@@ -77,7 +77,7 @@ const home = (props) => {
   const getSuggestion = async (userIdTemp) => {
     console.log("userIdTemp")
     console.log(userIdTemp)
-    axios.get("http://10.0.2.2:3000/answer/suggestions/" + userIdTemp).then(
+    axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/answer/suggestions/" + userIdTemp).then(
       (response) => {
         console.log("SuggestionNon");
         console.log(response.data.answer);
@@ -96,7 +96,7 @@ const home = (props) => {
 
   const getTrick = async () => {
     try {
-      const data = await axios.get("http://10.0.2.2:3000/tricks").then(
+      const data = await axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/tricks").then(
         (response) => {
           console.log("Trikcs");
           console.log(response.data.quiz)
@@ -123,7 +123,7 @@ const home = (props) => {
 
     for (let index = 0; index < suggestionTypeId.length; index++) {
       axios
-        .post("http://10.0.2.2:3000/suggestion_user", {
+        .post("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/suggestion_user", {
           typeOfSuggestion_id: suggestionTypeId[index].typeOfSuggestion_id,
           user_id: 1
         })
@@ -150,7 +150,7 @@ const home = (props) => {
         console.log("Suggestion Nontest")
 
         await axios
-          .delete("http://10.0.2.2:3000/suggestion_user/" + suggestId)
+          .delete("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/suggestion_user/" + suggestId)
           //เปลี่ยนตรงนี้
           .then(
             (response) => {

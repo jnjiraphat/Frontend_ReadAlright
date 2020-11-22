@@ -48,7 +48,7 @@ const QuizInstruction = (props) => {
       if (firebase.auth().currentUser.uid == null) {
         Actions.QuizInstruction()
       }
-      var response = await axios.get("http://10.0.2.2:3000/user/" + uuid);
+      var response = await axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/user/" + uuid);
       // console.log("response user");
       setUser(response.data.user)
       // console.log(response.data.user);

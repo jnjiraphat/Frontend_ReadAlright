@@ -125,7 +125,7 @@ const interest = (props) => {
       selected.forEach(logMapElements);
       for (let index = 0; index < arrayIdCate.length; index++) {
         axios
-          .post("http://10.0.2.2:3000/views", {
+          .post("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/views", {
             numOfView: 1,
             category_id: arrayIdCate[index],
             user_id: 1,

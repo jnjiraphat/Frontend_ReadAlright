@@ -169,7 +169,7 @@ export default class TestQuiz extends React.Component {
     fetchAPI = async () => {
         var dataArrayQuiz = [];
         for (let index = 7; index <= 16; index++) {
-            await axios.get("http://10.0.2.2:3000/quiz/" + index).then(
+            await axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/quiz/" + index).then(
                 (response) => {
                     // console.log("------------------question------------------" + index);
                     console.log(response.data);

@@ -23,7 +23,7 @@ const newReading = (props) => {
 
   const getNewReading = async () => {
     const data = await axios
-      .get("http://10.0.2.2:3000/newReading")
+      .get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/newReading")
       .then((response) => {
         console.log("Newreadingggggggggggggggggggggggggggggggggg");
         console.log("Newreadingggggggggggggggggggggggggggggggggg");
