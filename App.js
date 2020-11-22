@@ -1,67 +1,39 @@
-import * as React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { SplashScreen } from 'expo';
-import * as Font from 'expo-font';
-import { Ionicons } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, { Component } from "react";
+import { StyleSheet, Text, AppRegistry } from "react-native";
+import Interest from "./App/Screens/InterestScreen";
+import Routes from "./Routes.js";
+import * as firebase from "firebase";
 
-import BottomTabNavigator from './navigation/BottomTabNavigator';
-import useLinking from './navigation/useLinking';
 
-const Stack = createStackNavigator();
+var firebaseConfig = {
+  apiKey: "AIzaSyA6-ykf9ZduUIbdsgdsgAuE08pH3SFAo6M",
+  authDomain: "readalright.firebaseapp.com",
+  databaseURL: "https://readalright.firebaseio.com",
+  projectId: "readalright",
+  storageBucket: "readalright.appspot.com",
+  messagingSenderId: "730744212125",
+  appId: "1:730744212125:web:38634bee0504ef94f62274",
+  measurementId: "G-0XP8KDX5KW",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-export default function App(props) {
-  const [isLoadingComplete, setLoadingComplete] = React.useState(false);
-  const [initialNavigationState, setInitialNavigationState] = React.useState();
-  const containerRef = React.useRef();
-  const { getInitialState } = useLinking(containerRef);
-
-  // Load any resources or data that we need prior to rendering the app
-  React.useEffect(() => {
-    async function loadResourcesAndDataAsync() {
-      try {
-        SplashScreen.preventAutoHide();
-
-        // Load our initial navigation state
-        setInitialNavigationState(await getInitialState());
-
-        // Load fonts
-        await Font.loadAsync({
-          ...Ionicons.font,
-          'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-        });
-      } catch (e) {
-        // We might want to provide this error information to an error reporting service
-        console.warn(e);
-      } finally {
-        setLoadingComplete(true);
-        SplashScreen.hide();
-      }
-    }
-
-    loadResourcesAndDataAsync();
-  }, []);
-
-  if (!isLoadingComplete && !props.skipLoadingScreen) {
-    return null;
-  } else {
-    return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
-          <Stack.Navigator>
-            <Stack.Screen name="Root" component={BottomTabNavigator} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </View>
-    );
+class App extends Component {
+  render() {
+    return <Routes />;
   }
 }
+export default App;
+AppRegistry.registerComponent("App", () => App);
+// export default function App() {
+//   return <Interest />;
+// }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#fff",
+//     alignItems: "center",
+//     justifyContent: "center"
+//   }
+// });
