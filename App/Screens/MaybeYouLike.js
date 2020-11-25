@@ -54,7 +54,7 @@ const About = (props) => {
       console.log("cateId = " + props.text[index]);
 
       const data = await axios
-        .get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/reading/categorys/" + props.text[index])
+        .get("https://readalright-backend.khanysorn.me/reading/categorys/" + props.text[index])
         .then((response) => {
           console.log("round = " + [index]);
            (let j = 0; j < response.data.reading.length; j++) {

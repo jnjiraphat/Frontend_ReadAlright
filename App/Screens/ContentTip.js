@@ -25,7 +25,7 @@ const ContentTip = (props) => {
   const fetch = async () => {
     console.log("runningggggggggggggggggggggggggggggg");
     await axios
-      .get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/getTricksByTrickID/" + props.text)
+      .get("https://readalright-backend.khanysorn.me/getTricksByTrickID/" + props.text)
       .then(
         (response) => {
           console.log("Tip");
