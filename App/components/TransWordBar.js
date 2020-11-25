@@ -52,7 +52,7 @@ const TransWordBar = (props) => {
         setChecked(false)
         console.log(getWord)
         await axios
-          .delete("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/wordCol/del/" + getWord)
+          .delete("https://readalright-backend.khanysorn.me/wordCol/del/" + getWord)
           .then(
             (response) => {
               console.log("delete bookmark success!!!");
@@ -91,7 +91,7 @@ const TransWordBar = (props) => {
       console.log("Get UuidTemp");
       console.log(uuidTemp);
 
-      await axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/user/" + uuidTemp).then(
+      await axios.get("https://readalright-backend.khanysorn.me/user/" + uuidTemp).then(
         (response) => {
           console.log("id user in content vocab");
           console.log(response.data.user);
@@ -126,7 +126,7 @@ const TransWordBar = (props) => {
       isBookMark.forEach(logMapElements);
       for (let index = 0; index < bookmark.length; index++) {
         axios
-          .post("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/wordCol", {
+          .post("https://readalright-backend.khanysorn.me/wordCol", {
             wordCol_Thai: getTranslate,
             wordCol_Eng: getWord,
             user_id: userId

@@ -83,7 +83,7 @@ const WordCollection = (props) => {
       // });
       // const data = await response.json();
       // console.log(response)
-      await axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/user/" + uuidTemp).then(
+      await axios.get("https://readalright-backend.khanysorn.me/user/" + uuidTemp).then(
         (response) => {
           console.log("id user");
           console.log(response.data.user);
@@ -115,7 +115,7 @@ const WordCollection = (props) => {
     const newSelected = new Map(isBookMark);
     console.log("userId")
     console.log(userIdTemp)
-    await axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/wordCol/" + userIdTemp).then(
+    await axios.get("https://readalright-backend.khanysorn.me/wordCol/" + userIdTemp).then(
       (response) => {
         for (let index = 0; index < response.data.word.length; index++) {
           newSelected.set(response.data.word[index]['wordCol_Eng'], true);
@@ -169,7 +169,7 @@ const WordCollection = (props) => {
       if (!isBookMark.get(wordCol_Eng) == false) {
         console.log(wordCol_Eng)
         await axios
-          .delete("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/wordCol/del/" + wordCol_Eng)
+          .delete("https://readalright-backend.khanysorn.me/wordCol/del/" + wordCol_Eng)
           .then(
             (response) => {
               console.log("delete bookmark success!!!");

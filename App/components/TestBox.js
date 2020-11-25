@@ -229,56 +229,7 @@ const TestBox = (props) => {
     [selected],
     console.log(selected)
   );
-  // const onSelect = ({ choice_id, isRightChoice, question_id }) => {
-  //   const newSelected = new Map(selected);
-  //   newSelected.set(choice_id, !selected.get(choice_id));
-  //   setSelected(choice_id);
 
-  //   [selected], console.log(selected);
-  //   // if (userAnswer.indexOf(choice_id) == -1) {
-  //   //   userAnswer.push(choice_id);
-  //   // } else {
-  //   //   console.log("Dup");
-
-  //   //   userAnswer.splice(userAnswer.indexOf(choice_id), 1);
-  //   // }
-  //   // console.log(userAnswer);
-  //   // setCurrent(question_id);
-  //   // putScore(isRightChoice);
-  // };
-
-  // const putScore = React.useCallback(
-  //   (isRightChoice) => {
-  //     const newScore = new Map(score);
-  //     newScore.set(isRightChoice, !score.get(isRightChoice));
-
-  //     setScore(newScore);
-  //   },
-  //   [setScore],
-  //   console.log(setScore)
-  // );
-  // const putScore = (isRightChoice) => {
-  //   let array = [1, 2, 3, 4, 5];
-  //   // Getting sum of numbers.
-  //   let sum = array.reduce(function (a, b) {
-  //     return a + b;
-  //   }, 0);
-  //   console.log(sum);
-
-  // if (currentQuiz !== prevQuiz){
-  //   if (isRightChoice === 1) {
-  //     setScore(score + 1);
-  //   } else if (isRightChoice === 0) {
-  //     setScore(score + 0);
-  //   }
-  // } else if(currentQuiz === prevQuiz){
-  //   if (isRightChoice === 1) {
-  //     setScore(score + 0);
-  //   } else if (isRightChoice === 0) {
-  //     setScore(score - 1);
-  //   }
-  // }
-  // };
 
   useEffect(() => {
     // console.log(selected);
