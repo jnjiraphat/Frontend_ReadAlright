@@ -168,7 +168,7 @@ const Login = () => {
 
             });
             try {
-              fetch('http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/user', {
+              fetch('https://readalright-backend.khanysorn.me/user', {
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json',
@@ -337,7 +337,7 @@ const Login = () => {
         firebase.auth().signInWithCredential(credential).then((response) => {
           console.log("uuid Facebook" + response.user.uid);
           axios
-            .post("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/user", {
+            .post("https://readalright-backend.khanysorn.me/user", {
               regtime: null,
               username: data.name,
               pwd: "A1",
@@ -427,7 +427,7 @@ const Login = () => {
 
           console.log("uuid Facebook" + response.user.uid);
           axios
-            .post("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/user", {
+            .post("https://readalright-backend.khanysorn.me/user", {
               regtime: null,
               username: response.user.email,
               pwd: "A1",

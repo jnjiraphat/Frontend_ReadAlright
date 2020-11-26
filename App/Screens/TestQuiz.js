@@ -118,7 +118,7 @@ export default class TestQuiz extends React.Component {
         console.log("name null")
         name = firebase.auth().currentUser.email;
       }
-      var response = await axios.put("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/user/updateUser/" + uuid, {
+      var response = await axios.put("https://readalright-backend.khanysorn.me/user/updateUser/" + uuid, {
         "regtime": null,
         "username": name,
         "pwd": "Panda",
@@ -216,7 +216,7 @@ export default class TestQuiz extends React.Component {
               );
             } else {
               axios
-                .post("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/answers", {
+                .post("https://readalright-backend.khanysorn.me/answers", {
                   isRightChoice: this.state.result[index].value.isRightChoice,
                   choice: this.state.result[index].value.choice,
                   optionText: this.state.result[index].value.optionText,
@@ -257,7 +257,7 @@ export default class TestQuiz extends React.Component {
 
     try {
 
-      await axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/QuizPre/question/reading/" + this.state.reading_id).then(
+      await axios.get("https://readalright-backend.khanysorn.me/QuizPre/question/reading/" + this.state.reading_id).then(
         (response) => {
           for (let index = 0; index < response.data.quiz.length; index++) {
             dataArrayQuiz2.push(response.data.quiz[index].question_pretest_id);
@@ -289,7 +289,7 @@ export default class TestQuiz extends React.Component {
   fetchAPI = async () => {
     var dataArrayQuiz = [];
     for (let index = 0; index < this.state.questionId.length; index++) {
-      await axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/QuizPre/question/" + this.state.questionId[index]).then(
+      await axios.get("https://readalright-backend.khanysorn.me/QuizPre/question/" + this.state.questionId[index]).then(
         (response) => {
           console.log(response.data);
           dataArrayQuiz.push(response.data);

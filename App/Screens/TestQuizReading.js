@@ -37,7 +37,7 @@ const TestQuizReading = (props) => {
     if (props.text != null) {
       console.log("$$$$$$$$$$$$$$$$$$$$$$");
       console.log(props.text);
-      await axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/ReadingPre/" + props.text).then(
+      await axios.get("https://readalright-backend.khanysorn.me/ReadingPre/" + props.text).then(
         (response) => {
           console.log("prop not null");
           console.log(response.data.quiz);
@@ -51,7 +51,7 @@ const TestQuizReading = (props) => {
         }
       );
     } else {
-      await axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/ReadingPre/" + index).then(
+      await axios.get("https://readalright-backend.khanysorn.me/ReadingPre/" + index).then(
         (response) => {
           console.log("prop null");
           console.log(response.data.quiz);

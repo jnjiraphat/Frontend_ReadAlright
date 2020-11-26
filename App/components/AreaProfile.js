@@ -19,7 +19,7 @@ const AreaProfile = (props) => {
 
   const getSuggestion = async (uUidTemp2) => {
     const data = await axios
-      .get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/answer/suggestions/" + uUidTemp2)
+      .get("https://readalright-backend.khanysorn.me/answer/suggestions/" + uUidTemp2)
       .then((response) => {
         console.log("sug in Area")
         console.log(response.data.answer)
@@ -49,7 +49,7 @@ const AreaProfile = (props) => {
     try {
       console.log("Get UuidTemp Area");
       console.log(uuidTemp);
-      await axios.get("http://ec2-3-90-114-38.compute-1.amazonaws.com:3000/" + uuidTemp).then(
+      await axios.get("https://readalright-backend.khanysorn.me/" + uuidTemp).then(
         (response) => {
           console.log("id user");
           console.log(response.data.user);
