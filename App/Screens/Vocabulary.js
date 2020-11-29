@@ -49,7 +49,7 @@ const Vocabulary = (props) => {
 
   const fetch = async () => {
     console.log("runningggggggggggggggggggggggggggggg");
-    await axios.get("https://readalright-backend.khanysorn.me/vocabBox/" + props.text).then(
+    await axios.get("https://readalright-backend.khanysorn.me/vocabBoxByCateID/" + props.text).then(
       (response) => {
         console.log("eiei");
         console.log(response.data.reading);

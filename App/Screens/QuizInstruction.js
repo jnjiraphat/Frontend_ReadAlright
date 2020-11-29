@@ -43,7 +43,8 @@ const QuizInstruction = (props) => {
   //   }
   // } 
   const fetchUser = async () => { 
-    setTimeout(async () => {
+    var check = false;
+   var myInterval = setInterval(async () => {
       var uuid = firebase.auth().currentUser.uid;
       if (firebase.auth().currentUser.uid == null) {
         Actions.QuizInstruction()
@@ -54,11 +55,16 @@ const QuizInstruction = (props) => {
       // console.log(response.data.user);
       // console.log(response.data.user[0].isTested);
       if (response.data.user[0].isTested == "true") {
-        Actions.Home()
+        Actions.Home() 
       } else {
-
+  
       }
-    }, 1000);
+      check = true;
+      if(check==true){
+        clearInterval(myInterval)
+      }
+
+    }, 2000);
 
   } 
   const setUp = async () => {

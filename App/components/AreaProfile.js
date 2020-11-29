@@ -49,7 +49,7 @@ const AreaProfile = (props) => {
     try {
       console.log("Get UuidTemp Area");
       console.log(uuidTemp);
-      await axios.get("https://readalright-backend.khanysorn.me/" + uuidTemp).then(
+      await axios.get("https://readalright-backend.khanysorn.me/user/" + uuidTemp).then(
         (response) => {
           console.log("id user");
           console.log(response.data.user);

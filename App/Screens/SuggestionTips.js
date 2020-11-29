@@ -33,6 +33,7 @@ const home = (props) => {
       var uid = firebase.auth().currentUser.uid;
       console.log(uid)
       getUser(uid);
+      getAndPostSuggestion(uid);
 
     } catch (error) {
       console.log("error getItem")
@@ -66,10 +67,10 @@ const home = (props) => {
   }
 
   const [trick, setTrick] = useState([]);
-  const getAndPostSuggestion = async () => {
+  const getAndPostSuggestion = async (uid) => {
     await getSuggestion();
     setTimeout(() => {
-      postSuggestion();
+      postSuggestion(uid);
     }, 5000);
   }
 
@@ -113,7 +114,7 @@ const home = (props) => {
     }
 
   };
-  const postSuggestion = async () => {
+  const postSuggestion = async (uid) => {
     console.log("PostSuggestionNon");
     console.log(suggestionTypeId.length);
     console.log(suggestionTypeId[0]);
@@ -125,7 +126,7 @@ const home = (props) => {
       axios
         .post("https://readalright-backend.khanysorn.me/suggestion_user", {
           typeOfSuggestion_id: suggestionTypeId[index].typeOfSuggestion_id,
-          user_id: 1
+          user_id: uid
         })
         .then(
           (response) => {
@@ -183,7 +184,7 @@ const home = (props) => {
 
   useEffect(() => {
     getTrick();
-    getAndPostSuggestion();
+    // getAndPostSuggestion();
     getUid();
     // read();
   }, []);
