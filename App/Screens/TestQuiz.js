@@ -7,7 +7,6 @@ import { Actions } from "react-native-router-flux";
 import Constants from "expo-constants";
 import { Button } from "@ant-design/react-native";
 import { AsyncStorage } from "react-native";
-import { set } from "react-native-reanimated";
 import * as firebase from "firebase";
 
 import LoadingScreen from './LoadingScreen'
@@ -39,14 +38,8 @@ export default class TestQuiz extends React.Component {
       count: 0,
       temp: []
     };
-    // this.checkPretest()
-    // this.editUser()
-
     this.setUpQuestion()
 
-    // this.setUp
-    // this.fetchReading();
-    // console.log("This is  " + this.reading_id);
   }
 
 
@@ -57,40 +50,22 @@ export default class TestQuiz extends React.Component {
     for (const elem of infoQuestionsRemoved) {
       answersAsObj[elem.questionId] = elem.value;
     }
-    // this.setState({
-    //   answersSoFar: JSON.stringify(this.surveyRef.getAnswers(), 2),
-    // }); 
-    // console.log("=============================")
-
-    // console.log(this.state.answersSoFar)
-    // console.log("=============================")
-    // var count = 2;   
     setTimeout(() => {
       this.setUp();
     }, 1500);
 
     if (this.state.reading_id != 6) {
-      console.log("=============================")
-      console.log(this.state.reading_id + 1)
       Actions.TestQuizReading({ text: this.state.reading_id + 1 });
-      //  count = count+1;
     } else {
       this.editUser();
-      console.log("Success")
 
     }
 
 
 
-    // console.log(answers);
   }
 
   onAnswerSubmitted(answer) {
-
-    console.log("pretest true")
-    console.log("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
-    console.log(JSON.stringify(this.surveyRef.getAnswers(), 2))
-    console.log("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
 
     this.setState({
       count: this.state.count + 1,
@@ -101,10 +76,6 @@ export default class TestQuiz extends React.Component {
   converData() {
     return new Promise((resolve, reject) => {
       var data = JSON.parse(this.state.answersSoFar);
-      console.log("------------answer----------------")
-      console.log(data)
-      console.log("------------answer----------------")
-
 
       resolve(data);
     });
@@ -115,7 +86,6 @@ export default class TestQuiz extends React.Component {
       var photo = firebase.auth().currentUser.photoURL;
       var uuid = firebase.auth().currentUser.uid
       if (name == null) {
-        console.log("name null")
         name = firebase.auth().currentUser.email;
       }
       var response = await axios.put("https://readalright-backend.khanysorn.me/user/updateUser/" + uuid, {
@@ -127,8 +97,6 @@ export default class TestQuiz extends React.Component {
         "uid": uuid,
         "isTested":"true"
       });
-      console.log(response);
-      console.log("Edit user !!");
     } catch (error) {
 
     } finally {
@@ -139,13 +107,7 @@ export default class TestQuiz extends React.Component {
 
   }
   convertJson = async () => {
-    // console.log(this.state.answersSoFar.length)
-
     await this.converData().then((result) => {
-      console.log(result.length + "eiei");
-      console.log("------------answerq----------------")
-      console.log(result);
-      console.log("------------answerq----------------")
       try {
         AsyncStorage.setItem("pretest", "true");
         AsyncStorage.setItem('userAnswer' + this.state.reading_id, JSON.stringify(result));
@@ -156,7 +118,6 @@ export default class TestQuiz extends React.Component {
         result: result,
       });
     });
-    // console.log(this.state.result.length + "eiei")
   };
   setUpQuestion = async () => {
     await this.fetchAPIBefore();
@@ -166,30 +127,8 @@ export default class TestQuiz extends React.Component {
   setUp = async () => {
     await this.convertJson();
 
-    // await this.checkAnswer();
   };
   checkAnswer = async () => {
-    // var tempCorrectChoice = [];
-    // for (let index = 0; index <= 100; index++) {
-    //     await axios.get("http://10.0.2.2:3000/correctChoices").then(
-    //         (response) => {
-    //             console.log(response.data);
-    //             tempCorrectChoice.push(response.data);
-    //             console.log(tempCorrectChoice.length);
-    //         },
-    //         (error) => {
-    //             console.log(error);
-    //         }
-    //     );
-    // }
-    // this.setState({
-    //    correctChoice: tempCorrectChoice,
-    // });
-    // console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++")
-    // console.log(correctChoice)
-    // this.setState({
-    //     quizs: dataArrayQuiz,
-    // });
 
 
     var count = 0;
@@ -200,20 +139,8 @@ export default class TestQuiz extends React.Component {
         console.log(this.state.result.length + "koko");
         try {
           for (let index = 0; index < this.state.result.length; index++) {
-            console.log(
-              "index--" +
-              this.state.result[index] +
-              " is " +
-              this.state.result[index].value.value
-            );
             if (this.state.result[index].value.isRightChoice == 1) {
               count += 1;
-              console.log(
-                "index " +
-                this.state.result[index] +
-                " is " +
-                this.state.result[index].value.isRightChoice
-              );
             } else {
               axios
                 .post("https://readalright-backend.khanysorn.me/answers", {
@@ -233,13 +160,6 @@ export default class TestQuiz extends React.Component {
                   }
                 );
 
-              console.log(
-                "index " +
-                this.state.result[index] +
-                " is " +
-                this.state.result[index].value.isRightChoice +
-                " is wrong"
-              );
             }
           }
         } catch (error) {
@@ -261,11 +181,7 @@ export default class TestQuiz extends React.Component {
         (response) => {
           for (let index = 0; index < response.data.quiz.length; index++) {
             dataArrayQuiz2.push(response.data.quiz[index].question_pretest_id);
-            console.log("eiei")
-            console.log(response.data.quiz[index].question_pretest_id)
-
-            console.log("eiei")
-
+            
           }
           this.setState({
             questionId: dataArrayQuiz2
@@ -282,18 +198,13 @@ export default class TestQuiz extends React.Component {
     }
 
 
-    // this.setState({
-    //   quizs: dataArrayQuiz,
-    // });
   };
   fetchAPI = async () => {
     var dataArrayQuiz = [];
     for (let index = 0; index < this.state.questionId.length; index++) {
       await axios.get("https://readalright-backend.khanysorn.me/QuizPre/question/" + this.state.questionId[index]).then(
         (response) => {
-          console.log(response.data);
           dataArrayQuiz.push(response.data);
-          console.log(dataArrayQuiz.length);
         },
         (error) => {
           console.log(error);
@@ -304,19 +215,7 @@ export default class TestQuiz extends React.Component {
       quizs: dataArrayQuiz,
     });
   };
-  // fetchReading = async () => {
-  //   console.log("runningggggggggggggggggggggggggggggg");
-  //   await axios.get("http://10.0.2.2:3000/ReadingPre").then(
-  //     (response) => {
-  //       console.log("eiei");
-  //       console.log(response.data.quiz);
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     }
-  //   );
-  // };
-
+  
   renderPreviousButton(onPress, enabled) {
     return (
       <View
@@ -401,7 +300,6 @@ export default class TestQuiz extends React.Component {
           <Text style={styles.header}>Pre-Test</Text>
           <Text style={styles.subHeader}>
             Read the headline. Guess if a-c below are true (T) or false (F).
-            {/* {this.state.reading_id} */}
           </Text>
           <View style={styles.whiteCardChoice}>
             <SimpleSurvey
@@ -443,10 +341,6 @@ export default class TestQuiz extends React.Component {
               Actions.Interest();
             }}
           />
-          {/* <ScrollView style={styles.answersContainer}>
-                                    <Text style={{ textAlign: 'center' }}>JSON output</Text>
-                                    <Text>{this.state.answersSoFar}</Text>
-                                </ScrollView> */}
         </View>
       );
     else
@@ -501,7 +395,6 @@ const styles = StyleSheet.create({
     flex: 1,
     minHeight: 800,
     maxHeight: 800,
-    // justifyContent: 'center',
     alignItems: "center",
     marginTop: Constants.statusBarHeight,
     backgroundColor: "#FFD686",
@@ -570,12 +463,5 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
 
-  //   buttonChoiceNC: {
-  //     fontFamily: "PT-Reg" ,
-  //     fontSize: 14
-  //   },
-  //   buttonChoiceC: {
-  //     fontFamily: "PT-Bold" ,
-  //     fontSize: 14
-  //   }
+  
 });

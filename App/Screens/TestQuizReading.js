@@ -1,50 +1,30 @@
 import React, { useEffect, useState, useCallback } from "react";
 import {
   StyleSheet,
-  ScrollView,
   Text,
   View,
   Dimensions,
   FlatList,
-  SafeAreaView,
 } from "react-native";
 import axios from "axios";
 import { Actions } from "react-native-router-flux";
 import Constants from "expo-constants";
 import ButtonClick from "../components/ButtonClick";
-import { set } from "react-native-reanimated";
 
 const TestQuizReading = (props) => {
-  // const[readId , setReadId] = useState("")
-  console.log("--------------------------------");
-  console.log(props.text);
 
   const [index, setIndex] = useState("1");
-  // console.log("This is index")
-  // console.log(index)
 
   function goToTestQuiz(readingId) {
-    console.log(readingId);
     Actions.TestQuiz({ text: readingId });
-
-    console.log("hello");
   }
   const [readPretest, setReadPretest] = useState([]);
 
   const fetch = async () => {
-    // var index = 1;
-    // var dataArrayQuiz = [];
     if (props.text != null) {
-      console.log("$$$$$$$$$$$$$$$$$$$$$$");
-      console.log(props.text);
       await axios.get("https://readalright-backend.khanysorn.me/ReadingPre/" + props.text).then(
         (response) => {
-          console.log("prop not null");
-          console.log(response.data.quiz);
           setReadPretest(response.data.quiz);
-          // setIndex(props.text)
-          // dataArrayQuiz.push(response.data.quiz);
-          // console.log(dataArrayQuiz.length);
         },
         (error) => {
           console.log(error);
@@ -53,42 +33,15 @@ const TestQuizReading = (props) => {
     } else {
       await axios.get("https://readalright-backend.khanysorn.me/ReadingPre/" + index).then(
         (response) => {
-          console.log("prop null");
-          console.log(response.data.quiz);
           setReadPretest(response.data.quiz);
           setIndex(props.text);
-          // dataArrayQuiz.push(response.data.quiz);
-          // console.log(dataArrayQuiz.length);
         },
         (error) => {
           console.log(error);
         }
       );
     }
-
-    // var dataArrayQuiz = [];
-
-    // for (let index = 1; index < 7; index++) {
-    //   await axios
-    //     .get(
-    //       "http://10.0.2.2:3000/ReadingPre/" + index
-    //     )
-    //     .then(
-    //       (response) => {
-    //         console.log(response.data.quiz);
-    //         dataArrayQuiz.push(response.data.quiz);
-    //         console.log(dataArrayQuiz.length);
-    //       },
-    //       (error) => {
-    //         console.log(error);
-    //       }
-    //     );
-    // }
-    // setReadPretest(dataArrayQuiz)
   };
-
-  console.log("This is Read Pretest");
-  console.log(readPretest);
 
   const read = async () => {
     const data = await fetch();
@@ -154,7 +107,6 @@ const styles = StyleSheet.create({
     minHeight: Dimensions.get("window").height,
   },
   questionText: {
-    // marginBottom: 20,
     fontSize: 16,
     alignSelf: "center",
     fontFamily: "PT-Bold",
@@ -190,7 +142,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   whiteCardArea: {
-    // flexGrow: 1,
   },
   choiceButton: {
     shadowOffset: {

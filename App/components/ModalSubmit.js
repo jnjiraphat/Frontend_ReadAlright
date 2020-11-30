@@ -17,10 +17,8 @@ const ModalSubmit = (props) => {
     modalHeader,
     modalButton,
     modalAction,
-    modalVisible,
-    suggestionText
+    modalVisible
   } = props;
-  // const [modalVisible, setModalVisible] = useState(false);
   return (
     <View>
       <View style={styles.centeredView}>
@@ -37,28 +35,13 @@ const ModalSubmit = (props) => {
               colors={["#7EB2F0", "#8A63E5"]}
               style={styles.modalView}
             >
-              {/* Your Level of our suggestion is */}
               <Text style={styles.header}>{modalHeader}</Text>
-              {/* circleLayout */}
               <LinearGradient
                 colors={["#FFD387", "#FCDE58"]}
                 style={styles.circleLayout}
               >
                 <Text style={styles.modalText}>{modalText}</Text>
               </LinearGradient>
-              {/* circleLayout */}
-              {/* <Text>Your Suggestion</Text>
-              <LinearGradient
-                colors={["#FFD387", "#FCDE58"]} style={styles.suggestionArea}>
-                <FlatList
-                  data={suggestionText}
-                  renderItem={({ item }) => (
-                    <Text></Text>
-                  )}
-                />
-              </LinearGradient> */}
-              
-              {/* next Step */}
               <ButtonClick
                 text={modalButton}
                 fontSize={16}
@@ -70,11 +53,9 @@ const ModalSubmit = (props) => {
                 padding={0}
                 marginBottom="20%"
                 onPressAction={modalAction}
-                // shadowRadius={30}
                 colorsStart="#FFD387"
                 colorsEnd="#FCDE58"
               />
-              {/* next Step */}
             </LinearGradient>
           </View>
         </Modal>

@@ -19,7 +19,6 @@ import axios from "axios";
 
 const userAnswer = [];
 const TestBox = (props) => {
-  // const array = [];
   const { section } = props;
   const [check, setCheck] = useState([false]);
   const [myScore, setMyScore] = useState(0);
@@ -27,7 +26,6 @@ const TestBox = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const Checking = () => {
-    // selected.forEach(logMapElements);
     try {
       var count = 0;
 
@@ -42,8 +40,6 @@ const TestBox = (props) => {
       }
       for (let index = 0; index < userAnswer.length; index++) {
         console.log(userAnswer[index]);
-        // count += 1;
-        // console.log(count);
         if (userAnswer[index] == "27") {
           console.log("true");
           count += 1;
@@ -87,47 +83,12 @@ const TestBox = (props) => {
     } catch (e) {
     } finally {
       setMyScore(count);
-      // setVisible(true);
       setModalVisible(true);
     }
 
-    //Actions.Home({ text: arrayIdCate });
+    
   };
-  // console.log(quizs);
-  // console.log(quizs.length);
-
-  // var data = quizs.map(function (item) {
-  //   return {
-  //     title: item.question,
-  //     data: [{}],
-  //   };
-  // });
-  // console.log(data);
-  // const loopId = async () => {
-  //   for (let index = 0; index < quizs.length; index++) {
-  //     array.push(quizs[index].question_id);
-  //   }
-  //   console.log(" quiz length = " + array.length);
-
-  // };
-
-  // const Answer = async () => {
-  //   for (let index = 1; index <= 6; index++) {
-  //     axios.get("http://10.0.2.2:3000/answers/quizs/" + index).then(
-  //       (response) => {
-  //         console.log("------------------------------------" + index);
-  //         console.log(response.data.answer);
-  //         console.log("------------------------------------");
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //       }
-  //     );
-  //   }
-
-  //   // setAnswer();
-  // };
-
+  
   function Item({
     choice_id,
     choice,
@@ -143,7 +104,6 @@ const TestBox = (props) => {
         style={{
           flex: 1,
           alignItems: "center",
-          // justifyContent: "center",
           marginBottom: 10,
           marginTop: 10,
         }}
@@ -197,26 +157,7 @@ const TestBox = (props) => {
     );
   }
 
-  // const [selected, setSelected] = React.useState(null);
-  // const onSelect = (choice_id) => {
-  //   setSelected(choice_id);
-  //   console.log(selected);
-  // };
-
-  // const onSelect = React.useCallback(
-  //   (choice_id) => {
-  //     const newSelected = new Map(selected);
-
-  //     newSelected.set(choice_id, !selected.get(choice_id));
-
-  //     setSelected(choice_id);
-  //   },
-  //   console.log(selected)
-  // );
   const [score, setScore] = React.useState(new Map());
-  // const [selected, setSelected] = React.useState(0);
-  // const [currentQuiz, setCurrent] = React.useState(0);
-  // const [prevQuiz, setPrev] = React.useState(0);
   const [selected, setSelected] = React.useState(new Map());
 
   const onSelect = React.useCallback(
@@ -229,71 +170,12 @@ const TestBox = (props) => {
     [selected],
     console.log(selected)
   );
-  // const onSelect = ({ choice_id, isRightChoice, question_id }) => {
-  //   const newSelected = new Map(selected);
-  //   newSelected.set(choice_id, !selected.get(choice_id));
-  //   setSelected(choice_id);
-
-  //   [selected], console.log(selected);
-  //   // if (userAnswer.indexOf(choice_id) == -1) {
-  //   //   userAnswer.push(choice_id);
-  //   // } else {
-  //   //   console.log("Dup");
-
-  //   //   userAnswer.splice(userAnswer.indexOf(choice_id), 1);
-  //   // }
-  //   // console.log(userAnswer);
-  //   // setCurrent(question_id);
-  //   // putScore(isRightChoice);
-  // };
-
-  // const putScore = React.useCallback(
-  //   (isRightChoice) => {
-  //     const newScore = new Map(score);
-  //     newScore.set(isRightChoice, !score.get(isRightChoice));
-
-  //     setScore(newScore);
-  //   },
-  //   [setScore],
-  //   console.log(setScore)
-  // );
-  // const putScore = (isRightChoice) => {
-  //   let array = [1, 2, 3, 4, 5];
-  //   // Getting sum of numbers.
-  //   let sum = array.reduce(function (a, b) {
-  //     return a + b;
-  //   }, 0);
-  //   console.log(sum);
-
-  // if (currentQuiz !== prevQuiz){
-  //   if (isRightChoice === 1) {
-  //     setScore(score + 1);
-  //   } else if (isRightChoice === 0) {
-  //     setScore(score + 0);
-  //   }
-  // } else if(currentQuiz === prevQuiz){
-  //   if (isRightChoice === 1) {
-  //     setScore(score + 0);
-  //   } else if (isRightChoice === 0) {
-  //     setScore(score - 1);
-  //   }
-  // }
-  // };
-
-  useEffect(() => {
-    // console.log(selected);
-    // console.log(score);
-  });
-
+  
   const renderSection = ({ item }) => {
-    // if (item.choice_id == selected) {
-
-    // }
     return (
       <View style={styles.whiteCardChoice}>
         <View style={{ width: Dimensions.get("window").width / 1.35 }}>
           <FlatList
-            // title={item.question}
             data={item.choice}
             numColumns={2}
             renderItem={({ item }) => (
@@ -325,13 +207,11 @@ const TestBox = (props) => {
           }}
         >
           <FlatList
-            // title={item.question}
             data={section.quiz}
             renderItem={({ item }) => (
               <Text style={styles.textQuestion}>{item.question}</Text>
             )}
             keyExtractor = { (item, index) => index.toString() }
-          // keyExtractor={keyExtractor}
           />
         </View>
       </View>
@@ -341,10 +221,8 @@ const TestBox = (props) => {
   const renderListItem = ({ item }) => {
     return (
       <ButtonClick
-        // onPressAction={}
         colorsStart="#E9B0FF"
         colorsEnd="#8A63E5"
-        // padding=
         radius={10}
         height={39}
         width={112}
@@ -358,11 +236,6 @@ const TestBox = (props) => {
     );
   };
 
-  // const keyExtractor = (item) => {
-  //   return item.choice;
-  // };
-
-  // render()
   return (
     <View>
       <SectionList
@@ -370,7 +243,6 @@ const TestBox = (props) => {
         keyExtractor={(item, index) => item + index}
         contentContainerStyle={{ alignItems: "center", marginVertical: "7%" }}
         renderSectionHeader={renderSectionHeader}
-        // renderSectionHeader={renderSection}
         renderItem={renderSection}
       />
       <ButtonClick
@@ -398,22 +270,6 @@ const TestBox = (props) => {
           Actions.Interest();
         }}
       />
-      {/* <Dialog
-        visible={visible}
-        onTouchOutside={() => {
-          setVisible(false);
-          Actions.Interest();
-        }}
-      >
-        <DialogContent>
-          <Text>This is your score {myScore}</Text>
-        </DialogContent>
-      </Dialog> */}
-      {/* {myScore ? (
-        <Text>This is Your Score{myScore}</Text>
-      ) : (
-        <Text>Waiting</Text>
-      )} */}
     </View>
   );
 };
@@ -421,9 +277,7 @@ export default TestBox;
 
 const styles = StyleSheet.create({
   whiteCardChoice: {
-    // flex: 1,
     width: Dimensions.get("window").width / 1.15,
-    // justifyContent: "center",
     borderBottomRightRadius: 5,
     borderBottomLeftRadius: 5,
     backgroundColor: "#ffffff",
@@ -440,13 +294,11 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   whiteCardQuestion: {
-    // flex: 1,
     width: Dimensions.get("window").width / 1.15,
     justifyContent: "center",
     borderTopRightRadius: 5,
     borderTopLeftRadius: 5,
     backgroundColor: "#ffffff",
-    // alignItems: "center",
     shadowOffset: {
       width: 0,
       height: 4,
@@ -455,8 +307,6 @@ const styles = StyleSheet.create({
     shadowColor: "#000000",
     shadowOpacity: 0.3,
     elevation: 8,
-    // marginBottom: 10,
-    // marginVertical: 20,
     paddingVertical: 20,
   },
   textQuestion: {

@@ -5,7 +5,6 @@ import {
   StyleSheet,
   View,
   TextInput,
-  Alert,
   TouchableOpacity,
   Image,
 } from "react-native";
@@ -23,36 +22,12 @@ import * as Google from 'expo-google-app-auth';
 
 const Login = () => {
 
-  // const FACEBOOK_APP_ID = '791616524971373';
-
-  // const auth = firebase.auth();
-  // // Enter your Firebase app web configuration settings here.
-  // async function loginWithFacebook() {
-  //     await Facebook.initializeAsync({
-  //         appId: '791616524971373', appName: 'readalright'
-  //     });        //ENTER YOUR APP ID
-  //     const { type, token } = await Facebook.logInWithReadPermissionsAsync({ permissions: ['public_profile'] })
-
-  //     if (type == 'success') {
-
-  //         const credential = firebase.auth.FacebookAuthProvider.credential(token)
-
-  //         firebase.auth().signInWithCredential(credential).catch((error) => {
-  //             console.log(error)
-  //         })
-  //     }
-  // }
-  // async function logOut() {
-  //     Facebook.log
-  // } 
   const [userName, setUserName] = useState([]);
   const [picURL, setPicURL] = useState([]);
   const [uuid, setIuid] = useState("");
   var check = false;
   function goToInterest() {
-    console.log("Goto Interest");
     Actions.QuizInstruction();
-    console.log("hello");
   }
   useEffect(() => {
     if (check == true) {
@@ -62,14 +37,9 @@ const Login = () => {
       checkAuth()
 
     }
-    // sendUidToWordCol();
+    
   }, []);
 
-  // function sendUidToWordCol() {
-  //     console.log("Goto wordcol");
-  //     // Actions.WordCollection({ text: uuid });
-  //     console.log("Goto wordcol already");
-  //   }
   const checkAuth = async () => {
     var token = await AsyncStorage.getItem("token");
     var emailSign = await AsyncStorage.getItem("emailSign");
@@ -79,7 +49,6 @@ const Login = () => {
 
     if (emailSign || token || googleSign) {
 
-      console.log("Signed In------------------")
       goToInterest();
 
     } else {
@@ -108,7 +77,6 @@ const Login = () => {
 
         if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
           providerData[i].uid === googleUser.getBasicProfile().getId()) {
-          // We don't need to reauth the Firebase connection.
           return true;
         }
       }
@@ -123,7 +91,6 @@ const Login = () => {
       );
     } catch (error) {
       console.log("error setItem new user")
-      // Error saving data
     }
   }
   async function setUid2(uidTemp2) {
@@ -134,29 +101,19 @@ const Login = () => {
       );
     } catch (error) {
       console.log("error setItem not new user")
-      // Error saving data
     }
   }
   async function onSignIn(googleUser) {
 
-    console.log('Google Auth Response', googleUser);
-    // We need to register an Observer on Firebase Auth to make sure auth is initialized.
     var unsubscribe = firebase.auth().onAuthStateChanged(function (firebaseUser) {
       unsubscribe();
-      // Check if we are already signed-in Firebase with the correct user.
       if (!isUserEqual(googleUser, firebaseUser)) {
-        // Build Firebase credential with the Google ID token.
         var credential = firebase.auth.GoogleAuthProvider.credential(
           googleUser.idToken,
           googleUser.accessToken);
-        // Sign in with credential from the Google user.
         firebase.auth().signInWithCredential(credential).then(function (result) {
 
-          console.log("google sign in")
           if (result.additionalUserInfo.isNewUser) {
-            console.log("new user UIDDDDDDDDDDDDDDDDDDDDDDDDD1")
-            console.log(result.user.uid)
-            // setuuid(result.user.uid)
             setUid(result.user.uid)
             firebase.database().ref('/users/' + result.user.uid).set({
               gmail: result.user.email,
@@ -184,12 +141,8 @@ const Login = () => {
                   isTested: "false"
                 }),
               }).then((response) => {
-                console.log("post user success!!!---------------------------");
-                console.log(response.json())
                 console.log("post user success!!!");
-                console.log(response.body)
-                console.log(response.statusText)
-
+ 
               });
             } catch (error) {
               console.log("error post user")
@@ -204,8 +157,6 @@ const Login = () => {
             }
 
           } else {
-            console.log("not new user UIDDDDDDDDDDDDDDDDDDDDDDDDD2")
-            console.log(result.user.uid)
             setUid2(result.user.uid)
             try {
               AsyncStorage.setItem("userName",result.user.displayName);
@@ -220,68 +171,15 @@ const Login = () => {
             }
 
 
-            // setuuid(result.user.uid)
-            // AsyncStorage.setItem('uid', result.user.uid);
             firebase.database().ref('/users/' + result.user.uid)({
               last_logged_in: Date.now()
             })
-            // axios.get("http://10.0.2.2:3000/user/" + uuid).then((response) => {
-            //   console.log("response user");
-            //   setUser(response.data.user)
-            //   // console.log(response.data.user);
-            //   // console.log(response.data.user[0].isTested);
-            //   if (response.data.user[0] == null) {
-
-            //     try {
-            //       fetch('http://10.0.2.2:3000/user', {
-            //         method: 'POST',
-            //         headers: {
-            //           'Accept': 'application/json',
-            //           'Content-Type': 'application/json',
-            //         },
-            //         body: JSON.stringify({
-            //           regtime: null,
-            //           username: result.user.displayName,
-            //           pwd: "A1",
-            //           level: "A1",
-            //           image: result.user.photoURL,
-            //           uid: result.user.uid,
-            //           isTested: "false"
-            //         }),
-            //       }).then((response) => {
-
-            //         console.log("dont have acc")
-            //         console.log("post user success!!!---------------------------");
-            //         console.log(response.json())
-            //         console.log("post user success!!!");
-            //         console.log(response.body)
-            //         console.log(response.statusText)
-
-            //       });
-            //     } catch (error) {
-
-            //     } finally {
-            //       Actions.QuizInstruction()
-
-            //     }
-
-            //   } else {
-            //     console.log("have acc")
-
-
-            //   }
-            // });
-
           }
         }).catch(function (error) {
-          // Handle Errors here.
           var errorCode = error.code;
           var errorMessage = error.message;
-          // The email of the user's account used.
           var email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
           var credential = error.credential;
-          // ...
         });
       } else {
         console.log('User already signed-in Firebase.');
@@ -299,18 +197,12 @@ const Login = () => {
       if (result.type === 'success') {
         onSignIn(result)
 
-        // console.log("id krub"+result.user.id);
-        // console.log("id krub2"+result.idToken);
-
-        console.log(result.accessToken)
+  
         const response = await fetch('https://www.googleapis.com/userinfo/v2/me', {
           headers: { Authorization: `Bearer ${result.accessToken}` },
         });
         const data = await response.json();
-
-        // console.log(data.name);
-        // console.log(data.picture);
-        return result.accessToken;
+      return result.accessToken;
       } else {
         return { cancelled: true };
       }
@@ -319,23 +211,17 @@ const Login = () => {
     }
   }
   async function logIn() {
-    console.log("function log in facebook")
-    // setUpUser()
     try {
       await Facebook.initializeAsync("791616524971373");
       const {
         type,
         token,
-        expirationDate,
-        permissions,
-        declinedPermissions,
       } = await Facebook.logInWithReadPermissionsAsync({
         permissions: ["public_profile"],
       });
       if (type === "success") {
         const credential = firebase.auth.FacebookAuthProvider.credential(token)
         firebase.auth().signInWithCredential(credential).then((response) => {
-          console.log("uuid Facebook" + response.user.uid);
           axios
             .post("https://readalright-backend.khanysorn.me/user", {
               regtime: null,
@@ -348,7 +234,6 @@ const Login = () => {
             })
             .then(
               (response) => {
-                console.log("post user success!!!");
                 console.log(response);
               },
               (error) => {
@@ -358,50 +243,19 @@ const Login = () => {
         }).catch((error) => {
           console.log(error)
         })
-        // Get the user's name using Facebook's Graph API
         const response = await fetch(
           `https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture`
         );
         const data = await response.json();
         console.log(data);
         var uid = data.id;
-
-        // Alert.alert('Logged in!', `Hi ${data.name}!`);
         setUserName(data.name);
         setPicURL(data.picture.data.url);
-        console.log("PHOTO", data.picture.data.url);
         AsyncStorage.setItem("token", token);
         AsyncStorage.setItem("userName", data.name);
         AsyncStorage.setItem("userPicURL", data.picture.data.url);
 
-        console.log("postUser");
-        console.log(userName);
-        // axios
-        //   .post("http://10.0.2.2:3000/user", {
-        //     regtime: null,
-        //     username: data.name,
-        //     pwd: "A1",
-        //     level: "A1",
-        //     image: data.picture.data.url,
-        //     uid: uid
-        //   })
-        //   .then(
-        //     (response) => {
-        //       console.log("post user success!!!");
-        //       console.log(response);
-        //     },
-        //     (error) => {
-        //       console.log(error);
-        //     }
-        //   );
-
-        // var userName = await AsyncStorage.getItem('userName'); ////ตัวอย่างการเรียกใช้ AsyncStorage อย้าลืม import
-        // setUserName(`${(await response.json()).name}`)
-        // console.log(await response.json().name)
-        // console.log(" User Name")
-        // console.log(userName)
       } else {
-        // type === 'cancel'
       }
     } catch ({ message }) {
       alert(`Facebook Login Error: ${message}`);
@@ -418,7 +272,6 @@ const Login = () => {
   };
 
   async function signInEmail(data) {
-    // setUpUser()
     try {
       const email = data.email;
       const password = data.password;
@@ -440,8 +293,6 @@ const Login = () => {
               (response) => {
                 AsyncStorage.setItem("userName",response.user.email);
                 AsyncStorage.setItem("userPicURL", response.user.photoURL);
-                console.log("post user success Email!!!");
-                console.log(response);
               },
               (error) => {
                 console.log(error);
@@ -449,15 +300,11 @@ const Login = () => {
             );
 
         }).catch(function (error) {
-          // Handle Errors here.
           var errorCode = error.code;
           var errorMessage = error.message;
-          // ...
         });
 
         AsyncStorage.setItem("emailSign", email);
-
-        //ไม่ได้ axios กลับเพราะมีการ post ตอน register แล้ว
       }
       console.log(email);
       console.log(password);

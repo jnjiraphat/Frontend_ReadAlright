@@ -5,11 +5,7 @@ import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
-  ScrollView,
-  ImageBackground,
-  FlatList,
 } from "react-native";
-import ReadingApi from "../API/ReadingAPI";
 import { Card } from "@ant-design/react-native";
 import { FlatGrid } from "react-native-super-grid";
 import Constants from "expo-constants";
@@ -25,9 +21,6 @@ const newReading = (props) => {
     const data = await axios
       .get("https://readalright-backend.khanysorn.me/newReading")
       .then((response) => {
-        console.log("Newreadingggggggggggggggggggggggggggggggggg");
-        console.log("Newreadingggggggggggggggggggggggggggggggggg");
-
         setResultNew(response.data);
       });
   };
@@ -62,7 +55,6 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight,
   },
   gridView: {
-    // marginTop: 200,
     flex: 1,
   },
   itemContainer: {

@@ -20,23 +20,13 @@ const ContentTip = (props) => {
   console.log("this is trick id ")
   console.log(props.text)
   const [tricks, setTricks] = useState([]);
-  // const [cateContent, setCateContent] = useState([]);
-
+  
   const fetch = async () => {
-    console.log("runningggggggggggggggggggggggggggggg");
     await axios
       .get("https://readalright-backend.khanysorn.me/getTricksByTrickID/" + props.text)
       .then(
         (response) => {
-          console.log("Tip");
-          console.log(response.data.quiz);
           setTricks(response.data.quiz)
-          // setCate(response.data.reading);
-          // var str = "my car is red";
-          // var stringArray = str
-          //   .split(/(\s+)/)
-          //   .filter((e) => e.trim().length > 0);
-          // console.log(stringArray);
         },
         (error) => {
           console.log(error);
@@ -48,39 +38,14 @@ const ContentTip = (props) => {
     const data = await fetch();
   };
 
-  console.log("After get tricks")
-  console.log(tricks)
-  // const getContent = async () => {
-  //   const contentStory = cate[0].content;
-  //   console.log(contentStory);
-  //   const contentArray = contentStory
-  //     .split(/(\s+)/)
-  //     .filter((e) => e.trim().length > 0);
-  //   console.log(contentArray);
-  //   setCateContent(contentArray);
-  //   console.log("MY CATEEEEEEEEEEEEE");
-  //   console.log(cateContent);
-  // };
   useEffect(() => {
     read();
-    // getContent();
-    // console.log(cate[0].content);
   }, []);
-  // console.log("This is reading id  ");
-  // console.log(props.text);
-
-  // function goToChallenge(reading_id) {
-  //   console.log("readingIDDDDDDDDDDDD  " + reading_id);
-  //   Actions.TestQuizChallenge({ text: reading_id });
-  //   console.log("Finish " + reading_id);
-  //   console.log("readingIDDDDDDDDDDDD" + reading_id);
-  // }
-  // const goToAbout = () => {
-  //    Actions.about()
-  // }
+  
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMoreVisible, setModalMoreVisible] = useState(false);
   const [value, onChangeText] = useState("");
+  
   return (
     <View style={{ flex: 1 }}>
         <FlatList
@@ -92,12 +57,10 @@ const ContentTip = (props) => {
                   colors={["#FFB482", "#F07590"]}
                   style={styles.headerImg}
                 >
-                {/* <Text style={styles.topic}>{item.title}</Text> */}
                 <Text style={styles.topic}>{item.trick_title}</Text>
               
               </LinearGradient>
               <View style={styles.whiteCard}>
-                {/* <Text style={styles.content}>{item.content}</Text> */}
                 <Text style={styles.content}>{item.trick_detail}</Text>
               </View>
             </View>
@@ -112,8 +75,6 @@ export default ContentTip;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: "center",
-    // justifyContent: "center",
     marginTop: Constants.statusBarHeight,
   },
   category: {
@@ -150,9 +111,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end"
   },
 
-  //whiteCard
   whiteCard: {
-    // flex: 1,
     marginBottom: "10%",
     paddingVertical: 20,
     paddingHorizontal: 40,

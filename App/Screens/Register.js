@@ -10,24 +10,21 @@ import {
 import Constants from "expo-constants";
 import { useForm, Controller } from "react-hook-form";
 import * as firebase from "firebase";
-import { AsyncStorage } from "react-native";
 import Loader from "../assets/icon.png";
 
 import ButtonClick from "../components/ButtonClick";
 import { Actions } from "react-native-router-flux";
 import axios from "axios";
-import { NetInfo } from "react-native";
 
 const Register = () => {
   const { control, register, handleSubmit, setValue, errors } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     createAccount(data);
-    // Actions.Interest();
+    
   };
 
   async function createAccount(data) {
-    // setUpUser()
     try {
       const username = data.username;
       const email = data.email;
@@ -37,10 +34,9 @@ const Register = () => {
           .auth()
           .createUserWithEmailAndPassword(email, password)
           .catch(function (error) {
-            // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-            // ...
+            
           });
         axios
           .post("https://readalright-backend.khanysorn.me/user", {
@@ -61,15 +57,12 @@ const Register = () => {
             }
           );
       }
-      console.log(username);
-      console.log(email);
-      console.log(password);
+      
     } catch ({ message }) {
       alert(`CreateAccount Error: ${message}`);
     } finally {
-      console.log("Go to login")
       Actions.Login();
-      // goToInterest();
+      
     }
   }
 

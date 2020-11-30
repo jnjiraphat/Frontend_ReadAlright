@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Actions } from "react-native-router-flux";
-import ReadingApi from "../API/ReadingAPI";
 import {
   StyleSheet,
   View,
-  ScrollView,
   FlatList,
   Dimensions,
   Text,
   Image,
 } from "react-native";
 import ButtonClick from "../components/ButtonClick";
-import ModalWord from "../components/ModalWord";
-import ModalMoreDetail from "../components/ModalMoreDetail";
 import TransWordBar from "../components/TransWordBar";
 
 import Constants from "expo-constants";
@@ -23,19 +19,11 @@ const Content = (props) => {
   const [cateContent, setCateContent] = useState([]);
 
   const fetch = async () => {
-    console.log("runningggggggggggggggggggggggggggggg");
     await axios
       .get("https://readalright-backend.khanysorn.me/reading/readingId/" + props.text)
       .then(
         (response) => {
-          console.log("eieiContent");
-          console.log(response.data.reading);
           setCate(response.data.reading);
-          // var str = "my car is red";
-          // var stringArray = str
-          //   .split(/(\s+)/)
-          //   .filter((e) => e.trim().length > 0);
-          // console.log(stringArray);
         },
         (error) => {
           console.log(error);
@@ -46,34 +34,15 @@ const Content = (props) => {
   const read = async () => {
     const data = await fetch();
   };
-  // const getContent = async () => {
-  //   const contentStory = cate[0].content;
-  //   console.log(contentStory);
-  //   const contentArray = contentStory
-  //     .split(/(\s+)/)
-  //     .filter((e) => e.trim().length > 0);
-  //   console.log(contentArray);
-  //   setCateContent(contentArray);
-  //   console.log("MY CATEEEEEEEEEEEEE");
-  //   console.log(cateContent);
-  // };
+  
   useEffect(() => {
     read();
-    // getContent();
-    // console.log(cate[0].content);
   }, []);
-  console.log("This is reading id  ");
-  console.log(props.text);
-
+  
   function goToChallenge(reading_id) {
-    console.log("readingIDDDDDDDDDDDD  " + reading_id);
     Actions.TestQuizChallenge({ text: reading_id });
-    console.log("Finish " + reading_id);
-    // console.log("readingIDDDDDDDDDDDD" + reading_id);
   }
-  // const goToAbout = () => {
-  //    Actions.about()
-  // }
+  
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMoreVisible, setModalMoreVisible] = useState(false);
   const [value, onChangeText] = useState("");
@@ -104,26 +73,13 @@ const Content = (props) => {
                 padding={0}
                 marginTop={15}
                 marginBottom={115}
-                // shadowRadius={30}
                 colorsStart="#2DC897"
                 colorsEnd="#7EF192"
-                // contentId = {item.reading_id}
               />
             </View>
           )}
           keyExtractor = { (item, index) => index.toString() }
         />
-        {/* <View style={styles.container}>
-        <View style={styles.whiteCard}>
-          <FlatList
-            contentContainerStyle={{ flexGrow: 1, flexDirection:"row" }}
-            data={cateContent}
-            renderItem={({ item }) => (
-            <Text style={styles.content}>{item}</Text>
-           )}
-          /> 
-        </View>
-      </View> */}
       <TransWordBar
         textSearch={(text) => onChangeText(text)}
         value={value}

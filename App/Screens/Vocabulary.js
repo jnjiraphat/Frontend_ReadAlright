@@ -6,42 +6,13 @@ import {
   StyleSheet,
   View,
   ScrollView,
-  ImageBackground,
   FlatList,
 } from "react-native";
 import axios from "axios";
-import CountViews from "../API/CountViewsAPI"
 import TimelineCard from "../components/TimelineCard";
 import Constants from "expo-constants";
 import Header from "../components/Header";
 
-const data = [
-  {
-    img: "https://i.pinimg.com/originals/cf/7e/12/cf7e12886b090989aee2ff50288bd8e6.png",
-    title: "Haruichi",
-    subTitle: "แฟนคุณเจน"
-  },
-  {
-    img: "https://vignette.wikia.nocookie.net/diamondnoace/images/9/96/Haruichi_Act_2.png/revision/latest?cb=20190709155009",
-    title: "Haruichi"
-  },
-  {
-    img: "https://vignette.wikia.nocookie.net/diamondnoace/images/3/3c/HaruichiColor2.jpg/revision/latest?cb=20140225021021",
-    title: "Haruichi"
-  },
-  {
-    img: "https://pbs.twimg.com/media/EAcFPT_WwAEtf9-.jpg",
-    title: "Haruichi"
-  },
-  {
-    img: "https://thumbs.gfycat.com/DistantSkeletalImago-small.gif",
-    title: "Haruichi"
-  },
-  {
-    img: "https://cdn-us.anidb.net/images/main/142297.jpg",
-    title: "Haruichi"
-  },
-]
 
 const Vocabulary = (props) => {
   const [result, setResult] = useState([]);
@@ -51,14 +22,8 @@ const Vocabulary = (props) => {
     console.log("runningggggggggggggggggggggggggggggg");
     await axios.get("https://readalright-backend.khanysorn.me/vocabBoxByCateID/" + props.text).then(
       (response) => {
-        console.log("eiei");
-        console.log(response.data.reading);
-        //     setCate(response.data.reading);
-        //     // setCateName(response.data.reading[0].categoryName);
-        //     console.log(cateName);
         setResult(response.data.reading)
         setCateName(response.data.reading[0].categoryName);
-        console.log(cateName);
       },
       (error) => {
         console.log(error);
@@ -71,16 +36,10 @@ const Vocabulary = (props) => {
   };
   useEffect(() => {
     read();
-    // getSuggestion();
   }, []);
-  console.log("This is cate_id vocab");
-  console.log(props.text);
-
+  
   function goToContentVocab(vocabBox_id) {
-    console.log("vocabBox_id   " + vocabBox_id);
     Actions.ContentVocab({ text: vocabBox_id });
-    console.log("Finish " + vocabBox_id);
-    // console.log("readingIDDDDDDDDDDDD" + reading_id);
   }
 
   const [suggestion, setSuggestion] = useState([]);
@@ -117,19 +76,7 @@ const Vocabulary = (props) => {
         />
       </View>
 
-      {/* <FlatList
-        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-        data={cate}
-        renderItem={({ item }) => (
-          <View style={styles.container}>
-            <ArticleCard 
-              img={item.image}
-              title={item.title}
-            />
-          </View>
-        )}
-      /> */}
-    </ScrollView>
+  </ScrollView>
   );
 };
 export default Vocabulary;

@@ -7,24 +7,12 @@ const uploadImage = (props) => {
   onChooseImagePress = async () => {
     let result = await ImagePicker.launchCameraAsync();
     let fileName = result.uri;
-    console.log(fileName);
-    //let result = await ImagePicker.launchImageLibraryAsync();
-    // console.log("3");
-    // console.log(result);
-
-    // console.log(result.uri);
-
     if (!result.cancelled) {
       this.uploadImageF(result.uri, fileName)
         .then((response) => {
-          console.log("1");
-          console.log("response" + response);
           Alert.alert("Success");
         })
         .catch((error) => {
-          console.log("2");
-          console.log(error);
-
           Alert.alert(error);
         });
     }

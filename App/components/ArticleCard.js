@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 5,
     width: 100,
     height: 90,
-    // backgroundColor: "blue",
   },
   item: {
     borderColor: "transparent",

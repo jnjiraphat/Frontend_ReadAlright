@@ -1,47 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import {
   StyleSheet,
-  ScrollView,
   Text,
   View,
   Dimensions,
-  FlatList,
-  SafeAreaView,
 } from "react-native";
 import axios from "axios";
 import { Actions } from "react-native-router-flux";
 import Constants from "expo-constants";
 import ButtonClick from "../components/ButtonClick";
-import { set } from "react-native-reanimated";
-import { AsyncStorage } from "react-native";
 import * as firebase from "firebase";
 
 const QuizInstruction = (props) => {
-  // const[readId , setReadId] = useState("")
-  console.log("--------------------------------");
-  console.log(props.text);
   const [user, setUser] = useState([]);
 
   const [index, setIndex] = useState("1");
-  // console.log("This is index")
-  // console.log(index)
-
+  
   function goToTestQuizReading(readingId) {
-    console.log(readingId);
     Actions.TestQuizReading({ text: readingId });
 
-    console.log("hello");
-  }
+   }
   const [readPretest, setReadPretest] = useState([]);
-  // async function checkPretest() {
-  //   var checkPretest = await AsyncStorage.getItem('pretest');
-  //   console.log(checkPretest)
-  //   if (checkPretest == "true") {
-  //     Actions.Home()
-  //   } else {
-
-  //   }
-  // } 
   const fetchUser = async () => { 
     var check = false;
    var myInterval = setInterval(async () => {
@@ -50,10 +29,7 @@ const QuizInstruction = (props) => {
         Actions.QuizInstruction()
       }
       var response = await axios.get("https://readalright-backend.khanysorn.me/user/" + uuid);
-      // console.log("response user");
       setUser(response.data.user)
-      // console.log(response.data.user);
-      // console.log(response.data.user[0].isTested);
       if (response.data.user[0].isTested == "true") {
         Actions.Home() 
       } else {
@@ -71,13 +47,8 @@ const QuizInstruction = (props) => {
     await fetchUser()
 
   }
-  // const read = async () => {
-  //   const data = await fetch();
-  // };
   useEffect(() => {
     setUp();
-    // checkPretest();
-    // read();
   }, []);
   return (
 
@@ -119,7 +90,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   background: {
-    // flex: 1,
     marginTop: Constants.statusBarHeight,
     backgroundColor: "#F07590",
     height: "100%",
@@ -128,7 +98,6 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   questionText: {
-    // marginBottom: 20,
     fontSize: 16,
     alignSelf: "center",
     fontFamily: "PT-Bold",

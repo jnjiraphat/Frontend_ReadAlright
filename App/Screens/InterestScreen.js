@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import {
-  SafeAreaView,
   TouchableOpacity,
   FlatList,
   StyleSheet,
   Text,
-  Alert,
   Image,
-  ScrollView,
   View,
   Dimensions,
 } from "react-native";
@@ -16,10 +13,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Actions } from "react-native-router-flux";
 import ButtonClick from "./../components/ButtonClick";
 import Constants from "expo-constants";
-import CountView from "../API/CountViewsAPI";
 import LoadingScreen from './LoadingScreen'
 
-//API
 import ReadingApi from "../API/ReadingAPI";
 import axios from "axios";
 
@@ -35,7 +30,6 @@ function HomeScreen({ navigation }) {
   );
 }
 
-// const Stack = createStackNavigator();
 
 const ImageCards = () => {
   return <Image />;
@@ -78,19 +72,15 @@ function Item({ category_id, title, selected, onSelect, img }) {
 const arrayIdCate = [];
 
 const interest = (props) => {
-  //Fetch(GET) Catagory Name
   const [result, setResult] = useState([]);
   const read = async () => {
     const data = await ReadingApi();
     setResult(data);
   };
   useEffect(() => {
-    // console.log("uuid interest = ")
-    // console.log(props.text)
     read();
   }, []);
 
-  //Selected category
   const [selected, setSelected] = React.useState(new Map());
   const getKey = selected.keys();
 
@@ -107,20 +97,15 @@ const interest = (props) => {
 
   if (result) {
     function logMapElements(value, key, map) {
-      console.log(`m[${key}] = ${value}`);
     }
 
     selected.forEach(logMapElements);
 
-    //Navigator
     const goToHome = () => {
       function logMapElements(value, key, map) {
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-        console.log(`m[${key}] = ${value}`);
         if (value == true) {
           arrayIdCate.push(key);
         }
-        console.log("length = " + arrayIdCate.length);
       }
       selected.forEach(logMapElements);
       for (let index = 0; index < arrayIdCate.length; index++) {
@@ -194,7 +179,6 @@ const interest = (props) => {
           padding={0}
           marginBottom="10%"
           onPressAction={goToHome}
-          // shadowRadius={30}
           colorsStart="#7EF192"
           colorsEnd="#2DC897"
           flex={1}
@@ -213,7 +197,6 @@ export default interest;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // flexDirection: "column",
     marginTop: Constants.statusBarHeight,
   },
   textLayout: {

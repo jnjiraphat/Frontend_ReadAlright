@@ -6,10 +6,7 @@ import { Actions } from "react-native-router-flux";
 
 const CategoryCard = (props) => {
   function goToArticle(cateId) {
-    console.log(cateId);
     Actions.Article({ text: cateId });
-
-    console.log("hello");
   }
   const { result } = props;
   return (

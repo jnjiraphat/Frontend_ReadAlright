@@ -5,7 +5,6 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
-  Dimensions,
 } from "react-native";
 import { Tabs } from "@ant-design/react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -26,11 +25,7 @@ const SwitchType = (props) => {
           <View
             style={{
               alignItems: "center",
-              // justifyContent: "center",
               display: SwitchDisplay,
-              // left: 50, //ลองtestกับ device อื่นๆว่ามันกลางจริงมั้ย
-              // position: "absolute",
-              // zIndex: 1,
             }}
           >
             <LinearGradient
@@ -50,12 +45,10 @@ const SwitchType = (props) => {
                 }}
               >
                 {tabProps.tabs.map((tab, i) => (
-                  // change the style to fit your needs
                   <TouchableOpacity
                     activeOpacity={0.9}
                     key={tab.key || i}
                     style={{
-                      // width: "10%",
                       padding: 6,
                       width: "50%",
                       alignItems: "center",
@@ -115,10 +108,6 @@ export default SwitchType;
 
 const styles = StyleSheet.create({
   content: {
-    // alignItems: "center",
-    // justifyContent: "center",
-    // height: Dimensions.get("window").height,
-    // backgroundColor: "#000",
     marginTop: "5%",
   },
   LayoutGradient: {

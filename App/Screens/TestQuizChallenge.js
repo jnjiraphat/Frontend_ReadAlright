@@ -29,8 +29,7 @@ export default class TestQuizChallenge extends React.Component {
       userId: "",
     };
     this.setUpPage();
-    // console.log("This is  " + this.reading_id);
-  }
+      }
 
   onSurveyFinished(answers) {
     const infoQuestionsRemoved = [...answers];
@@ -41,7 +40,6 @@ export default class TestQuizChallenge extends React.Component {
     }
     this.setUp();
 
-    // console.log(answers);
   }
 
   onAnswerSubmitted(answer) {
@@ -53,8 +51,7 @@ export default class TestQuizChallenge extends React.Component {
     await this.fetchApiChallenge();
     await this.fetchAPI();
     await this.getUid();
-    // await this.getUser();
-
+  
     
   };
   converData() {
@@ -65,8 +62,7 @@ export default class TestQuizChallenge extends React.Component {
     });
   }
   convertJson = async () => {
-    // console.log(this.state.answersSoFar.length)
-
+  
     await this.converData().then((result) => {
       console.log(result.length + "eiei");
       console.log(result);
@@ -74,7 +70,6 @@ export default class TestQuizChallenge extends React.Component {
         result: result,
       });
     });
-    // console.log(this.state.result.length + "eiei")
   };
   setUp = async () => {
     await this.convertJson();
@@ -82,27 +77,6 @@ export default class TestQuizChallenge extends React.Component {
     await this.checkAnswer();
   };
   checkAnswer = async () => {
-    // var tempCorrectChoice = [];
-    // for (let index = 0; index <= 100; index++) {
-    //     await axios.get("http://10.0.2.2:3000/correctChoices").then(
-    //         (response) => {
-    //             console.log(response.data);
-    //             tempCorrectChoice.push(response.data);
-    //             console.log(tempCorrectChoice.length);
-    //         },
-    //         (error) => {
-    //             console.log(error);
-    //         }
-    //     );
-    // }
-    // this.setState({
-    //    correctChoice: tempCorrectChoice,
-    // });
-    // console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++")
-    // console.log(correctChoice)
-    // this.setState({
-    //     quizs: dataArrayQuiz,
-    // });
     var count = 0;
     setTimeout(() => {
       if (this.state.result.length != 3) {
@@ -111,20 +85,8 @@ export default class TestQuizChallenge extends React.Component {
         console.log(this.state.result.length + "koko");
         try {
           for (let index = 0; index < this.state.result.length; index++) {
-            console.log(
-              "index--" +
-                this.state.result[index] +
-                " is " +
-                this.state.result[index].value.value
-            );
             if (this.state.result[index].value.isRightChoice == 1) {
               count += 1;
-              console.log(
-                "index " +
-                  this.state.result[index] +
-                  " is " +
-                  this.state.result[index].value.isRightChoice
-              );
             } else {
               axios
                 .post("https://readalright-backend.khanysorn.me/answers", {
@@ -145,44 +107,8 @@ export default class TestQuizChallenge extends React.Component {
                   }
                 );
 
-              console.log(
-                "index " +
-                  this.state.result[index] +
-                  " is " +
-                  this.state.result[index].value.isRightChoice +
-                  " is wrong"
-              );
             }
-            // if (this.state.result[index].value.value == "took") {
-            //     count += 1
-            // } else if (this.state.result[index].value.value == "instructions") {
-            //     count += 1
-
-            // } else if (this.state.result[index].value.value == "compulsory") {
-            //     count += 1
-
-            // } else if (this.state.result[index].value.value == "friendless") {
-            //     count += 1
-
-            // } else if (this.state.result[index].value.value == "population") {
-            //     count += 1
-
-            // } else if (this.state.result[index].value.value == "impression") {
-            //     count += 1
-
-            // } else if (this.state.result[index].value.value == "atmosphere") {
-            //     count += 1
-
-            // } else if (this.state.result[index].value.value == "consists?") {
-            //     count += 1
-
-            // } else if (this.state.result[index].value.value == "pay") {
-            //     count += 1
-
-            // } else if (this.state.result[index].value.value == "addition") {
-            //     count += 1
-
-            // }
+           
           }
         } catch (error) {
         } finally {
@@ -208,9 +134,8 @@ export default class TestQuizChallenge extends React.Component {
         )
         .then(
           (response) => {
-            console.log(response.data);
             dataArrayQuiz.push(response.data);
-            console.log(dataArrayQuiz.length);
+            
           },
           (error) => {
             console.log(error);
@@ -230,9 +155,7 @@ export default class TestQuizChallenge extends React.Component {
         .get("https://readalright-backend.khanysorn.me/quizInContent/" + this.state.reading_id)
         .then(
           (response) => {
-            console.log(response.data.quiz);
             temp.push(response.data.quiz);
-            console.log(temp.length);
           },
           (error) => {
             console.log(error);
@@ -250,42 +173,23 @@ export default class TestQuizChallenge extends React.Component {
 
   getUid = async () => {
     try {
-      console.log("get uid first in test quiz chal")
       var uid = firebase.auth().currentUser.uid;
-      console.log(uid)
       this.getUser(uid)
-      // getUser(uid);
-      // const value = await AsyncStorage.getItem('uid');
-      // if (value !== null) { 
-      //   // We have data!!
-      //   getUser(value)
-      //   setUuid(value);
-      //   console.log(value);
-      // }
+      
     } catch (error) {
       console.log("error getItem")
-      // Error retrieving data
+      
     }
   }
 
   getUser = async (uuidTemp) => {
-    console.log("find uid in get user")
-    // var userIdTemp = "";
     try {
-      console.log("Get UuidTemp");
-      // userIdTemp = uuidTemp;
-      console.log(uuidTemp);
 
       await axios.get("https://readalright-backend.khanysorn.me/user/" + uuidTemp).then(
         (response) => {
-          console.log("id user");
-          console.log(response.data.user);
-          console.log(response.data.user[0].user_id);
           this.setState({
             userId: response.data.user[0].user_id,
           });
-          // userIdTemp : response.data.user[0].user_id;
-          // fetch(response.data.user[0].user_id)
         },
         (error) => {
           console.log("error in get userId")
@@ -297,7 +201,6 @@ export default class TestQuizChallenge extends React.Component {
       console.log("error get userId 7")
     } finally{
       console.log("user id in testquizchal")
-      console.log(this.state.userId)
     }
   }
 
@@ -374,7 +277,6 @@ export default class TestQuizChallenge extends React.Component {
           <Text style={styles.header}>Challenge</Text>
           <Text style={styles.subHeader}>
             Answer the questions from Reading Part.
-            {/* {this.state.reading_id} */}
           </Text>
           <View style={styles.whiteCardChoice}>
             <SimpleSurvey
@@ -414,10 +316,6 @@ export default class TestQuizChallenge extends React.Component {
               Actions.popTo("ContentScreen");
             }}
           />
-          {/* <ScrollView style={styles.answersContainer}>
-                                    <Text style={{ textAlign: 'center' }}>JSON output</Text>
-                                    <Text>{this.state.answersSoFar}</Text>
-                                </ScrollView> */}
         </View>
       );
     else
@@ -472,7 +370,6 @@ const styles = StyleSheet.create({
     flex: 1,
     minHeight: 800,
     maxHeight: 800,
-    // justifyContent: 'center',
     alignItems: "center",
     marginTop: Constants.statusBarHeight,
     backgroundColor: "#fff",
@@ -536,13 +433,4 @@ const styles = StyleSheet.create({
     fontFamily: "PT-Bold",
     color: "#fff",
   },
-
-  //   buttonChoiceNC: {
-  //     fontFamily: "PT-Reg" ,
-  //     fontSize: 14
-  //   },
-  //   buttonChoiceC: {
-  //     fontFamily: "PT-Bold" ,
-  //     fontSize: 14
-  //   }
 });

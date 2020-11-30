@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity, Text } from "react-native";
 import { Actions } from "react-native-router-flux";
-import ReadingApi from "../API/ReadingAPI";
 import {
   StyleSheet,
   View,
   ScrollView,
-  ImageBackground,
   FlatList,
   Image,
 } from "react-native";
@@ -16,21 +14,12 @@ import ArticleCard from "../components/ArticleCard";
 import Constants from "expo-constants";
 import Header from "../components/Header";
 import * as firebase from "firebase";
-const data = [
-  {
-    img:
-      "https://vignette.wikia.nocookie.net/diamondnoace/images/9/96/Haruichi_Act_2.png/revision/latest?cb=20190709155009",
-    title: "Ho",
-  },
-];
 
 const Article = (props) => {
   const [readingId, setReadingId] = useState(0);
 
   function goToContentScreen(category_id, user_id, reading_id, vocabBox_id) {
     const views = CountViews(category_id, user_id, reading_id, vocabBox_id);
-    console.log("readingIdddddddddddddddddddddd++++++++++++++");
-    console.log(reading_id);
     Actions.ContentScreen({ text: reading_id });
   }
 
@@ -39,7 +28,6 @@ const Article = (props) => {
     try {
       console.log("get uid first in article")
       var uid = firebase.auth().currentUser.uid;
-      console.log(uid)
       getUser(uid);
 
     } catch (error) {
@@ -50,20 +38,12 @@ const Article = (props) => {
 
   const getUser = async (uuidTemp) => {
     try {
-      console.log("Get UuidTemp in article");
-      console.log(uuidTemp);
-
       await axios.get("https://readalright-backend.khanysorn.me/user/" + uuidTemp).then(
         (response) => {
-          console.log("id user in article");
-          console.log(response.data.user);
-          console.log(response.data.user[0].user_id);
           setUserId(response.data.user[0].user_id);
           fetch(response.data.user[0].user_id)
         },
         (error) => {
-          console.log("error in get userId")
-
           console.log(error);
         }
       );
@@ -82,11 +62,6 @@ const Article = (props) => {
     const data = await axios
       .get("https://readalright-backend.khanysorn.me/answer/suggestions/" + userId)
       .then((response) => {
-        console.log("Suggestion");
-        // console.log(response.data.length);
-        console.log(response.data.answer);
-        console.log("Suggestion");
-
         setSuggestion(response.data.answer)
 
       });
@@ -97,7 +72,6 @@ const Article = (props) => {
   const [cateName, setCateName] = useState("");
 
   const fetch = async () => {
-    console.log("runningggggggggggggggggggggggggggggg");
     await axios.get("https://readalright-backend.khanysorn.me/reading/interest/" + props.text).then(
       (response) => {
         console.log("eiei");
@@ -121,33 +95,12 @@ const Article = (props) => {
     getSuggestion();
 
   }, []);
-  console.log("This is id");
-  console.log(props.text);
-
-  // const goToAbout = () => {
-  //    Actions.about()
-  // }
-
+  
   const ImageCards = () => {
     return <Image />;
   };
 
   return (
-    // <FlatList
-    //   numColumns={2}
-    //   contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-    //   data={cate}
-    //   renderItem={({ item }) => (
-    //     <View>
-    //       {/* <TouchableOpacity onPress={() => goToContentScreen(item.category_id,1,item.reading_id,1)} > */}
-    //         <ArticleCard
-    //           // img={item.image}
-    //           // title={item.title}
-    //         />
-    //       {/* </TouchableOpacity> */}
-    //     </View>
-    //   )}
-    // />
     <ScrollView
       style={{
         marginTop: Constants.statusBarHeight,

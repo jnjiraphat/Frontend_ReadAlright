@@ -1,6 +1,4 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Actions } from "react-native-router-flux";
-import ReadingApi from "../API/ReadingAPI";
 import {
   StyleSheet,
   View,
@@ -8,8 +6,6 @@ import {
   FlatList,
   Dimensions,
   Text,
-  Image,
-  TouchableOpacity,
   RefreshControl,
 
 } from "react-native";
@@ -17,77 +13,27 @@ import WordCard from '../components/WordCard'
 
 import Constants from "expo-constants";
 import axios from "axios";
-import { AsyncStorage } from "react-native";
 import * as firebase from "firebase";
-import { get } from "react-native/Libraries/Utilities/PixelRatio";
 import LoadingScreen from '../Screens/LoadingScreen'
 
 const WordCollection = (props) => {
-  // const translationGoogle = async (word) => {
-  //   console.log("translate------------------");
-  //   axios
-  //     .post(
-  //       "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCBEbjkNJ_6_DL8s5Ni6bfF0M4YwhrR-Dc",
-  //       {
-  //         q: word,
-  //         source: "en",
-  //         target: "th",
-  //         format: "text",
-  //       }
-  //     )
-  //     .then(
-  //       (response) => {
-  //         console.log(response.data);
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //       }
-  //     );
-  // };
-
-
   const [uuid, setUuid] = useState("");
   const [userId, setUserId] = useState("");
 
 
   async function getUid() {
     try {
-      console.log("get uid first")
       var uid = firebase.auth().currentUser.uid;
-      console.log(uid)
       getUser(uid);
-      // const value = await AsyncStorage.getItem('uid');
-      // if (value !== null) {
-      //   // We have data!!
-      //   getUser(value)
-      //   setUuid(value);
-      //   console.log(value);
-      // }
     } catch (error) {
       console.log("error getItem")
-      // Error retrieving data
     }
   }
 
   const getUser = async (uuidTemp) => {
     try {
-      console.log("Get UuidTemp");
-      console.log(uuidTemp);
-
-      // const response = await fetch('http://10.0.2.2:3000/user/' + uuid, {
-      //   method: 'GET',
-      //   headers: {
-      //     'Accept': 'application/json',
-      //     'Content-Type': 'application/json',
-      //   }
-      // });
-      // const data = await response.json();
-      // console.log(response)
       await axios.get("https://readalright-backend.khanysorn.me/user/" + uuidTemp).then(
         (response) => {
-          console.log("id user");
-          console.log(response.data.user);
-          console.log(response.data.user[0].user_id);
           setUserId(response.data.user[0].user_id);
           fetch(response.data.user[0].user_id)
         },
@@ -101,13 +47,7 @@ const WordCollection = (props) => {
       console.log("error get userId8 ")
     }
   }
-  // async function setUp() {
-  //   console.log("processingg")
-  //   await getUid();
-  // await getUser();
-  // await fetch();
-  // }
-
+  
 
   const [wordCol, setWordCol] = useState([]);
 
@@ -131,28 +71,10 @@ const WordCollection = (props) => {
     );
   };
 
-  // const read = async () => {
-  //   const data = await fetch();
-  // };
   useEffect(() => {
-    // setUp();
     getUid();
-    // getUser();
-    // read();
-
   }, []);
-  // console.log("This is reading id  ");
-  // console.log(props.text);
-
-  // function goToChallenge(reading_id) {
-  //   console.log("readingIDDDDDDDDDDDD  " + reading_id);
-  //   Actions.TestQuizChallenge({ text: reading_id });
-  // console.log("Finish " + reading_id);
-  // console.log("readingIDDDDDDDDDDDD" + reading_id);
-  // }
-  // const goToAbout = () => {
-  //    Actions.about()
-  // }
+  
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMoreVisible, setModalMoreVisible] = useState(false);
   const [isBookMark, setBookMark] = useState(new Map());
@@ -181,8 +103,7 @@ const WordCollection = (props) => {
       }
     },
     [isBookMark],
-    // console.log(getWord),
-    // console.log(isBookMark),
+    
   );
   const [refreshing, setRefreshing] = React.useState(false);
   const wait = (timeout) => {

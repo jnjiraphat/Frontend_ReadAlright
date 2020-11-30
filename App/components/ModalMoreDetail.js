@@ -7,8 +7,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import ButtonClick from "./ButtonClick";
-import { Fontisto } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const ModalMoreDetail = (props) => {
@@ -17,11 +15,9 @@ const ModalMoreDetail = (props) => {
     typeWord,
     meaning,
     modalClose,
-    modalAction,
-    modalButton,
     modalVisible,
   } = props;
-  // const [modalVisible, setModalVisible] = useState(false);
+  
   return (
     
       <View style={styles.centeredView}>
@@ -55,7 +51,6 @@ const ModalMoreDetail = (props) => {
                 <View style={styles.hr}></View>
                 <Text style={styles.Meaning}>(n.) {meaning}</Text>
                 <View style={styles.hr}></View>
-                {/* ส่วนนี้อาจต้องปรับเป็น card เพื่อ flatlist ความหมายออกมา */}
               </View>
             
             </LinearGradient>
@@ -68,7 +63,6 @@ const ModalMoreDetail = (props) => {
 export default ModalMoreDetail;
 
 const styles = StyleSheet.create({
-  // modal
   centeredView: {
     flex: 1,
   },

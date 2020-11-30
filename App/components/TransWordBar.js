@@ -64,8 +64,7 @@ const TransWordBar = (props) => {
       }
     },
     [isBookMark],
-    // console.log(getWord),
-    // console.log(isBookMark),
+    
   );
 
 
@@ -75,10 +74,7 @@ const TransWordBar = (props) => {
 
   async function getUid() {
     try {
-      console.log("get uid first")
       var uid = firebase.auth().currentUser.uid;
-      console.log("uid in content vocabbbbbbbbbbbbbbbb")
-      console.log(uid)
       getUser(uid);
 
     } catch (error) {
@@ -88,20 +84,14 @@ const TransWordBar = (props) => {
 
   const getUser = async (uuidTemp) => {
     try {
-      console.log("Get UuidTemp");
-      console.log(uuidTemp);
-
+     
       await axios.get("https://readalright-backend.khanysorn.me/user/" + uuidTemp).then(
         (response) => {
-          console.log("id user in content vocab");
-          console.log(response.data.user);
-          console.log(response.data.user[0].user_id);
           setUserId(response.data.user[0].user_id);
-          // fetch(response.data.user[0].user_id)
+          
         },
         (error) => {
-          console.log("error in get userId")
-
+          
           console.log(error);
         }
       );
@@ -113,15 +103,11 @@ const TransWordBar = (props) => {
 
   useEffect(() => {
     if (getChecked == true) {
-      console.log(isBookMark)
-      console.log(getTranslate)
       var bookmark = [];
       function logMapElements(value, key, map) {
-        console.log(`m[${key}] = ${value}`);
         if (value == true) {
           bookmark.push(key);
         }
-        console.log("length = " + bookmark.length);
       }
       isBookMark.forEach(logMapElements);
       for (let index = 0; index < bookmark.length; index++) {
@@ -149,7 +135,6 @@ const TransWordBar = (props) => {
 
   const translationGoogle = async (word) => {
     setWord(word)
-    console.log("translate------------------");
     await axios
       .post(
         "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCBEbjkNJ_6_DL8s5Ni6bfF0M4YwhrR-Dc",
@@ -162,11 +147,9 @@ const TransWordBar = (props) => {
       )
       .then(
         (response) => {
-          console.log(response.data.data.translations[0].translatedText);
           setGetTranslate(response.data.data.translations[0].translatedText);
           var mean = response.data.data.translations[0].translatedText;
           setEngWordBook(mean)
-          console.log("innon" + getTranslate);
           setModalVisible(true)
         },
         (error) => {
@@ -175,11 +158,8 @@ const TransWordBar = (props) => {
       )
   };
 
-  // console.log("---------------------------------------")
-  // console.log("THIS "+ getTranslate)
   return (
     <View style={styles.barArea}>
-      {/* <Text>{getTranslate}</Text> */}
       <LinearGradient
         colors={["#FFD387", "#FFE43A"]}
         style={{

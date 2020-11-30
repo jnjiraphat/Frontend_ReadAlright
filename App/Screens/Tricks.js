@@ -4,7 +4,6 @@ StyleSheet,
 Text,
 View
 } from "react-native";
-import {Actions} from "react-native-router-flux";
 
 const Tricks = () => {
     return (

@@ -6,11 +6,9 @@ import { Actions } from "react-native-router-flux";
 
 const CarouselCard2 = (props) => {
   function goToContentScreen(readingId) {
-    console.log(readingId);
     Actions.ContentScreen({ text: readingId });
 
-    console.log("hello");
-  }
+    }
   const { result } = props;
   return (
     <FlatList
@@ -18,8 +16,6 @@ const CarouselCard2 = (props) => {
       showsHorizontalScrollIndicator={false}
       data={result}
       
-      // initialNumToRender={5}
-      // contentContainerStyle={{ flexGrow: 1, flexDirection: "row" }}
       renderItem={({ item }) => (
         <TouchableOpacity onPress={() => goToContentScreen(item.reading_id)}>
         <View style={{ height: 200 }}>

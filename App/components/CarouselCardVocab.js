@@ -6,10 +6,9 @@ import { Actions } from "react-native-router-flux";
 
 const CarouselCardVocab = (props) => {
   function goToContentVocab(vocabBox_id) {
-    console.log(vocabBox_id);
     Actions.ContentVocab({ text: vocabBox_id });
 
-    console.log("hello");
+    
   }
   const { result } = props;
   return (
@@ -18,8 +17,6 @@ const CarouselCardVocab = (props) => {
       showsHorizontalScrollIndicator={false}
       data={result}
       
-      // initialNumToRender={5}
-      // contentContainerStyle={{ flexGrow: 1, flexDirection: "row" }}
       renderItem={({ item }) => (
         <TouchableOpacity onPress={() => goToContentVocab(item.vocabBox_id)}>
         <View style={{ height: 200 }}>

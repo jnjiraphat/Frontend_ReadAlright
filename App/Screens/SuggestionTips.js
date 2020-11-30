@@ -8,11 +8,9 @@ import {
   FlatList,
   Text,
 } from "react-native";
-import ReadingApi from "../API/ReadingAPI";
 import Constants from "expo-constants";
 import Header from "../components/Header";
 import { LinearGradient } from "expo-linear-gradient";
-import VocabCateApi from "../API/VocabCateAPI";
 
 import SuggestionCard from "../components/SuggestionCard";
 import LoadingScreen from './LoadingScreen'
@@ -37,7 +35,7 @@ const home = (props) => {
 
     } catch (error) {
       console.log("error getItem")
-      // Error retrieving data
+      
     }
   }
 
@@ -53,7 +51,6 @@ const home = (props) => {
           console.log(response.data.user[0].user_id);
           setUserId(response.data.user[0].user_id);
           getSuggestion(response.data.user[0].user_id);
-          // fetch(response.data.user[0].user_id)
         },
         (error) => {
           console.log("error in get userId")
@@ -92,15 +89,11 @@ const home = (props) => {
       }
     );
   };
-  console.log("This is suggestion")
-  console.log(suggestion)
-
+  
   const getTrick = async () => {
     try {
       const data = await axios.get("https://readalright-backend.khanysorn.me/tricks").then(
         (response) => {
-          console.log("Trikcs");
-          console.log(response.data.quiz)
           setTrick(response.data.quiz)
         },
         (error) => {
@@ -110,18 +103,12 @@ const home = (props) => {
     } catch (error) {
 
     } finally {
-      // setTrick(allTrick);
+      
     }
 
   };
   const postSuggestion = async (uid) => {
-    console.log("PostSuggestionNon");
-    console.log(suggestionTypeId.length);
-    console.log(suggestionTypeId[0]);
-    console.log(suggestionTypeId[1]);
-
-    console.log("PostSuggestionNon");
-
+  
     for (let index = 0; index < suggestionTypeId.length; index++) {
       axios
         .post("https://readalright-backend.khanysorn.me/suggestion_user", {
@@ -146,13 +133,8 @@ const home = (props) => {
       newSelected.set(suggestId, !isCheck.get(suggestId));
       setCheck(newSelected);
       if (!isCheck.get(suggestId) == true) {
-        console.log("Suggestion Nontest")
-        console.log(suggestId)
-        console.log("Suggestion Nontest")
-
         await axios
           .delete("https://readalright-backend.khanysorn.me/suggestion_user/" + suggestId)
-          //เปลี่ยนตรงนี้
           .then(
             (response) => {
               console.log("delete suggestion success!!!");
@@ -168,25 +150,17 @@ const home = (props) => {
       }
     },
     [isCheck],
-    // console.log(getWord),
-    // console.log(isBookMark),
   );
 
   function goToContentTip(tricks_id) {   
-    console.log("Content Tip");
-    console.log(tricks_id);
     Actions.ContentTip({ text: tricks_id });
   }
 
 
-  console.log("This is Tricks")
-  console.log(trick)
-
+  
   useEffect(() => {
     getTrick();
-    // getAndPostSuggestion();
     getUid();
-    // read();
   }, []);
 
   function ContentDefault() {

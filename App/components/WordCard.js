@@ -4,16 +4,12 @@ import ReadingApi from "../API/ReadingAPI";
 import {
   StyleSheet,
   View,
-  ScrollView,
-  FlatList,
   Dimensions,
   Text,
-  Image,
   TouchableOpacity,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AntDesign } from "@expo/vector-icons";
-import { Fontisto } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import Constants from "expo-constants";
@@ -79,9 +75,7 @@ const WordCard = (props) => {
             }}
           >
             <TouchableOpacity onPress={() => onBookMark(engWord,thaiWord)}>
-              {/* engWord คือตัวข้อความที่จะรับไว้ส่งค่า */}
               <MaterialIcons
-                // name={"bookmark"}
                 name={isBookMark ? "bookmark" : "bookmark-border"}
                 size={24}
                 color="#8A63E5"
@@ -141,12 +135,9 @@ const styles = StyleSheet.create({
     opacity: 0.75,
   },
 
-  //whiteCard
   whiteCard: {
-    // flex: 1,
     width: 350,
     height: 70,
-    // justifyContent: "center",
     borderRadius: 5,
     backgroundColor: "white",
     shadowOffset: {
@@ -166,7 +157,6 @@ const styles = StyleSheet.create({
   },
   yellowButton: {},
   wordArea: {
-    // paddingVertical: 5,
     maxWidth: 100,
     minHeight: 70,
     justifyContent: "center",

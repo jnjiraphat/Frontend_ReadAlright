@@ -2,7 +2,7 @@ import React from "react";
 import { Image, TouchableOpacity } from "react-native";
 
 const Avatar = (props) => {
-  const { width, source, containerStyle, height } = props;
+  const { width, source, height } = props;
   return (
     <TouchableOpacity
       style={{

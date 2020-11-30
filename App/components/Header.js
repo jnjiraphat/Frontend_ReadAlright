@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Actions } from "react-native-router-flux";
 import {
-  Text,
   TouchableOpacity,
   View,
   Dimensions,
   StyleSheet,
-  TouchableHighlight,
-  Image,
-  Button,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Avatar from "../components/Avatar";
@@ -17,7 +13,6 @@ import SwitchType from "../components/SwitchType";
 import { AsyncStorage } from "react-native";
 import * as firebase from "firebase";
 import { Ionicons } from "@expo/vector-icons";
-import { setLogLevel } from "firebase";
 import ButtonClick from '../components/ButtonClick'
 import LoadingScreen from '../Screens/LoadingScreen'
 
@@ -29,13 +24,9 @@ const Header = (props) => {
 
   const getUserPic = async () => {
     try {
-      console.log("MyUserPIc 1");
       var userPicture = await AsyncStorage.getItem("userPicURL");
       var level = await AsyncStorage.getItem("level");
 
-      console.log("MyUserPIc 2");
-      console.log(userPicture);
-      console.log("MyUserPIc 2");
     } catch (error) {
       console.log("MyUserPIc 3");
     } finally {
@@ -46,34 +37,22 @@ const Header = (props) => {
   useEffect(() => {
     getUserPic();
   }, []);
-  console.log("In headerNOn");
-  console.log(picture);
-  console.log(suggestion);
-  console.log("In headerNon");
   const onPress = () => {
     if (check == true) {
       setCheck(false);
-      console.log(check);
     } else if (check == false) {
       setCheck(true);
-      console.log(check);
     }
   };
   const [check, setCheck] = useState(true);
   async function goToLogout() {
-    console.log("Log out already 1");
-    // clearAppData()
     await firebase.auth().signOut();
     await removeItemValue();
-
-    console.log("Log out already 2");
   }
 
   async function removeItemValue() {
     try {
       var token = await AsyncStorage.getItem("token");
-      console.log("token in home");
-      console.log(token);
       await AsyncStorage.removeItem("uid");
       await AsyncStorage.removeItem("pretest");
       await AsyncStorage.removeItem("emailSign");
@@ -98,7 +77,6 @@ const Header = (props) => {
               left: 0,
               right: 0,
               top: 0,
-              // height: Dimensions.get("window").height / 3.8,
               height: 200,
               width: Dimensions.get("window").width,
               borderBottomLeftRadius: 30,
@@ -133,8 +111,6 @@ const Header = (props) => {
         </View>
               <Avatar
                 source={picture}
-                // width={Dimensions.get("window").width / 3.5}
-                // height={Dimensions.get("window").height / 7}
                 width={110}
                 height={110}
               />
@@ -143,12 +119,7 @@ const Header = (props) => {
             </View>
 
               
-              {/* <TouchableOpacity onPress={() => goToLogout()} style={styles.button}>
-                <Text>
-                  Logout
-                </Text>
-              </TouchableOpacity> */}
-            <View
+              <View
               style={{
                 flexDirection: "row",
                 justifyContent: "center",
@@ -187,7 +158,7 @@ const Header = (props) => {
       <View
         style={{
           height: Dimensions.get("window").height,
-          // backgroundColor: "red",
+          
         }}
       >
         <LinearGradient
@@ -197,7 +168,6 @@ const Header = (props) => {
             left: 0,
             right: 0,
             top: 0,
-            // height: Dimensions.get("window").height / 8,
             height: 100,
             width: Dimensions.get("window").width,
             borderBottomLeftRadius: 30,
@@ -215,9 +185,7 @@ const Header = (props) => {
           >
             <Avatar
               source={picture}
-              // width={Dimensions.get("window").width / 5.5}
               width={80}
-              // height={Dimensions.get("window").height / 10}
               height={80}
             />
             <AreaProfile level={level} display="none" />
@@ -267,6 +235,5 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 5,
     width: 100,
     height: 90,
-    // backgroundColor: "blue",
   },
 });

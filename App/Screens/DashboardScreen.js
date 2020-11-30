@@ -1,13 +1,11 @@
 import React from "react";
 import { View, StyleSheet, Image } from "react-native";
 import Constants from "expo-constants";
-import Loader from "../assets/icon.png";
 
 const DashboardScreen = () => {
   return (
     <View style={styles.container}>
         <Text>DashboardScreen</Text>
-        {/* <Image source={Loader} style={styles.img} /> */}
     </View>
   );
 };
